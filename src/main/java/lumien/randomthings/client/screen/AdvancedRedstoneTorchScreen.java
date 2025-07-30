@@ -1,108 +1,85 @@
 package lumien.randomthings.client.screen;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import lumien.randomthings.menu.AdvancedRedstoneTorchMenu;
+import lumien.randomthings.network.messages.ContainerSignalMessage;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.DyeColor;
+import net.neoforged.neoforge.network.PacketDistributor;
 
-import lumien.randomthings.container.AdvancedRedstoneTorchContainer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.DyeColor;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+public class AdvancedRedstoneTorchScreen extends AbstractContainerScreen<AdvancedRedstoneTorchMenu> {
+    private static final ResourceLocation GUI_TEXTURES = ResourceLocation.fromNamespaceAndPath("randomthings", "textures/gui/advanced_redstone_torch.png");
 
-/**
- * AdvancedRedstoneTorchScreen
- */
-public class AdvancedRedstoneTorchScreen extends ContainerScreen<AdvancedRedstoneTorchContainer>
-{
-	private static final ResourceLocation GUI_TEXTURES = new ResourceLocation("randomthings:textures/gui/advanced_redstone_torch.png");
+    public AdvancedRedstoneTorchScreen(AdvancedRedstoneTorchMenu menu, Inventory playerInventory, Component title) {
+        super(menu, playerInventory, title);
+        
+        this.imageWidth = 90;
+        this.imageHeight = 56;
+    }
 
-	IWorldPosCallable pos;
+    @Override
+    protected void init() {
+        super.init();
 
-	public AdvancedRedstoneTorchScreen(AdvancedRedstoneTorchContainer screenContainer, PlayerInventory inv, ITextComponent titleIn)
-	{
-		super(screenContainer, inv, titleIn);
+        this.addRenderableWidget(Button.builder(Component.literal("-"), (button) -> {
+            sendButtonPress(0);
+        }).bounds(this.leftPos + 5, this.topPos + 15, 10, 10).build());
 
-		this.xSize = 90;
-		this.ySize = 56;
-	}
+        this.addRenderableWidget(Button.builder(Component.literal("+"), (button) -> {
+            sendButtonPress(1);
+        }).bounds(this.leftPos + 5 + 70, this.topPos + 15, 10, 10).build());
 
-	@Override
-	protected void init()
-	{
-		super.init();
+        this.addRenderableWidget(Button.builder(Component.literal("-"), (button) -> {
+            sendButtonPress(2);
+        }).bounds(this.leftPos + 5, this.topPos + 39, 10, 10).build());
 
-		this.addButton(new Button(this.guiLeft + 5, this.guiTop + 15, 10, 10, "-", (button) -> {
-			this.container.send(0, (pb) -> {
-				pb.writeInt(0);
-			});
-		}));
-		this.addButton(new Button(this.guiLeft + 5 + 70, this.guiTop + 15, 10, 10, "+", (button) -> {
-			this.container.send(0, (pb) -> {
-				pb.writeInt(1);
-			});
-		}));
+        this.addRenderableWidget(Button.builder(Component.literal("+"), (button) -> {
+            sendButtonPress(3);
+        }).bounds(this.leftPos + 5 + 70, this.topPos + 39, 10, 10).build());
+    }
 
-		this.addButton(new Button(this.guiLeft + 5, this.guiTop + 39, 10, 10, "-", (button) -> {
-			this.container.send(0, (pb) -> {
-				pb.writeInt(2);
-			});
-		}));
-		this.addButton(new Button(this.guiLeft + 5 + 70, this.guiTop + 39, 10, 10, "+", (button) -> {
-			this.container.send(0, (pb) -> {
-				pb.writeInt(3);
-			});
-		}));
-	}
+    private void sendButtonPress(int buttonId) {
+        FriendlyByteBuf buffer = new FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
+        buffer.writeInt(buttonId);
+        byte[] data = new byte[buffer.readableBytes()];
+        buffer.readBytes(data);
+        PacketDistributor.sendToServer(new ContainerSignalMessage(0, data));
+    }
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-	{
-		RenderHelper.disableStandardItemLighting();
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, Component.translatable("gui.randomthings.advanced_redstone_torch.gs"), 8, 5, 0x000000, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.randomthings.advanced_redstone_torch.rs"), 13, 29, 0x000000, false);
 
+        if (this.menu instanceof AdvancedRedstoneTorchMenu artMenu) {
+            String signalStrengthGreenString = artMenu.getSignalStrengthGreen() + "";
+            int greenStringWidth = this.font.width(signalStrengthGreenString);
+            guiGraphics.drawString(this.font, signalStrengthGreenString, 
+                imageWidth / 2 - greenStringWidth / 2, 16, DyeColor.GREEN.getFireworkColor(), false);
 
-		this.font.drawString(I18n.format("gui.randomthings.advanced_redstone_torch.gs"), 8, 5, 0);
-		this.font.drawString(I18n.format("gui.randomthings.advanced_redstone_torch.rs"), 13, 29, 0);
+            String signalStrengthRedString = artMenu.getSignalStrengthRed() + "";
+            int redStringWidth = this.font.width(signalStrengthRedString);
+            guiGraphics.drawString(this.font, signalStrengthRedString, 
+                imageWidth / 2 - redStringWidth / 2, 40, DyeColor.RED.getFireworkColor(), false);
+        }
+    }
 
-		String signalStrengthOffString = this.container.strengthGreen.get() + "";
-		this.font.drawString(signalStrengthOffString, xSize / 2 - this.font.getStringWidth(signalStrengthOffString) / 2, 16, DyeColor.GREEN.getFireworkColor());
+    @Override
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
+        guiGraphics.blit(GUI_TEXTURES, i, j, 0, 0, this.imageWidth, this.imageHeight);
+    }
 
-		String signalStrengthOnString = this.container.strengthRed.get() + "";
-		this.font.drawString(signalStrengthOnString, xSize / 2 - this.font.getStringWidth(signalStrengthOnString) / 2, 40, DyeColor.RED.getFireworkColor());
-
-		for (Widget widget : this.buttons)
-		{
-			if (widget.isHovered())
-			{
-				widget.renderToolTip(mouseX - this.guiLeft, mouseY - this.guiTop);
-				break;
-			}
-		}
-
-		RenderHelper.enableGUIStandardItemLighting();
-	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.minecraft.getTextureManager().bindTexture(GUI_TEXTURES);
-		int i = (this.width - this.xSize) / 2;
-		int j = (this.height - this.ySize) / 2;
-		this.blit(i, j, 0, 0, this.xSize, this.ySize);
-	}
-
-	@Override
-	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
-	{
-		this.renderBackground();
-		super.render(p_render_1_, p_render_2_, p_render_3_);
-		this.renderHoveredToolTip(p_render_1_, p_render_2_);
-	}
-
-
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+    }
 }

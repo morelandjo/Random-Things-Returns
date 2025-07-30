@@ -1,80 +1,53 @@
 package lumien.randomthings.block;
 
-import net.minecraft.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.ObjectHolder;
+import lumien.randomthings.lib.ModConstants;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-@ObjectHolder("randomthings")
-public class ModBlocks
-{
-	@ObjectHolder("fertilized_dirt")
-	public static Block FERTILIZED_DIRT;
+import java.util.function.Supplier;
 
-	@ObjectHolder("rainbow_lamp")
-	public static Block RAINBOW_LAMP;
+public class ModBlocks {
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ModConstants.MOD_ID);
 
+    public static final Supplier<Block> FERTILIZED_DIRT = BLOCKS.register("fertilized_dirt", 
+        () -> new FertilizedDirtBlock());
 
-	@ObjectHolder("advanced_redstone_torch")
-	public static Block ADVANCED_REDSTONE_TORCH;
+    public static final Supplier<Block> RAINBOW_LAMP = BLOCKS.register("rainbow_lamp", 
+        () -> new RainbowLampBlock());
 
-	@ObjectHolder("advanced_redstone_wall_torch")
-	public static Block ADVANCED_WALL_REDSTONE_TORCH;
+    public static final Supplier<Block> ADVANCED_REDSTONE_TORCH = BLOCKS.register("advanced_redstone_torch", 
+        () -> new AdvancedRedstoneTorchBlock());
 
-	@ObjectHolder("super_lubricent_stone")
-	public static Block SUPER_LUBRICENT_STONE;
+    public static final Supplier<Block> ADVANCED_WALL_REDSTONE_TORCH = BLOCKS.register("advanced_redstone_wall_torch", 
+        () -> new AdvancedRedstoneWallTorchBlock());
 
+    public static final Supplier<Block> SUPER_LUBRICENT_STONE = BLOCKS.register("super_lubricent_stone", 
+        () -> new SuperLubricentStoneBlock());
 
-	@ObjectHolder("block_of_sticks")
-	public static Block BLOCK_OF_STICKS;
+    public static final Supplier<Block> BLOCK_OF_STICKS = BLOCKS.register("block_of_sticks", 
+        () -> new SticksBlock(false));
 
-	@ObjectHolder("block_of_sticks_returning")
-	public static Block BLOCK_OF_STICKS_RETURNING;
+    public static final Supplier<Block> BLOCK_OF_STICKS_RETURNING = BLOCKS.register("block_of_sticks_returning", 
+        () -> new SticksBlock(true));
 
+    public static final Supplier<Block> PLATFORM_OAK = BLOCKS.register("platform_oak", 
+        () -> new PlatformBlock());
 
-	@ObjectHolder("platform_oak")
-	public static Block PLATFORM_OAK;
+    public static final Supplier<Block> PLATFORM_SPRUCE = BLOCKS.register("platform_spruce", 
+        () -> new PlatformBlock());
 
-	@ObjectHolder("platform_spruce")
-	public static Block PLATFORM_SPRUCE;
+    public static final Supplier<Block> PLATFORM_BIRCH = BLOCKS.register("platform_birch", 
+        () -> new PlatformBlock());
 
-	@ObjectHolder("platform_birch")
-	public static Block PLATFORM_BIRCH;
+    public static final Supplier<Block> PLATFORM_JUNGLE = BLOCKS.register("platform_jungle", 
+        () -> new PlatformBlock());
 
-	@ObjectHolder("platform_jungle")
-	public static Block PLATFORM_JUNGLE;
+    public static final Supplier<Block> PLATFORM_ACACIA = BLOCKS.register("platform_acacia", 
+        () -> new PlatformBlock());
 
-	@ObjectHolder("platform_acacia")
-	public static Block PLATFORM_ACACIA;
+    public static final Supplier<Block> PLATFORM_DARKOAK = BLOCKS.register("platform_darkoak", 
+        () -> new PlatformBlock());
 
-	@ObjectHolder("platform_darkoak")
-	public static Block PLATFORM_DARKOAK;
-	
-	@ObjectHolder("blood_rose")
-	public static Block BLOOD_ROSE;
-
-	public static void registerBlocks(RegistryEvent.Register<Block> blockRegistryEvent)
-	{
-		IForgeRegistry<Block> registry = blockRegistryEvent.getRegistry();
-
-		registry.register(new FertilizedDirtBlock().setRegistryName("fertilized_dirt"));
-		registry.register(new RainbowLampBlock().setRegistryName("rainbow_lamp"));
-
-		registry.register(new AdvancedRedstoneTorchBlock().setRegistryName("advanced_redstone_torch"));
-		registry.register(new AdvancedRedstoneWallTorchBlock().setRegistryName("advanced_redstone_wall_torch"));
-
-		registry.register(new SticksBlock(false).setRegistryName("block_of_sticks"));
-		registry.register(new SticksBlock(true).setRegistryName("block_of_sticks_returning"));
-
-		registry.register(new SuperLubricentStoneBlock().setRegistryName("super_lubricent_stone"));
-
-		registry.register(new PlatformBlock().setRegistryName("platform_oak"));
-		registry.register(new PlatformBlock().setRegistryName("platform_spruce"));
-		registry.register(new PlatformBlock().setRegistryName("platform_birch"));
-		registry.register(new PlatformBlock().setRegistryName("platform_jungle"));
-		registry.register(new PlatformBlock().setRegistryName("platform_acacia"));
-		registry.register(new PlatformBlock().setRegistryName("platform_darkoak"));
-		
-		registry.register(new BloodRoseBlock().setRegistryName("blood_rose"));
-	}
+    public static final Supplier<Block> BLOOD_ROSE = BLOCKS.register("blood_rose", 
+        () -> new BloodRoseBlock());
 }

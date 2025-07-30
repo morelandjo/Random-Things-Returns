@@ -4,55 +4,50 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.Camera;
+import net.minecraft.world.phys.Vec3;
 
-public class VFXHandler
-{
-	public static VFXHandler INSTANCE = new VFXHandler();
-	
-	private List<VisualEffect> currentEffects;
-	
-	public VFXHandler()
-	{
-		this.currentEffects = new ArrayList<VisualEffect>();
-	}
-	
-	public void addEffect(VisualEffect ve) {
-		ve.init();
-		this.currentEffects.add(ve);
-	}
-	
-	public void tick() {
-		Iterator<VisualEffect> iterator = this.currentEffects.iterator();
-		
-		while (iterator.hasNext()) {
-			VisualEffect next = iterator.next();
-			
-			if (next.tick()) {
-				iterator.remove();
-			}
-		}
-	}
-	
-	public void render(float partialTicks) {
-		ActiveRenderInfo ari = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
+public class VFXHandler {
+    public static final VFXHandler INSTANCE = new VFXHandler();
+    
+    private final List<VisualEffect> currentEffects;
+    
+    public VFXHandler() {
+        this.currentEffects = new ArrayList<>();
+    }
+    
+    public void addEffect(VisualEffect effect) {
+        effect.init();
+        this.currentEffects.add(effect);
+    }
+    
+    public void tick() {
+        Iterator<VisualEffect> iterator = this.currentEffects.iterator();
+        
+        while (iterator.hasNext()) {
+            VisualEffect effect = iterator.next();
+            
+            if (effect.tick()) {
+                iterator.remove();
+            }
+        }
+    }
+    
+    public void render(PoseStack poseStack, float partialTicks) {
+        Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+        Vec3 cameraPos = camera.getPosition();
 
-		Vec3d pos = ari.getProjectedView();
+        double playerX = cameraPos.x();
+        double playerY = cameraPos.y();
+        double playerZ = cameraPos.z();
 
-		double playerX = pos.getX();
-		double playerY = pos.getY();
-		double playerZ = pos.getZ();
+        poseStack.pushPose();
+        poseStack.translate(-playerX, -playerY, -playerZ);
+        
+        this.currentEffects.forEach(effect -> effect.renderInternal(partialTicks));
 
-		GlStateManager.disableTexture();
-		GlStateManager.translated(-playerX, -playerY, -playerZ);
-		
-		this.currentEffects.forEach(ve -> ve.renderInternal(partialTicks));
-
-		// Undo
-		GlStateManager.enableTexture();
-		GlStateManager.translated(playerX, playerY, playerZ);
-	}
+        poseStack.popPose();
+    }
 }

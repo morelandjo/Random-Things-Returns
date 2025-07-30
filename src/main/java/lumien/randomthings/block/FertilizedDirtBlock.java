@@ -1,130 +1,93 @@
 package lumien.randomthings.block;
 
-import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StemBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.util.TriState;
 
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StemBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
-import net.minecraftforge.common.ToolType;
+public class FertilizedDirtBlock extends Block {
+    private static final VoxelShape SHAPE_TILLED = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
 
+    public static final BooleanProperty TILLED = BooleanProperty.create("tilled");
 
-public class FertilizedDirtBlock extends Block
-{
-	private static final VoxelShape SHAPE_TILLED = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+    public FertilizedDirtBlock() {
+        super(BlockBehaviour.Properties.of()
+            .strength(0.5F)
+            .sound(SoundType.GRAVEL)
+            .randomTicks());
 
-	public static final BooleanProperty TILLED = BooleanProperty.create("tilled");
+        this.registerDefaultState(this.stateDefinition.any().setValue(TILLED, false));
+    }
 
-	public FertilizedDirtBlock()
-	{
-		super(Block.Properties.create(Material.EARTH, MaterialColor.DIRT).hardnessAndResistance(0.5F).sound(SoundType.GROUND).tickRandomly());
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        super.randomTick(state, level, pos, random);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(TILLED, false));
-	}
+        for (int i = 0; i < 3; i++) {
+            BlockState aboveState = level.getBlockState(pos.above());
+            
+            if (aboveState.isRandomlyTicking()) {
+                aboveState.randomTick(level, pos.above(), random);
+            } else {
+                break;
+            }
+        }
+    }
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
-	{
-		super.tick(state, worldIn, pos, random);
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(TILLED) ? SHAPE_TILLED : Shapes.block();
+    }
 
-		for (int i = 0; i < 3; i++)
-		{
-			BlockState aboveState = worldIn.getBlockState(pos.up());
-			Block aboveBlock = aboveState.getBlock();
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(TILLED);
+    }
 
-			if (aboveBlock instanceof IPlantable && aboveState.ticksRandomly())
-			{
-				aboveState.randomTick(worldIn, pos.up(), random);
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+        return false;
+    }
 
-	@Override
-	public boolean isToolEffective(BlockState state, ToolType tool)
-	{
-		return tool == ToolType.SHOVEL;
-	}
+    @Override
+    public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos pos, Direction facing, BlockState plantState) {
+        boolean tilled = state.getValue(TILLED);
+        Block plantBlock = plantState.getBlock();
 
-	public boolean func_220074_n(BlockState state)
-	{
-		return state.get(TILLED);
-	}
+        if (plantBlock instanceof StemBlock) {
+            return TriState.TRUE;
+        }
 
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-	{
-		return state.get(TILLED) ? SHAPE_TILLED : VoxelShapes.fullCube();
-	}
+        if (plantState.is(net.minecraft.tags.BlockTags.CROPS)) {
+            return tilled ? TriState.TRUE : TriState.FALSE;
+        }
 
-	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder)
-	{
-		builder.add(TILLED);
-	}
+        if (plantState.is(net.minecraft.tags.BlockTags.FLOWERS) || 
+            plantState.is(net.minecraft.tags.BlockTags.SAPLINGS) ||
+            plantState.is(Blocks.SHORT_GRASS) ||
+            plantState.is(Blocks.FERN)) {
+            return !tilled ? TriState.TRUE : TriState.FALSE;
+        }
 
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type)
-	{
-		return false;
-	}
+        return TriState.DEFAULT;
+    }
 
-	@Override
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable)
-	{
-		PlantType plantType = plantable.getPlantType(world, pos.up());
-		boolean tilled = state.get(TILLED);
-
-		Block b = plantable.getPlant(world, pos.offset(facing)).getBlock();
-
-		if (b.getBlock() instanceof AttachedStemBlock)
-		{
-			return true;
-		}
-
-		switch (plantType)
-		{
-			case Desert:
-				return !tilled;
-			case Nether:
-				return false;
-			case Crop:
-				return tilled;
-			case Cave:
-				return !tilled;
-			case Plains:
-				return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
-			case Water:
-				return false;
-			case Beach:
-				return !tilled;
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos)
-	{
-		return true;
-	}
+    @Override
+    public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
+        return true;
+    }
 }

@@ -3,125 +3,104 @@ package lumien.randomthings.block;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 import lumien.randomthings.item.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
-public class SticksBlock extends Block
-{
-	boolean returning;
+public class SticksBlock extends Block {
+    boolean returning;
 
-	public SticksBlock(boolean returning)
-	{
-		super(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+    public SticksBlock(boolean returning) {
+        super(BlockBehaviour.Properties.of()
+            .strength(0.5F)
+            .sound(SoundType.WOOD)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false));
 
-		this.returning = returning;
-	}
+        this.returning = returning;
+    }
 
-	@Override
-	public boolean isToolEffective(BlockState state, ToolType tool)
-	{
-		return tool == ToolType.AXE;
-	}
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (!level.isClientSide) {
+            level.scheduleTick(pos, this, 20 * 10);
+        }
+    }
 
-	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
-	{
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		if (!worldIn.isRemote)
-		{
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 20 * 10);
-		}
-	}
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
 
-	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.CUTOUT;
-	}
+    @OnlyIn(Dist.CLIENT)
+    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1.0F;
+    }
 
-	@OnlyIn(Dist.CLIENT)
-	public float func_220080_a(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return 1.0F;
-	}
+    @Override
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+        return true;
+    }
 
-	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
-	{
-		return true;
-	}
+    @Override
+    public boolean isOcclusionShapeFullBlock(BlockState state, BlockGetter level, BlockPos pos) {
+        return false;
+    }
 
-	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return false;
-	}
+    public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, EntityType<?> type) {
+        return false;
+    }
 
-	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return false;
-	}
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        level.removeBlock(pos, false);
 
-	public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type)
-	{
-		return false;
-	}
+        if (returning) {
+            level.playSound(null, pos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS, 0.6f, 1.2f);
 
-	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
-	{
-		if (!worldIn.isRemote)
-		{
-			worldIn.removeBlock(pos, false);
+            List<Player> playerList = level.getEntitiesOfClass(Player.class, new AABB(pos).inflate(50, 50, 50));
 
-			if (returning)
-			{
-				worldIn.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 0.6f, 1.2f);
+            if (!playerList.isEmpty()) {
+                Collections.sort(playerList, new Comparator<Player>() {
+                    @Override
+                    public int compare(Player o1, Player o2) {
+                        return o1.blockPosition().distSqr(pos) >= o2.blockPosition().distSqr(pos) ? 1 : -1;
+                    }
+                });
 
-				List<PlayerEntity> playerList = worldIn.getEntitiesWithinAABB(PlayerEntity.class, new AxisAlignedBB(pos).grow(50, 50, 50));
+                Player closest = playerList.get(0);
 
-				if (!playerList.isEmpty())
-				{
-					Collections.sort(playerList, new Comparator<PlayerEntity>()
-					{
-						@Override
-						public int compare(PlayerEntity o1, PlayerEntity o2)
-						{
-							return o1.getPosition().distanceSq(pos) >= o2.getPosition().distanceSq(pos) ? 1 : -1;
-						}
-					});
-
-					PlayerEntity closes = playerList.get(0);
-
-					if (!closes.isCreative())
-					{
-						closes.inventory.addItemStackToInventory(new ItemStack(returning ? ModItems.BLOCK_OF_STICKS_RETURNING : ModItems.BLOCK_OF_STICKS));
-					}
-				}
-			}
-			else
-			{
-				worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 0.6f, 1.2f);
-				worldIn.playEvent(2001, pos, Block.getStateId(state));
-			}
-		}
-	}
+                if (!closest.isCreative()) {
+                    ItemStack itemToReturn = new ItemStack(ModItems.BLOCK_OF_STICKS_RETURNING.get());
+                    if (!closest.getInventory().add(itemToReturn)) {
+                        // If inventory is full, drop the item at the player's location
+                        closest.drop(itemToReturn, false);
+                    }
+                }
+            }
+        } else {
+            level.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.BLOCKS, 0.6f, 1.2f);
+            level.levelEvent(2001, pos, Block.getId(state));
+        }
+    }
 }

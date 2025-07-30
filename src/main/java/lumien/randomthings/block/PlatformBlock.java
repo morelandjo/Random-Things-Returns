@@ -1,50 +1,42 @@
 package lumien.randomthings.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class PlatformBlock extends Block
-{
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0, 14, 0, 16, 16, 16);
+public class PlatformBlock extends Block {
+    protected static final VoxelShape SHAPE = Block.box(0, 14, 0, 16, 16, 16);
 
-	public PlatformBlock()
-	{
-		super(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD));
-	}
+    public PlatformBlock() {
+        super(BlockBehaviour.Properties.of()
+            .strength(2.0F, 3.0F)
+            .sound(SoundType.WOOD));
+    }
 
-	@Override
-	public boolean isToolEffective(BlockState state, ToolType tool)
-	{
-		return tool == ToolType.AXE;
-	}
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
 
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-	{
-		return SHAPE;
-	}
-
-	@Override
-	@SuppressWarnings("deprecation")
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-	{
-		Entity entity = context.getEntity();
-
-		if (entity instanceof PlayerEntity && ((PlayerEntity) entity).isSneaking() || entity != null && entity.posY < pos.getY() + 14F / 16F)
-		{
-			return VoxelShapes.empty();
-		}
-		return super.getCollisionShape(state, worldIn, pos, context);
-	}
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (context instanceof EntityCollisionContext entityContext) {
+            Entity entity = entityContext.getEntity();
+            
+            if (entity instanceof Player player && player.isCrouching() || 
+                entity != null && entity.getY() < pos.getY() + 14F / 16F) {
+                return Shapes.empty();
+            }
+        }
+        return super.getCollisionShape(state, level, pos, context);
+    }
 }

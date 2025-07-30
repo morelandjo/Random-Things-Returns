@@ -1,48 +1,33 @@
 package lumien.randomthings.client.vfx;
 
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 
-public abstract class VisualEffect
-{
-	private int lifeTime;
-	
-	protected int tickCount;
+public abstract class VisualEffect {
+    private int lifeTime;
+    protected int tickCount;
 
-	public VisualEffect(int lifeTime)
-	{
-		this.lifeTime = lifeTime;
-	}
-	
-	public void readData(PacketBuffer pb) {
-		
-	}
+    public VisualEffect(int lifeTime) {
+        this.lifeTime = lifeTime;
+    }
 
-	public boolean tick()
-	{
-		this.tickCount++;
+    public void readData(FriendlyByteBuf buffer) {
+        // Override in subclasses to read specific data
+    }
 
-		if (this.tickCount == this.lifeTime)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+    public boolean tick() {
+        this.tickCount++;
+        return this.tickCount >= this.lifeTime;
+    }
 
-	public void renderInternal(float partialTick)
-	{
-		this.render(this.tickCount + partialTick);
-	}
+    public void renderInternal(float partialTick) {
+        this.render(this.tickCount + partialTick);
+    }
 
-	public void render(float time)
-	{
+    public void render(float time) {
+        // Override in subclasses to implement rendering
+    }
 
-	}
-
-	public void init()
-	{
-
-	}
+    public void init() {
+        // Override in subclasses for initialization
+    }
 }

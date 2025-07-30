@@ -2,241 +2,268 @@ package lumien.randomthings.block;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.WeakHashMap;
 
 import com.google.common.collect.Lists;
 
-import lumien.randomthings.tileentity.AdvancedRedstoneTorchTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.TorchBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.particles.RedstoneParticleData;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
+import lumien.randomthings.blockentity.AdvancedRedstoneTorchBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
-public class AdvancedRedstoneTorchBlock extends TorchBlock
+public class AdvancedRedstoneTorchBlock extends BaseEntityBlock
 {
-	public static enum COLOR implements IStringSerializable
+	public static final MapCodec<AdvancedRedstoneTorchBlock> CODEC = simpleCodec(AdvancedRedstoneTorchBlock::new);
+
+	@Override
+	public MapCodec<AdvancedRedstoneTorchBlock> codec() {
+		return CODEC;
+	}
+
+	public static enum COLOR implements StringRepresentable
 	{
 		GREEN, RED;
 
 		@Override
-		public String getName()
+		public String getSerializedName()
 		{
 			return this == GREEN ? "green" : "red";
 		}
 	}
 
 	public static final EnumProperty<COLOR> COLOR_PROPERTY = EnumProperty.create("color", COLOR.class);
-	private static final Map<IBlockReader, List<AdvancedRedstoneTorchBlock.Toggle>> BURNED_TORCHES = new WeakHashMap<>();
+	private static final Map<BlockGetter, List<AdvancedRedstoneTorchBlock.Toggle>> BURNED_TORCHES = new WeakHashMap<>();
 
 	protected AdvancedRedstoneTorchBlock()
 	{
-		super(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.0F).lightValue(7).sound(SoundType.WOOD));
-		this.setDefaultState(this.stateContainer.getBaseState().with(COLOR_PROPERTY, COLOR.RED));
+		super(BlockBehaviour.Properties.of().noCollission().instabreak().lightLevel((state) -> 7).sound(SoundType.WOOD));
+		this.registerDefaultState(this.stateDefinition.any().setValue(COLOR_PROPERTY, COLOR.RED));
 	}
 
-	protected AdvancedRedstoneTorchBlock(Block.Properties properties)
+	protected AdvancedRedstoneTorchBlock(BlockBehaviour.Properties properties)
 	{
 		super(properties);
 	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state)
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state)
 	{
-		return true;
+		return new AdvancedRedstoneTorchBlockEntity(pos, state);
 	}
 
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world)
+	public RenderShape getRenderShape(BlockState state)
 	{
-		return new AdvancedRedstoneTorchTileEntity();
+		return RenderShape.MODEL;
 	}
 
-	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+	@Override
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit)
 	{
-		if (worldIn.isRemote)
+		if (level.isClientSide)
 		{
-			return true;
+			return InteractionResult.SUCCESS;
 		}
 		else
 		{
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof AdvancedRedstoneTorchTileEntity)
+			BlockEntity blockEntity = level.getBlockEntity(pos);
+			if (blockEntity instanceof AdvancedRedstoneTorchBlockEntity)
 			{
-				AdvancedRedstoneTorchTileEntity art = (AdvancedRedstoneTorchTileEntity) tileentity;
-				NetworkHooks.openGui((ServerPlayerEntity) player, art);
+				AdvancedRedstoneTorchBlockEntity art = (AdvancedRedstoneTorchBlockEntity) blockEntity;
+				player.openMenu(art, pos);
 			}
 
-			return true;
+			return InteractionResult.CONSUME;
 		}
 	}
 
 	/**
 	 * How many world ticks before ticking
 	 */
-	public int tickRate(IWorldReader worldIn)
+	public int tickRate(LevelReader level)
 	{
 		return 2;
 	}
 
-	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving)
+	@Override
+	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston)
 	{
+		if (!level.isClientSide && !level.getBlockTicks().hasScheduledTick(pos, this))
+		{
+			level.scheduleTick(pos, this, 1);
+		}
 		for (Direction direction : Direction.values())
 		{
-			worldIn.notifyNeighborsOfStateChange(pos.offset(direction), this);
+			level.updateNeighborsAt(pos.relative(direction), this);
 		}
-
 	}
 
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+	@Override
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
 	{
-		if (!isMoving)
+		if (!movedByPiston)
 		{
 			for (Direction direction : Direction.values())
 			{
-				worldIn.notifyNeighborsOfStateChange(pos.offset(direction), this);
+				level.updateNeighborsAt(pos.relative(direction), this);
 			}
-
 		}
+		super.onRemove(state, level, pos, newState, movedByPiston);
 	}
 
-	/**
-	 * @deprecated call via {@link IBlockState#getWeakPower(IBlockAccess,BlockPos,EnumFacing)} whenever possible. Implementing/overriding is fine.
-	 */
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
+	@Override
+	public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side)
 	{
-		AdvancedRedstoneTorchTileEntity te = (AdvancedRedstoneTorchTileEntity) blockAccess.getTileEntity(pos);
-
-		int strength = blockState.get(COLOR_PROPERTY) == COLOR.RED ? te.signalStrengthRed() : te.signalStrengthGreen();
-
-		return Direction.UP != side ? strength : 0;
+		if (blockAccess.getBlockEntity(pos) instanceof AdvancedRedstoneTorchBlockEntity te)
+		{
+			int strength = blockState.getValue(COLOR_PROPERTY) == COLOR.RED ? te.signalStrengthRed() : te.signalStrengthGreen();
+			return Direction.UP != side ? strength : 0;
+		}
+		return 0;
 	}
 
-	protected boolean shouldBeGreen(World worldIn, BlockPos pos, BlockState state)
+	protected boolean shouldBeGreen(Level level, BlockPos pos, BlockState state)
 	{
-		return worldIn.isSidePowered(pos.down(), Direction.DOWN);
+		return level.hasNeighborSignal(pos);
 	}
 
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	@Override
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
 	{
-		update(state, worldIn, pos, random, this.shouldBeGreen(worldIn, pos, state));
+		boolean shouldBeGreen = this.shouldBeGreen(level, pos, state);
+		update(state, level, pos, random, shouldBeGreen);
 	}
 
-	public static void update(BlockState state, World worldIn, BlockPos pos, Random p_196527_3_, boolean p_196527_4_)
+	public static void update(BlockState state, Level level, BlockPos pos, RandomSource random, boolean shouldBeGreen)
 	{
-		List<AdvancedRedstoneTorchBlock.Toggle> list = BURNED_TORCHES.get(worldIn);
+		List<AdvancedRedstoneTorchBlock.Toggle> list = BURNED_TORCHES.get(level);
 
-		while (list != null && !list.isEmpty() && worldIn.getGameTime() - (list.get(0)).time > 60L)
+		while (list != null && !list.isEmpty() && level.getGameTime() - (list.get(0)).time > 60L)
 		{
 			list.remove(0);
 		}
 
-		if (state.get(COLOR_PROPERTY) == COLOR.RED)
+		if (state.getValue(COLOR_PROPERTY) == COLOR.RED)
 		{
-			if (p_196527_4_)
+			if (shouldBeGreen)
 			{
-				worldIn.setBlockState(pos, state.with(COLOR_PROPERTY, COLOR.GREEN), 3);
-				if (isBurnedOut(worldIn, pos, true))
+				level.setBlock(pos, state.setValue(COLOR_PROPERTY, COLOR.GREEN), 3);
+				for (Direction direction : Direction.values())
 				{
-					worldIn.playEvent(1502, pos, 0);
-					worldIn.getPendingBlockTicks().scheduleTick(pos, worldIn.getBlockState(pos).getBlock(), 160);
+					level.updateNeighborsAt(pos.relative(direction), level.getBlockState(pos).getBlock());
+				}
+				if (isBurnedOut(level, pos, true))
+				{
+					level.levelEvent(1502, pos, 0);
+					level.scheduleTick(pos, level.getBlockState(pos).getBlock(), 160);
 				}
 			}
 		}
-		else if (!p_196527_4_ && !isBurnedOut(worldIn, pos, false))
+		else if (!shouldBeGreen && !isBurnedOut(level, pos, false))
 		{
-			worldIn.setBlockState(pos, state.with(COLOR_PROPERTY, COLOR.RED), 3);
+			level.setBlock(pos, state.setValue(COLOR_PROPERTY, COLOR.RED), 3);
+			for (Direction direction : Direction.values())
+			{
+				level.updateNeighborsAt(pos.relative(direction), level.getBlockState(pos).getBlock());
+			}
 		}
-
 	}
 
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
+	@Override
+	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
 	{
-		if (state.get(COLOR_PROPERTY) == COLOR.RED == this.shouldBeGreen(worldIn, pos, state) && !worldIn.getPendingBlockTicks().isTickPending(pos, this))
+		if (!level.isClientSide)
 		{
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
+			boolean currentlyRed = state.getValue(COLOR_PROPERTY) == COLOR.RED;
+			boolean shouldBeGreen = this.shouldBeGreen(level, pos, state);
+			
+			if (currentlyRed == shouldBeGreen && !level.getBlockTicks().hasScheduledTick(pos, this))
+			{
+				level.scheduleTick(pos, this, this.tickRate(level));
+			}
 		}
-
 	}
 
-	/**
-	 * @deprecated call via {@link IBlockState#getStrongPower(IBlockAccess,BlockPos,EnumFacing)} whenever possible. Implementing/overriding is fine.
-	 */
-	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
+	@Override
+	public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side)
 	{
-		return side == Direction.DOWN ? blockState.getWeakPower(blockAccess, pos, side) : 0;
+		return side == Direction.DOWN ? blockState.getSignal(blockAccess, pos, side) : 0;
 	}
 
-	/**
-	 * Can this block provide power. Only wire currently seems to have this change based on its state.
-	 * 
-	 * @deprecated call via {@link IBlockState#canProvidePower()} whenever possible. Implementing/overriding is fine.
-	 */
-	public boolean canProvidePower(BlockState state)
+	@Override
+	public boolean isSignalSource(BlockState state)
 	{
 		return true;
 	}
 
-	protected RedstoneParticleData GREEN_DUST = new RedstoneParticleData(0.0F, 1.0F, 0.0F, 1.0F);
+	protected static final DustParticleOptions GREEN_DUST = new DustParticleOptions(new org.joml.Vector3f(0.0F, 1.0F, 0.0F), 1.0F);
 
+	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
 	{
-		if (stateIn.get(COLOR_PROPERTY) == COLOR.RED)
+		if (state.getValue(COLOR_PROPERTY) == COLOR.RED)
 		{
-			double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-			double d1 = (double) pos.getY() + 0.7D + (rand.nextDouble() - 0.5D) * 0.2D;
-			double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-			worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			double d0 = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+			double d1 = (double) pos.getY() + 0.7D + (random.nextDouble() - 0.5D) * 0.2D;
+			double d2 = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+			level.addParticle(DustParticleOptions.REDSTONE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 		else
 		{
-			double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-			double d1 = (double) pos.getY() + 0.7D + (rand.nextDouble() - 0.5D) * 0.2D;
-			double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-			worldIn.addParticle(GREEN_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			double d0 = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+			double d1 = (double) pos.getY() + 0.7D + (random.nextDouble() - 0.5D) * 0.2D;
+			double d2 = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+			level.addParticle(GREEN_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
 	{
 		builder.add(COLOR_PROPERTY);
 	}
 
-	private static boolean isBurnedOut(World p_176598_0_, BlockPos worldIn, boolean pos)
+	private static boolean isBurnedOut(Level level, BlockPos pos, boolean addToggle)
 	{
-		List<AdvancedRedstoneTorchBlock.Toggle> list = BURNED_TORCHES.computeIfAbsent(p_176598_0_, (p_220288_0_) -> {
+		List<AdvancedRedstoneTorchBlock.Toggle> list = BURNED_TORCHES.computeIfAbsent(level, (l) -> {
 			return Lists.newArrayList();
 		});
-		if (pos)
+		if (addToggle)
 		{
-			list.add(new AdvancedRedstoneTorchBlock.Toggle(worldIn.toImmutable(), p_176598_0_.getGameTime()));
+			list.add(new AdvancedRedstoneTorchBlock.Toggle(pos.immutable(), level.getGameTime()));
 		}
 
 		int i = 0;
 
 		for (int j = 0; j < list.size(); ++j)
 		{
-			AdvancedRedstoneTorchBlock.Toggle redstonetorchblock$toggle = list.get(j);
-			if (redstonetorchblock$toggle.pos.equals(worldIn))
+			AdvancedRedstoneTorchBlock.Toggle toggle = list.get(j);
+			if (toggle.pos.equals(pos))
 			{
 				++i;
 				if (i >= 8)

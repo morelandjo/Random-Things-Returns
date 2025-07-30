@@ -2,263 +2,201 @@ package lumien.randomthings.client.renderer;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.function.Function;
 
-import javax.vecmath.Vector3f;
+import org.joml.Vector3f;
 
-import org.lwjgl.opengl.GL11;
+import com.mojang.blaze3d.vertex.PoseStack;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-
-import lumien.randomthings.client.util.RenderUtils;
 import lumien.randomthings.item.DiviningRodItem;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import lumien.randomthings.client.util.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
-public class DiviningRodRenderer
-{
-	public static DiviningRodRenderer INSTANCE;
+public class DiviningRodRenderer {
+    public static DiviningRodRenderer INSTANCE;
 
-	LinkedHashSet<BlockPos> positionsToCheck;
+    private final List<Indicator> indicators;
+    private int modX, modY, modZ;
+    private int tickCounter = 0;
+    private DiviningRodItem lastRodType = null;
 
-	List<Indicator> indicators;
+    public DiviningRodRenderer() {
+        indicators = new ArrayList<>();
+    }
 
-	HashMap<Block, Color> blockColorMap;
+    public boolean shouldGlow(DiviningRodItem rodType) {
+        return !indicators.isEmpty() && (indicators.stream().anyMatch((i) -> i.type == rodType));
+    }
 
-	public DiviningRodRenderer()
-	{
-		positionsToCheck = new LinkedHashSet<BlockPos>();
-		indicators = new ArrayList<Indicator>();
-	}
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks) {
+        if (indicators.isEmpty()) {
+            return;
+        }
+        
+        Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+        Vec3 cameraPos = camera.getPosition();
 
-	public boolean shouldGlow(DiviningRodItem rodType)
-	{
-		return !indicators.isEmpty() && (indicators.stream().anyMatch((i) -> i.type == rodType));
-	}
+        double playerX = cameraPos.x();
+        double playerY = cameraPos.y();
+        double playerZ = cameraPos.z();
 
-	int modX, modY, modZ;
+        poseStack.pushPose();
+        poseStack.translate(-playerX, -playerY, -playerZ);
+        
+        for (Indicator indicator : indicators) {
+            float size = 0.5F; // Constant size - no pulsing animation
+            Color c = indicator.color;
+            
+            // Use the actual ore colors but make them more visible
+            int alpha = 180; // Slightly transparent so you can see multiple overlapping cubes
+            
+            // Use distinct colors for each ore type
+            int red, green, blue;
+            if (c.getRed() == 20 && c.getGreen() == 20 && c.getBlue() == 20) {
+                // Coal - pure black for maximum contrast with stone
+                red = 0; green = 0; blue = 0;
+            } else if (c.getRed() == 211 && c.getGreen() == 180 && c.getBlue() == 159) {
+                // Iron - metallic silver/gray
+                red = 200; green = 200; blue = 200;
+            } else if (c.getRed() == 246 && c.getGreen() == 233 && c.getBlue() == 80) {
+                // Gold - bright gold
+                red = 255; green = 215; blue = 0;
+            } else if (c.getRed() == 87 && c.getGreen() == 221 && c.getBlue() == 229) {
+                // Diamond - light cyan/blue
+                red = 135; green = 206; blue = 250;
+            } else {
+                // Other ores - enhance brightness while keeping identity
+                red = Math.min(255, Math.max(80, c.getRed() * 2));
+                green = Math.min(255, Math.max(80, c.getGreen() * 2));
+                blue = Math.min(255, Math.max(80, c.getBlue() * 2));
+            }
+            
+            RenderUtils.drawCube(poseStack, bufferSource, 
+                (float) (indicator.target.getX() + 0.5 - size / 2), 
+                (float) (indicator.target.getY() + 0.5 - size / 2), 
+                (float) (indicator.target.getZ() + 0.5 - size / 2), 
+                size, red, green, blue, alpha);
+                
+            // Use the same enhanced colors for wireframe
+            RenderUtils.drawWireframeCube(poseStack, bufferSource,
+                (float) (indicator.target.getX() + 0.5 - size / 2), 
+                (float) (indicator.target.getY() + 0.5 - size / 2), 
+                (float) (indicator.target.getZ() + 0.5 - size / 2), 
+                size, red, green, blue, 255); // Full opacity wireframe
+        }
 
-	public void render()
-	{
-		float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
+        poseStack.popPose();
+    }
 
-		ActiveRenderInfo ari = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
+    public void tick() {
+        tickCounter++;
+        
+        Iterator<Indicator> indicatorIterator = indicators.iterator();
 
-		Vec3d pos = ari.getProjectedView();
+        while (indicatorIterator.hasNext()) {
+            Indicator i = indicatorIterator.next();
+            i.duration--;
 
-		double playerX = pos.getX();
-		double playerY = pos.getY();
-		double playerZ = pos.getZ();
+            if (i.duration == 0) {
+                indicatorIterator.remove();
+            }
+        }
 
-		GlStateManager.disableTexture();
-		GlStateManager.disableDepthTest();
-		RenderUtils.enableDefaultBlending();
+        Player player = Minecraft.getInstance().player;
 
-		GlStateManager.translated(-playerX, -playerY, -playerZ);
-		for (Indicator indicator : indicators)
-		{
-			float size = (1 - (indicator.duration / 160F)) * 0.2F + 0.1F;
-			Color c = indicator.color;
-			RenderUtils.drawCube((float) (indicator.target.getX() + 0.5 - size / 2), (float) (indicator.target.getY() + 0.5 - size / 2), (float) (indicator.target.getZ() + 0.5 - size / 2), size, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
-		}
+        if (player != null) {
+            Level level = player.level();
 
-		// Undo
+            if (level != null) {
+                ItemStack main = player.getMainHandItem();
+                ItemStack off = player.getOffhandItem();
 
-		RenderUtils.enableDefaultBlending();
-		GlStateManager.enableTexture();
+                ItemStack rod = ItemStack.EMPTY;
+                DiviningRodItem type;
 
-		GlStateManager.translated(playerX, playerY, playerZ);
+                if (!main.isEmpty() && main.getItem() instanceof DiviningRodItem) {
+                    rod = main;
+                } else if (!off.isEmpty() && off.getItem() instanceof DiviningRodItem) {
+                    rod = off;
+                }
 
-		GlStateManager.enableDepthTest();
-	}
+                if (!rod.isEmpty()) {
+                    type = (DiviningRodItem) rod.getItem();
+                    
+                    // Clear indicators only when switching to a different rod type
+                    if (lastRodType != null && lastRodType != type) {
+                        indicators.clear();
+                    }
+                    lastRodType = type;
+                    
+                    BlockPos playerPos = player.blockPosition();
 
-	private void renderWat()
-	{
-		float renderX = -698;
-		float renderY = 73;
-		float renderZ = -92;
+                    for (int i = 0; i < 60; i++) {
+                        modX++;
 
-		float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
+                        if (modX == 6) {
+                            modX = -5;
+                            modZ++;
 
-		ActiveRenderInfo ari = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
+                            if (modZ == 6) {
+                                modZ = -5;
+                                modY++;
 
+                                if (modY == 6) {
+                                    modY = -5;
+                                }
+                            }
+                        }
 
-		int height = 5;
+                        BlockPos target = playerPos.offset(modX, modY, modZ);
+                        BlockState blockState = level.getBlockState(target);
 
-		int lineLength = 200;
+                        if (level.isLoaded(target)) {
+                            int matchIndex = type.matches(blockState);
+                            if (matchIndex != -1) {
+                                Indicator indicator = new Indicator(target, 160, type.getColor(matchIndex), type);
+                                indicators.add(indicator);
+                            }
+                        }
+                    }
+                } else {
+                    // Rod left hand - clear indicators and reset tracking
+                    if (lastRodType != null) {
+                        indicators.clear();
+                        lastRodType = null;
+                    }
+                }
+            }
+        }
+    }
 
-		float time = ari.getRenderViewEntity().world.getGameTime() + partialTicks;
+    private static class Indicator {
+        BlockPos target;
+        int duration;
+        Color color;
+        DiviningRodItem type;
 
-		Random rng = new Random(5);
+        public Indicator(BlockPos target, int duration, Color color, DiviningRodItem type) {
+            this.target = target;
+            this.duration = duration;
+            this.color = color;
+            this.type = type;
+        }
+    }
 
-		int loopHeight = height * 100 + lineLength;
-
-		float circleRadius = 1F;
-
-		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-		GlStateManager.lineWidth(2f);
-		GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
-		for (float p = 0; p < Math.PI * 2; p += Math.PI / 4F)
-		{
-			float myProgress = (float) ((time / 100F + rng.nextFloat() * 5) % (Math.PI * 0.5));
-			int startY = (int) (Math.sin((myProgress)) * loopHeight);
-
-			float g = rng.nextFloat();
-			float b = rng.nextFloat();
-
-			int endY = Math.min(loopHeight, startY + lineLength);
-
-			if (startY < lineLength)
-			{
-				startY = Math.max(0, startY - lineLength);
-				endY = Math.max(0, endY - lineLength);
-			}
-			else
-			{
-				startY -= lineLength;
-				endY -= lineLength;
-			}
-
-			GlStateManager.begin(GL11.GL_LINE_STRIP);
-			for (int modY = startY; modY <= endY; modY += 1)
-			{
-				float radius = (float) Math.sin(Math.PI / height * modY / 100F) * circleRadius;
-				float modX = (float) Math.sin(p) * radius;
-				float modZ = (float) Math.cos(p) * radius;
-
-				float alpha = endY - modY < 10 ? (1 / 10F * (endY - modY)) : 1;
-
-				GlStateManager.color4f(0.2F, g, b, alpha);
-
-				GlStateManager.vertex3f(renderX + modX, renderY + modY / 100F, renderZ + modZ);
-			}
-			GlStateManager.end();
-		}
-
-		RenderUtils.enableDefaultBlending();
-		GlStateManager.enableTexture();
-	}
-
-	public void tick()
-	{
-		Iterator<Indicator> indicatorIterator = indicators.iterator();
-
-		while (indicatorIterator.hasNext())
-		{
-			Indicator i = indicatorIterator.next();
-
-			i.duration--;
-
-			if (i.duration == 0)
-			{
-				indicatorIterator.remove();
-			}
-		}
-
-		PlayerEntity player = Minecraft.getInstance().player;
-
-		if (player != null)
-		{
-			World world = player.world;
-
-			if (world != null)
-			{
-				ItemStack main = player.getHeldItemMainhand();
-				ItemStack off = player.getHeldItemOffhand();
-
-				ItemStack rod = ItemStack.EMPTY;
-				DiviningRodItem type;
-
-				if (!main.isEmpty() && main.getItem() instanceof DiviningRodItem)
-				{
-					rod = main;
-				}
-				else if (!off.isEmpty() && off.getItem() instanceof DiviningRodItem)
-				{
-					rod = off;
-				}
-
-				if (!rod.isEmpty())
-				{
-					type = (DiviningRodItem) rod.getItem();
-					BlockPos playerPos = player.getPosition();
-
-					for (int i = 0; i < 60; i++)
-					{
-						modX++;
-
-						if (modX == 6)
-						{
-							modX = -5;
-							modZ++;
-
-							if (modZ == 6)
-							{
-								modZ = -5;
-								modY++;
-
-								if (modY == 6)
-								{
-									modY = -5;
-								}
-							}
-						}
-
-						BlockPos target = playerPos.add(modX, modY, modZ);
-						BlockState blockState = world.getBlockState(target);
-
-						if (world.isAreaLoaded(target, 0))
-						{
-							int matchIndex = type.matches(blockState);
-							if (matchIndex != -1)
-							{
-								Indicator indicator = new Indicator(target, 160, type.getColor(matchIndex), type);
-
-								indicators.add(indicator);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private static class Indicator
-	{
-		BlockPos target;
-		int duration;
-		Color color;
-
-		DiviningRodItem type;
-
-		public Indicator(BlockPos target, int duration, Color color, DiviningRodItem type)
-		{
-			super();
-			this.target = target;
-			this.duration = duration;
-			this.color = color;
-			this.type = type;
-		}
-	}
-
-	public static DiviningRodRenderer get()
-	{
-		if (INSTANCE == null)
-		{
-			INSTANCE = new DiviningRodRenderer();
-		}
-		return INSTANCE;
-	}
+    public static DiviningRodRenderer get() {
+        if (INSTANCE == null) {
+            INSTANCE = new DiviningRodRenderer();
+        }
+        return INSTANCE;
+    }
 }

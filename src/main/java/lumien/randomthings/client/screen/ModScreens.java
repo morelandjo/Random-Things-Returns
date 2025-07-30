@@ -1,16 +1,10 @@
 package lumien.randomthings.client.screen;
 
-import lumien.randomthings.container.ModContainerTypes;
-import net.minecraft.client.gui.ScreenManager;
+import lumien.randomthings.menu.ModMenuTypes;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-/**
- * ModScreens
- */
-public class ModScreens
-{
-
-	public static void register()
-	{
-		ScreenManager.registerFactory(ModContainerTypes.ADVANCED_REDSTONE_TORCH, AdvancedRedstoneTorchScreen::new);
-	}
+public class ModScreens {
+    public static void register(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.ADVANCED_REDSTONE_TORCH.get(), AdvancedRedstoneTorchScreen::new);
+    }
 }

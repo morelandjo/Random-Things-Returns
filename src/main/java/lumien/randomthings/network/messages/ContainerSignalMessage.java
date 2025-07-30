@@ -1,60 +1,44 @@
 package lumien.randomthings.network.messages;
 
-import io.netty.buffer.Unpooled;
-import lumien.randomthings.container.ISignalContainer;
+import lumien.randomthings.menu.ISignalContainer;
 import lumien.randomthings.network.IRTMessage;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent.Context;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-/**
- * ContainerSignalMessage
- */
-public class ContainerSignalMessage implements IRTMessage
-{
-	int id;
-	PacketBuffer data;
+public record ContainerSignalMessage(int id, byte[] data) implements IRTMessage {
+    public static final Type<ContainerSignalMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath("randomthings", "container_signal"));
+    
+    public static final StreamCodec<FriendlyByteBuf, ContainerSignalMessage> STREAM_CODEC = StreamCodec.composite(
+        net.minecraft.network.codec.ByteBufCodecs.VAR_INT, ContainerSignalMessage::id,
+        net.minecraft.network.codec.ByteBufCodecs.BYTE_ARRAY, ContainerSignalMessage::data,
+        ContainerSignalMessage::new
+    );
 
-	public ContainerSignalMessage(int id, PacketBuffer data)
-	{
-		this.id = id;
-		this.data = data;
-	}
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
 
-	public ContainerSignalMessage()
-	{
+    @Override
+    public void handle(IPayloadContext context) {
+        handle(this, context);
+    }
 
-	}
+    public static void handle(ContainerSignalMessage msg, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                AbstractContainerMenu container = serverPlayer.containerMenu;
 
-	@Override
-	public void read(PacketBuffer pb)
-	{
-		this.id = pb.readInt();
-
-		byte[] byteArray = pb.readByteArray();
-		this.data = new PacketBuffer(Unpooled.copiedBuffer(byteArray));
-	}
-
-	@Override
-	public void write(PacketBuffer pb)
-	{
-		pb.writeInt(id);
-		pb.writeByteArray(data.array());
-	}
-
-	@Override
-	public void handle(Context context)
-	{
-		ServerPlayerEntity player = context.getSender();
-
-		Container container = player.openContainer;
-
-		if (container instanceof ISignalContainer)
-		{
-			((ISignalContainer) container).handle(id, data);
-		}
-	}
-
-
+                if (container instanceof ISignalContainer signalContainer) {
+                    FriendlyByteBuf dataBuffer = new FriendlyByteBuf(io.netty.buffer.Unpooled.copiedBuffer(msg.data));
+                    signalContainer.handle(msg.id, dataBuffer);
+                }
+            }
+        });
+    }
 }

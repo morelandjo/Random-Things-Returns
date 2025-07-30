@@ -1,64 +1,52 @@
 package lumien.randomthings.network.messages;
 
-import java.util.function.Consumer;
-
 import lumien.randomthings.client.vfx.EFFECT;
 import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.client.vfx.VisualEffect;
 import lumien.randomthings.network.IRTMessage;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent.Context;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public class VisualEffectMessage  implements IRTMessage
-{
-	EFFECT type;
-	Consumer<PacketBuffer> parameter;
-	
-	VisualEffect effect;
-	
-	public VisualEffectMessage()
-	{
-		
-	}
-	
-	public VisualEffectMessage(EFFECT type, Consumer<PacketBuffer> parameter) {
-		this.type = type;
-		this.parameter = parameter;
-	}
+public record VisualEffectMessage(EFFECT effectType, byte[] effectData) implements IRTMessage {
+    public static final Type<VisualEffectMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath("randomthings", "visual_effect"));
+    
+    public static final StreamCodec<FriendlyByteBuf, VisualEffectMessage> STREAM_CODEC = StreamCodec.of(
+        (buffer, msg) -> {
+            buffer.writeInt(msg.effectType.ordinal());
+            buffer.writeByteArray(msg.effectData);
+        },
+        (buffer) -> {
+            EFFECT effectType = EFFECT.values()[buffer.readInt()];
+            byte[] data = buffer.readByteArray();
+            return new VisualEffectMessage(effectType, data);
+        }
+    );
 
-	@Override
-	public void read(PacketBuffer pb)
-	{
-		this.type = EFFECT.values()[pb.readInt()];
-		try
-		{
-			this.effect = this.type.getEffectClass().newInstance();
-			this.effect.readData(pb);
-		}
-		catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-	}
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
 
-	@Override
-	public void write(PacketBuffer pb)
-	{
-		pb.writeInt(this.type.ordinal());
-		this.parameter.accept(pb);
-	}
+    @Override
+    public void handle(IPayloadContext context) {
+        handle(this, context);
+    }
 
-	@Override
-	public void handle(Context ctx)
-	{
-		ctx.setPacketHandled(true);
-		ctx.enqueueWork(() -> {
-			VFXHandler.INSTANCE.addEffect(this.effect);
-		});
-	}
-	
+    public static void handle(VisualEffectMessage msg, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player().level().isClientSide) {
+                try {
+                    VisualEffect effect = msg.effectType.getEffectClass().getDeclaredConstructor().newInstance();
+                    FriendlyByteBuf dataBuffer = new FriendlyByteBuf(io.netty.buffer.Unpooled.copiedBuffer(msg.effectData));
+                    effect.readData(dataBuffer);
+                    VFXHandler.INSTANCE.addEffect(effect);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

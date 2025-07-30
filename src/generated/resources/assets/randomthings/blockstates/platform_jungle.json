@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "randomthings:block/platform_jungle"
+    }
+  }
+}

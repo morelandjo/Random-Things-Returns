@@ -1,19 +1,15 @@
 package lumien.randomthings.worldgen;
 
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.registries.ObjectHolder;
+import lumien.randomthings.lib.ModConstants;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-@ObjectHolder("randomthings")
-public class ModFeatures
-{
-	@ObjectHolder("blood_roses")
-	public static BloodRoseFeature BLOOD_ROSES;
+public class ModFeatures {
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, ModConstants.MOD_ID);
 
-	public static void registerFeatures(Register<Feature<?>> featureRegistryEvent)
-	{
-		featureRegistryEvent.getRegistry().register(new BloodRoseFeature(NoFeatureConfig::deserialize).setRegistryName("blood_roses"));
-	}
-	
+    public static final DeferredHolder<Feature<?>, BloodRoseFeature> BLOOD_ROSES = FEATURES.register("blood_roses", 
+        () -> new BloodRoseFeature(NoneFeatureConfiguration.CODEC));
 }

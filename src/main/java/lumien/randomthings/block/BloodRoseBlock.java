@@ -1,62 +1,67 @@
 package lumien.randomthings.block;
 
-import lumien.randomthings.tileentity.BloodRoseTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import lumien.randomthings.blockentity.BloodRoseBlockEntity;
+import lumien.randomthings.blockentity.ModBlockEntityTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BloodRoseBlock extends BushBlock
-{
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 15.0D, 11.0D);
+public class BloodRoseBlock extends BushBlock implements EntityBlock {
+    public static final MapCodec<BloodRoseBlock> CODEC = simpleCodec(properties -> new BloodRoseBlock());
 
-	public BloodRoseBlock()
-	{
-		super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0F).sound(SoundType.PLANT).doesNotBlockMovement());
-	}
+    @Override
+    public MapCodec<BloodRoseBlock> codec() {
+        return CODEC;
+    }
 
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-	{
-		Vec3d vec3d = state.getOffset(worldIn, pos);
-		return SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
-	}
+    protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 15.0D, 11.0D);
 
-	@Override
-	public boolean hasTileEntity(BlockState state)
-	{
-		return true;
-	}
+    public BloodRoseBlock() {
+        super(BlockBehaviour.Properties.of()
+            .strength(0F)
+            .sound(SoundType.GRASS)
+            .noCollission()
+            .offsetType(BlockBehaviour.OffsetType.XZ));
+    }
 
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world)
-	{
-		return new BloodRoseTileEntity();
-	}
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Vec3 offset = state.getOffset(level, pos);
+        return SHAPE.move(offset.x, offset.y, offset.z);
+    }
 
-	@Override
-	public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		if (BlockTags.DIRT_LIKE.contains(state.getBlock()))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new BloodRoseBlockEntity(pos, state);
+    }
 
-	public Block.OffsetType getOffsetType()
-	{
-		return Block.OffsetType.XZ;
-	}
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(BlockTags.DIRT) || super.mayPlaceOn(state, level, pos);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        if (level.isClientSide) {
+            return null;
+        } else {
+            return blockEntityType == ModBlockEntityTypes.BLOOD_ROSE.get() ? 
+                (BlockEntityTicker<T>) (BlockEntityTicker<BloodRoseBlockEntity>) BloodRoseBlockEntity::tick : null;
+        }
+    }
 }

@@ -1,148 +1,121 @@
 package lumien.randomthings;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import lumien.randomthings.asm.AsmHandler;
+import com.mojang.logging.LogUtils;
 import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.screen.ModScreens;
 import lumien.randomthings.client.vfx.VFXHandler;
-import lumien.randomthings.container.ModContainerTypes;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.network.RTPacketHandler;
-import lumien.randomthings.tileentity.ModTileEntityTypes;
-import lumien.randomthings.worldgen.BloodRoseFeature;
+import lumien.randomthings.blockentity.ModBlockEntityTypes;
+import lumien.randomthings.menu.ModMenuTypes;
 import lumien.randomthings.worldgen.ModFeatures;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.TickEvent.ClientTickEvent;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
-import net.minecraftforge.eventbus.api.Event.Result;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import org.slf4j.Logger;
 
 @Mod(ModConstants.MOD_ID)
-public class RandomThings
-{
-	private static final Logger LOGGER = LogManager.getLogger();
+public class RandomThings {
+    private static final Logger LOGGER = LogUtils.getLogger();
+    public static RandomThings INSTANCE;
 
-	public static RandomThings INSTANCE;
+    public RandomThings(IEventBus modEventBus) {
+        System.out.println("CONSTRUCTOR DEBUG: RandomThings constructor called - this should appear!");
+        INSTANCE = this;
+        LOGGER.info("DEBUG: RandomThings constructor called");
 
-	public RandomThings()
-	{
-		INSTANCE = this;
+        // Register our deferred registers
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModItems.CREATIVE_MODE_TABS.register(modEventBus);
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        ModMenuTypes.MENU_TYPES.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
 
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
+        // Register lifecycle events
+        modEventBus.addListener(this::setupCommon);
+        modEventBus.addListener(this::setupClient);
+        modEventBus.addListener(this::registerScreens);
+        modEventBus.addListener(this::registerNetworking);
 
-		MinecraftForge.EVENT_BUS.register(this);
+        // Register game events
+        // Note: Event handlers are registered as listeners below, not as class instance
 
-		MinecraftForge.EVENT_BUS.addListener((UseHoeEvent event) -> {
-			ItemUseContext context = event.getContext();
+        // Register hoe event for fertilized dirt
+        NeoForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickBlock event) -> {
+            if (event.getItemStack().getItem() instanceof net.minecraft.world.item.HoeItem) {
+                Level level = event.getLevel();
+                BlockPos pos = event.getPos();
+                BlockState state = level.getBlockState(pos);
 
-			World world = context.getWorld();
-			BlockPos pos = context.getPos();
-			BlockState state = world.getBlockState(pos);
+                if (state.getBlock() == ModBlocks.FERTILIZED_DIRT.get() && !state.getValue(FertilizedDirtBlock.TILLED)) {
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
+                    if (!level.isClientSide) {
+                        level.setBlock(pos, state.setValue(FertilizedDirtBlock.TILLED, true), 3);
+                        level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    }
+                }
+            }
+        });
+    }
 
-			if (state.getBlock() == ModBlocks.FERTILIZED_DIRT && !state.get(FertilizedDirtBlock.TILLED))
-			{
-				event.setResult(Result.ALLOW);
-				world.setBlockState(pos, state.with(FertilizedDirtBlock.TILLED, true));
-				PlayerEntity playerentity = context.getPlayer();
-				world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			}
-		});
+    private void setupCommon(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            // Common setup tasks
+            // Network registration handled in registerNetworking method
+        });
+    }
 
-		MinecraftForge.EVENT_BUS.addListener((ClientTickEvent event) -> {
-			if (event.phase == TickEvent.Phase.END)
-			{
-				DiviningRodRenderer.get().tick();
-				VFXHandler.INSTANCE.tick();
-			}
-		});
-	}
+    private void registerNetworking(final RegisterPayloadHandlersEvent event) {
+        RTPacketHandler.register(event);
+    }
 
-	private void setupCommon(final FMLCommonSetupEvent event)
-	{
-		AsmHandler.modBlockLight(0F, 1);
-		RTPacketHandler.register();
-		
-		ForgeRegistries.BIOMES.forEach(b -> {
-			b.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(ModFeatures.BLOOD_ROSES, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_32, new FrequencyConfig(1)));
-		});
-	}
+    private void setupClient(final FMLClientSetupEvent event) {
+        LOGGER.info("DEBUG: setupClient called");
+        event.enqueueWork(() -> {
+            // Client-side initialization
+            
+            // Register render layers for transparent blocks
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_ROSE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_REDSTONE_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS_RETURNING.get(), RenderType.translucent());
+        });
 
-	private void setupClient(final FMLClientSetupEvent event)
-	{
-		ModScreens.register();
+        // Register client events manually
+        LOGGER.info("DEBUG: Registering client events manually");
+        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onRenderLevelStage);
+        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onClientTick);
+    }
 
-		MinecraftForge.EVENT_BUS.addListener((RenderWorldLastEvent rwl) -> {
-			DiviningRodRenderer.get().render();
-			VFXHandler.INSTANCE.render(rwl.getPartialTicks());
-		});
-	}
+    private void registerScreens(final RegisterMenuScreensEvent event) {
+        ModScreens.register(event);
+    }
 
-
-
-	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class RegistryEvents
-	{
-		@SubscribeEvent
-		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
-		{
-			ModBlocks.registerBlocks(blockRegistryEvent);
-		}
-
-		@SubscribeEvent
-		public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent)
-		{
-			ModItems.initItemGroup();
-
-			ModItems.registerItems(itemRegistryEvent);
-		}
-
-		@SubscribeEvent
-		public static void onTileEntityTypesRegistry(final RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegistryEvent)
-		{
-			ModTileEntityTypes.registerTypes(tileEntityTypeRegistryEvent);
-		}
-
-		@SubscribeEvent
-		public static void onContainerTypesRegistry(final RegistryEvent.Register<ContainerType<?>> containerTypeRegistryEvent)
-		{
-			ModContainerTypes.registerContainerTypes(containerTypeRegistryEvent);
-		}
-		
-		@SubscribeEvent
-		public static void onFeaturesRegistry(final RegistryEvent.Register<Feature<?>> featureRegistryEvent) {
-			ModFeatures.registerFeatures(featureRegistryEvent);
-		}
-	}
 }

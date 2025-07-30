@@ -1,184 +1,196 @@
 package lumien.randomthings.client.util;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-
-import java.util.Random;
 import java.util.function.Function;
 
-import javax.vecmath.Vector3f;
+import org.joml.Vector3f;
 
-import org.lwjgl.opengl.GL11;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 
-public class RenderUtils
-{
-	public static void drawFunctionLinePart(Function<Float, Vector3f> function, float lineLength, float progress)
-	{
-		// Setup Render
-		GlStateManager.enableDepthTest();
-		GlStateManager.disableTexture();
-		GlStateManager.color4f(1, 1, 1, 1);
-		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-		GlStateManager.lineWidth(2f);
-		GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
-
-		// Numbers
-		float neededProgress = progress + lineLength;
-		float mappedProgress = progress * neededProgress;
-
-		float progressStart = Math.max(0, mappedProgress - lineLength);
-		float progressEnd = Math.min(mappedProgress, 1);
-
-		float range = progressEnd - progressStart;
-
-		int lineSegments = 100;
-
-		float step = range / lineSegments;
-
-		// Render
-		GlStateManager.lineWidth(2F);
-		GlStateManager.begin(GL11.GL_LINE_STRIP);
-
-		if (range != 0)
-		{
-			for (int seg = 0; seg < lineSegments; seg++)
-			{
-				float p = progressStart + seg * step;
-				Vector3f vec = function.apply(p);
-
-				float alpha = seg > lineSegments - 10 ? (10 - (seg - (lineSegments - 10))) / 10f : 1f;
-				alpha = 0.5F;
-
-				GlStateManager.color4f(1, 0, 0, alpha);
-				GlStateManager.vertex3f(vec.x, vec.y, vec.z);
-			}
-		}
-
-		Vector3f last = function.apply(progressEnd);
-
-		GlStateManager.vertex3f(last.x, last.y, last.z);
-
-		GlStateManager.end();
-
-		GlStateManager.enableTexture();
-		RenderUtils.enableDefaultBlending();
-	}
-
-	public static Function<Float, Vector3f> getLineFunction(Vector3f from, Vector3f to)
-	{
-		return (progress) -> {
-			Vector3f between = new Vector3f();
-			between.interpolate(from, to, progress);
-			return between;
-		};
-	}
-
-	public static void drawCube(float posX, float posY, float posZ, float width, float length, float height, int red, int green, int blue, int alpha)
-	{
-		GlStateManager.disableLighting();
-
-		Tessellator t = Tessellator.getInstance();
-		BufferBuilder wr = t.getBuffer();
-
-		GlStateManager.disableTexture();
-
-		GlStateManager.translated(posX, posY, posZ);
-
-		wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
-
-		wr.pos(0F, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, height, 0F).color(red, green, blue, alpha).endVertex(); // P2
-		wr.pos(width, height, 0F).color(red, green, blue, alpha).endVertex(); // P3
-		wr.pos(width, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P4
-
-		wr.pos(width, height, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(width, height, length).color(red, green, blue, alpha).endVertex(); // P2
-		wr.pos(width, 0F, length).color(red, green, blue, alpha).endVertex(); // P3
-		wr.pos(width, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P4
-
-		wr.pos(width, height, length).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, height, length).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, 0F, length).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(width, 0F, length).color(red, green, blue, alpha).endVertex(); // P1
-
-		wr.pos(0F, height, length).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, height, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, 0F, length).color(red, green, blue, alpha).endVertex(); // P1
-
-		wr.pos(0F, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(width, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(width, 0F, length).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, 0F, length).color(red, green, blue, alpha).endVertex(); // P1
-
-		wr.pos(0F, height, 0F).color(red, green, blue, alpha).endVertex(); // P1
-		wr.pos(0F, height, length).color(red, green, blue, alpha).endVertex(); // P2
-		wr.pos(width, height, length).color(red, green, blue, alpha).endVertex(); // P3
-		wr.pos(width, height, 0F).color(red, green, blue, alpha).endVertex(); // P4
-
-		t.draw();
-
-		GlStateManager.translated(-posX, -posY, -posZ);
-		GlStateManager.enableTexture();
-
-		GlStateManager.enableLighting();
-	}
-
-	public static void drawCube(float posX, float posY, float posZ, float size, int red, int green, int blue, int alpha)
-	{
-		drawCube(posX, posY, posZ, size, size, size, red, green, blue, alpha);
-	}
-
-	public static void drawCylinder(float x1, float y1, float z1, float x2, float y2, float z2)
-	{
-		GlStateManager.disableLighting();
-		GlStateManager.disableTexture();
-
-		Tessellator t = Tessellator.getInstance();
-		BufferBuilder wr = t.getBuffer();
-		ActiveRenderInfo ari = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
-
-		GL11.glPointSize(1.0f);
-		wr.begin(GL11.GL_POINTS, DefaultVertexFormats.POSITION_COLOR);
-
-		float radius = 2;
-
-		float oX = 2;
-		float oY = 2;
-		float oZ = 0;
-
-		Random rng = new Random(5);
-
-		for (int i = 0; i < 1; i++)
-		{
-			double alpha = rng.nextFloat() * Math.PI * 2;
-			double beta = rng.nextFloat() * Math.PI;
-
-			float x = (float) (radius * Math.sin(alpha)) + oX;
-			float y = (float) (radius * Math.cos(beta) * Math.cos(alpha)) + oY;
-			float z = (float) (radius * Math.sin(beta) * Math.cos(alpha)) + oZ;
-
-			wr.pos(x1 + x, y1 + y, z1 + z).color(255, 0, 0, 255).endVertex();
-		}
-
-		t.draw();
-
-
-
-		GlStateManager.enableTexture();
-		GlStateManager.enableLighting();
-	}
-
-	public static void enableDefaultBlending()
-	{
-		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-	}
+public class RenderUtils {
+    
+    // Create a custom render type that's guaranteed to be visible
+    private static final RenderType DIVINING_OVERLAY = RenderType.create(
+        "divining_rod_overlay",
+        DefaultVertexFormat.POSITION_COLOR,
+        VertexFormat.Mode.QUADS,
+        256,
+        false,
+        true,
+        RenderType.CompositeState.builder()
+            .setShaderState(RenderType.POSITION_COLOR_SHADER)
+            .setTransparencyState(RenderType.TRANSLUCENT_TRANSPARENCY)
+            .setCullState(RenderType.NO_CULL)
+            .setLightmapState(RenderType.NO_LIGHTMAP)
+            .setOverlayState(RenderType.NO_OVERLAY)
+            .setDepthTestState(RenderType.NO_DEPTH_TEST) // Render through blocks
+            .setWriteMaskState(RenderType.COLOR_WRITE)
+            .createCompositeState(false)
+    );
+    
+    public static void drawFunctionLinePart(Function<Float, Vector3f> function, float lineLength, float progress, 
+                                          PoseStack poseStack, MultiBufferSource bufferSource) {
+        
+        // Setup numbers
+        float neededProgress = progress + lineLength;
+        float mappedProgress = progress * neededProgress;
+        
+        float progressStart = Math.max(0, mappedProgress - lineLength);
+        float progressEnd = Math.min(mappedProgress, 1);
+        
+        float range = progressEnd - progressStart;
+        
+        int lineSegments = 100;
+        float step = range / lineSegments;
+        
+        if (range == 0) return;
+        
+        // Get line render type
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.lines());
+        
+        // Render line segments
+        for (int seg = 0; seg < lineSegments - 1; seg++) {
+            float p1 = progressStart + seg * step;
+            float p2 = progressStart + (seg + 1) * step;
+            
+            Vector3f vec1 = function.apply(p1);
+            Vector3f vec2 = function.apply(p2);
+            
+            float alpha = seg > lineSegments - 10 ? (10 - (seg - (lineSegments - 10))) / 10f : 1f;
+            alpha = 0.5F;
+            
+            // Draw line segment
+            vertexConsumer.addVertex(poseStack.last().pose(), vec1.x, vec1.y, vec1.z)
+                         .setColor(1.0f, 0.0f, 0.0f, alpha);
+            vertexConsumer.addVertex(poseStack.last().pose(), vec2.x, vec2.y, vec2.z)
+                         .setColor(1.0f, 0.0f, 0.0f, alpha);
+        }
+    }
+    
+    public static Function<Float, Vector3f> getLineFunction(Vector3f from, Vector3f to) {
+        return (progress) -> {
+            return new Vector3f(from).lerp(to, progress);
+        };
+    }
+    
+    public static void drawCube(PoseStack poseStack, MultiBufferSource bufferSource, 
+                               float x, float y, float z, float size, 
+                               int red, int green, int blue, int alpha) {
+        
+        VertexConsumer consumer = bufferSource.getBuffer(DIVINING_OVERLAY);
+        
+        float minX = x;
+        float minY = y;
+        float minZ = z;
+        float maxX = x + size;
+        float maxY = y + size;
+        float maxZ = z + size;
+        
+        float r = red / 255.0F;
+        float g = green / 255.0F;
+        float b = blue / 255.0F;
+        float a = alpha / 255.0F;
+        
+        // Draw cube faces with POSITION_COLOR format for debug renderer
+        // Bottom face (Y-)
+        consumer.addVertex(poseStack.last().pose(), minX, minY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, minY, maxZ).setColor(r, g, b, a);
+        
+        // Top face (Y+)
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, minZ).setColor(r, g, b, a);
+        
+        // North face (Z-)
+        consumer.addVertex(poseStack.last().pose(), minX, minY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, minZ).setColor(r, g, b, a);
+        
+        // South face (Z+)
+        consumer.addVertex(poseStack.last().pose(), minX, minY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, maxZ).setColor(r, g, b, a);
+        
+        // West face (X-)
+        consumer.addVertex(poseStack.last().pose(), minX, minY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, minY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, minZ).setColor(r, g, b, a);
+        
+        // East face (X+)
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, minZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, maxZ).setColor(r, g, b, a);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, maxZ).setColor(r, g, b, a);
+    }
+    
+    public static void drawWireframeCube(PoseStack poseStack, MultiBufferSource bufferSource, 
+                                        float x, float y, float z, float size, 
+                                        int red, int green, int blue, int alpha) {
+        
+        VertexConsumer consumer = bufferSource.getBuffer(RenderType.lines());
+        
+        float minX = x;
+        float minY = y;
+        float minZ = z;
+        float maxX = x + size;
+        float maxY = y + size;
+        float maxZ = z + size;
+        
+        float r = red / 255.0F;
+        float g = green / 255.0F;
+        float b = blue / 255.0F;
+        float a = alpha / 255.0F;
+        
+        // Draw wireframe cube with lines - lines render type needs normals
+        // Bottom edges
+        consumer.addVertex(poseStack.last().pose(), minX, minY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), minX, minY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), minX, minY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), minX, minY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        // Top edges
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        // Vertical edges
+        consumer.addVertex(poseStack.last().pose(), minX, minY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, minZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), maxX, minY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), maxX, maxY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        
+        consumer.addVertex(poseStack.last().pose(), minX, minY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+        consumer.addVertex(poseStack.last().pose(), minX, maxY, maxZ).setColor(r, g, b, a).setNormal(0, 1, 0);
+    }
 }

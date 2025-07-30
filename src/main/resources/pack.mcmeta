@@ -1,7 +1,7 @@
 {
     "pack": {
-        "description": "randomthings resources",
-        "pack_format": 4,
-        "_comment": "Resources for the Random Things mod"
+        "description": "Random Things Returns resources",
+        "pack_format": 34,
+        "_comment": "Resources for the Random Things Returns mod - Updated for 1.21.1"
     }
 }

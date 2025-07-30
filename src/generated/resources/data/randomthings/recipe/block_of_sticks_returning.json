@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "randomthings:block_of_sticks"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BEB",
+    "BBB"
+  ],
+  "result": {
+    "count": 8,
+    "id": "randomthings:block_of_sticks_returning"
+  }
+}
