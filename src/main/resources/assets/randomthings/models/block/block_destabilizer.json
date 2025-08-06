@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "particle": "randomthings:block/block_destabilizer_side",
+    "north": "randomthings:block/block_destabilizer_front",
+    "south": "randomthings:block/block_destabilizer_side",
+    "east": "randomthings:block/block_destabilizer_side",
+    "west": "randomthings:block/block_destabilizer_side",
+    "up": "randomthings:block/block_destabilizer_top",
+    "down": "randomthings:block/block_destabilizer_side"
+  }
+}

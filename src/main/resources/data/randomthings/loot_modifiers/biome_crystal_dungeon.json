@@ -1,0 +1,9 @@
+{
+  "type": "randomthings:biome_crystal",
+  "conditions": [
+    {
+      "condition": "minecraft:table_id",
+      "id": "minecraft:chests/simple_dungeon"
+    }
+  ]
+}

@@ -4,9 +4,13 @@ import com.mojang.logging.LogUtils;
 import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
+import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.client.screen.ModScreens;
 import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.ModDataComponents;
+import lumien.randomthings.loot.ModLootModifiers;
+import lumien.randomthings.recipe.ModRecipeSerializers;
 import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.network.RTPacketHandler;
 import lumien.randomthings.blockentity.ModBlockEntityTypes;
@@ -30,6 +34,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -55,12 +60,19 @@ public class RandomThings {
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ModMenuTypes.MENU_TYPES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
+        ModDataComponents.DATA_COMPONENTS.register(modEventBus);
+        ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
         // Register lifecycle events
         modEventBus.addListener(this::setupCommon);
         modEventBus.addListener(this::setupClient);
         modEventBus.addListener(this::registerScreens);
         modEventBus.addListener(this::registerNetworking);
+        modEventBus.addListener(this::registerRenderers);
+        
+        // Register client-side color handlers
+        modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
 
         // Register game events
         // Note: Event handlers are registered as listeners below, not as class instance
@@ -106,6 +118,8 @@ public class RandomThings {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS_RETURNING.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BIOME_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIAPHANOUS_BLOCK.get(), RenderType.translucent());
         });
 
         // Register client events manually
@@ -116,6 +130,10 @@ public class RandomThings {
 
     private void registerScreens(final RegisterMenuScreensEvent event) {
         ModScreens.register(event);
+    }
+
+    private void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
     }
 
 }

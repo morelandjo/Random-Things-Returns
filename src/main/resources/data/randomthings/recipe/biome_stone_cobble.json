@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC",
+    "CBC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "B": {
+      "item": "randomthings:biome_crystal"
+    }
+  },
+  "result": {
+    "count": 16,
+    "id": "randomthings:biome_stone_cobble"
+  }
+}

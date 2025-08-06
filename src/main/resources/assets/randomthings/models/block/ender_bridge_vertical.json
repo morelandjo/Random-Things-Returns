@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/orientable_vertical",
+    "textures": {
+        "front": "randomthings:block/enderbridge/front",
+        "side": "randomthings:block/enderbridge/side"
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SIS",
+    "SBS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "B": {
+      "item": "minecraft:lever"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:contact_lever"
+  }
+}

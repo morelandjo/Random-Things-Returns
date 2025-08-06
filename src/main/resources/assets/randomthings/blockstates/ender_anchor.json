@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "randomthings:block/ender_anchor" }
+    }
+}

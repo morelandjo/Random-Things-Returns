@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    " T ",
+    "RDR",
+    " R "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:redstone_torch"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "D": {
+      "item": "randomthings:chat_detector"
+    }
+  },
+  "result": {
+    "id": "randomthings:global_chat_detector",
+    "count": 1
+  }
+}

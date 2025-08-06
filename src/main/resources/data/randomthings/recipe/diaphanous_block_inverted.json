@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "randomthings:diaphanous_block"
+    },
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "randomthings:diaphanous_block",
+    "components": {
+      "randomthings:diaphanous_inverted": true,
+      "randomthings:diaphanous_block_state": "minecraft:stone"
+    }
+  }
+}

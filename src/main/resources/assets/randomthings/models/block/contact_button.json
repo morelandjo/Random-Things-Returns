@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "randomthings:block/contact_button_side",
+    "front": "randomthings:block/contact_button_front",
+    "side": "randomthings:block/contact_button_side"
+  }
+}

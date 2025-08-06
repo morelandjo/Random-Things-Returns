@@ -21,4 +21,55 @@ public class ModBlockEntityTypes {
         BLOCK_ENTITY_TYPES.register("blood_rose", 
             () -> BlockEntityType.Builder.of(BloodRoseBlockEntity::new, 
                 ModBlocks.BLOOD_ROSE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<AdvancedRedstoneRepeaterBlockEntity>> ADVANCED_REDSTONE_REPEATER = 
+        BLOCK_ENTITY_TYPES.register("advanced_redstone_repeater", 
+            () -> BlockEntityType.Builder.of(AdvancedRedstoneRepeaterBlockEntity::new, 
+                ModBlocks.ADVANCED_REDSTONE_REPEATER.get(), ModBlocks.ADVANCED_REDSTONE_REPEATER_POWERED.get()).build(null));
+
+    public static final Supplier<BlockEntityType<AnalogEmitterBlockEntity>> ANALOG_EMITTER = 
+        BLOCK_ENTITY_TYPES.register("analog_emitter", 
+            () -> BlockEntityType.Builder.of(AnalogEmitterBlockEntity::new, 
+                ModBlocks.ANALOG_EMITTER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER = 
+        BLOCK_ENTITY_TYPES.register("block_breaker", 
+            () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, 
+                ModBlocks.BLOCK_BREAKER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<BlockDestabilizerBlockEntity>> BLOCK_DESTABILIZER = 
+        BLOCK_ENTITY_TYPES.register("block_destabilizer", 
+            () -> BlockEntityType.Builder.of(BlockDestabilizerBlockEntity::new, 
+                ModBlocks.BLOCK_DESTABILIZER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<ChatDetectorBlockEntity>> CHAT_DETECTOR = 
+        BLOCK_ENTITY_TYPES.register("chat_detector", 
+            () -> BlockEntityType.Builder.of(ChatDetectorBlockEntity::new, 
+                ModBlocks.CHAT_DETECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<GlobalChatDetectorBlockEntity>> GLOBAL_CHAT_DETECTOR = 
+        BLOCK_ENTITY_TYPES.register("global_chat_detector", 
+            () -> BlockEntityType.Builder.of(GlobalChatDetectorBlockEntity::new, 
+                ModBlocks.GLOBAL_CHAT_DETECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
+        BLOCK_ENTITY_TYPES.register("diaphanous_block", 
+            () -> BlockEntityType.Builder.of(DiaphanousBlockEntity::new, 
+                ModBlocks.DIAPHANOUS_BLOCK.get()).build(null));
+
+    // Ender Bridge System
+    public static final Supplier<BlockEntityType<EnderAnchorBlockEntity>> ENDER_ANCHOR = 
+        BLOCK_ENTITY_TYPES.register("ender_anchor", 
+            () -> BlockEntityType.Builder.of(EnderAnchorBlockEntity::new, 
+                ModBlocks.ENDER_ANCHOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<EnderBridgeBlockEntity>> ENDER_BRIDGE = 
+        BLOCK_ENTITY_TYPES.register("ender_bridge", 
+            () -> BlockEntityType.Builder.of(EnderBridgeBlockEntity::new, 
+                ModBlocks.ENDER_BRIDGE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PrismarineEnderBridgeBlockEntity>> PRISMARINE_ENDER_BRIDGE = 
+        BLOCK_ENTITY_TYPES.register("prismarine_ender_bridge", 
+            () -> BlockEntityType.Builder.of(PrismarineEnderBridgeBlockEntity::new, 
+                ModBlocks.PRISMARINE_ENDER_BRIDGE.get()).build(null));
 }

@@ -1,5 +1,6 @@
 package lumien.randomthings.menu;
 
+import lumien.randomthings.blockentity.BlockDestabilizerBlockEntity;
 import lumien.randomthings.lib.ModConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -17,4 +18,32 @@ public class ModMenuTypes {
         MENU_TYPES.register("advanced_redstone_torch", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
                 new AdvancedRedstoneTorchMenu(windowId, ContainerLevelAccess.NULL)));
+
+    public static final Supplier<MenuType<AdvancedRedstoneRepeaterMenu>> ADVANCED_REDSTONE_REPEATER = 
+        MENU_TYPES.register("advanced_redstone_repeater", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+                new AdvancedRedstoneRepeaterMenu(windowId, ContainerLevelAccess.NULL)));
+
+    public static final Supplier<MenuType<AnalogEmitterMenu>> ANALOG_EMITTER = 
+        MENU_TYPES.register("analog_emitter", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+                new AnalogEmitterMenu(windowId, inventory, data.readBlockPos())));
+
+    public static final Supplier<MenuType<BlockDestabilizerMenu>> BLOCK_DESTABILIZER = 
+        MENU_TYPES.register("block_destabilizer", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                BlockDestabilizerBlockEntity blockEntity = (BlockDestabilizerBlockEntity) inventory.player.level()
+                    .getBlockEntity(data.readBlockPos());
+                return new BlockDestabilizerMenu(windowId, blockEntity);
+            }));
+
+    public static final Supplier<MenuType<ChatDetectorMenu>> CHAT_DETECTOR = 
+        MENU_TYPES.register("chat_detector", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+                new ChatDetectorMenu(windowId, inventory, data.readBlockPos())));
+
+    public static final Supplier<MenuType<GlobalChatDetectorMenu>> GLOBAL_CHAT_DETECTOR = 
+        MENU_TYPES.register("global_chat_detector", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+                new GlobalChatDetectorMenu(windowId, inventory, data.readBlockPos())));
 }

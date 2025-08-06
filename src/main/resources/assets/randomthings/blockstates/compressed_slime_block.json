@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "compression=0": {
+      "model": "randomthings:block/compressed_slime_block_1"
+    },
+    "compression=1": {
+      "model": "randomthings:block/compressed_slime_block_2"
+    },
+    "compression=2": {
+      "model": "randomthings:block/compressed_slime_block_3"
+    }
+  }
+}

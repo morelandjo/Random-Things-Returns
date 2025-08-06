@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "facing=down,powered=false": {
+      "model": "randomthings:block/contact_button_vertical",
+      "x": 180
+    },
+    "facing=up,powered=false": {
+      "model": "randomthings:block/contact_button_vertical"
+    },
+    "facing=north,powered=false": {
+      "model": "randomthings:block/contact_button"
+    },
+    "facing=south,powered=false": {
+      "model": "randomthings:block/contact_button",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "randomthings:block/contact_button",
+      "y": 270
+    },
+    "facing=east,powered=false": {
+      "model": "randomthings:block/contact_button",
+      "y": 90
+    },
+    "facing=down,powered=true": {
+      "model": "randomthings:block/contact_button_powered_vertical",
+      "x": 180
+    },
+    "facing=up,powered=true": {
+      "model": "randomthings:block/contact_button_powered_vertical"
+    },
+    "facing=north,powered=true": {
+      "model": "randomthings:block/contact_button_powered"
+    },
+    "facing=south,powered=true": {
+      "model": "randomthings:block/contact_button_powered",
+      "y": 180
+    },
+    "facing=west,powered=true": {
+      "model": "randomthings:block/contact_button_powered",
+      "y": 270
+    },
+    "facing=east,powered=true": {
+      "model": "randomthings:block/contact_button_powered",
+      "y": 90
+    }
+  }
+}

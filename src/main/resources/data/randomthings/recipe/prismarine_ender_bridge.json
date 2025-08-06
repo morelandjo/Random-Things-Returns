@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SCS",
+    "CBC",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "B": {
+      "item": "randomthings:ender_bridge"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:prismarine_ender_bridge"
+  }
+}

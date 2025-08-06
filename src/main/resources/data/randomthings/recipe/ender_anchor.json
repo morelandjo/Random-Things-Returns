@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "OOO",
+    "OSO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "randomthings:stable_enderpearl"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:ender_anchor"
+  }
+}

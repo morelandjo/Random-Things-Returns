@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "randomthings:block/block_destabilizer"
+    },
+    "facing=south": {
+      "model": "randomthings:block/block_destabilizer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "randomthings:block/block_destabilizer",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "randomthings:block/block_destabilizer",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "randomthings:block/block_destabilizer",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "randomthings:block/block_destabilizer",
+      "x": 90
+    }
+  }
+}

@@ -22,6 +22,12 @@ public class RTPacketHandler {
             (message, context) -> message.handle(context));
         registrar.playToClient(VisualEffectMessage.TYPE, VisualEffectMessage.STREAM_CODEC, 
             (message, context) -> message.handle(context));
+        registrar.playToServer(AnalogEmitterPacket.TYPE, AnalogEmitterPacket.STREAM_CODEC, 
+            (message, context) -> AnalogEmitterPacket.handle(message, context));
+        registrar.playToServer(ChatDetectorUpdatePacket.TYPE, ChatDetectorUpdatePacket.STREAM_CODEC, 
+            (message, context) -> ChatDetectorUpdatePacket.handle(message, context));
+        registrar.playToServer(GlobalChatDetectorUpdatePacket.TYPE, GlobalChatDetectorUpdatePacket.STREAM_CODEC, 
+            (message, context) -> GlobalChatDetectorUpdatePacket.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {

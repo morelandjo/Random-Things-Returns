@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "active=false,facing=down":  { "model": "randomthings:block/prismarine_ender_bridge_vertical", "x": 180 },
+        "active=false,facing=up":    { "model": "randomthings:block/prismarine_ender_bridge_vertical" },
+        "active=false,facing=north": { "model": "randomthings:block/prismarine_ender_bridge" },
+        "active=false,facing=south": { "model": "randomthings:block/prismarine_ender_bridge", "y": 180 },
+        "active=false,facing=west":  { "model": "randomthings:block/prismarine_ender_bridge", "y": 270 },
+        "active=false,facing=east":  { "model": "randomthings:block/prismarine_ender_bridge", "y": 90 },
+        
+        "active=true,facing=down":  { "model": "randomthings:block/prismarine_ender_bridge_vertical_active", "x": 180 },
+        "active=true,facing=up":    { "model": "randomthings:block/prismarine_ender_bridge_vertical_active" },
+        "active=true,facing=north": { "model": "randomthings:block/prismarine_ender_bridge_active" },
+        "active=true,facing=south": { "model": "randomthings:block/prismarine_ender_bridge_active", "y": 180 },
+        "active=true,facing=west":  { "model": "randomthings:block/prismarine_ender_bridge_active", "y": 270 },
+        "active=true,facing=east":  { "model": "randomthings:block/prismarine_ender_bridge_active", "y": 90 }
+    }
+}

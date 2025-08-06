@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SRS",
+    "RTR",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "T": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "result": {
+    "id": "randomthings:chat_detector",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:redstone_torch"
+    },
+    "X": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "#X#",
+    "ISI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "randomthings:advanced_redstone_repeater"
+  }
+}

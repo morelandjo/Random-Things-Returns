@@ -1,7 +1,9 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.block.BiomeStoneBlock;
 import lumien.randomthings.lib.ModConstants;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -57,9 +59,63 @@ public class ModItems {
     public static final Supplier<Item> BLOOD_ROSE = ITEMS.register("blood_rose",
         () -> new BlockItem(ModBlocks.BLOOD_ROSE.get(), new Item.Properties()));
 
+    public static final Supplier<Item> ADVANCED_REDSTONE_REPEATER = ITEMS.register("advanced_redstone_repeater",
+        () -> new BlockItem(ModBlocks.ADVANCED_REDSTONE_REPEATER.get(), new Item.Properties()));
+
+    public static final Supplier<Item> ANALOG_EMITTER = ITEMS.register("analog_emitter",
+        () -> new BlockItem(ModBlocks.ANALOG_EMITTER.get(), new Item.Properties()));
+
+    public static final Supplier<Item> BLOCK_BREAKER = ITEMS.register("block_breaker",
+        () -> new BlockItem(ModBlocks.BLOCK_BREAKER.get(), new Item.Properties()));
+
+    public static final Supplier<Item> BLOCK_DESTABILIZER = ITEMS.register("block_destabilizer",
+        () -> new BlockItem(ModBlocks.BLOCK_DESTABILIZER.get(), new Item.Properties()));
+
+    public static final Supplier<Item> CHAT_DETECTOR = ITEMS.register("chat_detector",
+        () -> new BlockItem(ModBlocks.CHAT_DETECTOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> GLOBAL_CHAT_DETECTOR = ITEMS.register("global_chat_detector",
+        () -> new BlockItem(ModBlocks.GLOBAL_CHAT_DETECTOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> COMPRESSED_SLIME_BLOCK = ITEMS.register("compressed_slime_block",
+        () -> new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK.get(), new Item.Properties()));
+
+    public static final Supplier<Item> CONTACT_BUTTON = ITEMS.register("contact_button",
+        () -> new BlockItem(ModBlocks.CONTACT_BUTTON.get(), new Item.Properties()));
+
+    public static final Supplier<Item> CONTACT_LEVER = ITEMS.register("contact_lever",
+        () -> new BlockItem(ModBlocks.CONTACT_LEVER.get(), new Item.Properties()));
+
+    // Biome Block Items
+    public static final Supplier<Item> BIOME_STONE_SMOOTH = ITEMS.register("biome_stone_smooth",
+        () -> new BiomeStoneBlockItem(ModBlocks.BIOME_STONE.get(), new Item.Properties(), BiomeStoneBlock.Variant.SMOOTH));
+    
+    public static final Supplier<Item> BIOME_STONE_COBBLE = ITEMS.register("biome_stone_cobble",
+        () -> new BiomeStoneBlockItem(ModBlocks.BIOME_STONE.get(), new Item.Properties(), BiomeStoneBlock.Variant.COBBLE));
+    
+    public static final Supplier<Item> BIOME_STONE_BRICK = ITEMS.register("biome_stone_brick",
+        () -> new BiomeStoneBlockItem(ModBlocks.BIOME_STONE.get(), new Item.Properties(), BiomeStoneBlock.Variant.BRICK));
+    
+    public static final Supplier<Item> BIOME_STONE_CRACKED = ITEMS.register("biome_stone_cracked",
+        () -> new BiomeStoneBlockItem(ModBlocks.BIOME_STONE.get(), new Item.Properties(), BiomeStoneBlock.Variant.CRACKED));
+    
+    public static final Supplier<Item> BIOME_STONE_CHISELED = ITEMS.register("biome_stone_chiseled",
+        () -> new BiomeStoneBlockItem(ModBlocks.BIOME_STONE.get(), new Item.Properties(), BiomeStoneBlock.Variant.CHISELED));
+    
+    public static final Supplier<Item> BIOME_GLASS = ITEMS.register("biome_glass",
+        () -> new BlockItem(ModBlocks.BIOME_GLASS.get(), new Item.Properties()));
+    
+    public static final Supplier<Item> DIAPHANOUS_BLOCK = ITEMS.register("diaphanous_block",
+        () -> new DiaphanousBlockItem(ModBlocks.DIAPHANOUS_BLOCK.get(), new Item.Properties()));
+
     // Regular Items
+    public static final Supplier<Item> BIOME_CRYSTAL = ITEMS.register("biome_crystal",
+        () -> new BiomeCrystalItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BLOOD_ROSE_PETAL = ITEMS.register("blood_rose_petal",
         () -> new Item(new Item.Properties()));
+
+    public static final Supplier<Item> ID_CARD = ITEMS.register("id_card",
+        () -> new IdCardItem(new Item.Properties().stacksTo(1)));
 
     // Divining Rods
     public static final Supplier<Item> DIVINING_ROD_COAL = ITEMS.register("divining_rod_coal",
@@ -86,6 +142,19 @@ public class ModItems {
     public static final Supplier<Item> DIVINING_ROD_VANILLA = ITEMS.register("divining_rod_vanilla",
         () -> new DiviningRodItem(new Item.Properties(), getAllColors(), getAllTags()));
 
+    // Ender Bridge System
+    public static final Supplier<Item> STABLE_ENDERPEARL = ITEMS.register("stable_enderpearl",
+        () -> new StableEnderpearl());
+
+    public static final Supplier<Item> ENDER_ANCHOR = ITEMS.register("ender_anchor",
+        () -> new BlockItem(ModBlocks.ENDER_ANCHOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> ENDER_BRIDGE = ITEMS.register("ender_bridge",
+        () -> new BlockItem(ModBlocks.ENDER_BRIDGE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> PRISMARINE_ENDER_BRIDGE = ITEMS.register("prismarine_ender_bridge",
+        () -> new BlockItem(ModBlocks.PRISMARINE_ENDER_BRIDGE.get(), new Item.Properties()));
+
     // Creative tab
     public static final Supplier<CreativeModeTab> RT_CREATIVE_TAB = CREATIVE_MODE_TABS.register("randomthings", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.randomthings"))
@@ -94,7 +163,16 @@ public class ModItems {
             output.accept(FERTILIZED_DIRT.get());
             output.accept(RAINBOW_LAMP.get());
             output.accept(SUPER_LUBRICENT_STONE.get());
+            output.accept(COMPRESSED_SLIME_BLOCK.get());
             output.accept(ADVANCED_REDSTONE_TORCH.get());
+            output.accept(ADVANCED_REDSTONE_REPEATER.get());
+            output.accept(ANALOG_EMITTER.get());
+            output.accept(BLOCK_BREAKER.get());
+            output.accept(BLOCK_DESTABILIZER.get());
+            output.accept(CHAT_DETECTOR.get());
+            output.accept(GLOBAL_CHAT_DETECTOR.get());
+            output.accept(CONTACT_BUTTON.get());
+            output.accept(CONTACT_LEVER.get());
             output.accept(BLOCK_OF_STICKS.get());
             output.accept(BLOCK_OF_STICKS_RETURNING.get());
             output.accept(PLATFORM_OAK.get());
@@ -105,6 +183,21 @@ public class ModItems {
             output.accept(PLATFORM_DARKOAK.get());
             output.accept(BLOOD_ROSE.get());
             output.accept(BLOOD_ROSE_PETAL.get());
+            output.accept(BIOME_STONE_SMOOTH.get());
+            output.accept(BIOME_STONE_COBBLE.get());
+            output.accept(BIOME_STONE_BRICK.get());
+            output.accept(BIOME_STONE_CRACKED.get());
+            output.accept(BIOME_STONE_CHISELED.get());
+            output.accept(BIOME_GLASS.get());
+            // Add diaphanous block with default stone appearance
+            ItemStack diaphanousStack = new ItemStack(DIAPHANOUS_BLOCK.get());
+            diaphanousStack.set(ModDataComponents.DIAPHANOUS_BLOCK_STATE.get(), 
+                              net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("minecraft", "stone"));
+            diaphanousStack.set(ModDataComponents.DIAPHANOUS_INVERTED.get(), false);
+            output.accept(diaphanousStack);
+            // Add example Biome Crystal (Plains biome for creative tab)
+            output.accept(BiomeCrystalItem.createForBiome(Biomes.PLAINS));
+            output.accept(ID_CARD.get());
             output.accept(DIVINING_ROD_COAL.get());
             output.accept(DIVINING_ROD_IRON.get());
             output.accept(DIVINING_ROD_GOLD.get());
@@ -113,6 +206,11 @@ public class ModItems {
             output.accept(DIVINING_ROD_EMERALD.get());
             output.accept(DIVINING_ROD_DIAMOND.get());
             output.accept(DIVINING_ROD_VANILLA.get());
+            // Ender Bridge System
+            output.accept(STABLE_ENDERPEARL.get());
+            output.accept(ENDER_ANCHOR.get());
+            output.accept(ENDER_BRIDGE.get());
+            output.accept(PRISMARINE_ENDER_BRIDGE.get());
         })
         .build());
 
