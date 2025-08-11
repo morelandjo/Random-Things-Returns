@@ -28,6 +28,10 @@ public class RTPacketHandler {
             (message, context) -> ChatDetectorUpdatePacket.handle(message, context));
         registrar.playToServer(GlobalChatDetectorUpdatePacket.TYPE, GlobalChatDetectorUpdatePacket.STREAM_CODEC, 
             (message, context) -> GlobalChatDetectorUpdatePacket.handle(message, context));
+        registrar.playToServer(IronDropperPacket.TYPE, IronDropperPacket.STREAM_CODEC, 
+            (message, context) -> IronDropperPacket.handle(message, context));
+        registrar.playToServer(IgniterPacket.TYPE, IgniterPacket.STREAM_CODEC, 
+            (message, context) -> IgniterPacket.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {

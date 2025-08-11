@@ -1,0 +1,8 @@
+{
+    "parent": "randomthings:block/facable",
+    "textures": {
+        "front": "randomthings:block/igniter/front",
+        "side": "randomthings:block/igniter/side",
+        "back": "randomthings:block/igniter/back"
+    }
+}

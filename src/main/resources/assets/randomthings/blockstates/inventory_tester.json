@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":    { "model": "randomthings:block/inventory_tester" },
+        "facing=down":  { "model": "randomthings:block/inventory_tester", "x": 180 },
+        "facing=east":  { "model": "randomthings:block/inventory_tester", "x": 90, "y": 90 },
+        "facing=west":  { "model": "randomthings:block/inventory_tester", "x": 90, "y": 270 },
+        "facing=south": { "model": "randomthings:block/inventory_tester", "x": 90, "y": 180 },
+        "facing=north": { "model": "randomthings:block/inventory_tester", "x": 90 }
+    }
+}

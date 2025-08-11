@@ -42,6 +42,11 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(BlockDestabilizerBlockEntity::new, 
                 ModBlocks.BLOCK_DESTABILIZER.get()).build(null));
 
+    public static final Supplier<BlockEntityType<IronDropperBlockEntity>> IRON_DROPPER = 
+        BLOCK_ENTITY_TYPES.register("iron_dropper", 
+            () -> BlockEntityType.Builder.of(IronDropperBlockEntity::new, 
+                ModBlocks.IRON_DROPPER.get()).build(null));
+
     public static final Supplier<BlockEntityType<ChatDetectorBlockEntity>> CHAT_DETECTOR = 
         BLOCK_ENTITY_TYPES.register("chat_detector", 
             () -> BlockEntityType.Builder.of(ChatDetectorBlockEntity::new, 
@@ -72,4 +77,19 @@ public class ModBlockEntityTypes {
         BLOCK_ENTITY_TYPES.register("prismarine_ender_bridge", 
             () -> BlockEntityType.Builder.of(PrismarineEnderBridgeBlockEntity::new, 
                 ModBlocks.PRISMARINE_ENDER_BRIDGE.get()).build(null));
+                
+    public static final Supplier<BlockEntityType<FluidDisplayBlockEntity>> FLUID_DISPLAY = 
+        BLOCK_ENTITY_TYPES.register("fluid_display", 
+            () -> BlockEntityType.Builder.of(FluidDisplayBlockEntity::new, 
+                ModBlocks.FLUID_DISPLAY.get()).build(null));
+
+    public static final Supplier<BlockEntityType<IgniterBlockEntity>> IGNITER = 
+        BLOCK_ENTITY_TYPES.register("igniter", 
+            () -> BlockEntityType.Builder.of(IgniterBlockEntity::new, 
+                ModBlocks.IGNITER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<InventoryTesterBlockEntity>> INVENTORY_TESTER = 
+        BLOCK_ENTITY_TYPES.register("inventory_tester", 
+            () -> BlockEntityType.Builder.of(InventoryTesterBlockEntity::new, 
+                ModBlocks.INVENTORY_TESTER.get()).build(null));
 }

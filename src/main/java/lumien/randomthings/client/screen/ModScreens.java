@@ -9,7 +9,10 @@ public class ModScreens {
         event.register(ModMenuTypes.ADVANCED_REDSTONE_REPEATER.get(), AdvancedRedstoneRepeaterScreen::new);
         event.register(ModMenuTypes.ANALOG_EMITTER.get(), AnalogEmitterScreen::new);
         event.register(ModMenuTypes.BLOCK_DESTABILIZER.get(), BlockDestabilizerScreen::new);
+        event.register(ModMenuTypes.IRON_DROPPER.get(), IronDropperScreen::new);
         event.register(ModMenuTypes.CHAT_DETECTOR.get(), ChatDetectorScreen::new);
         event.register(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorScreen::new);
+        event.register(ModMenuTypes.IGNITER.get(), IgniterScreen::new);
+        event.register(ModMenuTypes.INVENTORY_TESTER.get(), InventoryTesterScreen::new);
     }
 }

@@ -70,6 +70,9 @@ public class ModBlocks {
     
     public static final Supplier<Block> BIOME_GLASS = BLOCKS.register("biome_glass", 
         () -> new BiomeGlassBlock());
+    
+    public static final Supplier<Block> LAPIS_GLASS = BLOCKS.register("lapis_glass", 
+        () -> new LapisGlassBlock());
 
     public static final Supplier<Block> BLOCK_BREAKER = BLOCKS.register("block_breaker", 
         () -> new BlockBreakerBlock(BlockBehaviour.Properties.of()
@@ -97,6 +100,9 @@ public class ModBlocks {
     public static final Supplier<Block> CONTACT_BUTTON = BLOCKS.register("contact_button", 
         () -> new ContactButtonBlock());
 
+    public static final Supplier<Block> IRON_DROPPER = BLOCKS.register("iron_dropper", 
+        () -> new IronDropperBlock());
+
     public static final Supplier<Block> CONTACT_LEVER = BLOCKS.register("contact_lever", 
         () -> new ContactLeverBlock());
     
@@ -116,4 +122,17 @@ public class ModBlocks {
 
     public static final Supplier<Block> PRISMARINE_ENDER_BRIDGE = BLOCKS.register("prismarine_ender_bridge", 
         () -> new PrismarineEnderBridgeBlock());
+        
+    public static final Supplier<Block> FLUID_DISPLAY = BLOCKS.register("fluid_display", 
+        () -> new FluidDisplayBlock());
+
+    public static final Supplier<Block> IGNITER = BLOCKS.register("igniter", 
+        () -> new IgniterBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(1.5F)
+            .sound(SoundType.STONE)));
+
+    public static final Supplier<Block> INVENTORY_TESTER = BLOCKS.register("inventory_tester", 
+        () -> new InventoryTesterBlock());
 }

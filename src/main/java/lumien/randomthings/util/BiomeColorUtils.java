@@ -308,4 +308,11 @@ public class BiomeColorUtils {
                biomeName.contains("end") ||
                biomeName.contains("cherry");
     }
+
+    public static <E extends Enum<E>> E rotateEnum(E oldEnum) {
+        int currentIndex = oldEnum.ordinal();
+        E[] enumConstants = oldEnum.getDeclaringClass().getEnumConstants();
+        int length = enumConstants.length;
+        return (currentIndex + 1 < length) ? enumConstants[currentIndex + 1] : enumConstants[0];
+    }
 }

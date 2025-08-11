@@ -71,6 +71,9 @@ public class ModItems {
     public static final Supplier<Item> BLOCK_DESTABILIZER = ITEMS.register("block_destabilizer",
         () -> new BlockItem(ModBlocks.BLOCK_DESTABILIZER.get(), new Item.Properties()));
 
+    public static final Supplier<Item> IRON_DROPPER = ITEMS.register("iron_dropper",
+        () -> new BlockItem(ModBlocks.IRON_DROPPER.get(), new Item.Properties()));
+
     public static final Supplier<Item> CHAT_DETECTOR = ITEMS.register("chat_detector",
         () -> new BlockItem(ModBlocks.CHAT_DETECTOR.get(), new Item.Properties()));
 
@@ -104,6 +107,9 @@ public class ModItems {
     
     public static final Supplier<Item> BIOME_GLASS = ITEMS.register("biome_glass",
         () -> new BlockItem(ModBlocks.BIOME_GLASS.get(), new Item.Properties()));
+
+    public static final Supplier<Item> LAPIS_GLASS = ITEMS.register("lapis_glass",
+        () -> new BlockItem(ModBlocks.LAPIS_GLASS.get(), new Item.Properties()));
     
     public static final Supplier<Item> DIAPHANOUS_BLOCK = ITEMS.register("diaphanous_block",
         () -> new DiaphanousBlockItem(ModBlocks.DIAPHANOUS_BLOCK.get(), new Item.Properties()));
@@ -154,6 +160,15 @@ public class ModItems {
 
     public static final Supplier<Item> PRISMARINE_ENDER_BRIDGE = ITEMS.register("prismarine_ender_bridge",
         () -> new BlockItem(ModBlocks.PRISMARINE_ENDER_BRIDGE.get(), new Item.Properties()));
+        
+    public static final Supplier<Item> FLUID_DISPLAY = ITEMS.register("fluid_display",
+        () -> new BlockItem(ModBlocks.FLUID_DISPLAY.get(), new Item.Properties()));
+
+    public static final Supplier<Item> IGNITER = ITEMS.register("igniter",
+        () -> new BlockItem(ModBlocks.IGNITER.get(), new Item.Properties()));
+
+    public static final Supplier<Item> INVENTORY_TESTER = ITEMS.register("inventory_tester",
+        () -> new BlockItem(ModBlocks.INVENTORY_TESTER.get(), new Item.Properties()));
 
     // Creative tab
     public static final Supplier<CreativeModeTab> RT_CREATIVE_TAB = CREATIVE_MODE_TABS.register("randomthings", () -> CreativeModeTab.builder()
@@ -169,6 +184,7 @@ public class ModItems {
             output.accept(ANALOG_EMITTER.get());
             output.accept(BLOCK_BREAKER.get());
             output.accept(BLOCK_DESTABILIZER.get());
+            output.accept(IRON_DROPPER.get());
             output.accept(CHAT_DETECTOR.get());
             output.accept(GLOBAL_CHAT_DETECTOR.get());
             output.accept(CONTACT_BUTTON.get());
@@ -189,6 +205,7 @@ public class ModItems {
             output.accept(BIOME_STONE_CRACKED.get());
             output.accept(BIOME_STONE_CHISELED.get());
             output.accept(BIOME_GLASS.get());
+            output.accept(LAPIS_GLASS.get());
             // Add diaphanous block with default stone appearance
             ItemStack diaphanousStack = new ItemStack(DIAPHANOUS_BLOCK.get());
             diaphanousStack.set(ModDataComponents.DIAPHANOUS_BLOCK_STATE.get(), 
@@ -211,6 +228,9 @@ public class ModItems {
             output.accept(ENDER_ANCHOR.get());
             output.accept(ENDER_BRIDGE.get());
             output.accept(PRISMARINE_ENDER_BRIDGE.get());
+            output.accept(FLUID_DISPLAY.get());
+            output.accept(IGNITER.get());
+            output.accept(INVENTORY_TESTER.get());
         })
         .build());
 

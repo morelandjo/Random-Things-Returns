@@ -47,6 +47,10 @@ public class ClientModEvents {
             ModBlocks.BIOME_GLASS.get()
         );
         
+        // Register lapis color handler for lapis glass
+        BlockColor lapisGlassColor = (state, level, pos, tintIndex) -> 0x3C44AA; // Lapis blue color
+        event.register(lapisGlassColor, ModBlocks.LAPIS_GLASS.get());
+        
         // Register compressed slime block color handler
         BlockColor compressedSlimeColor = (state, level, pos, tintIndex) -> {
             int compression = state.getValue(lumien.randomthings.block.CompressedSlimeBlock.COMPRESSION);
@@ -57,6 +61,13 @@ public class ClientModEvents {
         event.register(compressedSlimeColor, ModBlocks.COMPRESSED_SLIME_BLOCK.get());
         
         // Remove the destabilizer color handler for now - let's try without tinting
+    }
+    
+    @SubscribeEvent
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        // Register lapis glass item color
+        ItemColor lapisGlassItemColor = (stack, tintIndex) -> 0x3C44AA; // Lapis blue color
+        event.register(lapisGlassItemColor, ModItems.LAPIS_GLASS.get());
     }
     
     
@@ -88,6 +99,7 @@ public class ClientModEvents {
         event.enqueueWork(() -> {
             // Register render types for translucent blocks
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BIOME_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LAPIS_GLASS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIAPHANOUS_BLOCK.get(), RenderType.translucent());
             
         });

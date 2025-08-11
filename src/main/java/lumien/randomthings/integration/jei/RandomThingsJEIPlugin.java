@@ -46,10 +46,13 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.ANALOG_EMITTER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CONTACT_BUTTON.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CONTACT_LEVER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.IGNITER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.INVENTORY_TESTER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Utility blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_BREAKER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_DESTABILIZER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.IRON_DROPPER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Decorative blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.RAINBOW_LAMP.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
@@ -71,7 +74,10 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         // Biome blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BIOME_STONE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BIOME_GLASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.LAPIS_GLASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
+        // Fluid Display - decorative fluid texture block
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.FLUID_DISPLAY.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }
