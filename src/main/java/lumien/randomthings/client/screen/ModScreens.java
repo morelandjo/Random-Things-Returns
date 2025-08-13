@@ -14,5 +14,6 @@ public class ModScreens {
         event.register(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorScreen::new);
         event.register(ModMenuTypes.IGNITER.get(), IgniterScreen::new);
         event.register(ModMenuTypes.INVENTORY_TESTER.get(), InventoryTesterScreen::new);
+        event.register(ModMenuTypes.NOTIFICATION_INTERFACE.get(), NotificationInterfaceScreen::new);
     }
 }

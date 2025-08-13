@@ -65,4 +65,9 @@ public class ModMenuTypes {
         MENU_TYPES.register("inventory_tester", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
                 new InventoryTesterMenu(windowId, inventory, data.readBlockPos())));
+
+    public static final Supplier<MenuType<NotificationInterfaceMenu>> NOTIFICATION_INTERFACE = 
+        MENU_TYPES.register("notification_interface", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+                new NotificationInterfaceMenu(windowId, inventory, ContainerLevelAccess.create(inventory.player.level(), data.readBlockPos()))));
 }

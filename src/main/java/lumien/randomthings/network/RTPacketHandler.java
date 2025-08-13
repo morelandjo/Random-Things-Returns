@@ -2,11 +2,13 @@ package lumien.randomthings.network;
 
 import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.network.messages.ContainerSignalMessage;
+import lumien.randomthings.network.messages.MessageNotification;
 import lumien.randomthings.network.messages.VisualEffectMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -32,11 +34,19 @@ public class RTPacketHandler {
             (message, context) -> IronDropperPacket.handle(message, context));
         registrar.playToServer(IgniterPacket.TYPE, IgniterPacket.STREAM_CODEC, 
             (message, context) -> IgniterPacket.handle(message, context));
+        registrar.playToServer(NotificationInterfaceUpdatePacket.TYPE, NotificationInterfaceUpdatePacket.STREAM_CODEC, 
+            (message, context) -> NotificationInterfaceUpdatePacket.handle(message, context));
+        registrar.playToClient(MessageNotification.TYPE, MessageNotification.STREAM_CODEC, 
+            (message, context) -> MessageNotification.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {
         if (level instanceof ServerLevel serverLevel) {
             PacketDistributor.sendToPlayersTrackingChunk(serverLevel, level.getChunkAt(pos).getPos(), message);
         }
+    }
+    
+    public static void sendToPlayer(MessageNotification message, ServerPlayer player) {
+        PacketDistributor.sendToPlayer(player, message);
     }
 }

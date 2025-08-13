@@ -6,6 +6,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
+import lumien.randomthings.client.renderer.LightRedirectorRenderer;
 import lumien.randomthings.client.screen.ModScreens;
 import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.item.ModItems;
@@ -115,6 +116,7 @@ public class RandomThings {
             
             // Register render layers for transparent blocks
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_ROSE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOTUS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_REDSTONE_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS.get(), RenderType.translucent());
@@ -122,12 +124,15 @@ public class RandomThings {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BIOME_GLASS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIAPHANOUS_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.FLUID_DISPLAY.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
         });
 
         // Register client events manually
         LOGGER.info("DEBUG: Registering client events manually");
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onRenderLevelStage);
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onClientTick);
+        
+        // Light Redirector client events removed - no longer using texture swapping approach
     }
 
     private void registerScreens(final RegisterMenuScreensEvent event) {
@@ -137,6 +142,7 @@ public class RandomThings {
     private void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.FLUID_DISPLAY.get(), FluidDisplayBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.LIGHT_REDIRECTOR.get(), LightRedirectorRenderer::new);
     }
 
 }

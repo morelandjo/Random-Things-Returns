@@ -74,6 +74,9 @@ public class ModBlocks {
     public static final Supplier<Block> LAPIS_GLASS = BLOCKS.register("lapis_glass", 
         () -> new LapisGlassBlock());
 
+    public static final Supplier<Block> LAPIS_LAMP = BLOCKS.register("lapis_lamp", 
+        () -> new LapisLampBlock());
+
     public static final Supplier<Block> BLOCK_BREAKER = BLOCKS.register("block_breaker", 
         () -> new BlockBreakerBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.STONE)
@@ -135,4 +138,23 @@ public class ModBlocks {
 
     public static final Supplier<Block> INVENTORY_TESTER = BLOCKS.register("inventory_tester", 
         () -> new InventoryTesterBlock());
+
+    public static final Supplier<Block> LIGHT_REDIRECTOR = BLOCKS.register("light_redirector", 
+        () -> new LightRedirectorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD)
+            .strength(2.0f)
+            .sound(SoundType.WOOD)));
+
+    public static final Supplier<Block> LOTUS = BLOCKS.register("lotus", 
+        () -> new LotusBlock());
+
+    // Luminous Blocks
+    public static final Supplier<Block> LUMINOUS_BLOCK = BLOCKS.register("luminous_block", 
+        () -> new LuminousBlock());
+
+    public static final Supplier<Block> TRANSLUCENT_LUMINOUS_BLOCK = BLOCKS.register("translucent_luminous_block", 
+        () -> new TranslucentLuminousBlock());
+
+    public static final Supplier<Block> NOTIFICATION_INTERFACE = BLOCKS.register("notification_interface", 
+        () -> new NotificationInterfaceBlock());
 }

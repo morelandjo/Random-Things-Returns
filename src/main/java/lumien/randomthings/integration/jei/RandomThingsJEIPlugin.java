@@ -48,6 +48,7 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CONTACT_LEVER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.IGNITER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.INVENTORY_TESTER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.NOTIFICATION_INTERFACE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Utility blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_BREAKER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
@@ -78,6 +79,10 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         
         // Fluid Display - decorative fluid texture block
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.FLUID_DISPLAY.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        
+        // Luminous blocks - decorative light emitting blocks
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.LUMINOUS_BLOCK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }

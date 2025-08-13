@@ -1,6 +1,7 @@
 package lumien.randomthings.client;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.events.LightRedirectorClientEvents;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.item.BiomeCrystalItem;
@@ -98,9 +99,8 @@ public class ClientModEvents {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register render types for translucent blocks
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BIOME_GLASS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.LAPIS_GLASS.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIAPHANOUS_BLOCK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
             
         });
     }

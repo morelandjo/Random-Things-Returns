@@ -12,4 +12,7 @@ public class ModFeatures {
 
     public static final DeferredHolder<Feature<?>, BloodRoseFeature> BLOOD_ROSES = FEATURES.register("blood_roses", 
         () -> new BloodRoseFeature(NoneFeatureConfiguration.CODEC));
+        
+    public static final DeferredHolder<Feature<?>, LotusFeature> LOTUS_PLANTS = FEATURES.register("lotus_plants", 
+        () -> new LotusFeature(NoneFeatureConfiguration.CODEC));
 }

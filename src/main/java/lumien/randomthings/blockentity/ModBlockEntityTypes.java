@@ -92,4 +92,14 @@ public class ModBlockEntityTypes {
         BLOCK_ENTITY_TYPES.register("inventory_tester", 
             () -> BlockEntityType.Builder.of(InventoryTesterBlockEntity::new, 
                 ModBlocks.INVENTORY_TESTER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<LightRedirectorBlockEntity>> LIGHT_REDIRECTOR = 
+        BLOCK_ENTITY_TYPES.register("light_redirector", 
+            () -> BlockEntityType.Builder.of(LightRedirectorBlockEntity::new, 
+                ModBlocks.LIGHT_REDIRECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<NotificationInterfaceBlockEntity>> NOTIFICATION_INTERFACE = 
+        BLOCK_ENTITY_TYPES.register("notification_interface", 
+            () -> BlockEntityType.Builder.of(NotificationInterfaceBlockEntity::new, 
+                ModBlocks.NOTIFICATION_INTERFACE.get()).build(null));
 }

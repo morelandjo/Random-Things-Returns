@@ -110,6 +110,9 @@ public class ModItems {
 
     public static final Supplier<Item> LAPIS_GLASS = ITEMS.register("lapis_glass",
         () -> new BlockItem(ModBlocks.LAPIS_GLASS.get(), new Item.Properties()));
+
+    public static final Supplier<Item> LAPIS_LAMP = ITEMS.register("lapis_lamp",
+        () -> new BlockItem(ModBlocks.LAPIS_LAMP.get(), new Item.Properties()));
     
     public static final Supplier<Item> DIAPHANOUS_BLOCK = ITEMS.register("diaphanous_block",
         () -> new DiaphanousBlockItem(ModBlocks.DIAPHANOUS_BLOCK.get(), new Item.Properties()));
@@ -170,6 +173,90 @@ public class ModItems {
     public static final Supplier<Item> INVENTORY_TESTER = ITEMS.register("inventory_tester",
         () -> new BlockItem(ModBlocks.INVENTORY_TESTER.get(), new Item.Properties()));
 
+    public static final Supplier<Item> LIGHT_REDIRECTOR = ITEMS.register("light_redirector",
+        () -> new BlockItem(ModBlocks.LIGHT_REDIRECTOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> NOTIFICATION_INTERFACE = ITEMS.register("notification_interface",
+        () -> new BlockItem(ModBlocks.NOTIFICATION_INTERFACE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> LOTUS_SEEDS = ITEMS.register("lotus_seeds",
+        () -> new LotusSeedsItem());
+
+    public static final Supplier<Item> LOTUS_BLOSSOM = ITEMS.register("lotus_blossom",
+        () -> new LotusBlossomItem());
+
+    // Luminous Block Items
+    public static final Supplier<Item> LUMINOUS_POWDER = ITEMS.register("luminous_powder",
+        () -> new LuminousPowderItem());
+
+    // Regular Luminous Blocks - All 16 colors
+    public static final Supplier<Item> LUMINOUS_BLOCK_WHITE = ITEMS.register("luminous_block_white",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.WHITE));
+    public static final Supplier<Item> LUMINOUS_BLOCK_ORANGE = ITEMS.register("luminous_block_orange",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.ORANGE));
+    public static final Supplier<Item> LUMINOUS_BLOCK_MAGENTA = ITEMS.register("luminous_block_magenta",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.MAGENTA));
+    public static final Supplier<Item> LUMINOUS_BLOCK_LIGHT_BLUE = ITEMS.register("luminous_block_light_blue",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.LIGHT_BLUE));
+    public static final Supplier<Item> LUMINOUS_BLOCK_YELLOW = ITEMS.register("luminous_block_yellow",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.YELLOW));
+    public static final Supplier<Item> LUMINOUS_BLOCK_LIME = ITEMS.register("luminous_block_lime",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.LIME));
+    public static final Supplier<Item> LUMINOUS_BLOCK_PINK = ITEMS.register("luminous_block_pink",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.PINK));
+    public static final Supplier<Item> LUMINOUS_BLOCK_GRAY = ITEMS.register("luminous_block_gray",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.GRAY));
+    public static final Supplier<Item> LUMINOUS_BLOCK_LIGHT_GRAY = ITEMS.register("luminous_block_light_gray",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.LIGHT_GRAY));
+    public static final Supplier<Item> LUMINOUS_BLOCK_CYAN = ITEMS.register("luminous_block_cyan",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.CYAN));
+    public static final Supplier<Item> LUMINOUS_BLOCK_PURPLE = ITEMS.register("luminous_block_purple",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.PURPLE));
+    public static final Supplier<Item> LUMINOUS_BLOCK_BLUE = ITEMS.register("luminous_block_blue",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BLUE));
+    public static final Supplier<Item> LUMINOUS_BLOCK_BROWN = ITEMS.register("luminous_block_brown",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BROWN));
+    public static final Supplier<Item> LUMINOUS_BLOCK_GREEN = ITEMS.register("luminous_block_green",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.GREEN));
+    public static final Supplier<Item> LUMINOUS_BLOCK_RED = ITEMS.register("luminous_block_red",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.RED));
+    public static final Supplier<Item> LUMINOUS_BLOCK_BLACK = ITEMS.register("luminous_block_black",
+        () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BLACK));
+
+    // Translucent Luminous Blocks - All 16 colors  
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_WHITE = ITEMS.register("translucent_luminous_block_white",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.WHITE));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_ORANGE = ITEMS.register("translucent_luminous_block_orange",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.ORANGE));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA = ITEMS.register("translucent_luminous_block_magenta",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.MAGENTA));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE = ITEMS.register("translucent_luminous_block_light_blue",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.LIGHT_BLUE));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_YELLOW = ITEMS.register("translucent_luminous_block_yellow",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.YELLOW));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_LIME = ITEMS.register("translucent_luminous_block_lime",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.LIME));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_PINK = ITEMS.register("translucent_luminous_block_pink",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.PINK));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_GRAY = ITEMS.register("translucent_luminous_block_gray",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.GRAY));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY = ITEMS.register("translucent_luminous_block_light_gray",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.LIGHT_GRAY));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_CYAN = ITEMS.register("translucent_luminous_block_cyan",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.CYAN));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_PURPLE = ITEMS.register("translucent_luminous_block_purple",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.PURPLE));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_BLUE = ITEMS.register("translucent_luminous_block_blue",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BLUE));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_BROWN = ITEMS.register("translucent_luminous_block_brown",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BROWN));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_GREEN = ITEMS.register("translucent_luminous_block_green",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.GREEN));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_RED = ITEMS.register("translucent_luminous_block_red",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.RED));
+    public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_BLACK = ITEMS.register("translucent_luminous_block_black",
+        () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BLACK));
+
     // Creative tab
     public static final Supplier<CreativeModeTab> RT_CREATIVE_TAB = CREATIVE_MODE_TABS.register("randomthings", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.randomthings"))
@@ -206,6 +293,7 @@ public class ModItems {
             output.accept(BIOME_STONE_CHISELED.get());
             output.accept(BIOME_GLASS.get());
             output.accept(LAPIS_GLASS.get());
+            output.accept(LAPIS_LAMP.get());
             // Add diaphanous block with default stone appearance
             ItemStack diaphanousStack = new ItemStack(DIAPHANOUS_BLOCK.get());
             diaphanousStack.set(ModDataComponents.DIAPHANOUS_BLOCK_STATE.get(), 
@@ -231,6 +319,45 @@ public class ModItems {
             output.accept(FLUID_DISPLAY.get());
             output.accept(IGNITER.get());
             output.accept(INVENTORY_TESTER.get());
+            output.accept(LIGHT_REDIRECTOR.get());
+            output.accept(NOTIFICATION_INTERFACE.get());
+            output.accept(LOTUS_SEEDS.get());
+            output.accept(LOTUS_BLOSSOM.get());
+            // Luminous Blocks
+            output.accept(LUMINOUS_POWDER.get());
+            output.accept(LUMINOUS_BLOCK_WHITE.get());
+            output.accept(LUMINOUS_BLOCK_ORANGE.get());
+            output.accept(LUMINOUS_BLOCK_MAGENTA.get());
+            output.accept(LUMINOUS_BLOCK_LIGHT_BLUE.get());
+            output.accept(LUMINOUS_BLOCK_YELLOW.get());
+            output.accept(LUMINOUS_BLOCK_LIME.get());
+            output.accept(LUMINOUS_BLOCK_PINK.get());
+            output.accept(LUMINOUS_BLOCK_GRAY.get());
+            output.accept(LUMINOUS_BLOCK_LIGHT_GRAY.get());
+            output.accept(LUMINOUS_BLOCK_CYAN.get());
+            output.accept(LUMINOUS_BLOCK_PURPLE.get());
+            output.accept(LUMINOUS_BLOCK_BLUE.get());
+            output.accept(LUMINOUS_BLOCK_BROWN.get());
+            output.accept(LUMINOUS_BLOCK_GREEN.get());
+            output.accept(LUMINOUS_BLOCK_RED.get());
+            output.accept(LUMINOUS_BLOCK_BLACK.get());
+            // Translucent Luminous Blocks
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_WHITE.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_ORANGE.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_MAGENTA.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_BLUE.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_YELLOW.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_LIME.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_PINK.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_GRAY.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_LIGHT_GRAY.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_CYAN.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_PURPLE.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_BLUE.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_BROWN.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_GREEN.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_RED.get());
+            output.accept(TRANSLUCENT_LUMINOUS_BLOCK_BLACK.get());
         })
         .build());
 

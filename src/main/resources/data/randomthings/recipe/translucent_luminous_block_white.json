@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "decorations",
+  "pattern": [
+    " P ",
+    "PLP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "item": "randomthings:luminous_block_white"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:translucent_luminous_block_white"
+  }
+}
