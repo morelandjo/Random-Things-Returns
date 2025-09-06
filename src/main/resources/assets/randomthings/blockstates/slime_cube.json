@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"powered=false": {"model": "randomthings:block/slime_cube_green"},
+		"powered=true": {"model": "randomthings:block/slime_cube_red"}
+	}
+}

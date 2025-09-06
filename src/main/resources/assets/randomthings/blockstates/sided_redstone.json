@@ -1,0 +1,26 @@
+{
+    "variants": {
+        "facing=down": {
+            "model": "randomthings:block/sided_redstone_vertical",
+            "x": 180
+        },
+        "facing=up": {
+            "model": "randomthings:block/sided_redstone_vertical"
+        },
+        "facing=north": {
+            "model": "randomthings:block/sided_redstone"
+        },
+        "facing=south": {
+            "model": "randomthings:block/sided_redstone",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "randomthings:block/sided_redstone",
+            "y": 270
+        },
+        "facing=east": {
+            "model": "randomthings:block/sided_redstone",
+            "y": 90
+        }
+    }
+}

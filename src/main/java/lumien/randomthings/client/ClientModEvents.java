@@ -4,6 +4,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.events.LightRedirectorClientEvents;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
+import lumien.randomthings.client.RedstoneInterfaceRenderer;
 import lumien.randomthings.item.BiomeCrystalItem;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.BiomeColorUtils;
@@ -52,6 +53,10 @@ public class ClientModEvents {
         BlockColor lapisGlassColor = (state, level, pos, tintIndex) -> 0x3C44AA; // Lapis blue color
         event.register(lapisGlassColor, ModBlocks.LAPIS_GLASS.get());
         
+        // Register quartz glass color handler
+        BlockColor quartzGlassColor = (state, level, pos, tintIndex) -> 0xFFFFFF; // White color
+        event.register(quartzGlassColor, ModBlocks.QUARTZ_GLASS.get());
+        
         // Register compressed slime block color handler
         BlockColor compressedSlimeColor = (state, level, pos, tintIndex) -> {
             int compression = state.getValue(lumien.randomthings.block.CompressedSlimeBlock.COMPRESSION);
@@ -69,6 +74,10 @@ public class ClientModEvents {
         // Register lapis glass item color
         ItemColor lapisGlassItemColor = (stack, tintIndex) -> 0x3C44AA; // Lapis blue color
         event.register(lapisGlassItemColor, ModItems.LAPIS_GLASS.get());
+        
+        // Register quartz glass item color
+        ItemColor quartzGlassItemColor = (stack, tintIndex) -> 0xFFFFFF; // White color
+        event.register(quartzGlassItemColor, ModItems.QUARTZ_GLASS.get());
     }
     
     
@@ -83,6 +92,13 @@ public class ClientModEvents {
                 bufferSource, 
                 event.getPartialTick().getGameTimeDeltaPartialTick(false)
             );
+            
+            // Render redstone interface connection lines - temporarily disabled
+            // RedstoneInterfaceRenderer.renderRedstoneInterfaceLines(
+            //     event.getPoseStack(),
+            //     bufferSource,
+            //     event.getCamera().getPosition()
+            // );
             
             // Explicitly flush the buffer source to ensure rendering
             bufferSource.endBatch();
@@ -100,6 +116,9 @@ public class ClientModEvents {
         event.enqueueWork(() -> {
             // Register render types for translucent blocks
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.LAPIS_GLASS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.QUARTZ_GLASS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRIGGER_GLASS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_CUBE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
             
         });

@@ -18,6 +18,12 @@ public class ModBlocks {
     public static final Supplier<Block> RAINBOW_LAMP = BLOCKS.register("rainbow_lamp", 
         () -> new RainbowLampBlock());
 
+    public static final Supplier<Block> RAIN_SHIELD = BLOCKS.register("rain_shield", 
+        () -> new RainShieldBlock());
+        
+    public static final Supplier<Block> SLIME_CUBE = BLOCKS.register("slime_cube", 
+        () -> new SlimeCubeBlock());
+
     public static final Supplier<Block> ADVANCED_REDSTONE_TORCH = BLOCKS.register("advanced_redstone_torch", 
         () -> new AdvancedRedstoneTorchBlock());
 
@@ -64,6 +70,13 @@ public class ModBlocks {
     public static final Supplier<Block> ANALOG_EMITTER = BLOCKS.register("analog_emitter", 
         () -> new AnalogEmitterBlock());
 
+    public static final Supplier<Block> SIDED_REDSTONE = BLOCKS.register("sided_redstone", 
+        () -> new SidedRedstoneBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.FIRE)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.METAL)));
+
     // Biome Blocks
     public static final Supplier<Block> BIOME_STONE = BLOCKS.register("biome_stone", 
         () -> new BiomeStoneBlock());
@@ -96,6 +109,12 @@ public class ModBlocks {
 
     public static final Supplier<Block> GLOBAL_CHAT_DETECTOR = BLOCKS.register("global_chat_detector", 
         () -> new GlobalChatDetectorBlock());
+
+    public static final Supplier<Block> PEACE_CANDLE = BLOCKS.register("peace_candle", 
+        () -> new PeaceCandleBlock());
+
+    public static final Supplier<Block> POTION_VAPORIZER = BLOCKS.register("potion_vaporizer", 
+        () -> new PotionVaporizerBlock());
 
     public static final Supplier<Block> COMPRESSED_SLIME_BLOCK = BLOCKS.register("compressed_slime_block", 
         () -> new CompressedSlimeBlock());
@@ -148,6 +167,9 @@ public class ModBlocks {
     public static final Supplier<Block> LOTUS = BLOCKS.register("lotus", 
         () -> new LotusBlock());
 
+    public static final Supplier<Block> PITCHER_PLANT = BLOCKS.register("pitcher_plant", 
+        () -> new PitcherPlantBlock());
+
     // Luminous Blocks
     public static final Supplier<Block> LUMINOUS_BLOCK = BLOCKS.register("luminous_block", 
         () -> new LuminousBlock());
@@ -155,6 +177,26 @@ public class ModBlocks {
     public static final Supplier<Block> TRANSLUCENT_LUMINOUS_BLOCK = BLOCKS.register("translucent_luminous_block", 
         () -> new TranslucentLuminousBlock());
 
+    // Stained Bricks
+    public static final Supplier<Block> STAINED_BRICK = BLOCKS.register("stained_brick", 
+        () -> new StainedBrickBlock());
+
+    public static final Supplier<Block> LUMINOUS_STAINED_BRICK = BLOCKS.register("luminous_stained_brick", 
+        () -> new LuminousStainedBrickBlock());
+
     public static final Supplier<Block> NOTIFICATION_INTERFACE = BLOCKS.register("notification_interface", 
         () -> new NotificationInterfaceBlock());
+
+    public static final Supplier<Block> PLAYER_INTERFACE = BLOCKS.register("player_interface", 
+        () -> new PlayerInterfaceBlock());
+
+    public static final Supplier<Block> QUARTZ_GLASS = BLOCKS.register("quartz_glass", 
+        () -> new QuartzGlassBlock());
+
+    public static final Supplier<Block> TRIGGER_GLASS = BLOCKS.register("trigger_glass", 
+        () -> new TriggerGlassBlock());
+
+    public static final Supplier<Block> QUARTZ_LAMP = BLOCKS.register("quartz_lamp", 
+        () -> new QuartzLampBlock());
+
 }

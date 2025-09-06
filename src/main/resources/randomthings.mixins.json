@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "lumien.randomthings.mixins",
+  "refmap": "randomthings.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mappings": "official",
+  "client": [
+    "LevelRendererMixin",
+    "ParticleEngineAdvancedMixin"
+  ],
+  "server": [
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

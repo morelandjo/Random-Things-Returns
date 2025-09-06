@@ -15,4 +15,7 @@ public class ModFeatures {
         
     public static final DeferredHolder<Feature<?>, LotusFeature> LOTUS_PLANTS = FEATURES.register("lotus_plants", 
         () -> new LotusFeature(NoneFeatureConfiguration.CODEC));
+        
+    public static final DeferredHolder<Feature<?>, PitcherPlantFeature> PITCHER_PLANTS = FEATURES.register("pitcher_plants", 
+        () -> new PitcherPlantFeature(NoneFeatureConfiguration.CODEC));
 }

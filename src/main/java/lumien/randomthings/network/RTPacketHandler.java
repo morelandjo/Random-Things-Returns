@@ -28,6 +28,8 @@ public class RTPacketHandler {
             (message, context) -> AnalogEmitterPacket.handle(message, context));
         registrar.playToServer(ChatDetectorUpdatePacket.TYPE, ChatDetectorUpdatePacket.STREAM_CODEC, 
             (message, context) -> ChatDetectorUpdatePacket.handle(message, context));
+        // registrar.playToServer(OnlineDetectorUpdatePacket.TYPE, OnlineDetectorUpdatePacket.STREAM_CODEC, 
+        //     (message, context) -> OnlineDetectorUpdatePacket.handle(message, context));
         registrar.playToServer(GlobalChatDetectorUpdatePacket.TYPE, GlobalChatDetectorUpdatePacket.STREAM_CODEC, 
             (message, context) -> GlobalChatDetectorUpdatePacket.handle(message, context));
         registrar.playToServer(IronDropperPacket.TYPE, IronDropperPacket.STREAM_CODEC, 

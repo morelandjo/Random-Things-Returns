@@ -17,6 +17,16 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(AdvancedRedstoneTorchBlockEntity::new, 
                 ModBlocks.ADVANCED_REDSTONE_TORCH.get(), ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get()).build(null));
 
+    public static final Supplier<BlockEntityType<RainShieldBlockEntity>> RAIN_SHIELD = 
+        BLOCK_ENTITY_TYPES.register("rain_shield", 
+            () -> BlockEntityType.Builder.of(RainShieldBlockEntity::new, 
+                ModBlocks.RAIN_SHIELD.get()).build(null));
+                
+    public static final Supplier<BlockEntityType<SlimeCubeBlockEntity>> SLIME_CUBE = 
+        BLOCK_ENTITY_TYPES.register("slime_cube", 
+            () -> BlockEntityType.Builder.of(SlimeCubeBlockEntity::new, 
+                ModBlocks.SLIME_CUBE.get()).build(null));
+
     public static final Supplier<BlockEntityType<BloodRoseBlockEntity>> BLOOD_ROSE = 
         BLOCK_ENTITY_TYPES.register("blood_rose", 
             () -> BlockEntityType.Builder.of(BloodRoseBlockEntity::new, 
@@ -56,6 +66,21 @@ public class ModBlockEntityTypes {
         BLOCK_ENTITY_TYPES.register("global_chat_detector", 
             () -> BlockEntityType.Builder.of(GlobalChatDetectorBlockEntity::new, 
                 ModBlocks.GLOBAL_CHAT_DETECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PeaceCandleBlockEntity>> PEACE_CANDLE = 
+        BLOCK_ENTITY_TYPES.register("peace_candle", 
+            () -> BlockEntityType.Builder.of(PeaceCandleBlockEntity::new, 
+                ModBlocks.PEACE_CANDLE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PotionVaporizerBlockEntity>> POTION_VAPORIZER = 
+        BLOCK_ENTITY_TYPES.register("potion_vaporizer", 
+            () -> BlockEntityType.Builder.of(PotionVaporizerBlockEntity::new, 
+                ModBlocks.POTION_VAPORIZER.get()).build(null));
+
+    // public static final Supplier<BlockEntityType<OnlineDetectorBlockEntity>> ONLINE_DETECTOR = 
+    //     BLOCK_ENTITY_TYPES.register("online_detector", 
+    //         () -> BlockEntityType.Builder.of(OnlineDetectorBlockEntity::new, 
+    //             ModBlocks.ONLINE_DETECTOR.get()).build(null));
 
     public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
         BLOCK_ENTITY_TYPES.register("diaphanous_block", 
@@ -102,4 +127,10 @@ public class ModBlockEntityTypes {
         BLOCK_ENTITY_TYPES.register("notification_interface", 
             () -> BlockEntityType.Builder.of(NotificationInterfaceBlockEntity::new, 
                 ModBlocks.NOTIFICATION_INTERFACE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PlayerInterfaceBlockEntity>> PLAYER_INTERFACE = 
+        BLOCK_ENTITY_TYPES.register("player_interface", 
+            () -> BlockEntityType.Builder.of(PlayerInterfaceBlockEntity::new, 
+                ModBlocks.PLAYER_INTERFACE.get()).build(null));
+
 }

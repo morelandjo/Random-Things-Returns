@@ -44,11 +44,18 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.ADVANCED_REDSTONE_REPEATER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.ADVANCED_REDSTONE_TORCH.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.ANALOG_EMITTER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIDED_REDSTONE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        // registration.addRecipeCatalyst(new ItemStack(ModBlocks.CHAT_DETECTOR.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        // registration.addRecipeCatalyst(new ItemStack(ModBlocks.ONLINE_DETECTOR.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        // registration.addRecipeCatalyst(new ItemStack(ModBlocks.GLOBAL_CHAT_DETECTOR.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.PEACE_CANDLE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.POTION_VAPORIZER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CONTACT_BUTTON.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CONTACT_LEVER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.IGNITER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.INVENTORY_TESTER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.NOTIFICATION_INTERFACE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        // registration.addRecipeCatalyst(new ItemStack(ModBlocks.NOTIFICATION_INTERFACE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        // registration.addRecipeCatalyst(new ItemStack(ModBlocks.BASIC_REDSTONE_INTERFACE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Utility blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_BREAKER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
@@ -57,6 +64,9 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         
         // Decorative blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.RAINBOW_LAMP.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.RAIN_SHIELD.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SLIME_CUBE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.QUARTZ_LAMP.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_OF_STICKS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BLOCK_OF_STICKS_RETURNING.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
@@ -76,6 +86,8 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BIOME_STONE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BIOME_GLASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.LAPIS_GLASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.QUARTZ_GLASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.TRIGGER_GLASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Fluid Display - decorative fluid texture block
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.FLUID_DISPLAY.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
@@ -83,6 +95,10 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         // Luminous blocks - decorative light emitting blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.LUMINOUS_BLOCK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        
+        // Stained Bricks - colored decorative bricks
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.STAINED_BRICK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.LUMINOUS_STAINED_BRICK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }

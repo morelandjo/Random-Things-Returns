@@ -8,6 +8,7 @@ public class ModScreens {
         event.register(ModMenuTypes.ADVANCED_REDSTONE_TORCH.get(), AdvancedRedstoneTorchScreen::new);
         event.register(ModMenuTypes.ADVANCED_REDSTONE_REPEATER.get(), AdvancedRedstoneRepeaterScreen::new);
         event.register(ModMenuTypes.ANALOG_EMITTER.get(), AnalogEmitterScreen::new);
+        event.register(ModMenuTypes.POTION_VAPORIZER.get(), PotionVaporizerScreen::new);
         event.register(ModMenuTypes.BLOCK_DESTABILIZER.get(), BlockDestabilizerScreen::new);
         event.register(ModMenuTypes.IRON_DROPPER.get(), IronDropperScreen::new);
         event.register(ModMenuTypes.CHAT_DETECTOR.get(), ChatDetectorScreen::new);

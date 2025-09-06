@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "OCO",
+    "ONO",
+    "OSO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "C": {
+      "item": "minecraft:ender_chest"
+    },
+    "S": {
+      "item": "randomthings:stable_enderpearl"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:player_interface"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_state",
+              "block": "randomthings:stained_brick",
+              "properties": [
+                "color"
+              ]
+            }
+          ],
+          "name": "randomthings:stained_brick"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

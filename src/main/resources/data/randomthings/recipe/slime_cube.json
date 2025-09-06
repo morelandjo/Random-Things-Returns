@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "redstone",
+	"pattern": [
+		" S ",
+		"SNS",
+		" S "
+	],
+	"key": {
+		"S": {
+			"item": "minecraft:slime_ball"
+		},
+		"N": {
+			"item": "minecraft:nether_star"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "randomthings:slime_cube"
+	}
+}

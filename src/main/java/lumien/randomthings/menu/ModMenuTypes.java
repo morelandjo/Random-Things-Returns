@@ -29,6 +29,16 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
                 new AnalogEmitterMenu(windowId, inventory, data.readBlockPos())));
 
+    public static final Supplier<MenuType<PotionVaporizerMenu>> POTION_VAPORIZER = 
+        MENU_TYPES.register("potion_vaporizer", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+                new PotionVaporizerMenu(windowId, inventory, data.readBlockPos())));
+
+    // public static final Supplier<MenuType<OnlineDetectorMenu>> ONLINE_DETECTOR = 
+    //     MENU_TYPES.register("online_detector", 
+    //         () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
+    //             new OnlineDetectorMenu(windowId)));
+
     public static final Supplier<MenuType<BlockDestabilizerMenu>> BLOCK_DESTABILIZER = 
         MENU_TYPES.register("block_destabilizer", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
@@ -70,4 +80,5 @@ public class ModMenuTypes {
         MENU_TYPES.register("notification_interface", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
                 new NotificationInterfaceMenu(windowId, inventory, ContainerLevelAccess.create(inventory.player.level(), data.readBlockPos()))));
+
 }

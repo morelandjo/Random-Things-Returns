@@ -3,7 +3,9 @@ package lumien.randomthings;
 import com.mojang.logging.LogUtils;
 import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.blockentity.PlayerInterfaceBlockEntity;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
+import lumien.randomthings.event.RTEventHandler;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
 import lumien.randomthings.client.renderer.LightRedirectorRenderer;
@@ -18,6 +20,7 @@ import lumien.randomthings.network.RTPacketHandler;
 import lumien.randomthings.blockentity.ModBlockEntityTypes;
 import lumien.randomthings.menu.ModMenuTypes;
 import lumien.randomthings.worldgen.ModFeatures;
+import lumien.randomthings.worldgen.ModStructureProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,6 +44,8 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import org.slf4j.Logger;
@@ -62,6 +67,7 @@ public class RandomThings {
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ModMenuTypes.MENU_TYPES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
+        ModStructureProcessors.STRUCTURE_PROCESSORS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
@@ -72,6 +78,7 @@ public class RandomThings {
         modEventBus.addListener(this::registerScreens);
         modEventBus.addListener(this::registerNetworking);
         modEventBus.addListener(this::registerRenderers);
+        modEventBus.addListener(this::registerCapabilities);
         
         // Register client-side color handlers
         modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
@@ -79,6 +86,9 @@ public class RandomThings {
         // Register game events
         // Note: Event handlers are registered as listeners below, not as class instance
 
+        // Register rain shield event handler
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onServerTick);
+        
         // Register hoe event for fertilized dirt
         NeoForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickBlock event) -> {
             if (event.getItemStack().getItem() instanceof net.minecraft.world.item.HoeItem) {
@@ -117,8 +127,10 @@ public class RandomThings {
             // Register render layers for transparent blocks
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_ROSE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOTUS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.PITCHER_PLANT.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_REDSTONE_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.RAIN_SHIELD.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS_RETURNING.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BIOME_GLASS.get(), RenderType.translucent());
@@ -131,6 +143,8 @@ public class RandomThings {
         LOGGER.info("DEBUG: Registering client events manually");
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onRenderLevelStage);
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onClientTick);
+        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.RainShieldClientEvents::onPlaySound);
+        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.RainShieldClientEvents::onClientTick);
         
         // Light Redirector client events removed - no longer using texture swapping approach
     }
@@ -143,6 +157,14 @@ public class RandomThings {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.FLUID_DISPLAY.get(), FluidDisplayBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.LIGHT_REDIRECTOR.get(), LightRedirectorRenderer::new);
+    }
+
+    private void registerCapabilities(final RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+            Capabilities.ItemHandler.BLOCK,
+            ModBlockEntityTypes.PLAYER_INTERFACE.get(),
+            (playerInterface, side) -> playerInterface.getItemHandler(side)
+        );
     }
 
 }

@@ -26,6 +26,12 @@ public class ModItems {
     public static final Supplier<Item> RAINBOW_LAMP = ITEMS.register("rainbow_lamp",
         () -> new BlockItem(ModBlocks.RAINBOW_LAMP.get(), new Item.Properties()));
 
+    public static final Supplier<Item> RAIN_SHIELD = ITEMS.register("rain_shield",
+        () -> new BlockItem(ModBlocks.RAIN_SHIELD.get(), new Item.Properties()));
+        
+    public static final Supplier<Item> SLIME_CUBE = ITEMS.register("slime_cube",
+        () -> new BlockItem(ModBlocks.SLIME_CUBE.get(), new Item.Properties()));
+
     public static final Supplier<Item> SUPER_LUBRICENT_STONE = ITEMS.register("super_lubricent_stone",
         () -> new BlockItem(ModBlocks.SUPER_LUBRICENT_STONE.get(), new Item.Properties()));
 
@@ -65,6 +71,9 @@ public class ModItems {
     public static final Supplier<Item> ANALOG_EMITTER = ITEMS.register("analog_emitter",
         () -> new BlockItem(ModBlocks.ANALOG_EMITTER.get(), new Item.Properties()));
 
+    public static final Supplier<Item> SIDED_REDSTONE = ITEMS.register("sided_redstone",
+        () -> new BlockItem(ModBlocks.SIDED_REDSTONE.get(), new Item.Properties()));
+
     public static final Supplier<Item> BLOCK_BREAKER = ITEMS.register("block_breaker",
         () -> new BlockItem(ModBlocks.BLOCK_BREAKER.get(), new Item.Properties()));
 
@@ -79,6 +88,12 @@ public class ModItems {
 
     public static final Supplier<Item> GLOBAL_CHAT_DETECTOR = ITEMS.register("global_chat_detector",
         () -> new BlockItem(ModBlocks.GLOBAL_CHAT_DETECTOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> PEACE_CANDLE = ITEMS.register("peace_candle",
+        () -> new BlockItem(ModBlocks.PEACE_CANDLE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> POTION_VAPORIZER = ITEMS.register("potion_vaporizer",
+        () -> new BlockItem(ModBlocks.POTION_VAPORIZER.get(), new Item.Properties()));
 
     public static final Supplier<Item> COMPRESSED_SLIME_BLOCK = ITEMS.register("compressed_slime_block",
         () -> new BlockItem(ModBlocks.COMPRESSED_SLIME_BLOCK.get(), new Item.Properties()));
@@ -179,6 +194,21 @@ public class ModItems {
     public static final Supplier<Item> NOTIFICATION_INTERFACE = ITEMS.register("notification_interface",
         () -> new BlockItem(ModBlocks.NOTIFICATION_INTERFACE.get(), new Item.Properties()));
 
+    public static final Supplier<Item> PLAYER_INTERFACE = ITEMS.register("player_interface",
+        () -> new PlayerInterfaceItem(ModBlocks.PLAYER_INTERFACE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> QUARTZ_GLASS = ITEMS.register("quartz_glass",
+        () -> new BlockItem(ModBlocks.QUARTZ_GLASS.get(), new Item.Properties()));
+
+    public static final Supplier<Item> TRIGGER_GLASS = ITEMS.register("trigger_glass",
+        () -> new BlockItem(ModBlocks.TRIGGER_GLASS.get(), new Item.Properties()));
+
+    public static final Supplier<Item> QUARTZ_LAMP = ITEMS.register("quartz_lamp",
+        () -> new BlockItem(ModBlocks.QUARTZ_LAMP.get(), new Item.Properties()));
+
+    public static final Supplier<Item> PITCHER_PLANT = ITEMS.register("pitcher_plant",
+        () -> new BlockItem(ModBlocks.PITCHER_PLANT.get(), new Item.Properties()));
+
     public static final Supplier<Item> LOTUS_SEEDS = ITEMS.register("lotus_seeds",
         () -> new LotusSeedsItem());
 
@@ -257,6 +287,74 @@ public class ModItems {
     public static final Supplier<Item> TRANSLUCENT_LUMINOUS_BLOCK_BLACK = ITEMS.register("translucent_luminous_block_black",
         () -> new LuminousBlockItem(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.BLACK));
 
+    // Stained Bricks
+    public static final Supplier<Item> STAINED_BRICK_WHITE = ITEMS.register("stained_brick_white",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.WHITE));
+    public static final Supplier<Item> STAINED_BRICK_ORANGE = ITEMS.register("stained_brick_orange",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.ORANGE));
+    public static final Supplier<Item> STAINED_BRICK_MAGENTA = ITEMS.register("stained_brick_magenta",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.MAGENTA));
+    public static final Supplier<Item> STAINED_BRICK_LIGHT_BLUE = ITEMS.register("stained_brick_light_blue",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.LIGHT_BLUE));
+    public static final Supplier<Item> STAINED_BRICK_YELLOW = ITEMS.register("stained_brick_yellow",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.YELLOW));
+    public static final Supplier<Item> STAINED_BRICK_LIME = ITEMS.register("stained_brick_lime",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.LIME));
+    public static final Supplier<Item> STAINED_BRICK_PINK = ITEMS.register("stained_brick_pink",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.PINK));
+    public static final Supplier<Item> STAINED_BRICK_GRAY = ITEMS.register("stained_brick_gray",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.GRAY));
+    public static final Supplier<Item> STAINED_BRICK_LIGHT_GRAY = ITEMS.register("stained_brick_light_gray",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.LIGHT_GRAY));
+    public static final Supplier<Item> STAINED_BRICK_CYAN = ITEMS.register("stained_brick_cyan",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.CYAN));
+    public static final Supplier<Item> STAINED_BRICK_PURPLE = ITEMS.register("stained_brick_purple",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.PURPLE));
+    public static final Supplier<Item> STAINED_BRICK_BLUE = ITEMS.register("stained_brick_blue",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.BLUE));
+    public static final Supplier<Item> STAINED_BRICK_BROWN = ITEMS.register("stained_brick_brown",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.BROWN));
+    public static final Supplier<Item> STAINED_BRICK_GREEN = ITEMS.register("stained_brick_green",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.GREEN));
+    public static final Supplier<Item> STAINED_BRICK_RED = ITEMS.register("stained_brick_red",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.RED));
+    public static final Supplier<Item> STAINED_BRICK_BLACK = ITEMS.register("stained_brick_black",
+        () -> new StainedBrickItem(ModBlocks.STAINED_BRICK.get(), new Item.Properties(), DyeColor.BLACK));
+
+    // Luminous Stained Bricks  
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_WHITE = ITEMS.register("luminous_stained_brick_white",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.WHITE));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_ORANGE = ITEMS.register("luminous_stained_brick_orange",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.ORANGE));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_MAGENTA = ITEMS.register("luminous_stained_brick_magenta",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.MAGENTA));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_LIGHT_BLUE = ITEMS.register("luminous_stained_brick_light_blue",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.LIGHT_BLUE));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_YELLOW = ITEMS.register("luminous_stained_brick_yellow",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.YELLOW));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_LIME = ITEMS.register("luminous_stained_brick_lime",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.LIME));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_PINK = ITEMS.register("luminous_stained_brick_pink",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.PINK));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_GRAY = ITEMS.register("luminous_stained_brick_gray",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.GRAY));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_LIGHT_GRAY = ITEMS.register("luminous_stained_brick_light_gray",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.LIGHT_GRAY));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_CYAN = ITEMS.register("luminous_stained_brick_cyan",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.CYAN));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_PURPLE = ITEMS.register("luminous_stained_brick_purple",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.PURPLE));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_BLUE = ITEMS.register("luminous_stained_brick_blue",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.BLUE));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_BROWN = ITEMS.register("luminous_stained_brick_brown",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.BROWN));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_GREEN = ITEMS.register("luminous_stained_brick_green",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.GREEN));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_RED = ITEMS.register("luminous_stained_brick_red",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.RED));
+    public static final Supplier<Item> LUMINOUS_STAINED_BRICK_BLACK = ITEMS.register("luminous_stained_brick_black",
+        () -> new StainedBrickItem(ModBlocks.LUMINOUS_STAINED_BRICK.get(), new Item.Properties(), DyeColor.BLACK));
+
     // Creative tab
     public static final Supplier<CreativeModeTab> RT_CREATIVE_TAB = CREATIVE_MODE_TABS.register("randomthings", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.randomthings"))
@@ -264,16 +362,21 @@ public class ModItems {
         .displayItems((parameters, output) -> {
             output.accept(FERTILIZED_DIRT.get());
             output.accept(RAINBOW_LAMP.get());
+            output.accept(RAIN_SHIELD.get());
+            output.accept(SLIME_CUBE.get());
             output.accept(SUPER_LUBRICENT_STONE.get());
             output.accept(COMPRESSED_SLIME_BLOCK.get());
             output.accept(ADVANCED_REDSTONE_TORCH.get());
             output.accept(ADVANCED_REDSTONE_REPEATER.get());
             output.accept(ANALOG_EMITTER.get());
+            output.accept(SIDED_REDSTONE.get());
             output.accept(BLOCK_BREAKER.get());
             output.accept(BLOCK_DESTABILIZER.get());
             output.accept(IRON_DROPPER.get());
             output.accept(CHAT_DETECTOR.get());
             output.accept(GLOBAL_CHAT_DETECTOR.get());
+            output.accept(PEACE_CANDLE.get());
+            output.accept(POTION_VAPORIZER.get());
             output.accept(CONTACT_BUTTON.get());
             output.accept(CONTACT_LEVER.get());
             output.accept(BLOCK_OF_STICKS.get());
@@ -321,6 +424,11 @@ public class ModItems {
             output.accept(INVENTORY_TESTER.get());
             output.accept(LIGHT_REDIRECTOR.get());
             output.accept(NOTIFICATION_INTERFACE.get());
+            output.accept(PLAYER_INTERFACE.get());
+            output.accept(QUARTZ_GLASS.get());
+            output.accept(TRIGGER_GLASS.get());
+            output.accept(QUARTZ_LAMP.get());
+            output.accept(PITCHER_PLANT.get());
             output.accept(LOTUS_SEEDS.get());
             output.accept(LOTUS_BLOSSOM.get());
             // Luminous Blocks
@@ -358,6 +466,40 @@ public class ModItems {
             output.accept(TRANSLUCENT_LUMINOUS_BLOCK_GREEN.get());
             output.accept(TRANSLUCENT_LUMINOUS_BLOCK_RED.get());
             output.accept(TRANSLUCENT_LUMINOUS_BLOCK_BLACK.get());
+            // Stained Bricks
+            output.accept(STAINED_BRICK_WHITE.get());
+            output.accept(STAINED_BRICK_ORANGE.get());
+            output.accept(STAINED_BRICK_MAGENTA.get());
+            output.accept(STAINED_BRICK_LIGHT_BLUE.get());
+            output.accept(STAINED_BRICK_YELLOW.get());
+            output.accept(STAINED_BRICK_LIME.get());
+            output.accept(STAINED_BRICK_PINK.get());
+            output.accept(STAINED_BRICK_GRAY.get());
+            output.accept(STAINED_BRICK_LIGHT_GRAY.get());
+            output.accept(STAINED_BRICK_CYAN.get());
+            output.accept(STAINED_BRICK_PURPLE.get());
+            output.accept(STAINED_BRICK_BLUE.get());
+            output.accept(STAINED_BRICK_BROWN.get());
+            output.accept(STAINED_BRICK_GREEN.get());
+            output.accept(STAINED_BRICK_RED.get());
+            output.accept(STAINED_BRICK_BLACK.get());
+            // Luminous Stained Bricks
+            output.accept(LUMINOUS_STAINED_BRICK_WHITE.get());
+            output.accept(LUMINOUS_STAINED_BRICK_ORANGE.get());
+            output.accept(LUMINOUS_STAINED_BRICK_MAGENTA.get());
+            output.accept(LUMINOUS_STAINED_BRICK_LIGHT_BLUE.get());
+            output.accept(LUMINOUS_STAINED_BRICK_YELLOW.get());
+            output.accept(LUMINOUS_STAINED_BRICK_LIME.get());
+            output.accept(LUMINOUS_STAINED_BRICK_PINK.get());
+            output.accept(LUMINOUS_STAINED_BRICK_GRAY.get());
+            output.accept(LUMINOUS_STAINED_BRICK_LIGHT_GRAY.get());
+            output.accept(LUMINOUS_STAINED_BRICK_CYAN.get());
+            output.accept(LUMINOUS_STAINED_BRICK_PURPLE.get());
+            output.accept(LUMINOUS_STAINED_BRICK_BLUE.get());
+            output.accept(LUMINOUS_STAINED_BRICK_BROWN.get());
+            output.accept(LUMINOUS_STAINED_BRICK_GREEN.get());
+            output.accept(LUMINOUS_STAINED_BRICK_RED.get());
+            output.accept(LUMINOUS_STAINED_BRICK_BLACK.get());
         })
         .build());
 
