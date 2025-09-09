@@ -132,11 +132,43 @@ public class ModItems {
     public static final Supplier<Item> DIAPHANOUS_BLOCK = ITEMS.register("diaphanous_block",
         () -> new DiaphanousBlockItem(ModBlocks.DIAPHANOUS_BLOCK.get(), new Item.Properties()));
 
+    // Bean System Block Items
+    public static final Supplier<Item> BEANSPROUT = ITEMS.register("beansprout",
+        () -> new BlockItem(ModBlocks.BEANSPROUT.get(), new Item.Properties()));
+
+    public static final Supplier<Item> BEANSTALK = ITEMS.register("beanstalk",
+        () -> new BlockItem(ModBlocks.BEANSTALK.get(), new Item.Properties()));
+
+    public static final Supplier<Item> SPECIALBEANSTALK = ITEMS.register("specialbeanstalk",
+        () -> new BlockItem(ModBlocks.SPECIALBEANSTALK.get(), new Item.Properties()));
+
+    public static final Supplier<Item> BEANPOD = ITEMS.register("beanpod",
+        () -> new BlockItem(ModBlocks.BEANPOD.get(), new Item.Properties()));
+
+    public static final Supplier<Item> NATURE_CORE = ITEMS.register("nature_core",
+        () -> new BlockItem(ModBlocks.NATURE_CORE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> PLANT_CHEST = ITEMS.register("plant_chest",
+        () -> new PlantChestItem(ModBlocks.PLANT_CHEST.get(), new Item.Properties()));
+
     // Regular Items
     public static final Supplier<Item> BIOME_CRYSTAL = ITEMS.register("biome_crystal",
         () -> new BiomeCrystalItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BLOOD_ROSE_PETAL = ITEMS.register("blood_rose_petal",
         () -> new Item(new Item.Properties()));
+
+    // Bean Items
+    public static final Supplier<Item> BEAN = ITEMS.register("bean",
+        () -> new ItemBean());
+
+    public static final Supplier<Item> LESSERBEAN = ITEMS.register("lesserbean",
+        () -> new ItemLesserMagicBean());
+
+    public static final Supplier<Item> MAGICBEAN = ITEMS.register("magicbean",
+        () -> new ItemMagicBean());
+
+    public static final Supplier<Item> BEANSTEW = ITEMS.register("beanstew",
+        () -> new ItemBeanStew());
 
     public static final Supplier<Item> ID_CARD = ITEMS.register("id_card",
         () -> new IdCardItem(new Item.Properties().stacksTo(1)));
@@ -405,6 +437,17 @@ public class ModItems {
             output.accept(diaphanousStack);
             // Add example Biome Crystal (Plains biome for creative tab)
             output.accept(BiomeCrystalItem.createForBiome(Biomes.PLAINS));
+            // Bean System Items
+            output.accept(BEAN.get());
+            output.accept(LESSERBEAN.get());
+            output.accept(MAGICBEAN.get());
+            output.accept(BEANSTEW.get());
+            output.accept(BEANSPROUT.get());
+            output.accept(BEANSTALK.get());
+            output.accept(SPECIALBEANSTALK.get());
+            output.accept(BEANPOD.get());
+            output.accept(NATURE_CORE.get());
+            output.accept(PLANT_CHEST.get());
             output.accept(ID_CARD.get());
             output.accept(DIVINING_ROD_COAL.get());
             output.accept(DIVINING_ROD_IRON.get());

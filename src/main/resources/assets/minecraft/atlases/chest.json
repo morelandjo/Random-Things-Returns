@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "randomthings:entity/chest/plant_chest"
+    }
+  ]
+}

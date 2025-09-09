@@ -133,4 +133,15 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(PlayerInterfaceBlockEntity::new, 
                 ModBlocks.PLAYER_INTERFACE.get()).build(null));
 
+    // Bean System Block Entities
+    public static final Supplier<BlockEntityType<NatureCoreBlockEntity>> NATURE_CORE = 
+        BLOCK_ENTITY_TYPES.register("nature_core", 
+            () -> BlockEntityType.Builder.of(NatureCoreBlockEntity::new, 
+                ModBlocks.NATURE_CORE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PlantChestBlockEntity>> PLANT_CHEST = 
+        BLOCK_ENTITY_TYPES.register("plant_chest", 
+            () -> BlockEntityType.Builder.of(PlantChestBlockEntity::new, 
+                ModBlocks.PLANT_CHEST.get()).build(null));
+
 }

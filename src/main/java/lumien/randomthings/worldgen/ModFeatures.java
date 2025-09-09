@@ -18,4 +18,10 @@ public class ModFeatures {
         
     public static final DeferredHolder<Feature<?>, PitcherPlantFeature> PITCHER_PLANTS = FEATURES.register("pitcher_plants", 
         () -> new PitcherPlantFeature(NoneFeatureConfiguration.CODEC));
+        
+    public static final DeferredHolder<Feature<?>, BeanSproutFeature> BEAN_SPROUTS = FEATURES.register("bean_sprouts", 
+        () -> new BeanSproutFeature(NoneFeatureConfiguration.CODEC));
+        
+    public static final DeferredHolder<Feature<?>, NatureCoreFeature> NATURE_CORES = FEATURES.register("nature_cores", 
+        () -> new NatureCoreFeature(NoneFeatureConfiguration.CODEC));
 }

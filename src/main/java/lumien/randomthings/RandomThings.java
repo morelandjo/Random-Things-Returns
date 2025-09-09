@@ -5,6 +5,7 @@ import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.blockentity.PlayerInterfaceBlockEntity;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
+import lumien.randomthings.command.BeanDebugCommand;
 import lumien.randomthings.event.RTEventHandler;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
@@ -43,6 +44,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -78,6 +80,7 @@ public class RandomThings {
         modEventBus.addListener(this::registerScreens);
         modEventBus.addListener(this::registerNetworking);
         modEventBus.addListener(this::registerRenderers);
+        modEventBus.addListener(this::registerLayerDefinitions);
         modEventBus.addListener(this::registerCapabilities);
         
         // Register client-side color handlers
@@ -88,6 +91,9 @@ public class RandomThings {
 
         // Register rain shield event handler
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onServerTick);
+        
+        // Register commands
+        NeoForge.EVENT_BUS.addListener(this::registerCommands);
         
         // Register hoe event for fertilized dirt
         NeoForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickBlock event) -> {
@@ -128,6 +134,12 @@ public class RandomThings {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_ROSE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOTUS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.PITCHER_PLANT.get(), RenderType.cutout());
+            
+            // Bean System blocks need cutout rendering
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BEANSPROUT.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BEANSTALK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECIALBEANSTALK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BEANPOD.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_REDSTONE_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.RAIN_SHIELD.get(), RenderType.cutout());
@@ -157,6 +169,16 @@ public class RandomThings {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.FLUID_DISPLAY.get(), FluidDisplayBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.LIGHT_REDIRECTOR.get(), LightRedirectorRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.PLANT_CHEST.get(), context -> {
+            lumien.randomthings.client.renderer.PlantChestRenderer renderer = new lumien.randomthings.client.renderer.PlantChestRenderer(context);
+            lumien.randomthings.client.renderer.PlantChestItemRenderer.setRenderer(renderer);
+            return renderer;
+        });
+    }
+    
+    private void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(lumien.randomthings.client.renderer.PlantChestRenderer.PLANT_CHEST_LAYER, 
+            lumien.randomthings.client.model.PlantChestModel::createLayerDefinition);
     }
 
     private void registerCapabilities(final RegisterCapabilitiesEvent event) {
@@ -165,6 +187,10 @@ public class RandomThings {
             ModBlockEntityTypes.PLAYER_INTERFACE.get(),
             (playerInterface, side) -> playerInterface.getItemHandler(side)
         );
+    }
+
+    private void registerCommands(RegisterCommandsEvent event) {
+        BeanDebugCommand.register(event.getDispatcher());
     }
 
 }

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "randomthings:bean_sprout_patch",
+  "step": "vegetal_decoration"
+}

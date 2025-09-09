@@ -57,6 +57,13 @@ public class ClientModEvents {
         BlockColor quartzGlassColor = (state, level, pos, tintIndex) -> 0xFFFFFF; // White color
         event.register(quartzGlassColor, ModBlocks.QUARTZ_GLASS.get());
         
+        // Register trigger glass color handler
+        BlockColor triggerGlassColor = (state, level, pos, tintIndex) -> {
+            // Red color when not triggered, color doesn't matter when invisible
+            return 0xFF4444; // Red color
+        };
+        event.register(triggerGlassColor, ModBlocks.TRIGGER_GLASS.get());
+        
         // Register compressed slime block color handler
         BlockColor compressedSlimeColor = (state, level, pos, tintIndex) -> {
             int compression = state.getValue(lumien.randomthings.block.CompressedSlimeBlock.COMPRESSION);
@@ -78,6 +85,10 @@ public class ClientModEvents {
         // Register quartz glass item color
         ItemColor quartzGlassItemColor = (stack, tintIndex) -> 0xFFFFFF; // White color
         event.register(quartzGlassItemColor, ModItems.QUARTZ_GLASS.get());
+        
+        // Register trigger glass item color
+        ItemColor triggerGlassItemColor = (stack, tintIndex) -> 0xFF4444; // Red color
+        event.register(triggerGlassItemColor, ModItems.TRIGGER_GLASS.get());
     }
     
     

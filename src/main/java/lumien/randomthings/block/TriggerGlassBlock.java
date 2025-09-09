@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -23,7 +24,6 @@ public class TriggerGlassBlock extends TransparentBlock {
     
     public TriggerGlassBlock() {
         super(BlockBehaviour.Properties.of()
-                .mapColor(MapColor.NONE)
                 .strength(0.3F)
                 .sound(SoundType.GLASS)
                 .noOcclusion()
@@ -33,6 +33,15 @@ public class TriggerGlassBlock extends TransparentBlock {
                 .isViewBlocking((state, level, pos) -> false));
         
         this.registerDefaultState(this.stateDefinition.any().setValue(TRIGGERED, Boolean.FALSE));
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        // When triggered, don't render the block at all (becomes invisible)
+        if (state.getValue(TRIGGERED)) {
+            return RenderShape.INVISIBLE;
+        }
+        return RenderShape.MODEL;
     }
 
     @Override
@@ -92,13 +101,4 @@ public class TriggerGlassBlock extends TransparentBlock {
         return super.getCollisionShape(state, level, pos, context);
     }
 
-    @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
-        return true;
-    }
-
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
-        return 0;
-    }
 }

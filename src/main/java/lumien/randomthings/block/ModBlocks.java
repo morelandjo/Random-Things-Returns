@@ -48,6 +48,25 @@ public class ModBlocks {
     public static final Supplier<Block> PLATFORM_BIRCH = BLOCKS.register("platform_birch", 
         () -> new PlatformBlock());
 
+    // Bean System Blocks
+    public static final Supplier<Block> BEANSPROUT = BLOCKS.register("beansprout", 
+        () -> new BlockBeanSprout());
+
+    public static final Supplier<Block> BEANSTALK = BLOCKS.register("beanstalk", 
+        () -> new BlockBeanStalk());
+
+    public static final Supplier<Block> SPECIALBEANSTALK = BLOCKS.register("specialbeanstalk", 
+        () -> new BlockSpecialBeanStalk());
+
+    public static final Supplier<Block> BEANPOD = BLOCKS.register("beanpod", 
+        () -> new BlockBeanPod());
+
+    public static final Supplier<Block> NATURE_CORE = BLOCKS.register("nature_core", 
+        () -> new BlockNatureCore());
+
+    public static final Supplier<Block> PLANT_CHEST = BLOCKS.register("plant_chest", 
+        () -> new PlantChestBlock());
+
     public static final Supplier<Block> PLATFORM_JUNGLE = BLOCKS.register("platform_jungle", 
         () -> new PlatformBlock());
 
