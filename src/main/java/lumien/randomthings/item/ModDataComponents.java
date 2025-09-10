@@ -2,6 +2,7 @@ package lumien.randomthings.item;
 
 import com.mojang.serialization.Codec;
 import lumien.randomthings.lib.ModConstants;
+import lumien.randomthings.util.ChunkAnalyzerResult;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -43,6 +44,12 @@ public class ModDataComponents {
             () -> DataComponentType.<Boolean>builder()
                 .persistent(Codec.BOOL)
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                .build());
+                
+    public static final Supplier<DataComponentType<ChunkAnalyzerResult>> CHUNK_ANALYZER_RESULT = 
+        DATA_COMPONENTS.register("chunk_analyzer_result", 
+            () -> DataComponentType.<ChunkAnalyzerResult>builder()
+                .persistent(ChunkAnalyzerResult.CODEC)
                 .build());
                 
 }

@@ -81,4 +81,12 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
                 new NotificationInterfaceMenu(windowId, inventory, ContainerLevelAccess.create(inventory.player.level(), data.readBlockPos()))));
 
+    public static final Supplier<MenuType<ChunkAnalyzerMenu>> CHUNK_ANALYZER = 
+        MENU_TYPES.register("chunk_analyzer", 
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                // For item-based menus, we need to get the held item
+                var heldItem = inventory.player.getMainHandItem();
+                return new ChunkAnalyzerMenu(windowId, inventory, heldItem);
+            }));
+
 }

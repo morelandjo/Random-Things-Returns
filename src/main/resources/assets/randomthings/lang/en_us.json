@@ -81,6 +81,7 @@
   "item.randomthings.id_card": "ID Card",
   "item.randomthings.stable_enderpearl": "Stable Enderpearl",
   "item.randomthings.blaze_and_steel": "Blaze and Steel",
+  "item.randomthings.chunk_analyzer": "Chunk Analyzer",
   
   "block.randomthings.blazing_fire": "Blazing Fire",
   
@@ -258,5 +259,8 @@
   "tooltip.randomthings.translucent_luminous_block": "Semi-transparent luminous blocks that emit light",
   "tooltip.randomthings.stained_brick": "Colored versions of vanilla bricks",
   "tooltip.randomthings.luminous_stained_brick": "Colored bricks that glow in the dark",
-  "tooltip.randomthings.blaze_and_steel": "The Fire created by this item burns and spreads significantly faster than vanilla fire"
+  "tooltip.randomthings.blaze_and_steel": "The Fire created by this item burns and spreads significantly faster than vanilla fire",
+  "tooltip.randomthings.chunk_analyzer": "The Chunk Analyzer allows you to check what blocks a chunk contains. Open its gui and press Scan. After a few seconds you will get the results for the chunk you are in.",
+  "gui.chunk_analyzer.results": "Chunk contains %d different block types",
+  "item.randomthings.chunk_analyzer.results": "Scanned results: %d block types"
 }

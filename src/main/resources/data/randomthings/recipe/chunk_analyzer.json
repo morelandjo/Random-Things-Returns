@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "tools",
+    "pattern": [
+        "B B",
+        "IGI",
+        "SID"
+    ],
+    "key": {
+        "B": {
+            "item": "minecraft:iron_bars"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        },
+        "G": {
+            "item": "minecraft:glass"
+        },
+        "S": {
+            "item": "minecraft:stone"
+        },
+        "D": {
+            "item": "minecraft:dirt"
+        }
+    },
+    "result": {
+        "count": 1,
+        "id": "randomthings:chunk_analyzer"
+    }
+}

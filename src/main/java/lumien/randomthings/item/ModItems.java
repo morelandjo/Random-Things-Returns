@@ -201,6 +201,9 @@ public class ModItems {
     // Tools
     public static final Supplier<Item> BLAZE_AND_STEEL = ITEMS.register("blaze_and_steel",
         () -> new BlazeAndSteelItem(new Item.Properties()));
+        
+    public static final Supplier<Item> CHUNK_ANALYZER = ITEMS.register("chunk_analyzer",
+        () -> new ChunkAnalyzerItem(new Item.Properties()));
 
     // Ender Bridge System
     public static final Supplier<Item> STABLE_ENDERPEARL = ITEMS.register("stable_enderpearl",
@@ -462,6 +465,7 @@ public class ModItems {
             output.accept(DIVINING_ROD_DIAMOND.get());
             output.accept(DIVINING_ROD_VANILLA.get());
             output.accept(BLAZE_AND_STEEL.get());
+            output.accept(CHUNK_ANALYZER.get());
             // Ender Bridge System
             output.accept(STABLE_ENDERPEARL.get());
             output.accept(ENDER_ANCHOR.get());

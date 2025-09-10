@@ -40,6 +40,10 @@ public class RTPacketHandler {
             (message, context) -> NotificationInterfaceUpdatePacket.handle(message, context));
         registrar.playToClient(MessageNotification.TYPE, MessageNotification.STREAM_CODEC, 
             (message, context) -> MessageNotification.handle(message, context));
+        registrar.playToServer(ChunkAnalyzerPacket.TYPE, ChunkAnalyzerPacket.STREAM_CODEC, 
+            (message, context) -> ChunkAnalyzerPacket.handle(message, context));
+        registrar.playToClient(ChunkAnalyzerResultPacket.TYPE, ChunkAnalyzerResultPacket.STREAM_CODEC, 
+            (message, context) -> ChunkAnalyzerResultPacket.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {
@@ -49,6 +53,14 @@ public class RTPacketHandler {
     }
     
     public static void sendToPlayer(MessageNotification message, ServerPlayer player) {
+        PacketDistributor.sendToPlayer(player, message);
+    }
+    
+    public static void sendToServer(ChunkAnalyzerPacket message) {
+        PacketDistributor.sendToServer(message);
+    }
+    
+    public static void sendToPlayer(ChunkAnalyzerResultPacket message, ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, message);
     }
 }

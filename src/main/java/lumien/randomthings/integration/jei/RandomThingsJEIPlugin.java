@@ -102,6 +102,7 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         
         // Tools
         registration.addRecipeCatalyst(new ItemStack(ModItems.BLAZE_AND_STEEL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.CHUNK_ANALYZER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }
