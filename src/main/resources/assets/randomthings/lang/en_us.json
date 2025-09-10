@@ -80,6 +80,9 @@
   "item.randomthings.divining_rod_redstone": "Divining Rod (Redstone)",
   "item.randomthings.id_card": "ID Card",
   "item.randomthings.stable_enderpearl": "Stable Enderpearl",
+  "item.randomthings.blaze_and_steel": "Blaze and Steel",
+  
+  "block.randomthings.blazing_fire": "Blazing Fire",
   
   "itemGroup.randomthings": "Random Things",
   
@@ -254,5 +257,6 @@
   "tooltip.randomthings.luminous_block": "Bright colored blocks that glow in the dark",
   "tooltip.randomthings.translucent_luminous_block": "Semi-transparent luminous blocks that emit light",
   "tooltip.randomthings.stained_brick": "Colored versions of vanilla bricks",
-  "tooltip.randomthings.luminous_stained_brick": "Colored bricks that glow in the dark"
+  "tooltip.randomthings.luminous_stained_brick": "Colored bricks that glow in the dark",
+  "tooltip.randomthings.blaze_and_steel": "The Fire created by this item burns and spreads significantly faster than vanilla fire"
 }

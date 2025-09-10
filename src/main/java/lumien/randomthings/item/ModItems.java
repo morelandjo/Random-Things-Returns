@@ -198,6 +198,10 @@ public class ModItems {
     public static final Supplier<Item> DIVINING_ROD_VANILLA = ITEMS.register("divining_rod_vanilla",
         () -> new DiviningRodItem(new Item.Properties(), getAllColors(), getAllTags()));
 
+    // Tools
+    public static final Supplier<Item> BLAZE_AND_STEEL = ITEMS.register("blaze_and_steel",
+        () -> new BlazeAndSteelItem(new Item.Properties()));
+
     // Ender Bridge System
     public static final Supplier<Item> STABLE_ENDERPEARL = ITEMS.register("stable_enderpearl",
         () -> new StableEnderpearl());
@@ -457,6 +461,7 @@ public class ModItems {
             output.accept(DIVINING_ROD_EMERALD.get());
             output.accept(DIVINING_ROD_DIAMOND.get());
             output.accept(DIVINING_ROD_VANILLA.get());
+            output.accept(BLAZE_AND_STEEL.get());
             // Ender Bridge System
             output.accept(STABLE_ENDERPEARL.get());
             output.accept(ENDER_ANCHOR.get());

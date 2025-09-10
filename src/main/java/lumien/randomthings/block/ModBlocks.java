@@ -79,6 +79,8 @@ public class ModBlocks {
     public static final Supplier<Block> BLOOD_ROSE = BLOCKS.register("blood_rose", 
         () -> new BloodRoseBlock());
 
+    public static final Supplier<Block> BLAZING_FIRE = BLOCKS.register("blazing_fire", 
+        () -> new BlazingFireBlock(BlockBehaviour.Properties.of()));
 
     public static final Supplier<Block> ADVANCED_REDSTONE_REPEATER = BLOCKS.register("advanced_redstone_repeater", 
         () -> new AdvancedRedstoneRepeaterBlock(false));
