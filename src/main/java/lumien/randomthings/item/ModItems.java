@@ -156,6 +156,12 @@ public class ModItems {
         () -> new BiomeCrystalItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BLOOD_ROSE_PETAL = ITEMS.register("blood_rose_petal",
         () -> new Item(new Item.Properties()));
+    
+    // Ectoplasm System Items
+    public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
+        () -> new EctoplasmItem());
+    public static final Supplier<Item> SPECTRE_INGOT = ITEMS.register("spectre_ingot",
+        () -> new SpectreIngotItem());
 
     // Bean Items
     public static final Supplier<Item> BEAN = ITEMS.register("bean",
@@ -434,6 +440,8 @@ public class ModItems {
             output.accept(PLATFORM_DARKOAK.get());
             output.accept(BLOOD_ROSE.get());
             output.accept(BLOOD_ROSE_PETAL.get());
+            output.accept(ECTOPLASM.get());
+            output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());
             output.accept(BIOME_STONE_COBBLE.get());
             output.accept(BIOME_STONE_BRICK.get());

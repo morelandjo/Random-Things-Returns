@@ -26,4 +26,12 @@ public class ModEntityTypes {
             .updateInterval(1)
             .build("time_accelerator")
     );
+    
+    public static final Supplier<EntityType<SpiritEntity>> SPIRIT = ENTITY_TYPES.register("spirit",
+        () -> EntityType.Builder.<SpiritEntity>of(SpiritEntity::new, MobCategory.MONSTER)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(8)
+            .updateInterval(3)
+            .build("spirit")
+    );
 }

@@ -276,5 +276,10 @@
   "item.randomthings.time_in_a_bottle.insufficient_time_for_clock": "Not enough time stored to set the clock!",
   "tooltip.timeInABottle": "Time: %d:%02d:%02d",
   "gui.chunk_analyzer.results": "Chunk contains %d different block types",
-  "item.randomthings.chunk_analyzer.results": "Scanned results: %d block types"
+  "item.randomthings.chunk_analyzer.results": "Scanned results: %d block types",
+  "item.randomthings.ectoplasm": "Ectoplasm",
+  "item.randomthings.spectre_ingot": "Spectre Ingot",
+  "entity.randomthings.spirit": "Spirit",
+  "tooltip.randomthings.ectoplasm": "A spiritual essence dropped by spirits. Used to craft spectre ingots.",
+  "tooltip.randomthings.spectre_ingot": "A spectral ingot crafted from ectoplasm, gold, and lapis lazuli."
 }

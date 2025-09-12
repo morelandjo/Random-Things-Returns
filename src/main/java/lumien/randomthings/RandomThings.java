@@ -17,6 +17,7 @@ import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ModDataComponents;
 import lumien.randomthings.entity.ModEntityTypes;
+import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.loot.ModLootModifiers;
 import lumien.randomthings.recipe.ModRecipeSerializers;
 import lumien.randomthings.lib.ModConstants;
@@ -44,6 +45,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -86,6 +88,7 @@ public class RandomThings {
         modEventBus.addListener(this::registerRenderers);
         modEventBus.addListener(this::registerLayerDefinitions);
         modEventBus.addListener(this::registerCapabilities);
+        modEventBus.addListener(this::registerEntityAttributes);
         
         // Register client-side color handlers
         modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
@@ -95,6 +98,12 @@ public class RandomThings {
 
         // Register rain shield event handler
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onServerTick);
+        // Register spirit spawning and dragon defeat tracking
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDeath);
+        // Register other RT event handlers  
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockPlace);
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockBreak);
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onClientTick);
         
         // Register commands
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
@@ -183,6 +192,7 @@ public class RandomThings {
         // Entity renderers
         event.registerEntityRenderer(ModEntityTypes.ECLIPSED_CLOCK.get(), EclipsedClockRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.TIME_ACCELERATOR.get(), TimeAcceleratorRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.SPIRIT.get(), lumien.randomthings.client.renderer.SpiritRenderer::new);
     }
     
     private void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -200,6 +210,10 @@ public class RandomThings {
 
     private void registerCommands(RegisterCommandsEvent event) {
         BeanDebugCommand.register(event.getDispatcher());
+    }
+
+    private void registerEntityAttributes(final EntityAttributeCreationEvent event) {
+        event.put(ModEntityTypes.SPIRIT.get(), SpiritEntity.createAttributes().build());
     }
 
 }
