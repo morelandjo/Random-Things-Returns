@@ -4,16 +4,8 @@ import com.mojang.logging.LogUtils;
 import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.blockentity.PlayerInterfaceBlockEntity;
-import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.command.BeanDebugCommand;
 import lumien.randomthings.event.RTEventHandler;
-import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
-import lumien.randomthings.client.renderer.EclipsedClockRenderer;
-import lumien.randomthings.client.renderer.TimeAcceleratorRenderer;
-import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
-import lumien.randomthings.client.renderer.LightRedirectorRenderer;
-import lumien.randomthings.client.screen.ModScreens;
-import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ModDataComponents;
 import lumien.randomthings.entity.ModEntityTypes;
@@ -42,7 +34,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -50,11 +41,9 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 @Mod(ModConstants.MOD_ID)
@@ -82,16 +71,20 @@ public class RandomThings {
 
         // Register lifecycle events
         modEventBus.addListener(this::setupCommon);
-        modEventBus.addListener(this::setupClient);
-        modEventBus.addListener(this::registerScreens);
         modEventBus.addListener(this::registerNetworking);
-        modEventBus.addListener(this::registerRenderers);
-        modEventBus.addListener(this::registerLayerDefinitions);
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(this::registerEntityAttributes);
         
-        // Register client-side color handlers
-        modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
+        // Register client-side events only if on client
+        if (FMLEnvironment.dist.isClient()) {
+            modEventBus.addListener(this::setupClient);
+            modEventBus.addListener(this::registerScreens);
+            modEventBus.addListener(this::registerRenderers);
+            modEventBus.addListener(this::registerLayerDefinitions);
+            modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
+            modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerItemColors);
+            modEventBus.addListener(lumien.randomthings.client.ClientModEvents::onClientSetup);
+        }
 
         // Register game events
         // Note: Event handlers are registered as listeners below, not as class instance
@@ -140,64 +133,19 @@ public class RandomThings {
 
     private void setupClient(final FMLClientSetupEvent event) {
         LOGGER.info("DEBUG: setupClient called");
-        event.enqueueWork(() -> {
-            // Client-side initialization
-            
-            // Register render layers for transparent blocks
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_ROSE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOTUS.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.PITCHER_PLANT.get(), RenderType.cutout());
-            
-            // Bean System blocks need cutout rendering
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BEANSPROUT.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BEANSTALK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECIALBEANSTALK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BEANPOD.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_REDSTONE_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ADVANCED_WALL_REDSTONE_TORCH.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.RAIN_SHIELD.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOCK_OF_STICKS_RETURNING.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BIOME_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIAPHANOUS_BLOCK.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.FLUID_DISPLAY.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
-        });
-
-        // Register client events manually
-        LOGGER.info("DEBUG: Registering client events manually");
-        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onRenderLevelStage);
-        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onClientTick);
-        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.RainShieldClientEvents::onPlaySound);
-        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.RainShieldClientEvents::onClientTick);
-        
-        // Light Redirector client events removed - no longer using texture swapping approach
+        lumien.randomthings.client.ClientProxy.setupClient(event);
     }
 
     private void registerScreens(final RegisterMenuScreensEvent event) {
-        ModScreens.register(event);
+        lumien.randomthings.client.ClientProxy.registerScreens(event);
     }
 
     private void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        // Block entity renderers
-        event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntityTypes.FLUID_DISPLAY.get(), FluidDisplayBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntityTypes.LIGHT_REDIRECTOR.get(), LightRedirectorRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntityTypes.PLANT_CHEST.get(), context -> {
-            lumien.randomthings.client.renderer.PlantChestRenderer renderer = new lumien.randomthings.client.renderer.PlantChestRenderer(context);
-            lumien.randomthings.client.renderer.PlantChestItemRenderer.setRenderer(renderer);
-            return renderer;
-        });
-        
-        // Entity renderers
-        event.registerEntityRenderer(ModEntityTypes.ECLIPSED_CLOCK.get(), EclipsedClockRenderer::new);
-        event.registerEntityRenderer(ModEntityTypes.TIME_ACCELERATOR.get(), TimeAcceleratorRenderer::new);
-        event.registerEntityRenderer(ModEntityTypes.SPIRIT.get(), lumien.randomthings.client.renderer.SpiritRenderer::new);
+        lumien.randomthings.client.ClientProxy.registerRenderers(event);
     }
     
     private void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(lumien.randomthings.client.renderer.PlantChestRenderer.PLANT_CHEST_LAYER, 
-            lumien.randomthings.client.model.PlantChestModel::createLayerDefinition);
+        lumien.randomthings.client.ClientProxy.registerLayerDefinitions(event);
     }
 
     private void registerCapabilities(final RegisterCapabilitiesEvent event) {
