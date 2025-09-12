@@ -52,4 +52,19 @@ public class ModDataComponents {
                 .persistent(ChunkAnalyzerResult.CODEC)
                 .build());
                 
+    public static final Supplier<DataComponentType<Integer>> TARGET_TIME = 
+        DATA_COMPONENTS.register("target_time", 
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+                
+    public static final Supplier<DataComponentType<Integer>> STORED_TIME = 
+        DATA_COMPONENTS.register("stored_time", 
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+                
+                
 }

@@ -1,0 +1,301 @@
+package lumien.randomthings.client.renderer;
+
+import java.awt.Color;
+import java.util.Random;
+
+import lumien.randomthings.client.render.magiccircles.ColorFunctions;
+import lumien.randomthings.client.render.magiccircles.IColorFunction;
+import lumien.randomthings.client.render.magiccircles.ITriangleFunction;
+import lumien.randomthings.client.util.ColorUtil;
+import lumien.randomthings.client.util.MKRRenderUtil;
+import lumien.randomthings.client.util.RenderUtils;
+import lumien.randomthings.entity.TimeAcceleratorEntity;
+import lumien.randomthings.event.RTEventHandler;
+import com.mojang.blaze3d.vertex.PoseStack;
+
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+
+@OnlyIn(Dist.CLIENT)
+public class TimeAcceleratorRenderer extends EntityRenderer<TimeAcceleratorEntity> {
+    
+    public TimeAcceleratorRenderer(EntityRendererProvider.Context context) {
+        super(context);
+    }
+    
+    @Override
+    public void render(TimeAcceleratorEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);
+        
+        // Only render if the entity has an acceleration rate > 1
+        int timeRate = entity.getTimeRate();
+        System.out.println("[TimeAcceleratorRenderer] Rendering entity with timeRate: " + timeRate + " at pos: " + entity.position());
+        
+        if (timeRate <= 1) {
+            System.out.println("[TimeAcceleratorRenderer] TimeRate <= 1, skipping render");
+            return;
+        }
+        
+        poseStack.pushPose();
+        
+        // Move rendering up so it's visible above ground level
+        poseStack.translate(0, 1.0, 0);
+        
+        // Set up rendering state
+        RenderUtils.enableDefaultBlending();
+        MKRRenderUtil.setRenderContext(poseStack, bufferSource);
+        
+        // Calculate progress for animation
+        float progress = (2) * (RTEventHandler.clientAnimationCounter + partialTicks);
+        System.out.println("[TimeAcceleratorRenderer] Progress: " + progress + " (counter: " + RTEventHandler.clientAnimationCounter + ", partialTicks: " + partialTicks + ")");
+        
+        // Render different levels of complexity based on time rate
+        if (timeRate >= 2) {
+            System.out.println("[TimeAcceleratorRenderer] Calling renderLevel1");
+            renderLevel1(progress);
+        }
+        if (timeRate >= 4) {
+            renderLevel2(progress);
+        }
+        if (timeRate >= 8) {
+            renderLevel3(progress);
+        }
+        if (timeRate >= 16) {
+            renderLevel4(progress);
+        }
+        if (timeRate >= 32) {
+            renderLevel5(progress);
+        }
+        if (timeRate >= 64) {
+            renderLevel6(progress);
+        }
+        if (timeRate >= 128) {
+            renderLevel7(progress);
+        }
+        if (timeRate >= 256) {
+            renderLevel8(progress);
+        }
+        if (timeRate >= 512) {
+            renderLevel9(progress);
+        }
+        if (timeRate >= 1024) {
+            renderLevel10(progress);
+        }
+        
+        poseStack.popPose();
+    }
+    
+    private void renderLevel1(float progress) {
+        ITriangleFunction innerFunction = getInnerFunction(progress);
+        MKRRenderUtil.renderCircleDecTriInner(0.05, innerFunction, 33, (i) -> 3);  // Restored original radius
+    }
+    
+    private void renderLevel2(float progress) {
+        ITriangleFunction outerFunction = getOuterFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPart3Tri(0.07, 0.11, outerFunction, 30);
+    }
+    
+    private void renderLevel3(float progress) {
+        ITriangleFunction midFunction = getMidFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPart3Tri(0.13, 0.17, midFunction, 30);
+    }
+    
+    private void renderLevel4(float progress) {
+        ITriangleFunction complexFunction = getComplexFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPart5Tri(0.19, 0.25, complexFunction, 50);
+    }
+    
+    private void renderLevel5(float progress) {
+        ITriangleFunction advancedFunction = getAdvancedFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPartCross(0.27, 0.33, advancedFunction, 60);
+    }
+    
+    private void renderLevel6(float progress) {
+        ITriangleFunction ultraFunction = getUltraFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPart5Tri(0.35, 0.43, ultraFunction, 50, 0, 5);
+        MKRRenderUtil.renderCircleDecTriPart5Tri(0.35, 0.43, ultraFunction, 50, 5, 10);
+    }
+    
+    private void renderLevel7(float progress) {
+        ITriangleFunction extremeFunction = getExtremeFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPart3Tri(0.45, 0.53, extremeFunction, 30, 0, 3);
+        MKRRenderUtil.renderCircleDecTriPart3Tri(0.45, 0.53, extremeFunction, 30, 3, 6);
+        MKRRenderUtil.renderCircleDecTriPart3Tri(0.45, 0.53, extremeFunction, 30, 6, 9);
+        MKRRenderUtil.renderCircleDecTriPart3Tri(0.45, 0.53, extremeFunction, 30, 9, 10);
+    }
+    
+    private void renderLevel8(float progress) {
+        ITriangleFunction insaneFunction = getInsaneFunction(progress);
+        MKRRenderUtil.renderCircleDecTriPartCross(0.55, 0.65, insaneFunction, 60);
+        MKRRenderUtil.renderCircleDecTriInner(0.03, insaneFunction, 11, (i) -> i % 3 + 1);
+    }
+    
+    private void renderLevel9(float progress) {
+        ITriangleFunction godlikeFunction = getGodlikeFunction(progress);
+        for (int layer = 0; layer < 3; layer++) {
+            double radius1 = 0.67 + (layer * 0.08);
+            double radius2 = 0.73 + (layer * 0.08);
+            float layerProgress = progress + (layer * 45);
+            MKRRenderUtil.renderCircleDecTriPart5Tri(radius1, radius2, godlikeFunction, 50, layer * 2, (layer + 1) * 2 + 4);
+        }
+    }
+    
+    private void renderLevel10(float progress) {
+        ITriangleFunction ultimateFunction = getUltimateFunction(progress);
+        // Render multiple overlapping patterns
+        for (int pattern = 0; pattern < 5; pattern++) {
+            double baseRadius = 0.95 + (pattern * 0.05);
+            float patternProgress = progress + (pattern * 72);
+            
+            if (pattern % 2 == 0) {
+                MKRRenderUtil.renderCircleDecTriPartCross(baseRadius, baseRadius + 0.08, ultimateFunction, 60);
+            } else {
+                MKRRenderUtil.renderCircleDecTriPart5Tri(baseRadius, baseRadius + 0.08, ultimateFunction, 50);
+            }
+        }
+    }
+    
+    private ITriangleFunction getInnerFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.flicker(1337, 3).next(
+            ColorFunctions.alternateN(2, ColorFunctions.constant(Color.CYAN), ColorFunctions.constant(Color.BLUE))
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getOuterFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.alternateN(3, 
+            ColorFunctions.constant(Color.GREEN),
+            ColorFunctions.constant(Color.YELLOW),
+            ColorFunctions.flicker(2021, 5).next(ColorFunctions.constant(Color.ORANGE))
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getMidFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.flicker(999, 2).next(
+            ColorFunctions.alternateN(4, 
+                ColorFunctions.constant(Color.RED),
+                ColorFunctions.constant(Color.PINK),
+                ColorFunctions.constant(Color.MAGENTA),
+                ColorFunctions.constant(new Color(128, 0, 128)) // Purple
+            )
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getComplexFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.alternateN(5,
+            ColorFunctions.flicker(1111, 4).next(ColorFunctions.constant(Color.CYAN)),
+            ColorFunctions.constant(Color.WHITE),
+            ColorFunctions.flicker(2222, 3).next(ColorFunctions.constant(Color.YELLOW)),
+            ColorFunctions.constant(Color.LIGHT_GRAY),
+            ColorFunctions.flicker(3333, 2).next(ColorFunctions.constant(Color.GREEN))
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getAdvancedFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.flicker(4444, 1).next(
+            ColorFunctions.alternateN(6,
+                ColorFunctions.constant(Color.RED),
+                ColorFunctions.constant(Color.ORANGE),
+                ColorFunctions.constant(Color.YELLOW),
+                ColorFunctions.constant(Color.GREEN),
+                ColorFunctions.constant(Color.BLUE),
+                ColorFunctions.constant(Color.MAGENTA)
+            )
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getUltraFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.alternateN(8,
+            ColorFunctions.flicker(5555, 2).next(ColorFunctions.constant(new Color(255, 100, 100))),
+            ColorFunctions.constant(new Color(255, 200, 100)),
+            ColorFunctions.flicker(6666, 3).next(ColorFunctions.constant(new Color(255, 255, 100))),
+            ColorFunctions.constant(new Color(200, 255, 100)),
+            ColorFunctions.flicker(7777, 1).next(ColorFunctions.constant(new Color(100, 255, 100))),
+            ColorFunctions.constant(new Color(100, 255, 200)),
+            ColorFunctions.flicker(8888, 4).next(ColorFunctions.constant(new Color(100, 200, 255))),
+            ColorFunctions.constant(new Color(200, 100, 255))
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getExtremeFunction(float progress) {
+        Random rng = new Random((long)(progress / 10));
+        Color randomBase = new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+        IColorFunction colorFunc = ColorFunctions.flicker(9999, 1).next(
+            ColorFunctions.limit(randomBase, 50)
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, randomBase);
+    }
+    
+    private ITriangleFunction getInsaneFunction(float progress) {
+        IColorFunction colorFunc = ColorFunctions.alternateN(12,
+            ColorFunctions.flicker(1001, 1).next(ColorFunctions.constant(Color.RED)),
+            ColorFunctions.flicker(1002, 1).next(ColorFunctions.constant(Color.ORANGE)),
+            ColorFunctions.flicker(1003, 1).next(ColorFunctions.constant(Color.YELLOW)),
+            ColorFunctions.flicker(1004, 1).next(ColorFunctions.constant(Color.GREEN)),
+            ColorFunctions.flicker(1005, 1).next(ColorFunctions.constant(Color.CYAN)),
+            ColorFunctions.flicker(1006, 1).next(ColorFunctions.constant(Color.BLUE)),
+            ColorFunctions.flicker(1007, 1).next(ColorFunctions.constant(Color.MAGENTA)),
+            ColorFunctions.flicker(1008, 1).next(ColorFunctions.constant(Color.PINK)),
+            ColorFunctions.flicker(1009, 1).next(ColorFunctions.constant(Color.WHITE)),
+            ColorFunctions.flicker(1010, 1).next(ColorFunctions.constant(Color.LIGHT_GRAY)),
+            ColorFunctions.flicker(1011, 1).next(ColorFunctions.constant(Color.GRAY)),
+            ColorFunctions.flicker(1012, 1).next(ColorFunctions.constant(Color.BLACK))
+        );
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getGodlikeFunction(float progress) {
+        // Create rainbow effect with intense flickering
+        IColorFunction colorFunc = (p, t, c) -> {
+            float hue = ((p + t * 10) % 360) / 360.0f;
+            Color rainbow = Color.getHSBColor(hue, 1.0f, 1.0f);
+            
+            // Add intense flickering
+            Random rng = new Random((long)(t * t + p));
+            if (rng.nextInt(2) == 0) {
+                rainbow = ColorUtil.brighter(rainbow, 50f);
+            }
+            
+            return rainbow;
+        };
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    private ITriangleFunction getUltimateFunction(float progress) {
+        // Ultra-complex function with multiple effects
+        IColorFunction colorFunc = (p, t, c) -> {
+            // Base rainbow
+            float hue = ((p * 2 + t * 15) % 360) / 360.0f;
+            float saturation = 0.8f + 0.2f * (float)Math.sin((p + t) / 5.0);
+            float brightness = 0.9f + 0.1f * (float)Math.cos((p + t) / 3.0);
+            Color base = Color.getHSBColor(hue, saturation, brightness);
+            
+            // Add pulsing effect
+            float pulse = (float)Math.sin(p / 10.0) * 0.5f + 0.5f;
+            base = ColorUtil.interpolate(base, Color.WHITE, pulse * 0.3f);
+            
+            // Add random flicker
+            Random rng = new Random((long)(t * t * t + p / 2));
+            if (rng.nextInt(3) == 0) {
+                base = ColorUtil.brighter(base, 30f + rng.nextFloat() * 20f);
+            }
+            
+            return base;
+        };
+        return (triangle) -> colorFunc.apply(progress, triangle, Color.WHITE);
+    }
+    
+    @Override
+    public ResourceLocation getTextureLocation(TimeAcceleratorEntity entity) {
+        return null; // No texture needed for this renderer
+    }
+}

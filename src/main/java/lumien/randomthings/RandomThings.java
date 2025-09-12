@@ -8,12 +8,15 @@ import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.command.BeanDebugCommand;
 import lumien.randomthings.event.RTEventHandler;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
+import lumien.randomthings.client.renderer.EclipsedClockRenderer;
+import lumien.randomthings.client.renderer.TimeAcceleratorRenderer;
 import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
 import lumien.randomthings.client.renderer.LightRedirectorRenderer;
 import lumien.randomthings.client.screen.ModScreens;
 import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ModDataComponents;
+import lumien.randomthings.entity.ModEntityTypes;
 import lumien.randomthings.loot.ModLootModifiers;
 import lumien.randomthings.recipe.ModRecipeSerializers;
 import lumien.randomthings.lib.ModConstants;
@@ -68,6 +71,7 @@ public class RandomThings {
         ModItems.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ModMenuTypes.MENU_TYPES.register(modEventBus);
+        ModEntityTypes.ENTITY_TYPES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
         ModStructureProcessors.STRUCTURE_PROCESSORS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
@@ -166,6 +170,7 @@ public class RandomThings {
     }
 
     private void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        // Block entity renderers
         event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.FLUID_DISPLAY.get(), FluidDisplayBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.LIGHT_REDIRECTOR.get(), LightRedirectorRenderer::new);
@@ -174,6 +179,10 @@ public class RandomThings {
             lumien.randomthings.client.renderer.PlantChestItemRenderer.setRenderer(renderer);
             return renderer;
         });
+        
+        // Entity renderers
+        event.registerEntityRenderer(ModEntityTypes.ECLIPSED_CLOCK.get(), EclipsedClockRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.TIME_ACCELERATOR.get(), TimeAcceleratorRenderer::new);
     }
     
     private void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {

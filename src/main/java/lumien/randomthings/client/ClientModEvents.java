@@ -6,8 +6,11 @@ import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.client.RedstoneInterfaceRenderer;
 import lumien.randomthings.item.BiomeCrystalItem;
+import lumien.randomthings.item.EclipsedClockItem;
+import lumien.randomthings.item.TimeInABottleItem;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.BiomeColorUtils;
+import lumien.randomthings.event.RTEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +23,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -120,6 +125,8 @@ public class ClientModEvents {
     public static void onClientTick(ClientTickEvent.Post event) {
         DiviningRodRenderer.get().tick();
         DiaphanousBlockRenderer.tick();
+        // Call RTEventHandler to increment clientAnimationCounter for Time Accelerator rotation
+        RTEventHandler.onClientTick(event);
     }
     
     @SubscribeEvent
@@ -133,6 +140,12 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_CUBE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
             
+            // Register item properties
+            ItemProperties.register(ModItems.ECLIPSED_CLOCK.get(), ResourceLocation.parse("randomthings:time"), 
+                EclipsedClockItem.getTimePropertyFunction());
+                
+            ItemProperties.register(ModItems.TIME_IN_A_BOTTLE.get(), ResourceLocation.parse("randomthings:fill_level"), 
+                (stack, level, entity, id) -> TimeInABottleItem.getFillLevel(stack));
         });
     }
 }

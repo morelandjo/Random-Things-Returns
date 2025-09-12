@@ -204,6 +204,12 @@ public class ModItems {
         
     public static final Supplier<Item> CHUNK_ANALYZER = ITEMS.register("chunk_analyzer",
         () -> new ChunkAnalyzerItem(new Item.Properties()));
+        
+    public static final Supplier<Item> ECLIPSED_CLOCK = ITEMS.register("eclipsed_clock",
+        () -> new EclipsedClockItem(new Item.Properties()));
+        
+    public static final Supplier<Item> TIME_IN_A_BOTTLE = ITEMS.register("time_in_a_bottle",
+        () -> new TimeInABottleItem(new Item.Properties()));
 
     // Ender Bridge System
     public static final Supplier<Item> STABLE_ENDERPEARL = ITEMS.register("stable_enderpearl",
@@ -466,6 +472,8 @@ public class ModItems {
             output.accept(DIVINING_ROD_VANILLA.get());
             output.accept(BLAZE_AND_STEEL.get());
             output.accept(CHUNK_ANALYZER.get());
+            output.accept(ECLIPSED_CLOCK.get());
+            output.accept(TIME_IN_A_BOTTLE.get());
             // Ender Bridge System
             output.accept(STABLE_ENDERPEARL.get());
             output.accept(ENDER_ANCHOR.get());

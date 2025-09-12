@@ -10,8 +10,16 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 public class RTEventHandler {
+    
+    public static int clientAnimationCounter;
+    
+    @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event) {
+        clientAnimationCounter++;
+    }
     
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {

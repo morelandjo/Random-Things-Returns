@@ -82,6 +82,11 @@
   "item.randomthings.stable_enderpearl": "Stable Enderpearl",
   "item.randomthings.blaze_and_steel": "Blaze and Steel",
   "item.randomthings.chunk_analyzer": "Chunk Analyzer",
+  "item.randomthings.eclipsed_clock": "Eclipsed Clock",
+  "item.randomthings.time_in_a_bottle": "Time in a Bottle",
+  
+  "entity.randomthings.eclipsed_clock": "Eclipsed Clock",
+  "entity.randomthings.time_accelerator": "Time Accelerator",
   
   "block.randomthings.blazing_fire": "Blazing Fire",
   
@@ -261,6 +266,15 @@
   "tooltip.randomthings.luminous_stained_brick": "Colored bricks that glow in the dark",
   "tooltip.randomthings.blaze_and_steel": "The Fire created by this item burns and spreads significantly faster than vanilla fire",
   "tooltip.randomthings.chunk_analyzer": "The Chunk Analyzer allows you to check what blocks a chunk contains. Open its gui and press Scan. After a few seconds you will get the results for the chunk you are in.",
+  "tooltip.randomthings.eclipsed_clock": "An eclipsed clock allows you to change the time of day. After you hang it on a wall you can (shift) right click it to decrease and increase its target time.",
+  "tooltip.randomthings.time_in_a_bottle": "Passively collects time while in your inventory. Right-click on blocks to accelerate their tick rate. Can be used with Eclipsed Clocks for instant time manipulation.",
+  "item.randomthings.time_in_a_bottle.stored_time": "Stored Time: %d seconds",
+  "item.randomthings.time_in_a_bottle.acceleration": "Acceleration: %s",
+  "item.randomthings.time_in_a_bottle.required_time": "Next Level: %d seconds required",
+  "item.randomthings.time_in_a_bottle.max_level": "Maximum Acceleration Reached",
+  "item.randomthings.time_in_a_bottle.insufficient_time": "Not enough stored time!",
+  "item.randomthings.time_in_a_bottle.insufficient_time_for_clock": "Not enough time stored to set the clock!",
+  "tooltip.timeInABottle": "Time: %d:%02d:%02d",
   "gui.chunk_analyzer.results": "Chunk contains %d different block types",
   "item.randomthings.chunk_analyzer.results": "Scanned results: %d block types"
 }
