@@ -66,5 +66,18 @@ public class ModDataComponents {
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                 .build());
                 
+    public static final Supplier<DataComponentType<Integer>> COMPASS_TARGET_X = 
+        DATA_COMPONENTS.register("compass_target_x", 
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+                
+    public static final Supplier<DataComponentType<Integer>> COMPASS_TARGET_Z = 
+        DATA_COMPONENTS.register("compass_target_z", 
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
                 
 }

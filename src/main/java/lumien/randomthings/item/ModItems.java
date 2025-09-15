@@ -205,6 +205,9 @@ public class ModItems {
         () -> new DiviningRodItem(new Item.Properties(), getAllColors(), getAllTags()));
 
     // Tools
+    public static final Supplier<Item> EMERALD_COMPASS = ITEMS.register("emerald_compass",
+        () -> new EmeraldCompassItem(new Item.Properties()));
+        
     public static final Supplier<Item> BLAZE_AND_STEEL = ITEMS.register("blaze_and_steel",
         () -> new BlazeAndSteelItem(new Item.Properties()));
         
@@ -478,6 +481,7 @@ public class ModItems {
             output.accept(DIVINING_ROD_EMERALD.get());
             output.accept(DIVINING_ROD_DIAMOND.get());
             output.accept(DIVINING_ROD_VANILLA.get());
+            output.accept(EMERALD_COMPASS.get());
             output.accept(BLAZE_AND_STEEL.get());
             output.accept(CHUNK_ANALYZER.get());
             output.accept(ECLIPSED_CLOCK.get());
