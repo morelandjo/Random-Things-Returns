@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    "OBO",
+    " E "
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "B": {
+      "item": "randomthings:ender_bucket"
+    },
+    "E": {
+      "item": "randomthings:stable_ender_pearl"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:reinforced_ender_bucket"
+  }
+}

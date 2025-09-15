@@ -67,6 +67,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntityTypes.ECLIPSED_CLOCK.get(), EclipsedClockRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.TIME_ACCELERATOR.get(), TimeAcceleratorRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SPIRIT.get(), lumien.randomthings.client.renderer.SpiritRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.STABLE_ENDER_PEARL.get(), net.minecraft.client.renderer.entity.ItemEntityRenderer::new);
     }
     
     public static void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {

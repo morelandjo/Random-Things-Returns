@@ -73,11 +73,18 @@ public class ModDataComponents {
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                 .build());
                 
-    public static final Supplier<DataComponentType<Integer>> COMPASS_TARGET_Z = 
-        DATA_COMPONENTS.register("compass_target_z", 
+    public static final Supplier<DataComponentType<Integer>> COMPASS_TARGET_Z =
+        DATA_COMPONENTS.register("compass_target_z",
             () -> DataComponentType.<Integer>builder()
                 .persistent(Codec.INT)
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                 .build());
-                
+
+    public static final Supplier<DataComponentType<net.neoforged.neoforge.fluids.SimpleFluidContent>> FLUID_CONTENT =
+        DATA_COMPONENTS.register("fluid_content",
+            () -> DataComponentType.<net.neoforged.neoforge.fluids.SimpleFluidContent>builder()
+                .persistent(net.neoforged.neoforge.fluids.SimpleFluidContent.CODEC)
+                .networkSynchronized(net.neoforged.neoforge.fluids.SimpleFluidContent.STREAM_CODEC)
+                .build());
+
 }

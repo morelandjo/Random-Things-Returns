@@ -34,4 +34,12 @@ public class ModEntityTypes {
             .updateInterval(3)
             .build("spirit")
     );
+
+    public static final Supplier<EntityType<StableEnderPearlEntity>> STABLE_ENDER_PEARL = ENTITY_TYPES.register("stable_ender_pearl",
+        () -> EntityType.Builder.<StableEnderPearlEntity>of(StableEnderPearlEntity::new, MobCategory.MISC)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(6)
+            .updateInterval(20)
+            .build("stable_ender_pearl")
+    );
 }

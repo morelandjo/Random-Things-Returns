@@ -154,6 +154,19 @@ public class RandomThings {
             ModBlockEntityTypes.PLAYER_INTERFACE.get(),
             (playerInterface, side) -> playerInterface.getItemHandler(side)
         );
+
+        // Register fluid handler capabilities for ender buckets
+        event.registerItem(
+            Capabilities.FluidHandler.ITEM,
+            (stack, ctx) -> new net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack(ModDataComponents.FLUID_CONTENT, stack, 1000),
+            ModItems.ENDER_BUCKET.get()
+        );
+
+        event.registerItem(
+            Capabilities.FluidHandler.ITEM,
+            (stack, ctx) -> new net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack(ModDataComponents.FLUID_CONTENT, stack, 10000),
+            ModItems.REINFORCED_ENDER_BUCKET.get()
+        );
     }
 
     private void registerCommands(RegisterCommandsEvent event) {

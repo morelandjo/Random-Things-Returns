@@ -282,5 +282,16 @@
   "item.randomthings.spectre_ingot": "Spectre Ingot",
   "entity.randomthings.spirit": "Spirit",
   "tooltip.randomthings.ectoplasm": "A spiritual essence dropped by spirits. Used to craft spectre ingots.",
-  "tooltip.randomthings.spectre_ingot": "A spectral ingot crafted from ectoplasm, gold, and lapis lazuli."
+  "tooltip.randomthings.spectre_ingot": "A spectral ingot crafted from ectoplasm, gold, and lapis lazuli.",
+  "item.randomthings.stable_ender_pearl": "Stable Ender Pearl",
+  "item.randomthings.stable_ender_pearl.bound.name": "Bound Stable Ender Pearl",
+  "item.randomthings.stable_ender_pearl.info": "Right click to bind to yourself",
+  "item.randomthings.stable_ender_pearl.bound.info": "Will teleport you when dropped (7 seconds)",
+  "item.randomthings.stable_ender_pearl.bound": "Ender Pearl bound to you!",
+  "item.randomthings.ender_bucket": "Ender Bucket",
+  "item.randomthings.ender_bucket.filled.name": "%s Ender Bucket",
+  "item.randomthings.ender_bucket.info": "An Ender Bucket works mostly like a normal Iron Bucket. However when you right click a non source block it will try to find the closest connected source block and pick that up instead of doing nothing.",
+  "item.randomthings.reinforced_ender_bucket": "Reinforced Ender Bucket",
+  "item.randomthings.reinforced_ender_bucket.filled.name": "%s Reinforced Ender Bucket",
+  "item.randomthings.reinforced_ender_bucket.info": "A Reinforced Ender Bucket works like an Ender Bucket but it can hold 10 Buckets of Fluid instead of just one. Also when you hold shift while picking up fluids it won't stop after it finds one source block but will keep going until it is either full or there is no fluid left."
 }

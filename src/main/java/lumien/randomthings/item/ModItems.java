@@ -221,8 +221,15 @@ public class ModItems {
         () -> new TimeInABottleItem(new Item.Properties()));
 
     // Ender Bridge System
-    public static final Supplier<Item> STABLE_ENDERPEARL = ITEMS.register("stable_enderpearl",
-        () -> new StableEnderpearl());
+    public static final Supplier<Item> STABLE_ENDER_PEARL = ITEMS.register("stable_ender_pearl",
+        () -> new StableEnderPearlItem());
+
+    // Ender Buckets
+    public static final Supplier<Item> ENDER_BUCKET = ITEMS.register("ender_bucket",
+        () -> new EnderBucketItem());
+
+    public static final Supplier<Item> REINFORCED_ENDER_BUCKET = ITEMS.register("reinforced_ender_bucket",
+        () -> new ReinforcedEnderBucketItem());
 
     public static final Supplier<Item> ENDER_ANCHOR = ITEMS.register("ender_anchor",
         () -> new BlockItem(ModBlocks.ENDER_ANCHOR.get(), new Item.Properties()));
@@ -487,7 +494,9 @@ public class ModItems {
             output.accept(ECLIPSED_CLOCK.get());
             output.accept(TIME_IN_A_BOTTLE.get());
             // Ender Bridge System
-            output.accept(STABLE_ENDERPEARL.get());
+            output.accept(STABLE_ENDER_PEARL.get());
+            output.accept(ENDER_BUCKET.get());
+            output.accept(REINFORCED_ENDER_BUCKET.get());
             output.accept(ENDER_ANCHOR.get());
             output.accept(ENDER_BRIDGE.get());
             output.accept(PRISMARINE_ENDER_BRIDGE.get());
