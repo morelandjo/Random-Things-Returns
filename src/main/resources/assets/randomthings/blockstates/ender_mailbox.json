@@ -1,0 +1,13 @@
+{
+    "variants": 
+    {
+        "active=false,facing=north": { "model": "randomthings:block/ender_mailbox_idle" },
+        "active=true,facing=north": { "model": "randomthings:block/ender_mailbox_active" },
+        "active=false,facing=south": { "model": "randomthings:block/ender_mailbox_idle", "y": 180},
+        "active=true,facing=south": { "model": "randomthings:block/ender_mailbox_active", "y": 180},
+        "active=false,facing=west": { "model": "randomthings:block/ender_mailbox_idle", "y": 270},
+        "active=true,facing=west": { "model": "randomthings:block/ender_mailbox_active", "y": 270},
+        "active=false,facing=east": { "model": "randomthings:block/ender_mailbox_idle", "y": 90},
+        "active=true,facing=east": { "model": "randomthings:block/ender_mailbox_active", "y": 90}
+    }
+}

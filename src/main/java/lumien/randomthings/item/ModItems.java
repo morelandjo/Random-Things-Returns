@@ -231,11 +231,17 @@ public class ModItems {
     public static final Supplier<Item> REINFORCED_ENDER_BUCKET = ITEMS.register("reinforced_ender_bucket",
         () -> new ReinforcedEnderBucketItem());
 
+    public static final Supplier<Item> ENDER_LETTER = ITEMS.register("ender_letter",
+        () -> new EnderLetterItem(new Item.Properties()));
+
     public static final Supplier<Item> ENDER_ANCHOR = ITEMS.register("ender_anchor",
         () -> new BlockItem(ModBlocks.ENDER_ANCHOR.get(), new Item.Properties()));
 
     public static final Supplier<Item> ENDER_BRIDGE = ITEMS.register("ender_bridge",
         () -> new BlockItem(ModBlocks.ENDER_BRIDGE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> ENDER_MAILBOX = ITEMS.register("ender_mailbox",
+        () -> new BlockItem(ModBlocks.ENDER_MAILBOX.get(), new Item.Properties()));
 
     public static final Supplier<Item> PRISMARINE_ENDER_BRIDGE = ITEMS.register("prismarine_ender_bridge",
         () -> new BlockItem(ModBlocks.PRISMARINE_ENDER_BRIDGE.get(), new Item.Properties()));
@@ -497,6 +503,8 @@ public class ModItems {
             output.accept(STABLE_ENDER_PEARL.get());
             output.accept(ENDER_BUCKET.get());
             output.accept(REINFORCED_ENDER_BUCKET.get());
+            output.accept(ENDER_LETTER.get());
+            output.accept(ENDER_MAILBOX.get());
             output.accept(ENDER_ANCHOR.get());
             output.accept(ENDER_BRIDGE.get());
             output.accept(PRISMARINE_ENDER_BRIDGE.get());

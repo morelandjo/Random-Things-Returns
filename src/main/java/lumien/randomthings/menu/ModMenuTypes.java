@@ -81,12 +81,25 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> 
                 new NotificationInterfaceMenu(windowId, inventory, ContainerLevelAccess.create(inventory.player.level(), data.readBlockPos()))));
 
-    public static final Supplier<MenuType<ChunkAnalyzerMenu>> CHUNK_ANALYZER = 
-        MENU_TYPES.register("chunk_analyzer", 
+    public static final Supplier<MenuType<ChunkAnalyzerMenu>> CHUNK_ANALYZER =
+        MENU_TYPES.register("chunk_analyzer",
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
                 // For item-based menus, we need to get the held item
                 var heldItem = inventory.player.getMainHandItem();
                 return new ChunkAnalyzerMenu(windowId, inventory, heldItem);
             }));
+
+    public static final Supplier<MenuType<EnderLetterMenu>> ENDER_LETTER =
+        MENU_TYPES.register("ender_letter",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                // For item-based menus, we need to get the held item
+                var heldItem = inventory.player.getMainHandItem();
+                return new EnderLetterMenu(windowId, inventory, heldItem);
+            }));
+
+    public static final Supplier<MenuType<EnderMailboxMenu>> ENDER_MAILBOX =
+        MENU_TYPES.register("ender_mailbox",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) ->
+                new EnderMailboxMenu(windowId, inventory, data.readBlockPos())));
 
 }

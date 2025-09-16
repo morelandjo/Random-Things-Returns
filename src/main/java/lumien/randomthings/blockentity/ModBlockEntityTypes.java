@@ -98,10 +98,15 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(EnderBridgeBlockEntity::new, 
                 ModBlocks.ENDER_BRIDGE.get()).build(null));
 
-    public static final Supplier<BlockEntityType<PrismarineEnderBridgeBlockEntity>> PRISMARINE_ENDER_BRIDGE = 
-        BLOCK_ENTITY_TYPES.register("prismarine_ender_bridge", 
-            () -> BlockEntityType.Builder.of(PrismarineEnderBridgeBlockEntity::new, 
+    public static final Supplier<BlockEntityType<PrismarineEnderBridgeBlockEntity>> PRISMARINE_ENDER_BRIDGE =
+        BLOCK_ENTITY_TYPES.register("prismarine_ender_bridge",
+            () -> BlockEntityType.Builder.of(PrismarineEnderBridgeBlockEntity::new,
                 ModBlocks.PRISMARINE_ENDER_BRIDGE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<EnderMailboxBlockEntity>> ENDER_MAILBOX =
+        BLOCK_ENTITY_TYPES.register("ender_mailbox",
+            () -> BlockEntityType.Builder.of(EnderMailboxBlockEntity::new,
+                ModBlocks.ENDER_MAILBOX.get()).build(null));
                 
     public static final Supplier<BlockEntityType<FluidDisplayBlockEntity>> FLUID_DISPLAY = 
         BLOCK_ENTITY_TYPES.register("fluid_display", 

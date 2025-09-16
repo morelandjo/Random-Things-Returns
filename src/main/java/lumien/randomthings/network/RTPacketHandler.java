@@ -44,8 +44,10 @@ public class RTPacketHandler {
             (message, context) -> MessageNotification.handle(message, context));
         registrar.playToServer(ChunkAnalyzerPacket.TYPE, ChunkAnalyzerPacket.STREAM_CODEC, 
             (message, context) -> ChunkAnalyzerPacket.handle(message, context));
-        registrar.playToClient(ChunkAnalyzerResultPacket.TYPE, ChunkAnalyzerResultPacket.STREAM_CODEC, 
+        registrar.playToClient(ChunkAnalyzerResultPacket.TYPE, ChunkAnalyzerResultPacket.STREAM_CODEC,
             (message, context) -> ChunkAnalyzerResultPacket.handle(message, context));
+        registrar.playToServer(EnderLetterUpdatePacket.TYPE, EnderLetterUpdatePacket.STREAM_CODEC,
+            (message, context) -> EnderLetterUpdatePacket.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {
@@ -64,5 +66,9 @@ public class RTPacketHandler {
     
     public static void sendToPlayer(ChunkAnalyzerResultPacket message, ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, message);
+    }
+
+    public static void sendToServer(EnderLetterUpdatePacket message) {
+        PacketDistributor.sendToServer(message);
     }
 }

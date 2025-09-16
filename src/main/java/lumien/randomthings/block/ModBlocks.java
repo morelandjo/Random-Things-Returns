@@ -217,7 +217,14 @@ public class ModBlocks {
     public static final Supplier<Block> TRIGGER_GLASS = BLOCKS.register("trigger_glass", 
         () -> new TriggerGlassBlock());
 
-    public static final Supplier<Block> QUARTZ_LAMP = BLOCKS.register("quartz_lamp", 
+    public static final Supplier<Block> QUARTZ_LAMP = BLOCKS.register("quartz_lamp",
         () -> new QuartzLampBlock());
+
+    public static final Supplier<Block> ENDER_MAILBOX = BLOCKS.register("ender_mailbox",
+        () -> new EnderMailboxBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.METAL)));
 
 }

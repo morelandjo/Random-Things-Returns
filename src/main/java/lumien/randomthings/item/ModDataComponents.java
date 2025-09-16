@@ -87,4 +87,25 @@ public class ModDataComponents {
                 .networkSynchronized(net.neoforged.neoforge.fluids.SimpleFluidContent.STREAM_CODEC)
                 .build());
 
+    public static final Supplier<DataComponentType<String>> SENDER_NAME =
+        DATA_COMPONENTS.register("sender_name",
+            () -> DataComponentType.<String>builder()
+                .persistent(Codec.STRING)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8)
+                .build());
+
+    public static final Supplier<DataComponentType<String>> RECEIVER_NAME =
+        DATA_COMPONENTS.register("receiver_name",
+            () -> DataComponentType.<String>builder()
+                .persistent(Codec.STRING)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8)
+                .build());
+
+    public static final Supplier<DataComponentType<Boolean>> ENDER_LETTER_SIGNED =
+        DATA_COMPONENTS.register("ender_letter_signed",
+            () -> DataComponentType.<Boolean>builder()
+                .persistent(Codec.BOOL)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                .build());
+
 }

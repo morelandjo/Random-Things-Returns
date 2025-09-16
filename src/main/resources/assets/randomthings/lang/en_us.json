@@ -293,5 +293,17 @@
   "item.randomthings.ender_bucket.info": "An Ender Bucket works mostly like a normal Iron Bucket. However when you right click a non source block it will try to find the closest connected source block and pick that up instead of doing nothing.",
   "item.randomthings.reinforced_ender_bucket": "Reinforced Ender Bucket",
   "item.randomthings.reinforced_ender_bucket.filled.name": "%s Reinforced Ender Bucket",
-  "item.randomthings.reinforced_ender_bucket.info": "A Reinforced Ender Bucket works like an Ender Bucket but it can hold 10 Buckets of Fluid instead of just one. Also when you hold shift while picking up fluids it won't stop after it finds one source block but will keep going until it is either full or there is no fluid left."
+  "item.randomthings.reinforced_ender_bucket.info": "A Reinforced Ender Bucket works like an Ender Bucket but it can hold 10 Buckets of Fluid instead of just one. Also when you hold shift while picking up fluids it won't stop after it finds one source block but will keep going until it is either full or there is no fluid left.",
+
+  "block.randomthings.ender_mailbox": "Ender Mailbox",
+  "item.randomthings.ender_letter": "Ender Letter",
+  "tooltip.randomthings.ender_mailbox": "The Ender Mailbox is used to send / receive Ender Letters to / from other players.",
+  "tooltip.randomthings.ender_letter": "Ender Letters can be used to send other people on a server items and messages.",
+  "item.randomthings.ender_letter.sender": "Sender: %s",
+  "item.randomthings.ender_letter.receiver": "Receiver: %s",
+  "item.randomthings.ender_letter.no_player": "%s does not seem to reside in this world",
+  "item.randomthings.ender_letter.no_space": "The letter appears to get rejected",
+  "block.randomthings.ender_mailbox.owner": "You are not the owner of this mailbox",
+  "container.randomthings.ender_letter": "Ender Letter",
+  "container.randomthings.ender_mailbox": "Ender Mailbox"
 }
