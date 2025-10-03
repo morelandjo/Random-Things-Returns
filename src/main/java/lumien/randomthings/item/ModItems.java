@@ -220,6 +220,9 @@ public class ModItems {
     public static final Supplier<Item> TIME_IN_A_BOTTLE = ITEMS.register("time_in_a_bottle",
         () -> new TimeInABottleItem(new Item.Properties()));
 
+    public static final Supplier<Item> ESCAPE_ROPE = ITEMS.register("escape_rope",
+        () -> new EscapeRopeItem());
+
     // Ender Bridge System
     public static final Supplier<Item> STABLE_ENDER_PEARL = ITEMS.register("stable_ender_pearl",
         () -> new StableEnderPearlItem());
@@ -499,6 +502,7 @@ public class ModItems {
             output.accept(CHUNK_ANALYZER.get());
             output.accept(ECLIPSED_CLOCK.get());
             output.accept(TIME_IN_A_BOTTLE.get());
+            output.accept(ESCAPE_ROPE.get());
             // Ender Bridge System
             output.accept(STABLE_ENDER_PEARL.get());
             output.accept(ENDER_BUCKET.get());

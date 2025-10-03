@@ -104,6 +104,7 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.EMERALD_COMPASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.BLAZE_AND_STEEL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.CHUNK_ANALYZER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.ESCAPE_ROPE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
 
         // Ender Bucket System
         registration.addRecipeCatalyst(new ItemStack(ModItems.STABLE_ENDER_PEARL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);

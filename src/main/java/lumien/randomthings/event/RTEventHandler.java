@@ -4,6 +4,7 @@ import lumien.randomthings.blockentity.RainShieldBlockEntity;
 import lumien.randomthings.entity.ModEntityTypes;
 import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.handler.RTWorldSavedData;
+import lumien.randomthings.handler.EscapeRopeHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -34,6 +35,9 @@ public class RTEventHandler {
         // Clear rain shield cache every tick to ensure rain shielding changes
         // are properly reflected and to prevent memory leaks
         RainShieldBlockEntity.clearRainCache();
+
+        // Process escape rope tasks
+        EscapeRopeHandler.getInstance().tick();
     }
     
     /**
