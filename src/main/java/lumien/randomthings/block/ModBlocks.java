@@ -76,8 +76,11 @@ public class ModBlocks {
     public static final Supplier<Block> PLATFORM_DARKOAK = BLOCKS.register("platform_darkoak", 
         () -> new PlatformBlock());
 
-    public static final Supplier<Block> BLOOD_ROSE = BLOCKS.register("blood_rose", 
+    public static final Supplier<Block> BLOOD_ROSE = BLOCKS.register("blood_rose",
         () -> new BloodRoseBlock());
+
+    public static final Supplier<Block> GLOWING_MUSHROOM = BLOCKS.register("glowing_mushroom",
+        () -> new GlowingMushroomBlock());
 
     public static final Supplier<Block> BLAZING_FIRE = BLOCKS.register("blazing_fire", 
         () -> new BlazingFireBlock(BlockBehaviour.Properties.of()));

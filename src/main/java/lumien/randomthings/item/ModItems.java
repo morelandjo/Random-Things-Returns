@@ -65,6 +65,9 @@ public class ModItems {
     public static final Supplier<Item> BLOOD_ROSE = ITEMS.register("blood_rose",
         () -> new BlockItem(ModBlocks.BLOOD_ROSE.get(), new Item.Properties()));
 
+    public static final Supplier<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom",
+        () -> new BlockItem(ModBlocks.GLOWING_MUSHROOM.get(), new Item.Properties()));
+
     public static final Supplier<Item> ADVANCED_REDSTONE_REPEATER = ITEMS.register("advanced_redstone_repeater",
         () -> new BlockItem(ModBlocks.ADVANCED_REDSTONE_REPEATER.get(), new Item.Properties()));
 
@@ -459,6 +462,7 @@ public class ModItems {
             output.accept(PLATFORM_DARKOAK.get());
             output.accept(BLOOD_ROSE.get());
             output.accept(BLOOD_ROSE_PETAL.get());
+            output.accept(GLOWING_MUSHROOM.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());

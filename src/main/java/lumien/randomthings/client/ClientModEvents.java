@@ -137,6 +137,7 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.QUARTZ_GLASS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRIGGER_GLASS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLAZING_FIRE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.GLOWING_MUSHROOM.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_CUBE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
             

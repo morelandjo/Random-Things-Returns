@@ -81,6 +81,9 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.PLATFORM_JUNGLE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.PLATFORM_ACACIA.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.PLATFORM_DARKOAK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
+        // Plants
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.GLOWING_MUSHROOM.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         
         // Biome blocks
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BIOME_STONE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);

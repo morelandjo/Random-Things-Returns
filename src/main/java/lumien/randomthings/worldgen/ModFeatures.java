@@ -22,6 +22,9 @@ public class ModFeatures {
     public static final DeferredHolder<Feature<?>, BeanSproutFeature> BEAN_SPROUTS = FEATURES.register("bean_sprouts", 
         () -> new BeanSproutFeature(NoneFeatureConfiguration.CODEC));
         
-    public static final DeferredHolder<Feature<?>, NatureCoreFeature> NATURE_CORES = FEATURES.register("nature_cores", 
+    public static final DeferredHolder<Feature<?>, NatureCoreFeature> NATURE_CORES = FEATURES.register("nature_cores",
         () -> new NatureCoreFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final DeferredHolder<Feature<?>, GlowingMushroomFeature> GLOWING_MUSHROOMS = FEATURES.register("glowing_mushrooms",
+        () -> new GlowingMushroomFeature(NoneFeatureConfiguration.CODEC));
 }
