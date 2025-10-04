@@ -19,5 +19,6 @@ public class ModScreens {
         event.register(ModMenuTypes.CHUNK_ANALYZER.get(), ChunkAnalyzerScreen::new);
         event.register(ModMenuTypes.ENDER_LETTER.get(), EnderLetterScreen::new);
         event.register(ModMenuTypes.ENDER_MAILBOX.get(), EnderMailboxScreen::new);
+        event.register(ModMenuTypes.ITEM_FILTER.get(), ItemFilterScreen::new);
     }
 }

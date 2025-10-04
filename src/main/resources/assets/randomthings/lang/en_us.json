@@ -321,5 +321,16 @@
   "tooltip.randomthings.position_filter.y": "Position-Y: %d",
   "tooltip.randomthings.position_filter.z": "Position-Z: %d",
   "tooltip.randomthings.position_filter.shift": "Hold SHIFT for details",
-  "tooltip.randomthings.golden_compass": "A Golden Compass can be combined with a position filter to make it point to the position of the Filter."
+  "tooltip.randomthings.golden_compass": "A Golden Compass can be combined with a position filter to make it point to the position of the Filter.",
+
+  "item.randomthings.item_filter": "Item Filter",
+  "tooltip.randomthings.item_filter": "This filter represents a list of items. Right-click to configure.",
+  "tooltip.randomthings.item_filter.metadata": "Check Metadata",
+  "tooltip.randomthings.item_filter.nometadata": "Ignore Metadata",
+  "tooltip.randomthings.item_filter.tags": "Check Tags",
+  "tooltip.randomthings.item_filter.notags": "Ignore Tags",
+  "tooltip.randomthings.item_filter.nbt": "Check NBT",
+  "tooltip.randomthings.item_filter.nonbt": "Ignore NBT",
+  "tooltip.randomthings.item_filter.whitelist": "Whitelist",
+  "tooltip.randomthings.item_filter.blacklist": "Blacklist"
 }

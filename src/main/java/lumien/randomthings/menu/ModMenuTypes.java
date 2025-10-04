@@ -102,4 +102,12 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) ->
                 new EnderMailboxMenu(windowId, inventory, data.readBlockPos())));
 
+    public static final Supplier<MenuType<ItemFilterMenu>> ITEM_FILTER =
+        MENU_TYPES.register("item_filter",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                // For item-based menus, we need to get the held item
+                var heldItem = inventory.player.getMainHandItem();
+                return new ItemFilterMenu(windowId, inventory, heldItem);
+            }));
+
 }

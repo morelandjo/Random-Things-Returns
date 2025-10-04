@@ -3,6 +3,7 @@ package lumien.randomthings.item;
 import com.mojang.serialization.Codec;
 import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.util.ChunkAnalyzerResult;
+import lumien.randomthings.util.ItemFilterData;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -135,6 +136,12 @@ public class ModDataComponents {
             () -> DataComponentType.<Integer>builder()
                 .persistent(Codec.INT)
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    public static final Supplier<DataComponentType<ItemFilterData>> ITEM_FILTER_DATA =
+        DATA_COMPONENTS.register("item_filter_data",
+            () -> DataComponentType.<ItemFilterData>builder()
+                .persistent(ItemFilterData.CODEC)
                 .build());
 
 }
