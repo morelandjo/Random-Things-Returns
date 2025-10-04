@@ -164,7 +164,10 @@ public class ModItems {
 
     public static final Supplier<Item> ITEM_FILTER = ITEMS.register("item_filter",
         () -> new ItemFilterItem(new Item.Properties()));
-    
+
+    public static final Supplier<Item> ENTITY_FILTER = ITEMS.register("entity_filter",
+        () -> new EntityFilterItem(new Item.Properties()));
+
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
         () -> new EctoplasmItem());
@@ -476,6 +479,7 @@ public class ModItems {
             output.accept(GLOWING_MUSHROOM.get());
             output.accept(POSITION_FILTER.get());
             output.accept(ITEM_FILTER.get());
+            output.accept(ENTITY_FILTER.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());

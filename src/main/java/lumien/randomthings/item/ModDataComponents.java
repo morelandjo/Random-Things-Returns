@@ -144,4 +144,11 @@ public class ModDataComponents {
                 .persistent(ItemFilterData.CODEC)
                 .build());
 
+    public static final Supplier<DataComponentType<ResourceLocation>> ENTITY_TYPE_FILTER =
+        DATA_COMPONENTS.register("entity_type_filter",
+            () -> DataComponentType.<ResourceLocation>builder()
+                .persistent(ResourceLocation.CODEC)
+                .networkSynchronized(ResourceLocation.STREAM_CODEC)
+                .build());
+
 }

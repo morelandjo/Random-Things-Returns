@@ -332,5 +332,11 @@
   "tooltip.randomthings.item_filter.nbt": "Check NBT",
   "tooltip.randomthings.item_filter.nonbt": "Ignore NBT",
   "tooltip.randomthings.item_filter.whitelist": "Whitelist",
-  "tooltip.randomthings.item_filter.blacklist": "Blacklist"
+  "tooltip.randomthings.item_filter.blacklist": "Blacklist",
+
+  "item.randomthings.entity_filter": "Entity Filter",
+  "tooltip.randomthings.entity_filter": "This filter represents an entity type. Right-click on an entity to set it.",
+  "tooltip.randomthings.entity_filter.invalid": "No entity set",
+  "tooltip.randomthings.entity_filter.entity": "Entity: %s",
+  "message.randomthings.entity_filter.set": "Entity Filter set to: %s"
 }
