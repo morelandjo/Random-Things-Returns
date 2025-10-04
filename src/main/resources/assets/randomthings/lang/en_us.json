@@ -82,6 +82,7 @@
   "item.randomthings.divining_rod_redstone": "Divining Rod (Redstone)",
   "item.randomthings.id_card": "ID Card",
   "item.randomthings.emerald_compass": "Emerald Compass",
+  "item.randomthings.golden_compass": "Golden Compass",
   "item.randomthings.stable_enderpearl": "Stable Enderpearl",
   "item.randomthings.blaze_and_steel": "Blaze and Steel",
   "item.randomthings.chunk_analyzer": "Chunk Analyzer",
@@ -316,5 +317,6 @@
   "tooltip.randomthings.position_filter.x": "Position-X: %d",
   "tooltip.randomthings.position_filter.y": "Position-Y: %d",
   "tooltip.randomthings.position_filter.z": "Position-Z: %d",
-  "tooltip.randomthings.position_filter.shift": "Hold SHIFT for details"
+  "tooltip.randomthings.position_filter.shift": "Hold SHIFT for details",
+  "tooltip.randomthings.golden_compass": "A Golden Compass can be combined with a position filter to make it point to the position of the Filter."
 }

@@ -156,9 +156,17 @@ public class ClientModEvents {
             ItemProperties.register(ModItems.TIME_IN_A_BOTTLE.get(), ResourceLocation.parse("randomthings:fill_level"), 
                 (stack, level, entity, id) -> TimeInABottleItem.getFillLevel(stack));
                 
-            ItemProperties.register(ModItems.EMERALD_COMPASS.get(), ResourceLocation.parse("angle"), 
+            ItemProperties.register(ModItems.EMERALD_COMPASS.get(), ResourceLocation.parse("angle"),
                 (stack, level, entity, id) -> {
                     if (stack.getItem() instanceof lumien.randomthings.item.EmeraldCompassItem compassItem) {
+                        return compassItem.getCompassAngle(stack, level, entity);
+                    }
+                    return 0.0F;
+                });
+
+            ItemProperties.register(ModItems.GOLDEN_COMPASS.get(), ResourceLocation.parse("angle"),
+                (stack, level, entity, id) -> {
+                    if (stack.getItem() instanceof lumien.randomthings.item.GoldenCompassItem compassItem) {
                         return compassItem.getCompassAngle(stack, level, entity);
                     }
                     return 0.0F;

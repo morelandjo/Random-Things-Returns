@@ -10,9 +10,12 @@ public class ModRecipeSerializers {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = 
         DeferredRegister.create(net.minecraft.core.registries.Registries.RECIPE_SERIALIZER, ModConstants.MOD_ID);
 
-    public static final Supplier<RecipeSerializer<DiaphanousBlockRecipe>> DIAPHANOUS_BLOCK = 
+    public static final Supplier<RecipeSerializer<DiaphanousBlockRecipe>> DIAPHANOUS_BLOCK =
         RECIPE_SERIALIZERS.register("diaphanous_block", DiaphanousBlockRecipeSerializer::new);
-        
-    public static final Supplier<RecipeSerializer<EmeraldCompassRecipe>> EMERALD_COMPASS = 
+
+    public static final Supplier<RecipeSerializer<EmeraldCompassRecipe>> EMERALD_COMPASS =
         RECIPE_SERIALIZERS.register("emerald_compass", EmeraldCompassRecipeSerializer::new);
+
+    public static final Supplier<RecipeSerializer<GoldenCompassRecipe>> GOLDEN_COMPASS =
+        RECIPE_SERIALIZERS.register("golden_compass", GoldenCompassRecipeSerializer::new);
 }
