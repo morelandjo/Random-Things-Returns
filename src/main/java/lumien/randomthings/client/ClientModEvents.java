@@ -4,6 +4,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.events.LightRedirectorClientEvents;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
+import lumien.randomthings.client.renderer.PositionFilterRenderer;
 import lumien.randomthings.client.RedstoneInterfaceRenderer;
 import lumien.randomthings.item.BiomeCrystalItem;
 import lumien.randomthings.item.EclipsedClockItem;
@@ -104,18 +105,25 @@ public class ClientModEvents {
             MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
             
             DiviningRodRenderer.get().render(
-                event.getPoseStack(), 
-                bufferSource, 
+                event.getPoseStack(),
+                bufferSource,
                 event.getPartialTick().getGameTimeDeltaPartialTick(false)
             );
-            
+
+            // Render Position Filter cube overlay
+            PositionFilterRenderer.get().render(
+                event.getPoseStack(),
+                bufferSource,
+                event.getPartialTick().getGameTimeDeltaPartialTick(false)
+            );
+
             // Render redstone interface connection lines - temporarily disabled
             // RedstoneInterfaceRenderer.renderRedstoneInterfaceLines(
             //     event.getPoseStack(),
             //     bufferSource,
             //     event.getCamera().getPosition()
             // );
-            
+
             // Explicitly flush the buffer source to ensure rendering
             bufferSource.endBatch();
         }

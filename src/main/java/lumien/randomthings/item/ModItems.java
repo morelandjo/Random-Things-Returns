@@ -159,6 +159,8 @@ public class ModItems {
         () -> new BiomeCrystalItem(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BLOOD_ROSE_PETAL = ITEMS.register("blood_rose_petal",
         () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> POSITION_FILTER = ITEMS.register("position_filter",
+        () -> new PositionFilterItem(new Item.Properties().stacksTo(1)));
     
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
@@ -463,6 +465,7 @@ public class ModItems {
             output.accept(BLOOD_ROSE.get());
             output.accept(BLOOD_ROSE_PETAL.get());
             output.accept(GLOWING_MUSHROOM.get());
+            output.accept(POSITION_FILTER.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());

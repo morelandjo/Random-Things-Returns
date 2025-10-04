@@ -108,4 +108,33 @@ public class ModDataComponents {
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
                 .build());
 
+    // Position Filter data components
+    public static final Supplier<DataComponentType<String>> POSITION_DIMENSION =
+        DATA_COMPONENTS.register("position_dimension",
+            () -> DataComponentType.<String>builder()
+                .persistent(Codec.STRING)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8)
+                .build());
+
+    public static final Supplier<DataComponentType<Integer>> POSITION_X =
+        DATA_COMPONENTS.register("position_x",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    public static final Supplier<DataComponentType<Integer>> POSITION_Y =
+        DATA_COMPONENTS.register("position_y",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    public static final Supplier<DataComponentType<Integer>> POSITION_Z =
+        DATA_COMPONENTS.register("position_z",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
 }

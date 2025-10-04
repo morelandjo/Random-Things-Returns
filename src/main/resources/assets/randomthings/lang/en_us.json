@@ -308,5 +308,13 @@
   "item.randomthings.ender_letter.no_space": "The letter appears to get rejected",
   "block.randomthings.ender_mailbox.owner": "You are not the owner of this mailbox",
   "container.randomthings.ender_letter": "Ender Letter",
-  "container.randomthings.ender_mailbox": "Ender Mailbox"
+  "container.randomthings.ender_mailbox": "Ender Mailbox",
+
+  "item.randomthings.position_filter": "Position Filter",
+  "tooltip.randomthings.position_filter": "Stores a block position. Right-click a block to set it.",
+  "tooltip.randomthings.position_filter.dimension": "Dimension: %s",
+  "tooltip.randomthings.position_filter.x": "Position-X: %d",
+  "tooltip.randomthings.position_filter.y": "Position-Y: %d",
+  "tooltip.randomthings.position_filter.z": "Position-Z: %d",
+  "tooltip.randomthings.position_filter.shift": "Hold SHIFT for details"
 }

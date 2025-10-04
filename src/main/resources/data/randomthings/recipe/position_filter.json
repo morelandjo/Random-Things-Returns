@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " D ",
+    "DPD",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:purple_dye"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:position_filter"
+  }
+}
