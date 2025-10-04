@@ -68,6 +68,8 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntityTypes.TIME_ACCELERATOR.get(), TimeAcceleratorRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SPIRIT.get(), lumien.randomthings.client.renderer.SpiritRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.STABLE_ENDER_PEARL.get(), net.minecraft.client.renderer.entity.ItemEntityRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), lumien.randomthings.client.renderer.entity.GoldenChickenRenderer::new);
     }
     
     public static void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {

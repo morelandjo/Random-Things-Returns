@@ -42,4 +42,20 @@ public class ModEntityTypes {
             .updateInterval(20)
             .build("stable_ender_pearl")
     );
+
+    public static final Supplier<EntityType<GoldenEggEntity>> GOLDEN_EGG = ENTITY_TYPES.register("golden_egg",
+        () -> EntityType.Builder.<GoldenEggEntity>of(GoldenEggEntity::new, MobCategory.MISC)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(64)
+            .updateInterval(10)
+            .build("golden_egg")
+    );
+
+    public static final Supplier<EntityType<GoldenChickenEntity>> GOLDEN_CHICKEN = ENTITY_TYPES.register("golden_chicken",
+        () -> EntityType.Builder.<GoldenChickenEntity>of(GoldenChickenEntity::new, MobCategory.CREATURE)
+            .sized(0.4f, 0.7f)
+            .clientTrackingRange(80)
+            .updateInterval(3)
+            .build("golden_chicken")
+    );
 }

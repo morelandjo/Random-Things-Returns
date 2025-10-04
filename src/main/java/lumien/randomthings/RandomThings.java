@@ -175,6 +175,7 @@ public class RandomThings {
 
     private void registerEntityAttributes(final EntityAttributeCreationEvent event) {
         event.put(ModEntityTypes.SPIRIT.get(), SpiritEntity.createAttributes().build());
+        event.put(ModEntityTypes.GOLDEN_CHICKEN.get(), lumien.randomthings.entity.GoldenChickenEntity.createAttributes().build());
     }
 
 }

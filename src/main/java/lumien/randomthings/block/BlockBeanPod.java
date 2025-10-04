@@ -106,7 +106,10 @@ public class BlockBeanPod extends Block {
                     break;
             }
         }
-        
+
+        // Always drop one golden egg
+        drops.add(new ItemStack(ModItems.GOLDEN_EGG.get(), 1));
+
         return drops;
     }
 }

@@ -66,6 +66,7 @@
   
   "item.randomthings.bean": "Bean",
   "item.randomthings.beanstew": "Bean Stew",
+  "item.randomthings.golden_egg": "Golden Egg",
   "item.randomthings.biome_crystal": "Biome Crystal",
   "item.randomthings.blood_rose_petal": "Blood Rose Petal",
   "item.randomthings.divining_rod_vanilla": "Divining Rod",
@@ -91,6 +92,8 @@
   
   "entity.randomthings.eclipsed_clock": "Eclipsed Clock",
   "entity.randomthings.time_accelerator": "Time Accelerator",
+  "entity.randomthings.golden_chicken": "Golden Chicken",
+  "entity.randomthings.golden_egg": "Golden Egg",
   
   "block.randomthings.blazing_fire": "Blazing Fire",
   
