@@ -5,6 +5,7 @@ import lumien.randomthings.entity.ModEntityTypes;
 import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.handler.RTWorldSavedData;
 import lumien.randomthings.handler.EscapeRopeHandler;
+import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.LavaCharmItem;
 import lumien.randomthings.item.ModDataComponents;
 import lumien.randomthings.item.ModItems;
@@ -56,6 +57,10 @@ public class RTEventHandler {
 
         // Process escape rope tasks
         EscapeRopeHandler.getInstance().tick();
+
+        // Process redstone signal handler
+        RedstoneSignalHandler handler = RedstoneSignalHandler.get(event.getServer());
+        handler.tick(event.getServer());
     }
     
     /**

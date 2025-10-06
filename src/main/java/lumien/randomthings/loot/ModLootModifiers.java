@@ -17,4 +17,7 @@ public class ModLootModifiers {
 
     public static final Supplier<MapCodec<OceanMonumentLootModifier>> OCEAN_MONUMENT_LOOT =
         LOOT_MODIFIERS.register("ocean_monument", () -> OceanMonumentLootModifier.CODEC);
+
+    public static final Supplier<MapCodec<AddItemLootModifier>> ADD_ITEM =
+        LOOT_MODIFIERS.register("add_item", () -> AddItemLootModifier.CODEC);
 }

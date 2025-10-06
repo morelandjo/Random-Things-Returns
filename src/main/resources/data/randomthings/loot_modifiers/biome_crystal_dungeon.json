@@ -2,8 +2,8 @@
   "type": "randomthings:biome_crystal",
   "conditions": [
     {
-      "condition": "minecraft:table_id",
-      "id": "minecraft:chests/simple_dungeon"
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/simple_dungeon"
     }
   ]
 }

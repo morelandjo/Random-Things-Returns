@@ -12,6 +12,7 @@
   "server": [
   ],
   "mixins": [
+    "SignalGetterMixin"
   ],
   "injectors": {
     "defaultRequire": 0

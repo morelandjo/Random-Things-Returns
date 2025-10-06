@@ -166,4 +166,12 @@ public class ModDataComponents {
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                 .build());
 
+    // Redstone Activator duration index (0, 1, or 2 for 2/20/100 ticks)
+    public static final Supplier<DataComponentType<Integer>> REDSTONE_ACTIVATOR_DURATION =
+        DATA_COMPONENTS.register("redstone_activator_duration",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
 }

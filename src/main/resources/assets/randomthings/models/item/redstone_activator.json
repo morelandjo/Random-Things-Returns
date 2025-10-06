@@ -1,0 +1,26 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "randomthings:item/redstone_activator_1"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "randomthings:duration": 0
+            },
+            "model": "randomthings:item/redstone_activator_0"
+        },
+        {
+            "predicate": {
+                "randomthings:duration": 1
+            },
+            "model": "randomthings:item/redstone_activator_1"
+        },
+        {
+            "predicate": {
+                "randomthings:duration": 2
+            },
+            "model": "randomthings:item/redstone_activator_2"
+        }
+    ]
+}

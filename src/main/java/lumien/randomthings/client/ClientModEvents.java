@@ -9,6 +9,7 @@ import lumien.randomthings.client.RedstoneInterfaceRenderer;
 import lumien.randomthings.item.BiomeCrystalItem;
 import lumien.randomthings.item.EclipsedClockItem;
 import lumien.randomthings.item.TimeInABottleItem;
+import lumien.randomthings.item.RedstoneActivatorItem;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.BiomeColorUtils;
 import lumien.randomthings.event.RTEventHandler;
@@ -170,6 +171,15 @@ public class ClientModEvents {
                         return compassItem.getCompassAngle(stack, level, entity);
                     }
                     return 0.0F;
+                });
+
+            // Register redstone activator duration property for model switching
+            ItemProperties.register(ModItems.REDSTONE_ACTIVATOR.get(), ResourceLocation.parse("randomthings:duration"),
+                (stack, level, entity, id) -> {
+                    if (stack.getItem() instanceof RedstoneActivatorItem activatorItem) {
+                        return activatorItem.getDurationIndex(stack);
+                    }
+                    return 1.0F; // Default to middle duration
                 });
         });
     }

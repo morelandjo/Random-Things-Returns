@@ -351,5 +351,9 @@
   "tooltip.randomthings.obsidian_water_walking_boots": "Combines Obsidian Skull and Water Walking Boots effects",
 
   "item.randomthings.lava_waders": "Lava Waders",
-  "tooltip.randomthings.lava_waders": "Combines Obsidian Water Walking Boots and Lava Charm. Walk on both water and lava! Walking on lava surface does not consume charges."
+  "tooltip.randomthings.lava_waders": "Combines Obsidian Water Walking Boots and Lava Charm. Walk on both water and lava! Walking on lava surface does not consume charges.",
+
+  "item.randomthings.redstone_activator": "Redstone Activator",
+  "tooltip.randomthings.redstone_activator": "Right-click a block to apply a temporary redstone signal. Right-click air to change duration.",
+  "tooltip.randomthings.redstone_activator.duration": "Duration: %d ticks"
 }
