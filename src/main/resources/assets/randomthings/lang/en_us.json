@@ -355,5 +355,7 @@
 
   "item.randomthings.redstone_activator": "Redstone Activator",
   "tooltip.randomthings.redstone_activator": "Right-click a block to apply a temporary redstone signal. Right-click air to change duration.",
-  "tooltip.randomthings.redstone_activator.duration": "Duration: %d ticks"
+  "tooltip.randomthings.redstone_activator.duration": "Duration: %d ticks",
+
+  "item.randomthings.redstone_remote": "Redstone Remote"
 }

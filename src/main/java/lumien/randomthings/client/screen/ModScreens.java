@@ -20,5 +20,7 @@ public class ModScreens {
         event.register(ModMenuTypes.ENDER_LETTER.get(), EnderLetterScreen::new);
         event.register(ModMenuTypes.ENDER_MAILBOX.get(), EnderMailboxScreen::new);
         event.register(ModMenuTypes.ITEM_FILTER.get(), ItemFilterScreen::new);
+        event.register(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), RedstoneRemoteEditScreen::new);
+        event.register(ModMenuTypes.REDSTONE_REMOTE_USE.get(), RedstoneRemoteUseScreen::new);
     }
 }

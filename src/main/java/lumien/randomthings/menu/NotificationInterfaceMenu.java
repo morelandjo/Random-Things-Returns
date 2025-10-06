@@ -1,7 +1,7 @@
 package lumien.randomthings.menu;
 
 import lumien.randomthings.blockentity.NotificationInterfaceBlockEntity;
-import lumien.randomthings.menu.slot.GhostSlot;
+import lumien.randomthings.menu.slot.ItemHandlerGhostSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -28,7 +28,7 @@ public class NotificationInterfaceMenu extends AbstractContainerMenu {
 
         // Ghost slot for the notification icon (only visual reference, no actual item storage)
         if (blockEntity != null) {
-            this.addSlot(new GhostSlot(blockEntity.getItemHandler(), 0, 8, 31));
+            this.addSlot(new ItemHandlerGhostSlot(blockEntity.getItemHandler(), 0, 8, 31));
         }
 
         // Player inventory (3x9)

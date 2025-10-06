@@ -108,6 +108,7 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.GOLDEN_COMPASS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.BLAZE_AND_STEEL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.REDSTONE_ACTIVATOR.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.REDSTONE_REMOTE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
 
         // Lava and Fire Protection Items
         registration.addRecipeCatalyst(new ItemStack(ModItems.OBSIDIAN_SKULL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);

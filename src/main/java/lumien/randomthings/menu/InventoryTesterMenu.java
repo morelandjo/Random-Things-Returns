@@ -1,7 +1,7 @@
 package lumien.randomthings.menu;
 
 import lumien.randomthings.blockentity.InventoryTesterBlockEntity;
-import lumien.randomthings.menu.slot.GhostSlot;
+import lumien.randomthings.menu.slot.ItemHandlerGhostSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -21,7 +21,7 @@ public class InventoryTesterMenu extends AbstractContainerMenu {
         this.access = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
 
         // Add the ghost slot for the test item
-        this.addSlot(new GhostSlot(blockEntity.getItemHandler(), 0, 64, 18));
+        this.addSlot(new ItemHandlerGhostSlot(blockEntity.getItemHandler(), 0, 64, 18));
 
         // Add player inventory slots (3x9)
         for (int row = 0; row < 3; ++row) {
@@ -87,8 +87,8 @@ public class InventoryTesterMenu extends AbstractContainerMenu {
 
     @Override
     public void clicked(int slotId, int button, net.minecraft.world.inventory.ClickType clickType, Player player) {
-        if (slotId >= 0 && slotId < this.slots.size() && this.slots.get(slotId) instanceof GhostSlot) {
-            GhostSlot ghostSlot = (GhostSlot) this.slots.get(slotId);
+        if (slotId >= 0 && slotId < this.slots.size() && this.slots.get(slotId) instanceof ItemHandlerGhostSlot) {
+            ItemHandlerGhostSlot ghostSlot = (ItemHandlerGhostSlot) this.slots.get(slotId);
             ItemStack carried = getCarried();
             
             if (clickType == net.minecraft.world.inventory.ClickType.PICKUP) {

@@ -48,6 +48,8 @@ public class RTPacketHandler {
             (message, context) -> ChunkAnalyzerResultPacket.handle(message, context));
         registrar.playToServer(EnderLetterUpdatePacket.TYPE, EnderLetterUpdatePacket.STREAM_CODEC,
             (message, context) -> EnderLetterUpdatePacket.handle(message, context));
+        registrar.playToServer(RedstoneRemotePayload.TYPE, RedstoneRemotePayload.STREAM_CODEC,
+            (message, context) -> RedstoneRemotePayload.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {

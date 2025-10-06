@@ -110,4 +110,18 @@ public class ModMenuTypes {
                 return new ItemFilterMenu(windowId, inventory, heldItem);
             }));
 
+    public static final Supplier<MenuType<RedstoneRemoteEditMenu>> REDSTONE_REMOTE_EDIT =
+        MENU_TYPES.register("redstone_remote_edit",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                var hand = data.readEnum(net.minecraft.world.InteractionHand.class);
+                return new RedstoneRemoteEditMenu(windowId, inventory, hand);
+            }));
+
+    public static final Supplier<MenuType<RedstoneRemoteUseMenu>> REDSTONE_REMOTE_USE =
+        MENU_TYPES.register("redstone_remote_use",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                var hand = data.readEnum(net.minecraft.world.InteractionHand.class);
+                return new RedstoneRemoteUseMenu(windowId, inventory, hand);
+            }));
+
 }

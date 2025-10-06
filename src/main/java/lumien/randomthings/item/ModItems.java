@@ -247,7 +247,10 @@ public class ModItems {
 
     public static final Supplier<Item> REDSTONE_ACTIVATOR = ITEMS.register("redstone_activator",
         () -> new RedstoneActivatorItem(new Item.Properties().stacksTo(1)));
-        
+
+    public static final Supplier<Item> REDSTONE_REMOTE = ITEMS.register("redstone_remote",
+        () -> new RedstoneRemoteItem(new Item.Properties().stacksTo(1)));
+
     public static final Supplier<Item> CHUNK_ANALYZER = ITEMS.register("chunk_analyzer",
         () -> new ChunkAnalyzerItem(new Item.Properties()));
         
@@ -564,6 +567,8 @@ public class ModItems {
             ItemStack redstoneActivator = new ItemStack(REDSTONE_ACTIVATOR.get());
             redstoneActivator.set(ModDataComponents.REDSTONE_ACTIVATOR_DURATION.get(), 1);
             output.accept(redstoneActivator);
+
+            output.accept(REDSTONE_REMOTE.get());
 
             output.accept(CHUNK_ANALYZER.get());
             output.accept(ECLIPSED_CLOCK.get());

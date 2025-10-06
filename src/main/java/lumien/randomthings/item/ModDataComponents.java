@@ -10,6 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.UUID;
@@ -172,6 +173,14 @@ public class ModDataComponents {
             () -> DataComponentType.<Integer>builder()
                 .persistent(Codec.INT)
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    // Redstone Remote internal inventory (18 slots: 9 for Position Filters, 9 for display icons)
+    public static final Supplier<DataComponentType<ItemContainerContents>> REDSTONE_REMOTE_INVENTORY =
+        DATA_COMPONENTS.register("redstone_remote_inventory",
+            () -> DataComponentType.<ItemContainerContents>builder()
+                .persistent(ItemContainerContents.CODEC)
+                .networkSynchronized(ItemContainerContents.STREAM_CODEC)
                 .build());
 
 }
