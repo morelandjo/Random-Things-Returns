@@ -1,0 +1,9 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "randomthings:water_walking_boots"
+      }
+    ]
+  }
+}

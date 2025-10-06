@@ -1,0 +1,9 @@
+{
+  "type": "randomthings:ocean_monument",
+  "conditions": [
+    {
+      "condition": "minecraft:table_id",
+      "id": "minecraft:chests/underwater_ruin_big"
+    }
+  ]
+}

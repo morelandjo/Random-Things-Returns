@@ -8,6 +8,8 @@ import lumien.randomthings.handler.EscapeRopeHandler;
 import lumien.randomthings.item.LavaCharmItem;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ObsidianSkullItem;
+import lumien.randomthings.item.WaterWalkingBootsItem;
+import lumien.randomthings.item.ObsidianWaterWalkingBootsItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,13 +20,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -193,12 +200,17 @@ public class RTEventHandler {
     }
 
     /**
-     * Handle fire damage reduction from Obsidian Skull
+     * Handle fire damage reduction from Obsidian Skull or Obsidian Water Walking Boots
      */
     private static void handleFireProtection(LivingDamageEvent.Pre event, ServerPlayer player) {
         ItemStack obsidianSkull = findObsidianSkullInInventory(player);
 
-        if (!obsidianSkull.isEmpty()) {
+        // Also check for Obsidian Water Walking Boots
+        ItemStack boots = player.getInventory().getArmor(0);
+        boolean hasFireProtection = !obsidianSkull.isEmpty() ||
+                                   boots.getItem() instanceof ObsidianWaterWalkingBootsItem;
+
+        if (hasFireProtection) {
             float damage = event.getOriginalDamage();
 
             // Calculate chance to negate damage
@@ -267,5 +279,110 @@ public class RTEventHandler {
         }
 
         return ItemStack.EMPTY;
+    }
+
+    /**
+     * Handle water walking - allows jumping out of water while on the surface
+     */
+    @SubscribeEvent
+    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
+        // Only apply to players
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        // Check if player is wearing water walking boots
+        if (!isWearingWaterWalkingBoots(player)) {
+            return;
+        }
+
+        // Skip if sneaking (allows entering water)
+        if (player.isCrouching()) {
+            return;
+        }
+
+        Level level = player.level();
+        BlockPos liquidPos = BlockPos.containing(Math.floor(player.getX()), Math.floor(player.getY()), Math.floor(player.getZ()));
+        BlockPos airPos = BlockPos.containing((int) player.getX(), (int) (player.getY() + player.getBbHeight()), (int) player.getZ());
+
+        BlockState liquidState = level.getBlockState(liquidPos);
+        BlockState airState = level.getBlockState(airPos);
+
+        // Check if player is at water surface
+        if (liquidState.getFluidState().getType() == Fluids.WATER &&
+            airState.isAir() &&
+            player.isInWater()) {
+
+            // Apply upward velocity boost to jump out of water
+            Vec3 motion = player.getDeltaMovement();
+            player.setDeltaMovement(motion.x, 0.22, motion.z);
+        }
+    }
+
+    /**
+     * Handle water walking - make water surface solid when player is above it
+     * This uses PlayerTickEvent to continuously check and adjust player position
+     */
+    @SubscribeEvent
+    public static void onWaterWalkingTick(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+
+        // Check if player is wearing water walking boots
+        if (!isWearingWaterWalkingBoots(player)) {
+            return;
+        }
+
+        // Skip if sneaking (allows entering water)
+        if (player.isCrouching()) {
+            return;
+        }
+
+        Level level = player.level();
+
+        // Check the block directly below the player's feet
+        BlockPos belowPos = BlockPos.containing(player.getX(), player.getY() - 0.1, player.getZ());
+        BlockState belowState = level.getBlockState(belowPos);
+
+        // Check if there's water below the player
+        if (belowState.getFluidState().getType() != Fluids.WATER) {
+            return;
+        }
+
+        // Check if player is close to the water surface
+        double playerY = player.getY();
+        double waterY = belowPos.getY() + 1.0; // Top of the water block
+
+        // If player is near or in the water surface
+        if (playerY < waterY + 0.2) {
+            // Check if player is not already fully submerged
+            BlockPos headPos = BlockPos.containing(player.getX(), player.getY() + player.getBbHeight(), player.getZ());
+            BlockState headState = level.getBlockState(headPos);
+
+            // Only walk on water if head is above water
+            if (headState.getFluidState().getType() != Fluids.WATER) {
+                // Set player on top of water
+                player.setPos(player.getX(), waterY, player.getZ());
+
+                // Reset vertical velocity if falling
+                if (player.getDeltaMovement().y < 0) {
+                    Vec3 motion = player.getDeltaMovement();
+                    player.setDeltaMovement(motion.x, 0, motion.z);
+                }
+
+                // Mark player as on ground so they can walk normally
+                player.setOnGround(true);
+                player.fallDistance = 0;
+            }
+        }
+    }
+
+    /**
+     * Check if player is wearing water walking boots
+     */
+    private static boolean isWearingWaterWalkingBoots(Player player) {
+        ItemStack boots = player.getInventory().getArmor(0); // 0 = boots slot
+
+        return boots.getItem() instanceof WaterWalkingBootsItem ||
+               boots.getItem() instanceof ObsidianWaterWalkingBootsItem;
     }
 }

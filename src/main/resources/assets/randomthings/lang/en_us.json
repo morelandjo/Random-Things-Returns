@@ -343,5 +343,10 @@
   "item.randomthings.lava_charm": "Lava Charm",
   "item.randomthings.obsidian_skull": "Obsidian Skull",
   "tooltip.randomthings.lava_charm": "Grants immunity to lava for 10 seconds. Charge bar displays above armor. Recharges when out of lava.",
-  "tooltip.randomthings.obsidian_skull": "Provides chance-based fire damage immunity. More effective against low fire damage."
+  "tooltip.randomthings.obsidian_skull": "Provides chance-based fire damage immunity. More effective against low fire damage.",
+
+  "item.randomthings.water_walking_boots": "Water Walking Boots",
+  "item.randomthings.obsidian_water_walking_boots": "Obsidian Water Walking Boots",
+  "tooltip.randomthings.water_walking_boots": "Found in Ocean Monuments. Walk on water! (Hold shift to enter water)",
+  "tooltip.randomthings.obsidian_water_walking_boots": "Combines Obsidian Skull and Water Walking Boots effects"
 }

@@ -175,6 +175,13 @@ public class ModItems {
     public static final Supplier<Item> OBSIDIAN_SKULL = ITEMS.register("obsidian_skull",
         () -> new ObsidianSkullItem());
 
+    // Water Walking Boots
+    public static final Supplier<Item> WATER_WALKING_BOOTS = ITEMS.register("water_walking_boots",
+        () -> new WaterWalkingBootsItem(new Item.Properties()));
+
+    public static final Supplier<Item> OBSIDIAN_WATER_WALKING_BOOTS = ITEMS.register("obsidian_water_walking_boots",
+        () -> new ObsidianWaterWalkingBootsItem(new Item.Properties()));
+
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
         () -> new EctoplasmItem());
@@ -495,6 +502,8 @@ public class ModItems {
             output.accept(lavaCharm);
 
             output.accept(OBSIDIAN_SKULL.get());
+            output.accept(WATER_WALKING_BOOTS.get());
+            output.accept(OBSIDIAN_WATER_WALKING_BOOTS.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());
