@@ -101,10 +101,12 @@ public class RandomThings {
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onClientTick);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDamage);
-        // Water Walking Boots event handlers
+        // Water Walking Boots and Lava Waders event handlers
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingJump);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onWaterWalkingTick);
-        
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onLavaWalkingTick);
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onLavaWadersTick);
+
         // Register commands
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
         

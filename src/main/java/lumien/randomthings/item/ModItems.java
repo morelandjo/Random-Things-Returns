@@ -182,6 +182,9 @@ public class ModItems {
     public static final Supplier<Item> OBSIDIAN_WATER_WALKING_BOOTS = ITEMS.register("obsidian_water_walking_boots",
         () -> new ObsidianWaterWalkingBootsItem(new Item.Properties()));
 
+    public static final Supplier<Item> LAVA_WADERS = ITEMS.register("lava_waders",
+        () -> new LavaWadersItem(new Item.Properties()));
+
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
         () -> new EctoplasmItem());
@@ -504,6 +507,13 @@ public class ModItems {
             output.accept(OBSIDIAN_SKULL.get());
             output.accept(WATER_WALKING_BOOTS.get());
             output.accept(OBSIDIAN_WATER_WALKING_BOOTS.get());
+
+            // Lava Waders need to be added with default charge
+            ItemStack lavaWaders = new ItemStack(LAVA_WADERS.get());
+            lavaWaders.set(ModDataComponents.LAVA_CHARM_CHARGE.get(), LavaCharmItem.MAX_CHARGE);
+            lavaWaders.set(ModDataComponents.LAVA_CHARM_COOLDOWN.get(), 0);
+            output.accept(lavaWaders);
+
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());

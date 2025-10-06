@@ -6,10 +6,12 @@ import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.handler.RTWorldSavedData;
 import lumien.randomthings.handler.EscapeRopeHandler;
 import lumien.randomthings.item.LavaCharmItem;
+import lumien.randomthings.item.ModDataComponents;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ObsidianSkullItem;
 import lumien.randomthings.item.WaterWalkingBootsItem;
 import lumien.randomthings.item.ObsidianWaterWalkingBootsItem;
+import lumien.randomthings.item.LavaWadersItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -183,11 +185,28 @@ public class RTEventHandler {
     }
 
     /**
-     * Handle lava damage protection
+     * Handle lava damage protection from Lava Charm or Lava Waders
      */
     private static void handleLavaProtection(LivingDamageEvent.Pre event, ServerPlayer player) {
         ItemStack lavaCharm = findLavaCharmInInventory(player);
 
+        // Check for Lava Waders first
+        ItemStack boots = player.getInventory().getArmor(0);
+        if (boots.getItem() instanceof LavaWadersItem) {
+            if (boots.has(ModDataComponents.LAVA_CHARM_CHARGE.get())) {
+                int charge = boots.get(ModDataComponents.LAVA_CHARM_CHARGE.get());
+
+                if (charge > 0) {
+                    // Use one charge and cancel the damage
+                    boots.set(ModDataComponents.LAVA_CHARM_CHARGE.get(), charge - 1);
+                    boots.set(ModDataComponents.LAVA_CHARM_COOLDOWN.get(), LavaCharmItem.RECHARGE_COOLDOWN);
+                    event.setNewDamage(0);
+                    return;
+                }
+            }
+        }
+
+        // Fall back to Lava Charm in inventory
         if (!lavaCharm.isEmpty()) {
             int charge = LavaCharmItem.getCharge(lavaCharm);
 
@@ -200,15 +219,16 @@ public class RTEventHandler {
     }
 
     /**
-     * Handle fire damage reduction from Obsidian Skull or Obsidian Water Walking Boots
+     * Handle fire damage reduction from Obsidian Skull, Obsidian Water Walking Boots, or Lava Waders
      */
     private static void handleFireProtection(LivingDamageEvent.Pre event, ServerPlayer player) {
         ItemStack obsidianSkull = findObsidianSkullInInventory(player);
 
-        // Also check for Obsidian Water Walking Boots
+        // Also check for Obsidian Water Walking Boots or Lava Waders
         ItemStack boots = player.getInventory().getArmor(0);
         boolean hasFireProtection = !obsidianSkull.isEmpty() ||
-                                   boots.getItem() instanceof ObsidianWaterWalkingBootsItem;
+                                   boots.getItem() instanceof ObsidianWaterWalkingBootsItem ||
+                                   boots.getItem() instanceof LavaWadersItem;
 
         if (hasFireProtection) {
             float damage = event.getOriginalDamage();
@@ -282,7 +302,7 @@ public class RTEventHandler {
     }
 
     /**
-     * Handle water walking - allows jumping out of water while on the surface
+     * Handle water/lava walking - allows jumping out of liquids while on the surface
      */
     @SubscribeEvent
     public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
@@ -291,12 +311,12 @@ public class RTEventHandler {
             return;
         }
 
-        // Check if player is wearing water walking boots
+        // Check if player is wearing water walking boots (includes Lava Waders)
         if (!isWearingWaterWalkingBoots(player)) {
             return;
         }
 
-        // Skip if sneaking (allows entering water)
+        // Skip if sneaking (allows entering water/lava)
         if (player.isCrouching()) {
             return;
         }
@@ -308,12 +328,17 @@ public class RTEventHandler {
         BlockState liquidState = level.getBlockState(liquidPos);
         BlockState airState = level.getBlockState(airPos);
 
-        // Check if player is at water surface
-        if (liquidState.getFluidState().getType() == Fluids.WATER &&
-            airState.isAir() &&
-            player.isInWater()) {
+        boolean isOnWater = liquidState.getFluidState().getType() == Fluids.WATER &&
+                           airState.isAir() &&
+                           player.isInWater();
 
-            // Apply upward velocity boost to jump out of water
+        boolean isOnLava = liquidState.getFluidState().getType() == Fluids.LAVA &&
+                          airState.isAir() &&
+                          isWearingLavaWaders(player); // Only Lava Waders can jump from lava
+
+        // Check if player is at liquid surface
+        if (isOnWater || isOnLava) {
+            // Apply upward velocity boost to jump out of liquid
             Vec3 motion = player.getDeltaMovement();
             player.setDeltaMovement(motion.x, 0.22, motion.z);
         }
@@ -377,12 +402,105 @@ public class RTEventHandler {
     }
 
     /**
-     * Check if player is wearing water walking boots
+     * Handle lava walking - make lava surface solid when player is above it
+     * This uses PlayerTickEvent to continuously check and adjust player position
+     * Only works with Lava Waders. Does NOT consume charges when walking on surface.
+     */
+    @SubscribeEvent
+    public static void onLavaWalkingTick(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+
+        // Only Lava Waders can walk on lava
+        if (!isWearingLavaWaders(player)) {
+            return;
+        }
+
+        // Skip if sneaking (allows entering lava)
+        if (player.isCrouching()) {
+            return;
+        }
+
+        Level level = player.level();
+
+        // Check the block directly below the player's feet
+        BlockPos belowPos = BlockPos.containing(player.getX(), player.getY() - 0.1, player.getZ());
+        BlockState belowState = level.getBlockState(belowPos);
+
+        // Check if there's lava below the player
+        if (belowState.getFluidState().getType() != Fluids.LAVA) {
+            return;
+        }
+
+        // Check if player is close to the lava surface
+        double playerY = player.getY();
+        double lavaY = belowPos.getY() + 1.0; // Top of the lava block
+
+        // If player is near or in the lava surface
+        if (playerY < lavaY + 0.2) {
+            // Check if player is not already fully submerged
+            BlockPos headPos = BlockPos.containing(player.getX(), player.getY() + player.getBbHeight(), player.getZ());
+            BlockState headState = level.getBlockState(headPos);
+
+            // Only walk on lava if head is above lava
+            if (headState.getFluidState().getType() != Fluids.LAVA) {
+                // Set player on top of lava
+                player.setPos(player.getX(), lavaY, player.getZ());
+
+                // Reset vertical velocity if falling
+                if (player.getDeltaMovement().y < 0) {
+                    Vec3 motion = player.getDeltaMovement();
+                    player.setDeltaMovement(motion.x, 0, motion.z);
+                }
+
+                // Mark player as on ground so they can walk normally
+                player.setOnGround(true);
+                player.fallDistance = 0;
+
+                // Extinguish fire when walking on lava surface
+                player.clearFire();
+            }
+        }
+    }
+
+    /**
+     * Manage Lava Waders charge system
+     * Ticks charge and cooldown similar to Lava Charm
+     */
+    @SubscribeEvent
+    public static void onLavaWadersTick(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+
+        // Only process on server side
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        // Check if wearing Lava Waders
+        ItemStack boots = player.getInventory().getArmor(0);
+        if (!(boots.getItem() instanceof LavaWadersItem)) {
+            return;
+        }
+
+        // Use existing Lava Charm tick logic
+        LavaCharmItem.tickCharge(boots);
+    }
+
+    /**
+     * Check if player is wearing water walking boots (includes Lava Waders)
      */
     private static boolean isWearingWaterWalkingBoots(Player player) {
         ItemStack boots = player.getInventory().getArmor(0); // 0 = boots slot
 
         return boots.getItem() instanceof WaterWalkingBootsItem ||
-               boots.getItem() instanceof ObsidianWaterWalkingBootsItem;
+               boots.getItem() instanceof ObsidianWaterWalkingBootsItem ||
+               boots.getItem() instanceof LavaWadersItem;
+    }
+
+    /**
+     * Check if player is wearing lava waders specifically
+     */
+    private static boolean isWearingLavaWaders(Player player) {
+        ItemStack boots = player.getInventory().getArmor(0); // 0 = boots slot
+        return boots.getItem() instanceof LavaWadersItem;
     }
 }

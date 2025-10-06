@@ -348,5 +348,8 @@
   "item.randomthings.water_walking_boots": "Water Walking Boots",
   "item.randomthings.obsidian_water_walking_boots": "Obsidian Water Walking Boots",
   "tooltip.randomthings.water_walking_boots": "Found in Ocean Monuments. Walk on water! (Hold shift to enter water)",
-  "tooltip.randomthings.obsidian_water_walking_boots": "Combines Obsidian Skull and Water Walking Boots effects"
+  "tooltip.randomthings.obsidian_water_walking_boots": "Combines Obsidian Skull and Water Walking Boots effects",
+
+  "item.randomthings.lava_waders": "Lava Waders",
+  "tooltip.randomthings.lava_waders": "Combines Obsidian Water Walking Boots and Lava Charm. Walk on both water and lava! Walking on lava surface does not consume charges."
 }

@@ -79,6 +79,33 @@ public class ModArmorMaterials {
     );
 
     /**
+     * Lava Waders armor material
+     * - Combines all effects: water walking, fire protection, lava immunity
+     * - Ultimate boots with charge system
+     */
+    public static final Holder<ArmorMaterial> LAVA_WADERS = register(
+        "lava_waders",
+        Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+            // Defense values per armor type (same as chain armor)
+            map.put(ArmorItem.Type.BOOTS, 1);
+            map.put(ArmorItem.Type.LEGGINGS, 4);
+            map.put(ArmorItem.Type.CHESTPLATE, 5);
+            map.put(ArmorItem.Type.HELMET, 2);
+            map.put(ArmorItem.Type.BODY, 4);
+        }),
+        15, // Enchantability (same as chain)
+        SoundEvents.ARMOR_EQUIP_NETHERITE,
+        () -> Ingredient.of(Items.NETHERITE_INGOT),
+        List.of(
+            new ArmorMaterial.Layer(
+                ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "lava_waders")
+            )
+        ),
+        0.0F, // Toughness
+        0.0F  // Knockback resistance
+    );
+
+    /**
      * Helper method to register an armor material
      */
     private static Holder<ArmorMaterial> register(

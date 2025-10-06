@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "randomthings:obsidian_water_walking_boots"
+  },
+  "addition": {
+    "item": "randomthings:lava_charm"
+  },
+  "result": {
+    "id": "randomthings:lava_waders",
+    "components": {
+      "randomthings:lava_charm_charge": 200,
+      "randomthings:lava_charm_cooldown": 0
+    }
+  }
+}
