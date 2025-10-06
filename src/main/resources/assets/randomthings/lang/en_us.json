@@ -338,5 +338,10 @@
   "tooltip.randomthings.entity_filter": "This filter represents an entity type. Right-click on an entity to set it.",
   "tooltip.randomthings.entity_filter.invalid": "No entity set",
   "tooltip.randomthings.entity_filter.entity": "Entity: %s",
-  "message.randomthings.entity_filter.set": "Entity Filter set to: %s"
+  "message.randomthings.entity_filter.set": "Entity Filter set to: %s",
+
+  "item.randomthings.lava_charm": "Lava Charm",
+  "item.randomthings.obsidian_skull": "Obsidian Skull",
+  "tooltip.randomthings.lava_charm": "Grants immunity to lava for 10 seconds. Charge bar displays above armor. Recharges when out of lava.",
+  "tooltip.randomthings.obsidian_skull": "Provides chance-based fire damage immunity. More effective against low fire damage."
 }

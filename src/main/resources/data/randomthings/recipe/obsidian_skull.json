@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ORO",
+    "BWB",
+    "ORO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "R": {
+      "item": "minecraft:blaze_rod"
+    },
+    "W": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "B": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:obsidian_skull"
+  }
+}

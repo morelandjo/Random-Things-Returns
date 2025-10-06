@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:table_id",
+      "id": "minecraft:chests/simple_dungeon"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.05
+    }
+  ],
+  "item": "randomthings:lava_charm"
+}

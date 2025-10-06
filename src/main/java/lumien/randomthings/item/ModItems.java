@@ -168,6 +168,13 @@ public class ModItems {
     public static final Supplier<Item> ENTITY_FILTER = ITEMS.register("entity_filter",
         () -> new EntityFilterItem(new Item.Properties()));
 
+    // Lava Protection Items
+    public static final Supplier<Item> LAVA_CHARM = ITEMS.register("lava_charm",
+        () -> new LavaCharmItem());
+
+    public static final Supplier<Item> OBSIDIAN_SKULL = ITEMS.register("obsidian_skull",
+        () -> new ObsidianSkullItem());
+
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
         () -> new EctoplasmItem());
@@ -480,6 +487,14 @@ public class ModItems {
             output.accept(POSITION_FILTER.get());
             output.accept(ITEM_FILTER.get());
             output.accept(ENTITY_FILTER.get());
+
+            // Lava Charm needs to be added with default charge
+            ItemStack lavaCharm = new ItemStack(LAVA_CHARM.get());
+            lavaCharm.set(ModDataComponents.LAVA_CHARM_CHARGE.get(), LavaCharmItem.MAX_CHARGE);
+            lavaCharm.set(ModDataComponents.LAVA_CHARM_COOLDOWN.get(), 0);
+            output.accept(lavaCharm);
+
+            output.accept(OBSIDIAN_SKULL.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());

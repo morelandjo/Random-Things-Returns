@@ -19,6 +19,7 @@ import lumien.randomthings.menu.ModMenuTypes;
 import lumien.randomthings.worldgen.ModFeatures;
 import lumien.randomthings.worldgen.ModStructureProcessors;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -81,6 +82,7 @@ public class RandomThings {
             modEventBus.addListener(this::registerScreens);
             modEventBus.addListener(this::registerRenderers);
             modEventBus.addListener(this::registerLayerDefinitions);
+            modEventBus.addListener(this::registerGuiOverlays);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerItemColors);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::onClientSetup);
@@ -93,10 +95,12 @@ public class RandomThings {
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onServerTick);
         // Register spirit spawning and dragon defeat tracking
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDeath);
-        // Register other RT event handlers  
+        // Register other RT event handlers
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockPlace);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockBreak);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onClientTick);
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDamage);
         
         // Register commands
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
@@ -146,6 +150,15 @@ public class RandomThings {
     
     private void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
         lumien.randomthings.client.ClientProxy.registerLayerDefinitions(event);
+    }
+
+    private void registerGuiOverlays(final net.neoforged.neoforge.client.event.RegisterGuiLayersEvent event) {
+        // Register the lava charm bar overlay above player health
+        event.registerAbove(
+            net.neoforged.neoforge.client.gui.VanillaGuiLayers.PLAYER_HEALTH,
+            ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "lava_charm_bar"),
+            new lumien.randomthings.client.LavaCharmOverlay()
+        );
     }
 
     private void registerCapabilities(final RegisterCapabilitiesEvent event) {

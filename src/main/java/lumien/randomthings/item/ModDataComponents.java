@@ -151,4 +151,19 @@ public class ModDataComponents {
                 .networkSynchronized(ResourceLocation.STREAM_CODEC)
                 .build());
 
+    // Lava Charm data components
+    public static final Supplier<DataComponentType<Integer>> LAVA_CHARM_CHARGE =
+        DATA_COMPONENTS.register("lava_charm_charge",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    public static final Supplier<DataComponentType<Integer>> LAVA_CHARM_COOLDOWN =
+        DATA_COMPONENTS.register("lava_charm_cooldown",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
 }

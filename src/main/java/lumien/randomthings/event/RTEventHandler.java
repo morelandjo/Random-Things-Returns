@@ -5,19 +5,28 @@ import lumien.randomthings.entity.ModEntityTypes;
 import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.handler.RTWorldSavedData;
 import lumien.randomthings.handler.EscapeRopeHandler;
+import lumien.randomthings.item.LavaCharmItem;
+import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.ObsidianSkullItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
@@ -121,5 +130,142 @@ public class RTEventHandler {
                 serverLevel.addFreshEntity(spirit);
             }
         }
+    }
+
+    /**
+     * Update Lava Charm charge for all players carrying one
+     */
+    @SubscribeEvent
+    public static void onPlayerTick(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+
+        // Only process on server side
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        // Find Lava Charm in player's inventory
+        ItemStack lavaCharm = findLavaCharmInInventory(player);
+
+        if (!lavaCharm.isEmpty()) {
+            LavaCharmItem.tickCharge(lavaCharm);
+        }
+    }
+
+    /**
+     * Handle lava damage protection from Lava Charm
+     */
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void onLivingDamage(LivingDamageEvent.Pre event) {
+        // Only apply to players
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+
+        DamageSource source = event.getSource();
+
+        // Handle lava damage
+        if (source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE) &&
+            source.getMsgId().equals("lava")) {
+            handleLavaProtection(event, player);
+        }
+        // Handle other fire damage
+        else if (source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) {
+            handleFireProtection(event, player);
+        }
+    }
+
+    /**
+     * Handle lava damage protection
+     */
+    private static void handleLavaProtection(LivingDamageEvent.Pre event, ServerPlayer player) {
+        ItemStack lavaCharm = findLavaCharmInInventory(player);
+
+        if (!lavaCharm.isEmpty()) {
+            int charge = LavaCharmItem.getCharge(lavaCharm);
+
+            if (charge > 0) {
+                // Use one charge and cancel the damage
+                LavaCharmItem.useCharge(lavaCharm);
+                event.setNewDamage(0);
+            }
+        }
+    }
+
+    /**
+     * Handle fire damage reduction from Obsidian Skull
+     */
+    private static void handleFireProtection(LivingDamageEvent.Pre event, ServerPlayer player) {
+        ItemStack obsidianSkull = findObsidianSkullInInventory(player);
+
+        if (!obsidianSkull.isEmpty()) {
+            float damage = event.getOriginalDamage();
+
+            // Calculate chance to negate damage
+            // Lower damage has higher chance of being negated
+            // Formula from original: chance = 1 - (damage/100 * damage^2)
+            float chance = damage / 100.0f;
+            chance *= damage * damage;
+
+            // Random roll
+            if (player.getRandom().nextFloat() > chance) {
+                // Negate the damage
+                event.setNewDamage(0);
+            }
+        }
+    }
+
+    /**
+     * Find Lava Charm in player's inventory
+     */
+    private static ItemStack findLavaCharmInInventory(Player player) {
+        // Check main inventory
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.getItem() instanceof LavaCharmItem) {
+                return stack;
+            }
+        }
+
+        // Check armor slots
+        for (ItemStack stack : player.getInventory().armor) {
+            if (stack.getItem() instanceof LavaCharmItem) {
+                return stack;
+            }
+        }
+
+        // Check offhand
+        ItemStack offhand = player.getOffhandItem();
+        if (offhand.getItem() instanceof LavaCharmItem) {
+            return offhand;
+        }
+
+        return ItemStack.EMPTY;
+    }
+
+    /**
+     * Find Obsidian Skull in player's inventory
+     */
+    private static ItemStack findObsidianSkullInInventory(Player player) {
+        // Check main inventory
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.getItem() instanceof ObsidianSkullItem) {
+                return stack;
+            }
+        }
+
+        // Check armor slots
+        for (ItemStack stack : player.getInventory().armor) {
+            if (stack.getItem() instanceof ObsidianSkullItem) {
+                return stack;
+            }
+        }
+
+        // Check offhand
+        ItemStack offhand = player.getOffhandItem();
+        if (offhand.getItem() instanceof ObsidianSkullItem) {
+            return offhand;
+        }
+
+        return ItemStack.EMPTY;
     }
 }
