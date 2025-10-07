@@ -185,6 +185,10 @@ public class ModItems {
     public static final Supplier<Item> LAVA_WADERS = ITEMS.register("lava_waders",
         () -> new LavaWadersItem(new Item.Properties()));
 
+    // Magic Hood
+    public static final Supplier<Item> MAGIC_HOOD = ITEMS.register("magic_hood",
+        () -> new MagicHoodItem(new Item.Properties()));
+
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
         () -> new EctoplasmItem());
@@ -520,6 +524,7 @@ public class ModItems {
             lavaWaders.set(ModDataComponents.LAVA_CHARM_COOLDOWN.get(), 0);
             output.accept(lavaWaders);
 
+            output.accept(MAGIC_HOOD.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(BIOME_STONE_SMOOTH.get());

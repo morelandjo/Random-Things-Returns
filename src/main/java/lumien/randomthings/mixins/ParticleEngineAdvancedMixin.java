@@ -1,12 +1,15 @@
 package lumien.randomthings.mixins;
 
 import lumien.randomthings.blockentity.RainShieldBlockEntity;
+import lumien.randomthings.client.events.MagicHoodClientEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +21,7 @@ public class ParticleEngineAdvancedMixin {
     
     /**
      * Intercept the main add() method that all particles go through
-     * Only block rain-related particles, allow others to render normally
+     * Only block rain-related particles and potion particles from Magic Hood wearers
      */
     @Inject(
         method = "add(Lnet/minecraft/client/particle/Particle;)V",
@@ -36,16 +39,27 @@ public class ParticleEngineAdvancedMixin {
                 double y = particle.y;
                 double z = particle.z;
                 BlockPos pos = BlockPos.containing(x, y, z);
-                
+
+                // Check for Magic Hood potion particle suppression
+                String particleType = particle.getClass().getSimpleName().toLowerCase();
+                if (particleType.contains("mobspell") || particleType.contains("spell") || particleType.contains("effect")) {
+                    // Check if any nearby player wearing Magic Hood matches this particle position
+                    if (mc.level.players().stream().anyMatch(player ->
+                        MagicHoodClientEvents.isWearingMagicHood(player) &&
+                        player.distanceToSqr(x, y, z) < 4.0)) { // Within 2 block radius
+                        ci.cancel();
+                        return;
+                    }
+                }
+
                 // Check if this position is protected by a Rain Shield
                 if (!RainShieldBlockEntity.shouldRain(mc.level, pos)) {
                     // Only block rain-related particles by checking particle class names
-                    String particleType = particle.getClass().getSimpleName();
-                    boolean isRainRelated = particleType.toLowerCase().contains("rain") || 
-                                          particleType.toLowerCase().contains("drip") ||
-                                          particleType.toLowerCase().contains("splash") ||
-                                          particleType.toLowerCase().contains("water");
-                    
+                    boolean isRainRelated = particleType.contains("rain") ||
+                                          particleType.contains("drip") ||
+                                          particleType.contains("splash") ||
+                                          particleType.contains("water");
+
                     if (isRainRelated) {
                         ci.cancel(); // Block only rain-related particles
                     }

@@ -357,5 +357,8 @@
   "tooltip.randomthings.redstone_activator": "Right-click a block to apply a temporary redstone signal. Right-click air to change duration.",
   "tooltip.randomthings.redstone_activator.duration": "Duration: %d ticks",
 
-  "item.randomthings.redstone_remote": "Redstone Remote"
+  "item.randomthings.redstone_remote": "Redstone Remote",
+
+  "item.randomthings.magic_hood": "Magic Hood",
+  "tooltip.randomthings.magic_hood": "Hides your nameplate and potion particles. Found in dungeons and village blacksmith chests."
 }

@@ -106,6 +106,35 @@ public class ModArmorMaterials {
     );
 
     /**
+     * Magic Hood armor material
+     * - Chain armor protection level
+     * - Indestructible (no durability)
+     * - Hides nameplate and potion particles
+     * - Found in dungeon and blacksmith chests
+     */
+    public static final Holder<ArmorMaterial> MAGIC_HOOD = register(
+        "magic_hood",
+        Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+            // Defense values per armor type (same as chain armor)
+            map.put(ArmorItem.Type.BOOTS, 1);
+            map.put(ArmorItem.Type.LEGGINGS, 4);
+            map.put(ArmorItem.Type.CHESTPLATE, 5);
+            map.put(ArmorItem.Type.HELMET, 2);
+            map.put(ArmorItem.Type.BODY, 4);
+        }),
+        15, // Enchantability (same as chain)
+        SoundEvents.ARMOR_EQUIP_CHAIN,
+        () -> Ingredient.EMPTY, // Not repairable
+        List.of(
+            new ArmorMaterial.Layer(
+                ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "magic_hood")
+            )
+        ),
+        0.0F, // Toughness
+        0.0F  // Knockback resistance
+    );
+
+    /**
      * Helper method to register an armor material
      */
     private static Holder<ArmorMaterial> register(
