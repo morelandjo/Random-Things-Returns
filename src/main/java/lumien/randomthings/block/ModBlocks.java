@@ -121,7 +121,12 @@ public class ModBlocks {
             .strength(3.5F)
             .sound(SoundType.STONE)));
 
-    public static final Supplier<Block> BLOCK_DESTABILIZER = BLOCKS.register("block_destabilizer", 
+    public static final Supplier<Block> SOUND_DAMPENER = BLOCKS.register("sound_dampener",
+        () -> new SoundDampenerBlock(BlockBehaviour.Properties.of()
+                .strength(2.0f)
+                .sound(SoundType.STONE)));
+
+    public static final Supplier<Block> BLOCK_DESTABILIZER = BLOCKS.register("block_destabilizer",
         () -> new BlockDestabilizerBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.STONE)
             .requiresCorrectToolForDrops()

@@ -22,5 +22,7 @@ public class ModScreens {
         event.register(ModMenuTypes.ITEM_FILTER.get(), ItemFilterScreen::new);
         event.register(ModMenuTypes.REDSTONE_REMOTE_EDIT.get(), RedstoneRemoteEditScreen::new);
         event.register(ModMenuTypes.REDSTONE_REMOTE_USE.get(), RedstoneRemoteUseScreen::new);
+        event.register(ModMenuTypes.PORTABLE_SOUND_DAMPENER.get(), PortableSoundDampenerScreen::new);
+        event.register(ModMenuTypes.SOUND_DAMPENER.get(), SoundDampenerScreen::new);
     }
 }

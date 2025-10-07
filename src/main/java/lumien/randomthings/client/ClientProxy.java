@@ -46,6 +46,7 @@ public class ClientProxy {
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.ClientModEvents::onClientTick);
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.RainShieldClientEvents::onPlaySound);
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.RainShieldClientEvents::onClientTick);
+        NeoForge.EVENT_BUS.addListener(lumien.randomthings.client.events.SoundDampenerClientEvents::onPlaySound);
     }
 
     public static void registerScreens(final RegisterMenuScreensEvent event) {

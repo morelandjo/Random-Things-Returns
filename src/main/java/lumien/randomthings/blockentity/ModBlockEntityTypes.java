@@ -42,10 +42,15 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(AnalogEmitterBlockEntity::new, 
                 ModBlocks.ANALOG_EMITTER.get()).build(null));
 
-    public static final Supplier<BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER = 
-        BLOCK_ENTITY_TYPES.register("block_breaker", 
-            () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, 
+    public static final Supplier<BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER =
+        BLOCK_ENTITY_TYPES.register("block_breaker",
+            () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new,
                 ModBlocks.BLOCK_BREAKER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SoundDampenerBlockEntity>> SOUND_DAMPENER =
+        BLOCK_ENTITY_TYPES.register("sound_dampener",
+            () -> BlockEntityType.Builder.of(SoundDampenerBlockEntity::new,
+                ModBlocks.SOUND_DAMPENER.get()).build(null));
 
     public static final Supplier<BlockEntityType<BlockDestabilizerBlockEntity>> BLOCK_DESTABILIZER = 
         BLOCK_ENTITY_TYPES.register("block_destabilizer", 

@@ -80,6 +80,9 @@ public class ModItems {
     public static final Supplier<Item> BLOCK_BREAKER = ITEMS.register("block_breaker",
         () -> new BlockItem(ModBlocks.BLOCK_BREAKER.get(), new Item.Properties()));
 
+    public static final Supplier<Item> SOUND_DAMPENER = ITEMS.register("sound_dampener",
+        () -> new BlockItem(ModBlocks.SOUND_DAMPENER.get(), new Item.Properties()));
+
     public static final Supplier<Item> BLOCK_DESTABILIZER = ITEMS.register("block_destabilizer",
         () -> new BlockItem(ModBlocks.BLOCK_DESTABILIZER.get(), new Item.Properties()));
 
@@ -257,7 +260,13 @@ public class ModItems {
 
     public static final Supplier<Item> CHUNK_ANALYZER = ITEMS.register("chunk_analyzer",
         () -> new ChunkAnalyzerItem(new Item.Properties()));
-        
+
+    public static final Supplier<Item> SOUND_PATTERN = ITEMS.register("sound_pattern",
+        () -> new ItemSoundPattern());
+
+    public static final Supplier<Item> PORTABLE_SOUND_DAMPENER = ITEMS.register("portable_sound_dampener",
+        () -> new ItemPortableSoundDampener());
+
     public static final Supplier<Item> ECLIPSED_CLOCK = ITEMS.register("eclipsed_clock",
         () -> new EclipsedClockItem(new Item.Properties()));
         
@@ -485,6 +494,7 @@ public class ModItems {
             output.accept(ANALOG_EMITTER.get());
             output.accept(SIDED_REDSTONE.get());
             output.accept(BLOCK_BREAKER.get());
+            output.accept(SOUND_DAMPENER.get());
             output.accept(BLOCK_DESTABILIZER.get());
             output.accept(IRON_DROPPER.get());
             output.accept(CHAT_DETECTOR.get());
@@ -574,6 +584,9 @@ public class ModItems {
             output.accept(redstoneActivator);
 
             output.accept(REDSTONE_REMOTE.get());
+
+            output.accept(SOUND_PATTERN.get());
+            output.accept(PORTABLE_SOUND_DAMPENER.get());
 
             output.accept(CHUNK_ANALYZER.get());
             output.accept(ECLIPSED_CLOCK.get());

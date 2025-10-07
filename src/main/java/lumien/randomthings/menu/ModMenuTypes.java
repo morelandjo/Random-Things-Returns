@@ -124,4 +124,16 @@ public class ModMenuTypes {
                 return new RedstoneRemoteUseMenu(windowId, inventory, hand);
             }));
 
+    public static final Supplier<MenuType<PortableSoundDampenerMenu>> PORTABLE_SOUND_DAMPENER =
+        MENU_TYPES.register("portable_sound_dampener",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
+                var hand = data.readEnum(net.minecraft.world.InteractionHand.class);
+                return new PortableSoundDampenerMenu(windowId, inventory, hand);
+            }));
+
+    public static final Supplier<MenuType<SoundDampenerMenu>> SOUND_DAMPENER =
+        MENU_TYPES.register("sound_dampener",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) ->
+                new SoundDampenerMenu(windowId, inventory, data.readBlockPos())));
+
 }

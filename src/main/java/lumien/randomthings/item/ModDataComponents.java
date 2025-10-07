@@ -183,4 +183,20 @@ public class ModDataComponents {
                 .networkSynchronized(ItemContainerContents.STREAM_CODEC)
                 .build());
 
+    // Sound Pattern - stores the ResourceLocation of the sound
+    public static final Supplier<DataComponentType<ResourceLocation>> SOUND_LOCATION =
+        DATA_COMPONENTS.register("sound_location",
+            () -> DataComponentType.<ResourceLocation>builder()
+                .persistent(ResourceLocation.CODEC)
+                .networkSynchronized(ResourceLocation.STREAM_CODEC)
+                .build());
+
+    // Portable Sound Dampener internal inventory (9 slots for Sound Patterns)
+    public static final Supplier<DataComponentType<ItemContainerContents>> DAMPENER_INVENTORY =
+        DATA_COMPONENTS.register("dampener_inventory",
+            () -> DataComponentType.<ItemContainerContents>builder()
+                .persistent(ItemContainerContents.CODEC)
+                .networkSynchronized(ItemContainerContents.STREAM_CODEC)
+                .build());
+
 }

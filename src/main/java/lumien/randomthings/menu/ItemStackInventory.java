@@ -1,6 +1,7 @@
 package lumien.randomthings.menu;
 
 import lumien.randomthings.item.ModDataComponents;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -14,18 +15,30 @@ import net.minecraft.world.item.component.ItemContainerContents;
 public class ItemStackInventory implements Container {
     private final ItemStack parentStack;
     private final int size;
+    private final DataComponentType<ItemContainerContents> componentType;
     private NonNullList<ItemStack> items;
 
-    public ItemStackInventory(ItemStack parentStack, int size) {
+    /**
+     * Constructor for specific data component type
+     */
+    public ItemStackInventory(ItemStack parentStack, int size, DataComponentType<ItemContainerContents> componentType) {
         this.parentStack = parentStack;
         this.size = size;
+        this.componentType = componentType;
         this.items = NonNullList.withSize(size, ItemStack.EMPTY);
 
         // Load from data component
-        ItemContainerContents contents = parentStack.get(ModDataComponents.REDSTONE_REMOTE_INVENTORY.get());
+        ItemContainerContents contents = parentStack.get(componentType);
         if (contents != null) {
             contents.copyInto(this.items);
         }
+    }
+
+    /**
+     * Default constructor using REDSTONE_REMOTE_INVENTORY for backwards compatibility
+     */
+    public ItemStackInventory(ItemStack parentStack, int size) {
+        this(parentStack, size, ModDataComponents.REDSTONE_REMOTE_INVENTORY.get());
     }
 
     @Override
@@ -74,8 +87,7 @@ public class ItemStackInventory implements Container {
     @Override
     public void setChanged() {
         // Save to data component
-        parentStack.set(ModDataComponents.REDSTONE_REMOTE_INVENTORY.get(),
-            ItemContainerContents.fromItems(items));
+        parentStack.set(componentType, ItemContainerContents.fromItems(items));
     }
 
     @Override

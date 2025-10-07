@@ -181,6 +181,15 @@ public class ClientModEvents {
                     }
                     return 1.0F; // Default to middle duration
                 });
+
+            // Register sound pattern has_sound property for empty/full model switching
+            ItemProperties.register(ModItems.SOUND_PATTERN.get(), ResourceLocation.parse("randomthings:has_sound"),
+                (stack, level, entity, id) -> {
+                    if (stack.getItem() instanceof lumien.randomthings.item.ItemSoundPattern) {
+                        return lumien.randomthings.item.ItemSoundPattern.getSoundLocation(stack) != null ? 1.0F : 0.0F;
+                    }
+                    return 0.0F;
+                });
         });
     }
 }
