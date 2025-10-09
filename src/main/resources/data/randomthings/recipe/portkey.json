@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    "GSG",
+    " D "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "S": {
+      "item": "randomthings:stable_ender_pearl"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:portkey"
+  }
+}

@@ -18,4 +18,7 @@ public class ModRecipeSerializers {
 
     public static final Supplier<RecipeSerializer<GoldenCompassRecipe>> GOLDEN_COMPASS =
         RECIPE_SERIALIZERS.register("golden_compass", GoldenCompassRecipeSerializer::new);
+
+    public static final Supplier<RecipeSerializer<PortkeyCamoRecipe>> PORTKEY_CAMO =
+        RECIPE_SERIALIZERS.register("portkey_camo", PortkeyCamoRecipe.Serializer::new);
 }

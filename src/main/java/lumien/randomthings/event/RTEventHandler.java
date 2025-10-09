@@ -13,11 +13,16 @@ import lumien.randomthings.item.ObsidianSkullItem;
 import lumien.randomthings.item.WaterWalkingBootsItem;
 import lumien.randomthings.item.ObsidianWaterWalkingBootsItem;
 import lumien.randomthings.item.LavaWadersItem;
+import lumien.randomthings.util.PortkeyTarget;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -35,10 +40,15 @@ import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RTEventHandler {
     
@@ -507,5 +517,90 @@ public class RTEventHandler {
     private static boolean isWearingLavaWaders(Player player) {
         ItemStack boots = player.getInventory().getArmor(0); // 0 = boots slot
         return boots.getItem() instanceof LavaWadersItem;
+    }
+
+    /**
+     * Handle portkey pickup teleportation
+     * When a player picks up a primed portkey (age > 100 ticks), teleport them to the target location
+     */
+    @SubscribeEvent
+    public static void onItemPickup(ItemEntityPickupEvent.Pre event) {
+        ItemEntity itemEntity = event.getItemEntity();
+        ItemStack stack = itemEntity.getItem();
+        Player player = event.getPlayer();
+
+        // Check if it's a portkey
+        if (stack.getItem() != ModItems.PORTKEY.get()) {
+            return;
+        }
+
+        // Check if it has a target set
+        PortkeyTarget target = stack.get(ModDataComponents.PORTKEY_TARGET.get());
+        if (target == null) {
+            return;
+        }
+
+        // Check if it's primed (age > 100 ticks)
+        Integer age = stack.get(ModDataComponents.PORTKEY_AGE.get());
+        if (age == null || age <= 100) {
+            return;
+        }
+
+        // Only process on server side
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        ServerLevel serverLevel = (ServerLevel) player.level();
+        ServerPlayer serverPlayer = (ServerPlayer) player;
+
+        // Check if player is in the same dimension as the target
+        if (!serverLevel.dimension().equals(target.dimension())) {
+            // Cannot teleport cross-dimension, allow normal pickup
+            return;
+        }
+
+        // Find a safe landing spot within 2 blocks of the target
+        BlockPos targetPos = target.pos();
+        List<BlockPos> possiblePositions = new ArrayList<>();
+
+        // Search in a 5x5 horizontal area around the target, going down up to 10 blocks
+        for (int offsetX = -2; offsetX <= 2; offsetX++) {
+            for (int offsetZ = -2; offsetZ <= 2; offsetZ++) {
+                for (int checkY = targetPos.getY(); checkY >= targetPos.getY() - 10 && checkY >= serverLevel.getMinBuildHeight(); checkY--) {
+                    BlockPos checkPos = new BlockPos(targetPos.getX() + offsetX, checkY, targetPos.getZ() + offsetZ);
+
+                    // Check if this position has a solid block with air above (safe landing spot)
+                    if (serverLevel.getBlockState(checkPos).isFaceSturdy(serverLevel, checkPos, Direction.UP)) {
+                        BlockPos abovePos = checkPos.above();
+                        BlockPos abovePos2 = abovePos.above();
+
+                        if (serverLevel.getBlockState(abovePos).isAir() && serverLevel.getBlockState(abovePos2).isAir()) {
+                            possiblePositions.add(checkPos);
+                            break; // Found a valid position at this X,Z, no need to check lower
+                        }
+                    }
+                }
+            }
+        }
+
+        // If we found valid positions, teleport to a random one
+        if (!possiblePositions.isEmpty()) {
+            Collections.shuffle(possiblePositions);
+            BlockPos teleportTarget = possiblePositions.get(0);
+
+            // Play teleport sound at original position
+            serverLevel.playSound(null, serverPlayer.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
+
+            // Teleport player to the target location (on top of the block)
+            serverPlayer.teleportTo(teleportTarget.getX() + 0.5, teleportTarget.getY() + 1, teleportTarget.getZ() + 0.5);
+
+            // Play teleport sound at new position
+            serverLevel.playSound(null, serverPlayer.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
+
+            // Remove the item entity - this prevents pickup since the entity no longer exists
+            itemEntity.discard();
+        }
+        // If no valid positions found, allow normal pickup (player can try again or keep it)
     }
 }

@@ -1,6 +1,8 @@
 package lumien.randomthings.client;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.model.PortkeyCamoModel;
+import lumien.randomthings.item.ModItems;
 import lumien.randomthings.client.events.LightRedirectorClientEvents;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -138,6 +141,21 @@ public class ClientModEvents {
         RTEventHandler.onClientTick(event);
     }
     
+    @SubscribeEvent
+    public static void onModifyBakingResult(ModelEvent.ModifyBakingResult event) {
+        // Wrap the portkey model to support camo
+        net.minecraft.client.resources.model.ModelResourceLocation portkeyLocation =
+            new net.minecraft.client.resources.model.ModelResourceLocation(
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("randomthings", "portkey"),
+                "inventory"
+            );
+
+        net.minecraft.client.resources.model.BakedModel originalModel = event.getModels().get(portkeyLocation);
+        if (originalModel != null) {
+            event.getModels().put(portkeyLocation, new PortkeyCamoModel(originalModel));
+        }
+    }
+
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {

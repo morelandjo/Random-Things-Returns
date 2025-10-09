@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.util.ChunkAnalyzerResult;
 import lumien.randomthings.util.ItemFilterData;
+import lumien.randomthings.util.PortkeyTarget;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -197,6 +198,28 @@ public class ModDataComponents {
             () -> DataComponentType.<ItemContainerContents>builder()
                 .persistent(ItemContainerContents.CODEC)
                 .networkSynchronized(ItemContainerContents.STREAM_CODEC)
+                .build());
+
+    // Portkey data components
+    public static final Supplier<DataComponentType<PortkeyTarget>> PORTKEY_TARGET =
+        DATA_COMPONENTS.register("portkey_target",
+            () -> DataComponentType.<PortkeyTarget>builder()
+                .persistent(PortkeyTarget.CODEC)
+                .networkSynchronized(PortkeyTarget.STREAM_CODEC)
+                .build());
+
+    public static final Supplier<DataComponentType<Integer>> PORTKEY_AGE =
+        DATA_COMPONENTS.register("portkey_age",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    public static final Supplier<DataComponentType<ResourceLocation>> PORTKEY_CAMO =
+        DATA_COMPONENTS.register("portkey_camo",
+            () -> DataComponentType.<ResourceLocation>builder()
+                .persistent(ResourceLocation.CODEC)
+                .networkSynchronized(ResourceLocation.STREAM_CODEC)
                 .build());
 
 }

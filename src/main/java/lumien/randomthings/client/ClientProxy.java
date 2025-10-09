@@ -4,6 +4,8 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.blockentity.ModBlockEntityTypes;
 import lumien.randomthings.client.renderer.DiaphanousBlockRenderer;
 import lumien.randomthings.client.renderer.EclipsedClockRenderer;
+import lumien.randomthings.client.renderer.PortkeyItemRenderer;
+import lumien.randomthings.client.renderer.PortkeyRenderer;
 import lumien.randomthings.client.renderer.TimeAcceleratorRenderer;
 import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
 import lumien.randomthings.client.renderer.LightRedirectorRenderer;
@@ -20,6 +22,9 @@ public class ClientProxy {
     
     public static void setupClient(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            // Initialize Portkey custom renderer
+            PortkeyItemRenderer.setRenderer(new PortkeyRenderer());
+
             // Register render layers for transparent blocks
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLOOD_ROSE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOTUS.get(), RenderType.cutout());

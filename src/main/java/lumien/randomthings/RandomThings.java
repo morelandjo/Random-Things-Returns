@@ -86,6 +86,7 @@ public class RandomThings {
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerItemColors);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::onClientSetup);
+            modEventBus.addListener(lumien.randomthings.client.ClientModEvents::onModifyBakingResult);
         }
 
         // Register game events
@@ -106,6 +107,8 @@ public class RandomThings {
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onWaterWalkingTick);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLavaWalkingTick);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLavaWadersTick);
+        // Portkey teleportation handler
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onItemPickup);
 
         // Register commands
         NeoForge.EVENT_BUS.addListener(this::registerCommands);

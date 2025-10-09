@@ -280,6 +280,9 @@ public class ModItems {
     public static final Supplier<Item> STABLE_ENDER_PEARL = ITEMS.register("stable_ender_pearl",
         () -> new StableEnderPearlItem());
 
+    public static final Supplier<Item> PORTKEY = ITEMS.register("portkey",
+        () -> new PortkeyItem(new Item.Properties().stacksTo(1)));
+
     // Ender Buckets
     public static final Supplier<Item> ENDER_BUCKET = ITEMS.register("ender_bucket",
         () -> new EnderBucketItem());
@@ -594,6 +597,7 @@ public class ModItems {
             output.accept(ESCAPE_ROPE.get());
             // Ender Bridge System
             output.accept(STABLE_ENDER_PEARL.get());
+            output.accept(PORTKEY.get());
             output.accept(ENDER_BUCKET.get());
             output.accept(REINFORCED_ENDER_BUCKET.get());
             output.accept(ENDER_LETTER.get());
