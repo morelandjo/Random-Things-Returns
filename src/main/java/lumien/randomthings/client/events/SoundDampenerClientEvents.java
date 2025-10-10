@@ -5,6 +5,9 @@ import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
 import lumien.randomthings.item.ModDataComponents;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.SoundRecorderItem;
+import lumien.randomthings.network.SoundPlayedPacket;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +35,8 @@ public class SoundDampenerClientEvents {
      * Intercepts sound playback and cancels sounds matching any Sound Pattern
      * in either a Portable Sound Dampener in the player's inventory or a
      * Sound Dampener block within 20 blocks.
+     *
+     * Also records sounds to Sound Recorders that are in recording mode.
      */
     @SubscribeEvent
     public static void onPlaySound(PlaySoundEvent event) {
@@ -45,6 +50,18 @@ public class SoundDampenerClientEvents {
 
         if (player == null || mc.level == null) {
             return;
+        }
+
+        // Check for Sound Recorders in recording mode and send packet to server
+        for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
+            ItemStack stack = player.getInventory().getItem(slot);
+
+            if (stack.getItem() == ModItems.SOUND_RECORDER.get()) {
+                if (SoundRecorderItem.isRecording(stack)) {
+                    // Send packet to server to record this sound
+                    PacketDistributor.sendToServer(new SoundPlayedPacket(soundLocation, slot));
+                }
+            }
         }
 
         // Check portable dampeners in player inventory

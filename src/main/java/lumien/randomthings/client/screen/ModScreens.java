@@ -24,5 +24,6 @@ public class ModScreens {
         event.register(ModMenuTypes.REDSTONE_REMOTE_USE.get(), RedstoneRemoteUseScreen::new);
         event.register(ModMenuTypes.PORTABLE_SOUND_DAMPENER.get(), PortableSoundDampenerScreen::new);
         event.register(ModMenuTypes.SOUND_DAMPENER.get(), SoundDampenerScreen::new);
+        event.register(ModMenuTypes.SOUND_RECORDER.get(), SoundRecorderScreen::new);
     }
 }

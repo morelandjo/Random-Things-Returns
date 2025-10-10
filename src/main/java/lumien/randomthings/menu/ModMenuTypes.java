@@ -136,4 +136,9 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) ->
                 new SoundDampenerMenu(windowId, inventory, data.readBlockPos())));
 
+    public static final Supplier<MenuType<SoundRecorderMenu>> SOUND_RECORDER =
+        MENU_TYPES.register("sound_recorder",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) ->
+                new SoundRecorderMenu(windowId, inventory)));
+
 }

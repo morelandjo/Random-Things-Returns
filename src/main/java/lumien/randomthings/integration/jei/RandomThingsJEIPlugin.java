@@ -129,6 +129,12 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.RUNE_DUST.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.RUNE_PATTERN.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
 
+        // Sound System - for recording and dampening sounds
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUND_DAMPENER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SOUND_PATTERN.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SOUND_RECORDER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.PORTABLE_SOUND_DAMPENER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }
     

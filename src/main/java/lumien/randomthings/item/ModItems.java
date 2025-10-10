@@ -264,6 +264,9 @@ public class ModItems {
     public static final Supplier<Item> SOUND_PATTERN = ITEMS.register("sound_pattern",
         () -> new ItemSoundPattern());
 
+    public static final Supplier<Item> SOUND_RECORDER = ITEMS.register("sound_recorder",
+        () -> new SoundRecorderItem());
+
     public static final Supplier<Item> PORTABLE_SOUND_DAMPENER = ITEMS.register("portable_sound_dampener",
         () -> new ItemPortableSoundDampener());
 
@@ -600,6 +603,7 @@ public class ModItems {
             output.accept(REDSTONE_REMOTE.get());
 
             output.accept(SOUND_PATTERN.get());
+            output.accept(SOUND_RECORDER.get());
             output.accept(PORTABLE_SOUND_DAMPENER.get());
 
             output.accept(CHUNK_ANALYZER.get());

@@ -50,6 +50,10 @@ public class RTPacketHandler {
             (message, context) -> EnderLetterUpdatePacket.handle(message, context));
         registrar.playToServer(RedstoneRemotePayload.TYPE, RedstoneRemotePayload.STREAM_CODEC,
             (message, context) -> RedstoneRemotePayload.handle(message, context));
+        registrar.playToServer(SoundPlayedPacket.TYPE, SoundPlayedPacket.STREAM_CODEC,
+            (message, context) -> SoundPlayedPacket.handle(message, context));
+        registrar.playToServer(SoundSelectedPacket.TYPE, SoundSelectedPacket.STREAM_CODEC,
+            (message, context) -> SoundSelectedPacket.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {

@@ -89,6 +89,7 @@
   "item.randomthings.blaze_and_steel": "Blaze and Steel",
   "item.randomthings.chunk_analyzer": "Chunk Analyzer",
   "item.randomthings.sound_pattern": "Sound Pattern",
+  "item.randomthings.sound_recorder": "Sound Recorder",
   "item.randomthings.portable_sound_dampener": "Portable Sound Dampener",
   "item.randomthings.eclipsed_clock": "Eclipsed Clock",
   "item.randomthings.time_in_a_bottle": "Time in a Bottle",
@@ -132,6 +133,7 @@
   "tooltip.randomthings.block_destabilizer": "Makes connected blocks fall when powered by redstone. Has configurable lazy and fuzzy modes.",
   "tooltip.randomthings.sound_dampener": "Dampens sounds from Sound Patterns in its inventory within a 20-block radius.",
   "tooltip.randomthings.sound_pattern": "Records a sound effect. Shift+right-click to clear. Used with Sound Dampeners.",
+  "tooltip.randomthings.sound_recorder": "Records sounds and saves them to Sound Patterns. Shift+right-click to start/stop recording (max 10 sounds). Right-click to open GUI and save sounds.",
   "tooltip.randomthings.portable_sound_dampener": "Dampens sounds from Sound Patterns in its inventory while in your inventory.",
   "tooltip.randomthings.iron_dropper": "An advanced configurable Dropper. You can change the pickup delay of items dropped, whether the dropper spits the items out \"perfectly straight\" (Nice for Superlubricent Ice/Stone), whether there are any particles/sound effects & how it reacts to redstone.",
   "tooltip.randomthings.chat_detector": "Outputs redstone signal when the owner sends a specific chat message",
@@ -155,6 +157,7 @@
   
   "container.randomthings.block_destabilizer": "Block Destabilizer",
   "container.randomthings.sound_dampener": "Sound Dampener",
+  "container.randomthings.sound_recorder": "Sound Recorder",
   "container.randomthings.portable_sound_dampener": "Portable Sound Dampener",
   "container.randomthings.iron_dropper": "Iron Dropper",
   "gui.randomthings.block_destabilizer.lazy": "Lazy Mode: Remembers the shape from the last operation for faster subsequent runs",

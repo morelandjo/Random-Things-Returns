@@ -240,4 +240,20 @@ public class ModDataComponents {
                 ))
                 .build());
 
+    // Sound Recorder - stores whether it's currently recording
+    public static final Supplier<DataComponentType<Boolean>> SOUND_RECORDER_RECORDING =
+        DATA_COMPONENTS.register("sound_recorder_recording",
+            () -> DataComponentType.<Boolean>builder()
+                .persistent(Codec.BOOL)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                .build());
+
+    // Sound Recorder - stores the list of recorded sound resource locations
+    public static final Supplier<DataComponentType<java.util.List<ResourceLocation>>> SOUND_RECORDER_SOUNDS =
+        DATA_COMPONENTS.register("sound_recorder_sounds",
+            () -> DataComponentType.<java.util.List<ResourceLocation>>builder()
+                .persistent(ResourceLocation.CODEC.listOf())
+                .networkSynchronized(ResourceLocation.STREAM_CODEC.apply(net.minecraft.network.codec.ByteBufCodecs.list()))
+                .build());
+
 }

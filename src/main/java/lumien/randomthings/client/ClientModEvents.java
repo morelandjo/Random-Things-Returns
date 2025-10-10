@@ -226,6 +226,15 @@ public class ClientModEvents {
                     }
                     return 0.0F;
                 });
+
+            // Register sound recorder recording property for idle/active model switching
+            ItemProperties.register(ModItems.SOUND_RECORDER.get(), ResourceLocation.parse("randomthings:recording"),
+                (stack, level, entity, id) -> {
+                    if (stack.getItem() instanceof lumien.randomthings.item.SoundRecorderItem) {
+                        return lumien.randomthings.item.SoundRecorderItem.isRecording(stack) ? 1.0F : 0.0F;
+                    }
+                    return 0.0F;
+                });
         });
     }
 }
