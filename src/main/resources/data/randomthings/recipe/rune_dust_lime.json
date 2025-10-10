@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "minecraft:clay_ball"},
+    {"item": "randomthings:luminous_powder"},
+    {"item": "minecraft:lime_dye"}
+  ],
+  "result": {
+    "count": 8,
+    "id": "randomthings:rune_dust",
+    "components": {
+      "randomthings:rune_color": "lime"
+    }
+  }
+}

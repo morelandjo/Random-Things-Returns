@@ -222,4 +222,22 @@ public class ModDataComponents {
                 .networkSynchronized(ResourceLocation.STREAM_CODEC)
                 .build());
 
+    // Rune Dust color component (stores the DyeColor for the rune dust)
+    public static final Supplier<DataComponentType<DyeColor>> RUNE_COLOR =
+        DATA_COMPONENTS.register("rune_color",
+            () -> DataComponentType.<DyeColor>builder()
+                .persistent(DyeColor.CODEC)
+                .networkSynchronized(DyeColor.STREAM_CODEC)
+                .build());
+
+    // Rune Pattern data (stores the 4x4 grid of rune colors, -1 for empty)
+    public static final Supplier<DataComponentType<int[]>> RUNE_PATTERN =
+        DATA_COMPONENTS.register("rune_pattern",
+            () -> DataComponentType.<int[]>builder()
+                .persistent(Codec.INT_STREAM.xmap(
+                    stream -> stream.toArray(),
+                    array -> java.util.Arrays.stream(array)
+                ))
+                .build());
+
 }

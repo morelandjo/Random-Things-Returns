@@ -123,7 +123,12 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.PORTKEY.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.ENDER_BUCKET.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.REINFORCED_ENDER_BUCKET.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
-        
+
+        // Rune System
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.RUNE_BASE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.RUNE_DUST.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.RUNE_PATTERN.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }
     

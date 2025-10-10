@@ -345,6 +345,17 @@ public class ModItems {
     public static final Supplier<Item> LUMINOUS_POWDER = ITEMS.register("luminous_powder",
         () -> new LuminousPowderItem());
 
+    // Rune System Items
+    public static final Supplier<Item> RUNE_DUST = ITEMS.register("rune_dust",
+        () -> new RuneDustItem(new Item.Properties()
+            .component(ModDataComponents.RUNE_COLOR.get(), DyeColor.WHITE))); // Default white component
+
+    public static final Supplier<Item> RUNE_PATTERN = ITEMS.register("rune_pattern",
+        () -> new RunePatternItem());
+
+    public static final Supplier<Item> RUNE_BASE = ITEMS.register("rune_base",
+        () -> new BlockItem(ModBlocks.RUNE_BASE.get(), new Item.Properties()));
+
     // Regular Luminous Blocks - All 16 colors
     public static final Supplier<Item> LUMINOUS_BLOCK_WHITE = ITEMS.register("luminous_block_white",
         () -> new LuminousBlockItem(ModBlocks.LUMINOUS_BLOCK.get(), new Item.Properties(), DyeColor.WHITE));
@@ -619,6 +630,12 @@ public class ModItems {
             output.accept(LOTUS_BLOSSOM.get());
             // Luminous Blocks
             output.accept(LUMINOUS_POWDER.get());
+
+            // Rune System - DON'T add rune_dust here, it gets auto-added
+            // Players can craft colored versions from white rune dust
+            output.accept(RUNE_PATTERN.get());
+            output.accept(RUNE_BASE.get());
+
             output.accept(LUMINOUS_BLOCK_WHITE.get());
             output.accept(LUMINOUS_BLOCK_ORANGE.get());
             output.accept(LUMINOUS_BLOCK_MAGENTA.get());

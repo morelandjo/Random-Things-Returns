@@ -43,7 +43,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientModEvents {
-    
+
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         BlockColor biomeBlockColor = (state, level, pos, tintIndex) -> {
@@ -52,37 +52,46 @@ public class ClientModEvents {
             }
             return 0x7CB518; // Default green
         };
-        
+
         // Register biome color handler for biome blocks
-        event.register(biomeBlockColor, 
+        event.register(biomeBlockColor,
             ModBlocks.BIOME_STONE.get(),
             ModBlocks.BIOME_GLASS.get()
         );
-        
+
         // Register lapis color handler for lapis glass
         BlockColor lapisGlassColor = (state, level, pos, tintIndex) -> 0x3C44AA; // Lapis blue color
         event.register(lapisGlassColor, ModBlocks.LAPIS_GLASS.get());
-        
+
         // Register quartz glass color handler
         BlockColor quartzGlassColor = (state, level, pos, tintIndex) -> 0xFFFFFF; // White color
         event.register(quartzGlassColor, ModBlocks.QUARTZ_GLASS.get());
-        
+
         // Register trigger glass color handler
         BlockColor triggerGlassColor = (state, level, pos, tintIndex) -> {
             // Red color when not triggered, color doesn't matter when invisible
             return 0xFF4444; // Red color
         };
         event.register(triggerGlassColor, ModBlocks.TRIGGER_GLASS.get());
-        
+
         // Register compressed slime block color handler
         BlockColor compressedSlimeColor = (state, level, pos, tintIndex) -> {
             int compression = state.getValue(lumien.randomthings.block.CompressedSlimeBlock.COMPRESSION);
             int[] compressionColors = {0xC8C8C8, 0x969696, 0x646464}; // Light gray, medium gray, dark gray
             return compressionColors[compression];
         };
-        
+
         event.register(compressedSlimeColor, ModBlocks.COMPRESSED_SLIME_BLOCK.get());
-        
+
+        // Register rune base block color handler - tints based on dye color
+        BlockColor runeBaseColor = (state, level, pos, tintIndex) -> {
+            if (tintIndex >= 0 && tintIndex < DyeColor.values().length) {
+                return DyeColor.byId(tintIndex).getFireworkColor();
+            }
+            return 0xFFFFFF;
+        };
+        event.register(runeBaseColor, ModBlocks.RUNE_BASE.get());
+
         // Remove the destabilizer color handler for now - let's try without tinting
     }
     
@@ -99,6 +108,14 @@ public class ClientModEvents {
         // Register trigger glass item color
         ItemColor triggerGlassItemColor = (stack, tintIndex) -> 0xFF4444; // Red color
         event.register(triggerGlassItemColor, ModItems.TRIGGER_GLASS.get());
+
+        // Register rune dust item color - tints based on dye color data component
+        ItemColor runeDustItemColor = (stack, tintIndex) -> {
+            DyeColor color = stack.get(lumien.randomthings.item.ModDataComponents.RUNE_COLOR.get());
+            // getFireworkColor() returns RGB without alpha, need to add alpha channel (0xFF prefix for full opacity)
+            return (color != null) ? (0xFF000000 | color.getFireworkColor()) : 0xFFFFFFFF;
+        };
+        event.register(runeDustItemColor, ModItems.RUNE_DUST.get());
     }
     
     
@@ -167,6 +184,7 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.GLOWING_MUSHROOM.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_CUBE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUNE_BASE.get(), RenderType.cutout());
             
             // Register item properties
             ItemProperties.register(ModItems.ECLIPSED_CLOCK.get(), ResourceLocation.parse("randomthings:time"), 

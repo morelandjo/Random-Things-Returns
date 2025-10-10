@@ -235,4 +235,8 @@ public class ModBlocks {
             .strength(5.0F, 6.0F)
             .sound(SoundType.METAL)));
 
+    // Rune System
+    public static final Supplier<Block> RUNE_BASE = BLOCKS.register("rune_base",
+        () -> new BlockRuneBase());
+
 }

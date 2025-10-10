@@ -1,0 +1,23 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "textures": {
+    "particle": "randomthings:block/runebase",
+    "texture": "randomthings:block/runebase"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 0.05, 16],
+      "faces": {
+        "up": {
+          "texture": "#texture",
+          "cullface": "up"
+        },
+        "down": {
+          "texture": "#texture",
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}
