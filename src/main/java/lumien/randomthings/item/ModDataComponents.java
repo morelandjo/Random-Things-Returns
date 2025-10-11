@@ -256,4 +256,12 @@ public class ModDataComponents {
                 .networkSynchronized(ResourceLocation.STREAM_CODEC.apply(net.minecraft.network.codec.ByteBufCodecs.list()))
                 .build());
 
+    // Spectre Anchor - marks items as anchored (preventing them from dropping on death)
+    public static final Supplier<DataComponentType<Boolean>> SPECTRE_ANCHORED =
+        DATA_COMPONENTS.register("spectre_anchored",
+            () -> DataComponentType.<Boolean>builder()
+                .persistent(Codec.BOOL)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                .build());
+
 }

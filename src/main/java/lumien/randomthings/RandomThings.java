@@ -109,6 +109,9 @@ public class RandomThings {
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLavaWadersTick);
         // Portkey teleportation handler
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onItemPickup);
+        // Spectre Anchor event handlers
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDrops);
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onPlayerClone);
 
         // Register commands
         NeoForge.EVENT_BUS.addListener(this::registerCommands);

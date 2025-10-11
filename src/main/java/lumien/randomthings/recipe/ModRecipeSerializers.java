@@ -21,4 +21,7 @@ public class ModRecipeSerializers {
 
     public static final Supplier<RecipeSerializer<PortkeyCamoRecipe>> PORTKEY_CAMO =
         RECIPE_SERIALIZERS.register("portkey_camo", PortkeyCamoRecipe.Serializer::new);
+
+    public static final Supplier<RecipeSerializer<SpectreAnchorRecipe>> SPECTRE_ANCHOR =
+        RECIPE_SERIALIZERS.register("spectre_anchor", SpectreAnchorRecipeSerializer::new);
 }

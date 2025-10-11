@@ -197,6 +197,8 @@ public class ModItems {
         () -> new EctoplasmItem());
     public static final Supplier<Item> SPECTRE_INGOT = ITEMS.register("spectre_ingot",
         () -> new SpectreIngotItem());
+    public static final Supplier<Item> SPECTRE_ANCHOR = ITEMS.register("spectre_anchor",
+        () -> new SpectreAnchorItem(new Item.Properties()));
 
     // Bean Items
     public static final Supplier<Item> BEAN = ITEMS.register("bean",
@@ -554,6 +556,7 @@ public class ModItems {
             output.accept(MAGIC_HOOD.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
+            output.accept(SPECTRE_ANCHOR.get());
             output.accept(BIOME_STONE_SMOOTH.get());
             output.accept(BIOME_STONE_COBBLE.get());
             output.accept(BIOME_STONE_BRICK.get());

@@ -398,5 +398,9 @@
   "item.randomthings.redstone_remote": "Redstone Remote",
 
   "item.randomthings.magic_hood": "Magic Hood",
-  "tooltip.randomthings.magic_hood": "Hides your nameplate and potion particles. Found in dungeons and village blacksmith chests."
+  "tooltip.randomthings.magic_hood": "Hides your nameplate and potion particles. Found in dungeons and village blacksmith chests.",
+
+  "item.randomthings.spectre_anchor": "Spectre Anchor",
+  "tooltip.randomthings.spectre_anchor": "Items combined with a Spectre Anchor in a Crafting Table don't leave your inventory when you die.",
+  "tooltip.randomthings.spectre_anchor.anchored": "Anchored"
 }

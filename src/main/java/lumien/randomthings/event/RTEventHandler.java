@@ -39,8 +39,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -48,11 +50,18 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class RTEventHandler {
-    
+
     public static int clientAnimationCounter;
+
+    // Store anchored items per player UUID when they die
+    private static final Map<UUID, List<ItemStack>> ANCHORED_ITEMS = new HashMap<>();
     
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
@@ -602,5 +611,104 @@ public class RTEventHandler {
             itemEntity.discard();
         }
         // If no valid positions found, allow normal pickup (player can try again or keep it)
+    }
+
+    /**
+     * Handle Spectre Anchor - prevent anchored items from being dropped on death
+     * This runs BEFORE items are dropped and removes anchored items from the drop list
+     */
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onLivingDrops(LivingDropsEvent event) {
+        // Only handle players
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        // Skip for fake players
+        if (player instanceof FakePlayer) {
+            return;
+        }
+
+        // Skip if keep inventory is enabled (items don't drop anyway)
+        if (player.level().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_KEEPINVENTORY)) {
+            return;
+        }
+
+        // Store and remove anchored items from the drops
+        List<ItemStack> anchoredItems = new ArrayList<>();
+        var iterator = event.getDrops().iterator();
+        while (iterator.hasNext()) {
+            ItemEntity itemEntity = iterator.next();
+            ItemStack stack = itemEntity.getItem();
+
+            if (stack.has(ModDataComponents.SPECTRE_ANCHORED.get())) {
+                Boolean isAnchored = stack.get(ModDataComponents.SPECTRE_ANCHORED.get());
+
+                if (isAnchored != null && isAnchored) {
+                    // Store the anchored item
+                    anchoredItems.add(stack.copy());
+                    iterator.remove();
+                }
+            }
+        }
+
+        // Store the anchored items for this player
+        if (!anchoredItems.isEmpty()) {
+            ANCHORED_ITEMS.put(player.getUUID(), anchoredItems);
+        }
+    }
+
+    /**
+     * Handle Spectre Anchor - transfer anchored items to respawned player
+     * This runs when a player respawns after death and restores their anchored items
+     */
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        // Only handle death cloning, not return from End
+        if (!event.isWasDeath()) {
+            return;
+        }
+
+        // Skip if keep inventory is enabled
+        if (event.getEntity().level().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_KEEPINVENTORY)) {
+            return;
+        }
+
+        // Skip for fake players
+        if (event.getEntity() instanceof FakePlayer) {
+            return;
+        }
+
+        Player newPlayer = event.getEntity();
+
+        // Get stored anchored items for this player
+        List<ItemStack> anchoredItems = ANCHORED_ITEMS.remove(newPlayer.getUUID());
+
+        if (anchoredItems == null || anchoredItems.isEmpty()) {
+            return;
+        }
+
+        // Transfer anchored items to new player
+        for (ItemStack stack : anchoredItems) {
+            // Try to find an empty slot
+            int emptySlot = newPlayer.getInventory().getFreeSlot();
+
+            if (emptySlot != -1) {
+                // Place the anchored item in the empty slot
+                newPlayer.getInventory().setItem(emptySlot, stack.copy());
+            } else {
+                // No empty slots, drop the anchored item at player's location
+                if (!newPlayer.level().isClientSide) {
+                    ItemEntity itemEntity = new ItemEntity(
+                        newPlayer.level(),
+                        newPlayer.getX(),
+                        newPlayer.getY(),
+                        newPlayer.getZ(),
+                        stack.copy()
+                    );
+                    newPlayer.level().addFreshEntity(itemEntity);
+                }
+            }
+        }
     }
 }
