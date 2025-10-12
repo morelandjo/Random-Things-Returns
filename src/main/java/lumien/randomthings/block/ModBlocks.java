@@ -239,4 +239,11 @@ public class ModBlocks {
     public static final Supplier<Block> RUNE_BASE = BLOCKS.register("rune_base",
         () -> new BlockRuneBase());
 
+    // Spectre Dimension Blocks
+    public static final Supplier<Block> SPECTRE_BLOCK = BLOCKS.register("spectre_block",
+        () -> new SpectreBlockBlock());
+
+    public static final Supplier<Block> SPECTRE_CORE = BLOCKS.register("spectre_core",
+        () -> new SpectreCoreBlock());
+
 }

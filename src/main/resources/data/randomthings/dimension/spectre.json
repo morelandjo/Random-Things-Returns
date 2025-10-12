@@ -1,0 +1,10 @@
+{
+  "type": "randomthings:spectre",
+  "generator": {
+    "type": "randomthings:spectre",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "randomthings:spectre_void"
+    }
+  }
+}

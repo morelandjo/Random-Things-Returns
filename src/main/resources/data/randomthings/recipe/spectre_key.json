@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    "I  ",
+    "IP ",
+    "  I"
+  ],
+  "key": {
+    "I": {
+      "item": "randomthings:ectoplasm"
+    },
+    "P": {
+      "item": "randomthings:stable_ender_pearl"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:spectre_key"
+  }
+}

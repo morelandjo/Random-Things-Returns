@@ -18,6 +18,7 @@ import lumien.randomthings.blockentity.ModBlockEntityTypes;
 import lumien.randomthings.menu.ModMenuTypes;
 import lumien.randomthings.worldgen.ModFeatures;
 import lumien.randomthings.worldgen.ModStructureProcessors;
+import lumien.randomthings.handler.spectre.ModChunkGenerators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -69,6 +70,7 @@ public class RandomThings {
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
 
         // Register lifecycle events
         modEventBus.addListener(this::setupCommon);

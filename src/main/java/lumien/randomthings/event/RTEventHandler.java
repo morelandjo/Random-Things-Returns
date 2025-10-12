@@ -6,6 +6,7 @@ import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.handler.RTWorldSavedData;
 import lumien.randomthings.handler.EscapeRopeHandler;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
+import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.LavaCharmItem;
 import lumien.randomthings.item.ModDataComponents;
 import lumien.randomthings.item.ModItems;
@@ -167,6 +168,7 @@ public class RTEventHandler {
 
     /**
      * Update Lava Charm charge for all players carrying one
+     * Also checks Spectre dimension security
      */
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -175,6 +177,14 @@ public class RTEventHandler {
         // Only process on server side
         if (player.level().isClientSide) {
             return;
+        }
+
+        // Check Spectre dimension security
+        if (SpectreHandler.isSpectreDimension(player.level()) && player instanceof ServerPlayer serverPlayer) {
+            SpectreHandler handler = SpectreHandler.getInstance(serverPlayer.getServer());
+            if (handler != null) {
+                handler.checkPosition(serverPlayer);
+            }
         }
 
         // Find Lava Charm in player's inventory

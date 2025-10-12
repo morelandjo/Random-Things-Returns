@@ -409,5 +409,12 @@
 
   "item.randomthings.spectre_anchor": "Spectre Anchor",
   "tooltip.randomthings.spectre_anchor": "Items combined with a Spectre Anchor in a Crafting Table don't leave your inventory when you die.",
-  "tooltip.randomthings.spectre_anchor.anchored": "Anchored"
+  "tooltip.randomthings.spectre_anchor.anchored": "Anchored",
+
+  "item.randomthings.spectre_key": "Spectre Key",
+  "tooltip.randomthings.spectre_key": "The Spectre Key grants you access to your own private room in the Spectre Dimension. Hold right-click for 5 seconds to teleport there. Use it again in your room to teleport back.",
+  "block.randomthings.spectre_core": "Spectre Core",
+  "tooltip.randomthings.spectre_core": "The core of your Spectre room. Right-click with Ectoplasm to increase room height. Right-click empty-handed to teleport back.",
+  "block.randomthings.spectre_block": "Spectre Block",
+  "tooltip.randomthings.spectre_block": "The indestructible walls of your Spectre room. Cannot be broken or moved."
 }

@@ -185,6 +185,10 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_CUBE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUNE_BASE.get(), RenderType.cutout());
+
+            // Spectre Dimension blocks - translucent rendering
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_BLOCK.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_CORE.get(), RenderType.translucent());
             
             // Register item properties
             ItemProperties.register(ModItems.ECLIPSED_CLOCK.get(), ResourceLocation.parse("randomthings:time"), 
