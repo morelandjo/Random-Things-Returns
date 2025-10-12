@@ -199,6 +199,10 @@ public class ModItems {
         () -> new SpectreIngotItem());
     public static final Supplier<Item> SPECTRE_ANCHOR = ITEMS.register("spectre_anchor",
         () -> new SpectreAnchorItem(new Item.Properties()));
+    public static final Supplier<Item> SPECTRE_ILLUMINATOR = ITEMS.register("spectre_illuminator",
+        () -> new SpectreIlluminatorItem());
+    public static final Supplier<Item> BLACKOUT_POWDER = ITEMS.register("blackout_powder",
+        () -> new BlackoutPowderItem());
 
     // Bean Items
     public static final Supplier<Item> BEAN = ITEMS.register("bean",
@@ -557,6 +561,8 @@ public class ModItems {
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(SPECTRE_ANCHOR.get());
+            output.accept(SPECTRE_ILLUMINATOR.get());
+            output.accept(BLACKOUT_POWDER.get());
             output.accept(BIOME_STONE_SMOOTH.get());
             output.accept(BIOME_STONE_COBBLE.get());
             output.accept(BIOME_STONE_BRICK.get());

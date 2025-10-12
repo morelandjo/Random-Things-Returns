@@ -58,4 +58,12 @@ public class ModEntityTypes {
             .updateInterval(3)
             .build("golden_chicken")
     );
+
+    public static final Supplier<EntityType<SpectreIlluminatorEntity>> SPECTRE_ILLUMINATOR = ENTITY_TYPES.register("spectre_illuminator",
+        () -> EntityType.Builder.<SpectreIlluminatorEntity>of(SpectreIlluminatorEntity::new, MobCategory.MISC)
+            .sized(0.5f, 0.5f)
+            .clientTrackingRange(64)
+            .updateInterval(1)
+            .build("spectre_illuminator")
+    );
 }

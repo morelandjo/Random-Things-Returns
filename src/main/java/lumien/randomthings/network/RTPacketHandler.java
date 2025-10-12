@@ -54,6 +54,8 @@ public class RTPacketHandler {
             (message, context) -> SoundPlayedPacket.handle(message, context));
         registrar.playToServer(SoundSelectedPacket.TYPE, SoundSelectedPacket.STREAM_CODEC,
             (message, context) -> SoundSelectedPacket.handle(message, context));
+        registrar.playToClient(SpectreIlluminationPacket.TYPE, SpectreIlluminationPacket.STREAM_CODEC,
+            (message, context) -> SpectreIlluminationPacket.handle(message, context));
     }
     
     public static void sendToTracking(Level level, BlockPos pos, VisualEffectMessage message) {

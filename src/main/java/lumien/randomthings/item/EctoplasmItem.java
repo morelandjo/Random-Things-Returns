@@ -15,7 +15,7 @@ public class EctoplasmItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("tooltip.randomthings.ectoplasm").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.translatable("tooltip.randomthings.ecto_plasm").withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

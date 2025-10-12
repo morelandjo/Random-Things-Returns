@@ -78,6 +78,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntityTypes.STABLE_ENDER_PEARL.get(), net.minecraft.client.renderer.entity.ItemEntityRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.GOLDEN_EGG.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.GOLDEN_CHICKEN.get(), lumien.randomthings.client.renderer.entity.GoldenChickenRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), lumien.randomthings.client.renderer.entity.SpectreIlluminatorRenderer::new);
     }
     
     public static void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {

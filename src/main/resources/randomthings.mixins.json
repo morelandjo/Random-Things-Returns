@@ -12,6 +12,7 @@
   "server": [
   ],
   "mixins": [
+    "LightEngineMixin",
     "SignalGetterMixin"
   ],
   "injectors": {
