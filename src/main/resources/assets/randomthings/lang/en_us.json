@@ -416,5 +416,14 @@
   "block.randomthings.spectre_core": "Spectre Core",
   "tooltip.randomthings.spectre_core": "The core of your Spectre room. Right-click with Ectoplasm to increase room height. Right-click empty-handed to teleport back.",
   "block.randomthings.spectre_block": "Spectre Block",
-  "tooltip.randomthings.spectre_block": "The indestructible walls of your Spectre room. Cannot be broken or moved."
+  "tooltip.randomthings.spectre_block": "The indestructible walls of your Spectre room. Cannot be broken or moved.",
+
+  "item.randomthings.spectre_pickaxe": "Spectre Pickaxe",
+  "item.randomthings.spectre_sword": "Spectre Sword",
+  "item.randomthings.spectre_shovel": "Spectre Shovel",
+  "item.randomthings.spectre_axe": "Spectre Axe",
+  "tooltip.randomthings.spectre_pickaxe": "A Spectre Pickaxe has more durability & enchantability than a diamond pickaxe and also increases the block range of the player holding it by 3 blocks.",
+  "tooltip.randomthings.spectre_sword": "A Spectre Sword has more durability & enchantability than a diamond sword and can also hurt spirits.",
+  "tooltip.randomthings.spectre_shovel": "A Spectre Shovel has more durability & enchantability than a diamond shovel and also increases the block range of the player holding it by 3 blocks.",
+  "tooltip.randomthings.spectre_axe": "A Spectre Axe has more durability & enchantability than a diamond axe and also increases the block range of the player holding it by 3 blocks."
 }

@@ -256,6 +256,19 @@ public class ModItems {
     public static final Supplier<Item> DIVINING_ROD_VANILLA = ITEMS.register("divining_rod_vanilla",
         () -> new DiviningRodItem(new Item.Properties(), getAllColors(), getAllTags()));
 
+    // Spectre Tools
+    public static final Supplier<Item> SPECTRE_PICKAXE = ITEMS.register("spectre_pickaxe",
+        () -> new SpectrePickaxeItem(new Item.Properties()));
+
+    public static final Supplier<Item> SPECTRE_SWORD = ITEMS.register("spectre_sword",
+        () -> new SpectreSwordItem(new Item.Properties()));
+
+    public static final Supplier<Item> SPECTRE_SHOVEL = ITEMS.register("spectre_shovel",
+        () -> new SpectreShovelItem(new Item.Properties()));
+
+    public static final Supplier<Item> SPECTRE_AXE = ITEMS.register("spectre_axe",
+        () -> new SpectreAxeItem(new Item.Properties()));
+
     // Tools
     public static final Supplier<Item> EMERALD_COMPASS = ITEMS.register("emerald_compass",
         () -> new EmeraldCompassItem(new Item.Properties()));
@@ -611,6 +624,11 @@ public class ModItems {
             output.accept(DIVINING_ROD_EMERALD.get());
             output.accept(DIVINING_ROD_DIAMOND.get());
             output.accept(DIVINING_ROD_VANILLA.get());
+            // Spectre Tools
+            output.accept(SPECTRE_PICKAXE.get());
+            output.accept(SPECTRE_SWORD.get());
+            output.accept(SPECTRE_SHOVEL.get());
+            output.accept(SPECTRE_AXE.get());
             output.accept(EMERALD_COMPASS.get());
             output.accept(GOLDEN_COMPASS.get());
             output.accept(BLAZE_AND_STEEL.get());

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    "SSS",
+    " O ",
+    " O "
+  ],
+  "key": {
+    "S": {
+      "item": "randomthings:ectoplasm"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:spectre_pickaxe"
+  }
+}

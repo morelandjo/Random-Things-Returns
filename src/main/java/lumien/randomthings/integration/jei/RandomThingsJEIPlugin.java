@@ -130,6 +130,12 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.SPECTRE_KEY.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.SPECTRE_BLOCK.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
 
+        // Spectre Tools
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SPECTRE_PICKAXE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SPECTRE_SWORD.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SPECTRE_SHOVEL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SPECTRE_AXE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
         // Rune System
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.RUNE_BASE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.RUNE_DUST.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
