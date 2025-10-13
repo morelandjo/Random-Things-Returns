@@ -1,0 +1,17 @@
+{
+  "type": "randomthings:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/stronghold_corridor"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.50
+    }
+  ],
+  "item": {
+    "id": "randomthings:summoning_pendulum",
+    "count": 1
+  }
+}

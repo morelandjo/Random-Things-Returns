@@ -407,6 +407,11 @@
   "item.randomthings.magic_hood": "Magic Hood",
   "tooltip.randomthings.magic_hood": "Hides your nameplate and potion particles. Found in dungeons and village blacksmith chests.",
 
+  "item.randomthings.summoning_pendulum": "Summoning Pendulum",
+  "tooltip.randomthings.summoning_pendulum": "Found in dungeons, the Summoning Pendulum can be used to pickup and move non-hostile entities.",
+  "tooltip.randomthings.summoning_pendulum.entityCount.singular": "§5Holding %d Entity",
+  "tooltip.randomthings.summoning_pendulum.entityCount.plural": "§5Holding %d Entities",
+
   "item.randomthings.spectre_anchor": "Spectre Anchor",
   "tooltip.randomthings.spectre_anchor": "Items combined with a Spectre Anchor in a Crafting Table don't leave your inventory when you die.",
   "tooltip.randomthings.spectre_anchor.anchored": "Anchored",

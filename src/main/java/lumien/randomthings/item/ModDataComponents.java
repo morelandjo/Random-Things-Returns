@@ -264,4 +264,11 @@ public class ModDataComponents {
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
                 .build());
 
+    // Summoning Pendulum - stores list of entity NBT compounds (up to 5 entities)
+    public static final Supplier<DataComponentType<java.util.List<net.minecraft.nbt.CompoundTag>>> SUMMONING_PENDULUM_ENTITIES =
+        DATA_COMPONENTS.register("summoning_pendulum_entities",
+            () -> DataComponentType.<java.util.List<net.minecraft.nbt.CompoundTag>>builder()
+                .persistent(net.minecraft.nbt.CompoundTag.CODEC.listOf())
+                .build());
+
 }

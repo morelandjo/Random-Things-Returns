@@ -192,6 +192,10 @@ public class ModItems {
     public static final Supplier<Item> MAGIC_HOOD = ITEMS.register("magic_hood",
         () -> new MagicHoodItem(new Item.Properties()));
 
+    // Summoning Pendulum
+    public static final Supplier<Item> SUMMONING_PENDULUM = ITEMS.register("summoning_pendulum",
+        () -> new SummoningPendulumItem());
+
     // Ectoplasm System Items
     public static final Supplier<Item> ECTOPLASM = ITEMS.register("ectoplasm",
         () -> new EctoplasmItem());
@@ -579,6 +583,7 @@ public class ModItems {
             output.accept(lavaWaders);
 
             output.accept(MAGIC_HOOD.get());
+            output.accept(SUMMONING_PENDULUM.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());
             output.accept(SPECTRE_ANCHOR.get());
