@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SW",
+    " B"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "W": {
+      "item": "minecraft:potion"
+    },
+    "B": {
+      "item": "randomthings:bean"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "randomthings:superlubricenttincture"
+  }
+}

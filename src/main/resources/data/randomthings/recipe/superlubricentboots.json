@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    " B ",
+    " T "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_boots"
+    },
+    "T": {
+      "item": "randomthings:superlubricenttincture"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:superlubricentboots"
+  }
+}

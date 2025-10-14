@@ -416,6 +416,12 @@
   "tooltip.randomthings.spectre_anchor": "Items combined with a Spectre Anchor in a Crafting Table don't leave your inventory when you die.",
   "tooltip.randomthings.spectre_anchor.anchored": "Anchored",
 
+  "item.randomthings.superlubricenttincture": "Super Lubricent Tincture",
+  "tooltip.randomthings.superlubricenttincture": "A slippery potion ingredient used to craft Super Lubricent Boots",
+
+  "item.randomthings.superlubricentboots": "Super Lubricent Boots",
+  "tooltip.randomthings.superlubricent_boots": "Wearing Super Lubricent Boots makes you glide over blocks without friction as if you were walking on Super Lubricent Ice. Hold shift to disable the effect.",
+
   "item.randomthings.spectre_key": "Spectre Key",
   "tooltip.randomthings.spectre_key": "The Spectre Key grants you access to your own private room in the Spectre Dimension. Hold right-click for 5 seconds to teleport there. Use it again in your room to teleport back.",
   "block.randomthings.spectre_core": "Spectre Core",

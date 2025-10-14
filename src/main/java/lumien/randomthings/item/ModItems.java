@@ -192,6 +192,13 @@ public class ModItems {
     public static final Supplier<Item> MAGIC_HOOD = ITEMS.register("magic_hood",
         () -> new MagicHoodItem(new Item.Properties()));
 
+    // Super Lubricent Items
+    public static final Supplier<Item> SUPER_LUBRICENT_TINCTURE = ITEMS.register("superlubricenttincture",
+        () -> new SuperLubricentTinctureItem());
+
+    public static final Supplier<Item> SUPER_LUBRICENT_BOOTS = ITEMS.register("superlubricentboots",
+        () -> new SuperLubricentBootsItem(new Item.Properties()));
+
     // Summoning Pendulum
     public static final Supplier<Item> SUMMONING_PENDULUM = ITEMS.register("summoning_pendulum",
         () -> new SummoningPendulumItem());
@@ -583,6 +590,8 @@ public class ModItems {
             output.accept(lavaWaders);
 
             output.accept(MAGIC_HOOD.get());
+            output.accept(SUPER_LUBRICENT_TINCTURE.get());
+            output.accept(SUPER_LUBRICENT_BOOTS.get());
             output.accept(SUMMONING_PENDULUM.get());
             output.accept(ECTOPLASM.get());
             output.accept(SPECTRE_INGOT.get());

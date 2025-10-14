@@ -135,6 +135,35 @@ public class ModArmorMaterials {
     );
 
     /**
+     * Super Lubricent Boots armor material
+     * - Iron armor stats (same protection as iron boots)
+     * - Standard durability
+     * - Provides frictionless movement when worn
+     * - Can be enchanted
+     */
+    public static final Holder<ArmorMaterial> SUPER_LUBRICENT = register(
+        "super_lubricent",
+        Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+            // Defense values per armor type (same as iron armor)
+            map.put(ArmorItem.Type.BOOTS, 2);
+            map.put(ArmorItem.Type.LEGGINGS, 5);
+            map.put(ArmorItem.Type.CHESTPLATE, 6);
+            map.put(ArmorItem.Type.HELMET, 2);
+            map.put(ArmorItem.Type.BODY, 5);
+        }),
+        9, // Enchantability (same as iron)
+        SoundEvents.ARMOR_EQUIP_IRON,
+        () -> Ingredient.of(Items.IRON_INGOT),
+        List.of(
+            new ArmorMaterial.Layer(
+                ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "superlubricentboots")
+            )
+        ),
+        0.0F, // Toughness
+        0.0F  // Knockback resistance
+    );
+
+    /**
      * Helper method to register an armor material
      */
     private static Holder<ArmorMaterial> register(

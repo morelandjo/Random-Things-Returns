@@ -114,6 +114,8 @@ public class RandomThings {
         // Spectre Anchor event handlers
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDrops);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onPlayerClone);
+        // Super Lubricent Boots handler
+        NeoForge.EVENT_BUS.addListener(lumien.randomthings.handler.SuperLubricentBootsHandler::onPlayerTickPost);
 
         // Register commands
         NeoForge.EVENT_BUS.addListener(this::registerCommands);

@@ -112,6 +112,11 @@ public class RandomThingsJEIPlugin implements IModPlugin {
 
         // Lava and Fire Protection Items
         registration.addRecipeCatalyst(new ItemStack(ModItems.OBSIDIAN_SKULL.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
+        // Super Lubricent Items
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SUPER_LUBRICENT_TINCTURE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SUPER_LUBRICENT_BOOTS.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
         registration.addRecipeCatalyst(new ItemStack(ModItems.CHUNK_ANALYZER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.ESCAPE_ROPE.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.POSITION_FILTER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
