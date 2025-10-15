@@ -239,6 +239,16 @@ public class ModItems {
     public static final Supplier<Item> GOLDEN_EGG = ITEMS.register("golden_egg",
         () -> new GoldenEggItem(new Item.Properties()));
 
+    // Weather Eggs
+    public static final Supplier<Item> WEATHER_EGG_SUN = ITEMS.register("weather_egg_sun",
+        () -> new WeatherEggItem(WeatherEggItem.WeatherType.SUN, new Item.Properties()));
+
+    public static final Supplier<Item> WEATHER_EGG_RAIN = ITEMS.register("weather_egg_rain",
+        () -> new WeatherEggItem(WeatherEggItem.WeatherType.RAIN, new Item.Properties()));
+
+    public static final Supplier<Item> WEATHER_EGG_STORM = ITEMS.register("weather_egg_storm",
+        () -> new WeatherEggItem(WeatherEggItem.WeatherType.STORM, new Item.Properties()));
+
     public static final Supplier<Item> ID_CARD = ITEMS.register("id_card",
         () -> new IdCardItem(new Item.Properties().stacksTo(1)));
 
@@ -623,6 +633,9 @@ public class ModItems {
             output.accept(MAGICBEAN.get());
             output.accept(BEANSTEW.get());
             output.accept(GOLDEN_EGG.get());
+            output.accept(WEATHER_EGG_SUN.get());
+            output.accept(WEATHER_EGG_RAIN.get());
+            output.accept(WEATHER_EGG_STORM.get());
             output.accept(BEANSPROUT.get());
             output.accept(BEANSTALK.get());
             output.accept(SPECIALBEANSTALK.get());

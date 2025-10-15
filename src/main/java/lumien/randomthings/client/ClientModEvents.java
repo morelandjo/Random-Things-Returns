@@ -156,6 +156,8 @@ public class ClientModEvents {
         DiaphanousBlockRenderer.tick();
         // Call RTEventHandler to increment clientAnimationCounter for Time Accelerator rotation
         RTEventHandler.onClientTick(event);
+        // Increment weather cloud animation counter
+        lumien.randomthings.client.renderer.entity.WeatherCloudRenderer.incrementClientCounter();
     }
     
     @SubscribeEvent

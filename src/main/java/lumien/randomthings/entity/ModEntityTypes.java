@@ -66,4 +66,20 @@ public class ModEntityTypes {
             .updateInterval(1)
             .build("spectre_illuminator")
     );
+
+    public static final Supplier<EntityType<ThrownWeatherEggEntity>> THROWN_WEATHER_EGG = ENTITY_TYPES.register("thrown_weather_egg",
+        () -> EntityType.Builder.<ThrownWeatherEggEntity>of(ThrownWeatherEggEntity::new, MobCategory.MISC)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(64)
+            .updateInterval(10)
+            .build("thrown_weather_egg")
+    );
+
+    public static final Supplier<EntityType<WeatherCloudEntity>> WEATHER_CLOUD = ENTITY_TYPES.register("weather_cloud",
+        () -> EntityType.Builder.<WeatherCloudEntity>of(WeatherCloudEntity::new, MobCategory.MISC)
+            .sized(0.5f, 0.5f)
+            .clientTrackingRange(64)
+            .updateInterval(1)
+            .build("weather_cloud")
+    );
 }

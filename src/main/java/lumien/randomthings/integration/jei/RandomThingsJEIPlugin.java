@@ -152,6 +152,11 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.SOUND_RECORDER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.PORTABLE_SOUND_DAMPENER.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
 
+        // Weather Eggs - throwable items that change the weather
+        registration.addRecipeCatalyst(new ItemStack(ModItems.WEATHER_EGG_SUN.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.WEATHER_EGG_RAIN.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.WEATHER_EGG_STORM.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }
     
