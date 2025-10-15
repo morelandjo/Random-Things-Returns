@@ -157,6 +157,9 @@ public class RandomThingsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.WEATHER_EGG_RAIN.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.WEATHER_EGG_STORM.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
 
+        // End Portal System - for creating artificial End Portals
+        registration.addRecipeCatalyst(new ItemStack(ModItems.EVIL_TEAR.get()), mezz.jei.api.constants.RecipeTypes.CRAFTING);
+
         // Special blocks (Note: BLOOD_ROSE is not added as it's a dangerous block that spreads)
     }
     

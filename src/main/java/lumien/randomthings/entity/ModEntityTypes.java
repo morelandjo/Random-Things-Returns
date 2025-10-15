@@ -82,4 +82,12 @@ public class ModEntityTypes {
             .updateInterval(1)
             .build("weather_cloud")
     );
+
+    public static final Supplier<EntityType<ArtificialEndPortalEntity>> ARTIFICIAL_END_PORTAL = ENTITY_TYPES.register("artificial_end_portal",
+        () -> EntityType.Builder.<ArtificialEndPortalEntity>of(ArtificialEndPortalEntity::new, MobCategory.MISC)
+            .sized(3.0f, 1.0f)
+            .clientTrackingRange(80)
+            .updateInterval(1)
+            .build("artificial_end_portal")
+    );
 }

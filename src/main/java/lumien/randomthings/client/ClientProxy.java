@@ -83,6 +83,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntityTypes.SPECTRE_ILLUMINATOR.get(), lumien.randomthings.client.renderer.entity.SpectreIlluminatorRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.THROWN_WEATHER_EGG.get(), lumien.randomthings.client.renderer.entity.ThrownWeatherEggRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.WEATHER_CLOUD.get(), lumien.randomthings.client.renderer.entity.WeatherCloudRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.ARTIFICIAL_END_PORTAL.get(), lumien.randomthings.client.renderer.entity.ArtificialEndPortalRenderer::new);
     }
     
     public static void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {

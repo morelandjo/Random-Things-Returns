@@ -253,6 +253,10 @@ public class ModItems {
     public static final Supplier<Item> WEATHER_EGG_STORM = ITEMS.register("weather_egg_storm",
         () -> new WeatherEggItem(WeatherEggItem.WeatherType.STORM, new Item.Properties()));
 
+    // End Portal System
+    public static final Supplier<Item> EVIL_TEAR = ITEMS.register("evil_tear",
+        () -> new EvilTearItem());
+
     public static final Supplier<Item> ID_CARD = ITEMS.register("id_card",
         () -> new IdCardItem(new Item.Properties().stacksTo(1)));
 
@@ -641,6 +645,7 @@ public class ModItems {
             output.accept(WEATHER_EGG_SUN.get());
             output.accept(WEATHER_EGG_RAIN.get());
             output.accept(WEATHER_EGG_STORM.get());
+            output.accept(EVIL_TEAR.get());
             output.accept(BEANSPROUT.get());
             output.accept(BEANSTALK.get());
             output.accept(SPECIALBEANSTALK.get());
