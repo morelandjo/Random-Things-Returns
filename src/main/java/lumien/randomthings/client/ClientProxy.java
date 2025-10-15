@@ -9,6 +9,7 @@ import lumien.randomthings.client.renderer.PortkeyRenderer;
 import lumien.randomthings.client.renderer.TimeAcceleratorRenderer;
 import lumien.randomthings.client.renderer.FluidDisplayBlockEntityRenderer;
 import lumien.randomthings.client.renderer.LightRedirectorRenderer;
+import lumien.randomthings.client.renderer.block_entity.AncientFurnaceRenderer;
 import lumien.randomthings.client.renderer.block_entity.RuneBaseBlockEntityRenderer;
 import lumien.randomthings.client.screen.ModScreens;
 import lumien.randomthings.entity.ModEntityTypes;
@@ -61,6 +62,7 @@ public class ClientProxy {
 
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         // Block entity renderers
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.ANCIENT_FURNACE.get(), AncientFurnaceRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.DIAPHANOUS_BLOCK.get(), DiaphanousBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.FLUID_DISPLAY.get(), FluidDisplayBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntityTypes.LIGHT_REDIRECTOR.get(), LightRedirectorRenderer::new);

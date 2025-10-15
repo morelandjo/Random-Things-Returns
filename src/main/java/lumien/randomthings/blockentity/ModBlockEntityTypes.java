@@ -9,8 +9,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ModBlockEntityTypes {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = 
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
         DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, ModConstants.MOD_ID);
+
+    // Ancient Furnace System
+    public static final Supplier<BlockEntityType<AncientFurnaceBlockEntity>> ANCIENT_FURNACE =
+        BLOCK_ENTITY_TYPES.register("ancient_furnace",
+            () -> BlockEntityType.Builder.of(AncientFurnaceBlockEntity::new,
+                ModBlocks.ANCIENT_FURNACE.get()).build(null));
 
     public static final Supplier<BlockEntityType<AdvancedRedstoneTorchBlockEntity>> ADVANCED_REDSTONE_TORCH = 
         BLOCK_ENTITY_TYPES.register("advanced_redstone_torch", 

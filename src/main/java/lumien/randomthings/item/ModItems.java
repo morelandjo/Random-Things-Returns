@@ -20,6 +20,10 @@ public class ModItems {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ModConstants.MOD_ID);
 
     // Block Items
+    // Ancient Furnace System - only Ancient Brick is obtainable
+    public static final Supplier<Item> ANCIENT_BRICK = ITEMS.register("ancient_brick",
+        () -> new BlockItem(ModBlocks.ANCIENT_BRICK.get(), new Item.Properties()));
+
     public static final Supplier<Item> FERTILIZED_DIRT = ITEMS.register("fertilized_dirt",
         () -> new BlockItem(ModBlocks.FERTILIZED_DIRT.get(), new Item.Properties()));
 
@@ -548,6 +552,7 @@ public class ModItems {
         .title(Component.translatable("itemGroup.randomthings"))
         .icon(() -> new ItemStack(FERTILIZED_DIRT.get()))
         .displayItems((parameters, output) -> {
+            // Note: Ancient Brick is world-generated only, not added to creative tab
             output.accept(FERTILIZED_DIRT.get());
             output.accept(RAINBOW_LAMP.get());
             output.accept(RAIN_SHIELD.get());

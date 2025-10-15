@@ -1,4 +1,6 @@
 {
+  "block.randomthings.ancient_brick": "Ancient Brick",
+  "block.randomthings.ancient_furnace": "Ancient Furnace",
   "block.randomthings.analog_emitter": "Analog Emitter",
   "block.randomthings.beanpod": "Bean Pod",
   "block.randomthings.beansprout": "Bean Sprout", 
@@ -106,6 +108,8 @@
   
   "itemGroup.randomthings": "Random Things",
   
+  "tooltip.randomthings.ancient_brick": "Part of the Ancient Furnace structure. Right-click the top with a Nether Star to activate.",
+  "tooltip.randomthings.ancient_furnace": "The core of an Ancient Furnace. Transforms cold biomes into warmer ones when activated.",
   "tooltip.randomthings.divining_rod": "Right-click to search for ores",
   "tooltip.randomthings.platform": "Crouch to pass through",
   "tooltip.randomthings.blood_rose": "Spreads to nearby grass",

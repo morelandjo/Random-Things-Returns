@@ -12,7 +12,14 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ModConstants.MOD_ID);
 
-    public static final Supplier<Block> FERTILIZED_DIRT = BLOCKS.register("fertilized_dirt", 
+    // Ancient Furnace System
+    public static final Supplier<Block> ANCIENT_BRICK = BLOCKS.register("ancient_brick",
+        () -> new AncientBrickBlock());
+
+    public static final Supplier<Block> ANCIENT_FURNACE = BLOCKS.register("ancient_furnace",
+        () -> new AncientFurnaceBlock());
+
+    public static final Supplier<Block> FERTILIZED_DIRT = BLOCKS.register("fertilized_dirt",
         () -> new FertilizedDirtBlock());
 
     public static final Supplier<Block> RAINBOW_LAMP = BLOCKS.register("rainbow_lamp", 

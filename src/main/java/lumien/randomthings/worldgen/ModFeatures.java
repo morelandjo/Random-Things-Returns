@@ -27,4 +27,7 @@ public class ModFeatures {
 
     public static final DeferredHolder<Feature<?>, GlowingMushroomFeature> GLOWING_MUSHROOMS = FEATURES.register("glowing_mushrooms",
         () -> new GlowingMushroomFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final DeferredHolder<Feature<?>, AncientFurnaceFeature> ANCIENT_FURNACE = FEATURES.register("ancient_furnace",
+        () -> new AncientFurnaceFeature(NoneFeatureConfiguration.CODEC));
 }

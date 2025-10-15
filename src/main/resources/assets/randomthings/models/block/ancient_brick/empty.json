@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "randomthings:block/ancientbrick_default",
+    "down": "randomthings:block/ancientbrick_default",
+    "up": "randomthings:block/ancientbrick_empty",
+    "north": "randomthings:block/ancientbrick_default",
+    "east": "randomthings:block/ancientbrick_default",
+    "south": "randomthings:block/ancientbrick_default",
+    "west": "randomthings:block/ancientbrick_default"
+  }
+}
