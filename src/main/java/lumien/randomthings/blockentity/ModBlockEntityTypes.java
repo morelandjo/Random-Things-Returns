@@ -166,4 +166,19 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(BlockEntityRuneBase::new,
                 ModBlocks.RUNE_BASE.get()).build(null));
 
+    // Spectre Energy System
+    public static final Supplier<BlockEntityType<SpectreEnergyInjectorBlockEntity>> SPECTRE_ENERGY_INJECTOR =
+        BLOCK_ENTITY_TYPES.register("spectre_energy_injector",
+            () -> BlockEntityType.Builder.of(SpectreEnergyInjectorBlockEntity::new,
+                ModBlocks.SPECTRE_ENERGY_INJECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SpectreCoilBlockEntity>> SPECTRE_COIL =
+        BLOCK_ENTITY_TYPES.register("spectre_coil",
+            () -> BlockEntityType.Builder.of(SpectreCoilBlockEntity::new,
+                ModBlocks.SPECTRE_COIL_NORMAL.get(),
+                ModBlocks.SPECTRE_COIL_REDSTONE.get(),
+                ModBlocks.SPECTRE_COIL_ENDER.get(),
+                ModBlocks.SPECTRE_COIL_NUMBER.get(),
+                ModBlocks.SPECTRE_COIL_GENESIS.get()).build(null));
+
 }

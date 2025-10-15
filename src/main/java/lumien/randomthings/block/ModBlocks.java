@@ -253,4 +253,24 @@ public class ModBlocks {
     public static final Supplier<Block> SPECTRE_CORE = BLOCKS.register("spectre_core",
         () -> new SpectreCoreBlock());
 
+    // Spectre Energy System
+    public static final Supplier<Block> SPECTRE_ENERGY_INJECTOR = BLOCKS.register("spectre_energy_injector",
+        () -> new SpectreEnergyInjectorBlock());
+
+    // Spectre Coils - 5 variants
+    public static final Supplier<Block> SPECTRE_COIL_NORMAL = BLOCKS.register("spectre_coil_normal",
+        () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.NORMAL));
+
+    public static final Supplier<Block> SPECTRE_COIL_REDSTONE = BLOCKS.register("spectre_coil_redstone",
+        () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.REDSTONE));
+
+    public static final Supplier<Block> SPECTRE_COIL_ENDER = BLOCKS.register("spectre_coil_ender",
+        () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.ENDER));
+
+    public static final Supplier<Block> SPECTRE_COIL_NUMBER = BLOCKS.register("spectre_coil_number",
+        () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.NUMBER));
+
+    public static final Supplier<Block> SPECTRE_COIL_GENESIS = BLOCKS.register("spectre_coil_genesis",
+        () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.GENESIS));
+
 }

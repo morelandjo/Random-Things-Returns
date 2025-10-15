@@ -195,6 +195,13 @@ public class RandomThings {
             (stack, ctx) -> new net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack(ModDataComponents.FLUID_CONTENT, stack, 10000),
             ModItems.REINFORCED_ENDER_BUCKET.get()
         );
+
+        // Register energy capability for Spectre Energy Injector
+        event.registerBlock(
+            Capabilities.EnergyStorage.BLOCK,
+            (level, pos, state, be, side) -> lumien.randomthings.block.SpectreEnergyInjectorBlock.getEnergyCapability(level, pos, side),
+            ModBlocks.SPECTRE_ENERGY_INJECTOR.get()
+        );
     }
 
     private void registerCommands(RegisterCommandsEvent event) {

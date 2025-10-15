@@ -448,5 +448,35 @@
   "tooltip.randomthings.spectre_pickaxe": "A Spectre Pickaxe has more durability & enchantability than a diamond pickaxe and also increases the block range of the player holding it by 3 blocks.",
   "tooltip.randomthings.spectre_sword": "A Spectre Sword has more durability & enchantability than a diamond sword and can also hurt spirits.",
   "tooltip.randomthings.spectre_shovel": "A Spectre Shovel has more durability & enchantability than a diamond shovel and also increases the block range of the player holding it by 3 blocks.",
-  "tooltip.randomthings.spectre_axe": "A Spectre Axe has more durability & enchantability than a diamond axe and also increases the block range of the player holding it by 3 blocks."
+  "tooltip.randomthings.spectre_axe": "A Spectre Axe has more durability & enchantability than a diamond axe and also increases the block range of the player holding it by 3 blocks.",
+
+  "item.randomthings.spectre_string": "Spectre String",
+  "tooltip.randomthings.spectre_string": "A spectral thread used to craft Spectre Energy devices.",
+
+  "block.randomthings.spectre_energy_injector": "Spectre Energy Injector",
+  "tooltip.randomthings.spectre_energy_injector": "Receives energy from external sources and stores it in your personal Spectre Energy buffer (1M RF capacity).",
+
+  "block.randomthings.spectre_coil_normal": "Spectre Coil",
+  "block.randomthings.spectre_coil_redstone": "Redstone Spectre Coil",
+  "block.randomthings.spectre_coil_ender": "Ender Spectre Coil",
+  "block.randomthings.spectre_coil_number": "Number Spectre Coil",
+  "block.randomthings.spectre_coil_genesis": "Genesis Spectre Coil",
+  "tooltip.randomthings.spectre_coil": "Transfers energy from your Spectre Energy buffer to adjacent machines.",
+  "tooltip.randomthings.spectre_coil.normal": "Transfer Rate: 1,024 RF/t",
+  "tooltip.randomthings.spectre_coil.redstone": "Transfer Rate: 4,096 RF/t",
+  "tooltip.randomthings.spectre_coil.ender": "Transfer Rate: 20,480 RF/t",
+  "tooltip.randomthings.spectre_coil.number": "Transfer Rate: 1,000,000 RF/t (Configurable)",
+  "tooltip.randomthings.spectre_coil.genesis": "Transfer Rate: Infinite (Creative)",
+
+  "item.randomthings.spectre_charger_normal": "Spectre Charger",
+  "item.randomthings.spectre_charger_redstone": "Redstone Spectre Charger",
+  "item.randomthings.spectre_charger_ender": "Ender Spectre Charger",
+  "item.randomthings.spectre_charger_genesis": "Genesis Spectre Charger",
+  "tooltip.randomthings.spectre_charger": "Charges energy-compatible items in your inventory using Spectre Energy. Right-click to toggle on/off.",
+  "item.randomthings.spectre_charger.charge_rate": "Charge Rate: %s RF/t",
+  "item.randomthings.spectre_charger.enabled": "Enabled",
+  "item.randomthings.spectre_charger.disabled": "Disabled",
+  "item.randomthings.spectre_charger.toggle": "Right-click to toggle",
+  "item.randomthings.spectre_charger.enabled_message": "Spectre Charger Enabled",
+  "item.randomthings.spectre_charger.disabled_message": "Spectre Charger Disabled"
 }

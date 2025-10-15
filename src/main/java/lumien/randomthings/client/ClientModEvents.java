@@ -92,6 +92,23 @@ public class ClientModEvents {
         };
         event.register(runeBaseColor, ModBlocks.RUNE_BASE.get());
 
+        // Register Spectre Coil color handlers - tints based on coil type
+        BlockColor spectreCoilColor = (state, level, pos, tintIndex) -> {
+            // Get the coil type from the block
+            Block block = state.getBlock();
+            if (block instanceof lumien.randomthings.block.SpectreCoilBlock spectreCoilBlock) {
+                return spectreCoilBlock.getCoilType().getColor();
+            }
+            return 0xFFFFFF;
+        };
+        event.register(spectreCoilColor,
+            ModBlocks.SPECTRE_COIL_NORMAL.get(),
+            ModBlocks.SPECTRE_COIL_REDSTONE.get(),
+            ModBlocks.SPECTRE_COIL_ENDER.get(),
+            ModBlocks.SPECTRE_COIL_NUMBER.get(),
+            ModBlocks.SPECTRE_COIL_GENESIS.get()
+        );
+
         // Remove the destabilizer color handler for now - let's try without tinting
     }
     
@@ -116,6 +133,38 @@ public class ClientModEvents {
             return (color != null) ? (0xFF000000 | color.getFireworkColor()) : 0xFFFFFFFF;
         };
         event.register(runeDustItemColor, ModItems.RUNE_DUST.get());
+
+        // Register Spectre Charger item colors - tints based on tier
+        ItemColor spectreChargerItemColor = (stack, tintIndex) -> {
+            if (stack.getItem() instanceof lumien.randomthings.item.SpectreChargerItem spectreChargerItem) {
+                return spectreChargerItem.getTier().getColor();
+            }
+            return 0xFFFFFF;
+        };
+        event.register(spectreChargerItemColor,
+            ModItems.SPECTRE_CHARGER_NORMAL.get(),
+            ModItems.SPECTRE_CHARGER_REDSTONE.get(),
+            ModItems.SPECTRE_CHARGER_ENDER.get(),
+            ModItems.SPECTRE_CHARGER_GENESIS.get()
+        );
+
+        // Register Spectre Coil item colors - tints based on coil type
+        ItemColor spectreCoilItemColor = (stack, tintIndex) -> {
+            if (stack.getItem() instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                if (block instanceof lumien.randomthings.block.SpectreCoilBlock spectreCoilBlock) {
+                    return spectreCoilBlock.getCoilType().getColor();
+                }
+            }
+            return 0xFFFFFF;
+        };
+        event.register(spectreCoilItemColor,
+            ModItems.SPECTRE_COIL_NORMAL.get(),
+            ModItems.SPECTRE_COIL_REDSTONE.get(),
+            ModItems.SPECTRE_COIL_ENDER.get(),
+            ModItems.SPECTRE_COIL_NUMBER.get(),
+            ModItems.SPECTRE_COIL_GENESIS.get()
+        );
     }
     
     
@@ -191,6 +240,14 @@ public class ClientModEvents {
             // Spectre Dimension blocks - translucent rendering
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_CORE.get(), RenderType.translucent());
+
+            // Spectre Energy System blocks - cutout for animated textures
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_COIL_NORMAL.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_COIL_REDSTONE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_COIL_ENDER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_COIL_NUMBER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_COIL_GENESIS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPECTRE_ENERGY_INJECTOR.get(), RenderType.cutout());
             
             // Register item properties
             ItemProperties.register(ModItems.ECLIPSED_CLOCK.get(), ResourceLocation.parse("randomthings:time"), 
