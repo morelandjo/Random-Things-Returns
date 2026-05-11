@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "randomthings:block/online_detector/top",
+    "bottom": "randomthings:block/online_detector/down",
+    "side": "randomthings:block/online_detector/side_off"
+  }
+}

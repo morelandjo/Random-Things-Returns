@@ -28,3 +28,6 @@ forge*changelog.txt
 
 # VSC
 .vscode
+
+# Porting briefs — fresh-context notes for tackling missing features
+porting-notes/

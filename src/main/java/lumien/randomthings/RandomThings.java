@@ -101,7 +101,9 @@ public class RandomThings {
         // Register other RT event handlers
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockPlace);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockBreak);
-        NeoForge.EVENT_BUS.addListener(RTEventHandler::onClientTick);
+        // RTEventHandler::onClientTick is wired by ClientModEvents on the client only.
+        // Registering it here would force NeoForge to resolve ClientTickEvent.Post on the
+        // dedicated server, which has no neoforge.client.event package and crashes.
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDamage);
         // Water Walking Boots and Lava Waders event handlers

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "IRI",
+    "RSR",
+    "IRI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "S": { "item": "randomthings:stable_ender_pearl" }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:basic_redstone_interface"
+  }
+}

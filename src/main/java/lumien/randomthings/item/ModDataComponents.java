@@ -5,6 +5,7 @@ import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.util.ChunkAnalyzerResult;
 import lumien.randomthings.util.ItemFilterData;
 import lumien.randomthings.util.PortkeyTarget;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -109,6 +110,13 @@ public class ModDataComponents {
             () -> DataComponentType.<Boolean>builder()
                 .persistent(Codec.BOOL)
                 .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                .build());
+
+    public static final Supplier<DataComponentType<BlockPos>> REDSTONE_TOOL_LINK =
+        DATA_COMPONENTS.register("redstone_tool_link",
+            () -> DataComponentType.<BlockPos>builder()
+                .persistent(BlockPos.CODEC)
+                .networkSynchronized(BlockPos.STREAM_CODEC)
                 .build());
 
     // Position Filter data components

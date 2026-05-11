@@ -99,6 +99,24 @@ public class ModItems {
     public static final Supplier<Item> GLOBAL_CHAT_DETECTOR = ITEMS.register("global_chat_detector",
         () -> new BlockItem(ModBlocks.GLOBAL_CHAT_DETECTOR.get(), new Item.Properties()));
 
+    public static final Supplier<Item> ONLINE_DETECTOR = ITEMS.register("online_detector",
+        () -> new BlockItem(ModBlocks.ONLINE_DETECTOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> REDSTONE_OBSERVER = ITEMS.register("redstone_observer",
+        () -> new BlockItem(ModBlocks.REDSTONE_OBSERVER.get(), new Item.Properties()));
+
+    public static final Supplier<Item> REDSTONE_TOOL = ITEMS.register("redstone_tool",
+        () -> new RedstoneToolItem(new Item.Properties()));
+
+    public static final Supplier<Item> BIOME_RADAR = ITEMS.register("biome_radar",
+        () -> new BlockItem(ModBlocks.BIOME_RADAR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> BASIC_REDSTONE_INTERFACE = ITEMS.register("basic_redstone_interface",
+        () -> new BlockItem(ModBlocks.BASIC_REDSTONE_INTERFACE.get(), new Item.Properties()));
+
+    public static final Supplier<Item> ENTITY_DETECTOR = ITEMS.register("entity_detector",
+        () -> new BlockItem(ModBlocks.ENTITY_DETECTOR.get(), new Item.Properties()));
+
     public static final Supplier<Item> PEACE_CANDLE = ITEMS.register("peace_candle",
         () -> new BlockItem(ModBlocks.PEACE_CANDLE.get(), new Item.Properties()));
 
@@ -609,6 +627,12 @@ public class ModItems {
             output.accept(IRON_DROPPER.get());
             output.accept(CHAT_DETECTOR.get());
             output.accept(GLOBAL_CHAT_DETECTOR.get());
+            output.accept(ONLINE_DETECTOR.get());
+            output.accept(REDSTONE_OBSERVER.get());
+            output.accept(REDSTONE_TOOL.get());
+            output.accept(BIOME_RADAR.get());
+            output.accept(BASIC_REDSTONE_INTERFACE.get());
+            output.accept(ENTITY_DETECTOR.get());
             output.accept(PEACE_CANDLE.get());
             output.accept(POTION_VAPORIZER.get());
             output.accept(CONTACT_BUTTON.get());

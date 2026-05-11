@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "randomthings:block/online_detector"
+    },
+    "powered=true": {
+      "model": "randomthings:block/online_detector_powered"
+    }
+  }
+}

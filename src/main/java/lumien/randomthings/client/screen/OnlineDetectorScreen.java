@@ -2,7 +2,7 @@ package lumien.randomthings.client.screen;
 
 import lumien.randomthings.blockentity.OnlineDetectorBlockEntity;
 import lumien.randomthings.menu.OnlineDetectorMenu;
-// import lumien.randomthings.network.OnlineDetectorUpdatePacket;
+import lumien.randomthings.network.OnlineDetectorUpdatePacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -46,10 +46,10 @@ public class OnlineDetectorScreen extends AbstractContainerScreen<OnlineDetector
     
     private void saveSettings() {
         String username = this.usernameField.getValue();
-        // PacketDistributor.sendToServer(new OnlineDetectorUpdatePacket(
-        //     this.menu.getBlockEntity().getBlockPos(), 
-        //     username
-        // ));
+        PacketDistributor.sendToServer(new OnlineDetectorUpdatePacket(
+            this.menu.getBlockEntity().getBlockPos(),
+            username
+        ));
     }
     
     @Override

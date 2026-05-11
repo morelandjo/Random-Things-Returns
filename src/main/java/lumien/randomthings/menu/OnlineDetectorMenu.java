@@ -13,14 +13,10 @@ public class OnlineDetectorMenu extends AbstractContainerMenu {
     private final OnlineDetectorBlockEntity blockEntity;
     private final ContainerLevelAccess access;
 
-    public OnlineDetectorMenu(int containerId, Inventory playerInventory, OnlineDetectorBlockEntity blockEntity) {
-        super(null /* ModMenuTypes.ONLINE_DETECTOR.get() */, containerId);
-        this.blockEntity = blockEntity;
-        this.access = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
-    }
-
     public OnlineDetectorMenu(int containerId, Inventory playerInventory, BlockPos pos) {
-        this(containerId, playerInventory, getBlockEntity(playerInventory, pos));
+        super(ModMenuTypes.ONLINE_DETECTOR.get(), containerId);
+        this.blockEntity = getBlockEntity(playerInventory, pos);
+        this.access = ContainerLevelAccess.create(this.blockEntity.getLevel(), this.blockEntity.getBlockPos());
     }
 
     private static OnlineDetectorBlockEntity getBlockEntity(Inventory playerInventory, BlockPos pos) {

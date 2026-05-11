@@ -1,6 +1,7 @@
 package lumien.randomthings.entity;
 
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.SpectreSwordItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.FlyingMob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -130,13 +132,15 @@ public class SpiritEntity extends FlyingMob {
     
     @Override
     public boolean hurt(DamageSource damageSource, float amount) {
-        // Only take damage from magic sources, creative players, or void damage
-        if (!damageSource.is(net.minecraft.tags.DamageTypeTags.WITCH_RESISTANT_TO) && 
+        // Spirits accept damage from magic, creative players, void, or a Spectre Sword wielder.
+        if (!damageSource.is(net.minecraft.tags.DamageTypeTags.WITCH_RESISTANT_TO) &&
             !damageSource.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-            !(damageSource.getEntity() instanceof Player player && player.isCreative())) {
+            !(damageSource.getEntity() instanceof Player player && player.isCreative()) &&
+            !(damageSource.getEntity() instanceof LivingEntity living
+                && living.getMainHandItem().getItem() instanceof SpectreSwordItem)) {
             return false;
         }
-        
+
         return super.hurt(damageSource, amount);
     }
     

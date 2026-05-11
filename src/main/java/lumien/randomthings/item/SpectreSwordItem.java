@@ -1,11 +1,9 @@
 package lumien.randomthings.item;
 
-import lumien.randomthings.entity.SpiritEntity;
 import lumien.randomthings.lib.ModConstants;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
@@ -51,18 +49,6 @@ public class SpectreSwordItem extends SwordItem {
         );
 
         return builder.build();
-    }
-
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        // Special handling for Spirit entities - the sword can hurt them with magic damage
-        // Spirit entities are normally immune to non-magic damage, but the Spectre Sword deals magic damage
-        if (target instanceof SpiritEntity) {
-            // Deal magic damage to spirits (indirectMagic is "WITCH_RESISTANT_TO" tagged)
-            target.hurt(target.damageSources().indirectMagic(attacker, attacker),
-                       (float)(6.0 + SpectreToolMaterial.SPECTRE.getAttackDamageBonus()));
-        }
-        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override

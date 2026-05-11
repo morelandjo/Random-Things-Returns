@@ -13,6 +13,8 @@ public class ModScreens {
         event.register(ModMenuTypes.IRON_DROPPER.get(), IronDropperScreen::new);
         event.register(ModMenuTypes.CHAT_DETECTOR.get(), ChatDetectorScreen::new);
         event.register(ModMenuTypes.GLOBAL_CHAT_DETECTOR.get(), GlobalChatDetectorScreen::new);
+        event.register(ModMenuTypes.ONLINE_DETECTOR.get(), OnlineDetectorScreen::new);
+        event.register(ModMenuTypes.ENTITY_DETECTOR.get(), EntityDetectorScreen::new);
         event.register(ModMenuTypes.IGNITER.get(), IgniterScreen::new);
         event.register(ModMenuTypes.INVENTORY_TESTER.get(), InventoryTesterScreen::new);
         event.register(ModMenuTypes.NOTIFICATION_INTERFACE.get(), NotificationInterfaceScreen::new);

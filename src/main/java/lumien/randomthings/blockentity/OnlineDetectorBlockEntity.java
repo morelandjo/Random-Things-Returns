@@ -25,7 +25,7 @@ public class OnlineDetectorBlockEntity extends BlockEntity implements MenuProvid
     private boolean playerOnline = false;
     
     public OnlineDetectorBlockEntity(BlockPos pos, BlockState blockState) {
-        super(null /* ModBlockEntityTypes.ONLINE_DETECTOR.get() */, pos, blockState);
+        super(ModBlockEntityTypes.ONLINE_DETECTOR.get(), pos, blockState);
     }
     
     @Override
@@ -120,6 +120,6 @@ public class OnlineDetectorBlockEntity extends BlockEntity implements MenuProvid
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        return new OnlineDetectorMenu(containerId, playerInventory, this);
+        return new OnlineDetectorMenu(containerId, playerInventory, this.worldPosition);
     }
 }

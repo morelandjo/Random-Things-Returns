@@ -143,8 +143,23 @@ public class ModBlocks {
     public static final Supplier<Block> CHAT_DETECTOR = BLOCKS.register("chat_detector", 
         () -> new ChatDetectorBlock());
 
-    public static final Supplier<Block> GLOBAL_CHAT_DETECTOR = BLOCKS.register("global_chat_detector", 
+    public static final Supplier<Block> GLOBAL_CHAT_DETECTOR = BLOCKS.register("global_chat_detector",
         () -> new GlobalChatDetectorBlock());
+
+    public static final Supplier<Block> ONLINE_DETECTOR = BLOCKS.register("online_detector",
+        () -> new OnlineDetectorBlock());
+
+    public static final Supplier<Block> REDSTONE_OBSERVER = BLOCKS.register("redstone_observer",
+        () -> new RedstoneObserverBlock());
+
+    public static final Supplier<Block> BIOME_RADAR = BLOCKS.register("biome_radar",
+        () -> new BiomeRadarBlock());
+
+    public static final Supplier<Block> BASIC_REDSTONE_INTERFACE = BLOCKS.register("basic_redstone_interface",
+        () -> new BasicRedstoneInterfaceBlock());
+
+    public static final Supplier<Block> ENTITY_DETECTOR = BLOCKS.register("entity_detector",
+        () -> new EntityDetectorBlock());
 
     public static final Supplier<Block> PEACE_CANDLE = BLOCKS.register("peace_candle", 
         () -> new PeaceCandleBlock());

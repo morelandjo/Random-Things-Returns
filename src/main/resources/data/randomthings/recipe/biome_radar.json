@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "III",
+    "GEG",
+    "III"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "G": { "item": "minecraft:glass" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:biome_radar"
+  }
+}

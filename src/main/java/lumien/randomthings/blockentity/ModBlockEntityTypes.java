@@ -88,10 +88,30 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(PotionVaporizerBlockEntity::new, 
                 ModBlocks.POTION_VAPORIZER.get()).build(null));
 
-    // public static final Supplier<BlockEntityType<OnlineDetectorBlockEntity>> ONLINE_DETECTOR = 
-    //     BLOCK_ENTITY_TYPES.register("online_detector", 
-    //         () -> BlockEntityType.Builder.of(OnlineDetectorBlockEntity::new, 
-    //             ModBlocks.ONLINE_DETECTOR.get()).build(null));
+    public static final Supplier<BlockEntityType<OnlineDetectorBlockEntity>> ONLINE_DETECTOR =
+        BLOCK_ENTITY_TYPES.register("online_detector",
+            () -> BlockEntityType.Builder.of(OnlineDetectorBlockEntity::new,
+                ModBlocks.ONLINE_DETECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<RedstoneObserverBlockEntity>> REDSTONE_OBSERVER =
+        BLOCK_ENTITY_TYPES.register("redstone_observer",
+            () -> BlockEntityType.Builder.of(RedstoneObserverBlockEntity::new,
+                ModBlocks.REDSTONE_OBSERVER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<BiomeRadarBlockEntity>> BIOME_RADAR =
+        BLOCK_ENTITY_TYPES.register("biome_radar",
+            () -> BlockEntityType.Builder.of(BiomeRadarBlockEntity::new,
+                ModBlocks.BIOME_RADAR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<BasicRedstoneInterfaceBlockEntity>> BASIC_REDSTONE_INTERFACE =
+        BLOCK_ENTITY_TYPES.register("basic_redstone_interface",
+            () -> BlockEntityType.Builder.of(BasicRedstoneInterfaceBlockEntity::new,
+                ModBlocks.BASIC_REDSTONE_INTERFACE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<EntityDetectorBlockEntity>> ENTITY_DETECTOR =
+        BLOCK_ENTITY_TYPES.register("entity_detector",
+            () -> BlockEntityType.Builder.of(EntityDetectorBlockEntity::new,
+                ModBlocks.ENTITY_DETECTOR.get()).build(null));
 
     public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
         BLOCK_ENTITY_TYPES.register("diaphanous_block", 
