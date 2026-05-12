@@ -40,6 +40,8 @@
   "block.randomthings.advanced_item_collector": "Advanced Item Collector",
   "tooltip.randomthings.advanced_item_collector": "Like the Item Collector but with a configurable per-axis range and a slot for an Item Filter.",
   "container.randomthings.advanced_item_collector": "Advanced Item Collector",
+  "block.randomthings.inventory_rerouter": "Inventory Rerouter",
+  "tooltip.randomthings.inventory_rerouter": "Forwards an attached inventory through its other 5 faces. Right-click a face to cycle which side of the target inventory that face exposes.",
   "item.randomthings.redstone_tool": "Redstone Tool",
   "tooltip.randomthings.redstone_tool": "Right-click a Redstone Observer, then right-click the block you want it to mirror.",
   "tooltip.randomthings.redstone_tool.linking": "Linking from: %s, %s, %s",

@@ -167,6 +167,9 @@ public class ModBlocks {
     public static final Supplier<Block> ADVANCED_ITEM_COLLECTOR = BLOCKS.register("advanced_item_collector",
         () -> new AdvancedItemCollectorBlock());
 
+    public static final Supplier<Block> INVENTORY_REROUTER = BLOCKS.register("inventory_rerouter",
+        () -> new InventoryRerouterBlock());
+
     public static final Supplier<Block> PEACE_CANDLE = BLOCKS.register("peace_candle", 
         () -> new PeaceCandleBlock());
 

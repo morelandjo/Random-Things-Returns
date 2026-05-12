@@ -123,6 +123,11 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(AdvancedItemCollectorBlockEntity::new,
                 ModBlocks.ADVANCED_ITEM_COLLECTOR.get()).build(null));
 
+    public static final Supplier<BlockEntityType<InventoryRerouterBlockEntity>> INVENTORY_REROUTER =
+        BLOCK_ENTITY_TYPES.register("inventory_rerouter",
+            () -> BlockEntityType.Builder.of(InventoryRerouterBlockEntity::new,
+                ModBlocks.INVENTORY_REROUTER.get()).build(null));
+
     public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
         BLOCK_ENTITY_TYPES.register("diaphanous_block", 
             () -> BlockEntityType.Builder.of(DiaphanousBlockEntity::new, 

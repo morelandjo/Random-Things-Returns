@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SBS",
+    "BHB",
+    "SBS"
+  ],
+  "key": {
+    "S": { "item": "minecraft:stone" },
+    "B": { "item": "minecraft:iron_bars" },
+    "H": { "item": "minecraft:hopper" }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:inventory_rerouter"
+  }
+}
