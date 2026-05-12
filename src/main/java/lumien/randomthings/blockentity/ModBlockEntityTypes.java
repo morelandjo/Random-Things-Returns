@@ -113,6 +113,16 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(EntityDetectorBlockEntity::new,
                 ModBlocks.ENTITY_DETECTOR.get()).build(null));
 
+    public static final Supplier<BlockEntityType<ItemCollectorBlockEntity>> ITEM_COLLECTOR =
+        BLOCK_ENTITY_TYPES.register("item_collector",
+            () -> BlockEntityType.Builder.of(ItemCollectorBlockEntity::new,
+                ModBlocks.ITEM_COLLECTOR.get()).build(null));
+
+    public static final Supplier<BlockEntityType<AdvancedItemCollectorBlockEntity>> ADVANCED_ITEM_COLLECTOR =
+        BLOCK_ENTITY_TYPES.register("advanced_item_collector",
+            () -> BlockEntityType.Builder.of(AdvancedItemCollectorBlockEntity::new,
+                ModBlocks.ADVANCED_ITEM_COLLECTOR.get()).build(null));
+
     public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
         BLOCK_ENTITY_TYPES.register("diaphanous_block", 
             () -> BlockEntityType.Builder.of(DiaphanousBlockEntity::new, 

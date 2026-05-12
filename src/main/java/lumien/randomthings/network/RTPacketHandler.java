@@ -34,6 +34,8 @@ public class RTPacketHandler {
             (message, context) -> OnlineDetectorUpdatePacket.handle(message, context));
         registrar.playToServer(EntityDetectorUpdatePacket.TYPE, EntityDetectorUpdatePacket.STREAM_CODEC,
             (message, context) -> EntityDetectorUpdatePacket.handle(message, context));
+        registrar.playToServer(AdvancedItemCollectorPacket.TYPE, AdvancedItemCollectorPacket.STREAM_CODEC,
+            (message, context) -> AdvancedItemCollectorPacket.handle(message, context));
         registrar.playToServer(GlobalChatDetectorUpdatePacket.TYPE, GlobalChatDetectorUpdatePacket.STREAM_CODEC, 
             (message, context) -> GlobalChatDetectorUpdatePacket.handle(message, context));
         registrar.playToServer(IronDropperPacket.TYPE, IronDropperPacket.STREAM_CODEC, 

@@ -161,6 +161,12 @@ public class ModBlocks {
     public static final Supplier<Block> ENTITY_DETECTOR = BLOCKS.register("entity_detector",
         () -> new EntityDetectorBlock());
 
+    public static final Supplier<Block> ITEM_COLLECTOR = BLOCKS.register("item_collector",
+        () -> new ItemCollectorBlock());
+
+    public static final Supplier<Block> ADVANCED_ITEM_COLLECTOR = BLOCKS.register("advanced_item_collector",
+        () -> new AdvancedItemCollectorBlock());
+
     public static final Supplier<Block> PEACE_CANDLE = BLOCKS.register("peace_candle", 
         () -> new PeaceCandleBlock());
 

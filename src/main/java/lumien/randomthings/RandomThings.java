@@ -185,6 +185,12 @@ public class RandomThings {
             (playerInterface, side) -> playerInterface.getItemHandler(side)
         );
 
+        event.registerBlockEntity(
+            Capabilities.ItemHandler.BLOCK,
+            ModBlockEntityTypes.ADVANCED_ITEM_COLLECTOR.get(),
+            (advCollector, side) -> advCollector.getFilterSlot()
+        );
+
         // Register fluid handler capabilities for ender buckets
         event.registerItem(
             Capabilities.FluidHandler.ITEM,

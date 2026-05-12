@@ -117,6 +117,12 @@ public class ModItems {
     public static final Supplier<Item> ENTITY_DETECTOR = ITEMS.register("entity_detector",
         () -> new BlockItem(ModBlocks.ENTITY_DETECTOR.get(), new Item.Properties()));
 
+    public static final Supplier<Item> ITEM_COLLECTOR = ITEMS.register("item_collector",
+        () -> new BlockItem(ModBlocks.ITEM_COLLECTOR.get(), new Item.Properties()));
+
+    public static final Supplier<Item> ADVANCED_ITEM_COLLECTOR = ITEMS.register("advanced_item_collector",
+        () -> new BlockItem(ModBlocks.ADVANCED_ITEM_COLLECTOR.get(), new Item.Properties()));
+
     public static final Supplier<Item> PEACE_CANDLE = ITEMS.register("peace_candle",
         () -> new BlockItem(ModBlocks.PEACE_CANDLE.get(), new Item.Properties()));
 
@@ -633,6 +639,8 @@ public class ModItems {
             output.accept(BIOME_RADAR.get());
             output.accept(BASIC_REDSTONE_INTERFACE.get());
             output.accept(ENTITY_DETECTOR.get());
+            output.accept(ITEM_COLLECTOR.get());
+            output.accept(ADVANCED_ITEM_COLLECTOR.get());
             output.accept(PEACE_CANDLE.get());
             output.accept(POTION_VAPORIZER.get());
             output.accept(CONTACT_BUTTON.get());

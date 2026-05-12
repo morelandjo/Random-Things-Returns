@@ -44,6 +44,11 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) ->
                 new EntityDetectorMenu(windowId, inventory, data.readBlockPos())));
 
+    public static final Supplier<MenuType<AdvancedItemCollectorMenu>> ADVANCED_ITEM_COLLECTOR =
+        MENU_TYPES.register("advanced_item_collector",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) ->
+                new AdvancedItemCollectorMenu(windowId, inventory, data.readBlockPos())));
+
     public static final Supplier<MenuType<BlockDestabilizerMenu>> BLOCK_DESTABILIZER = 
         MENU_TYPES.register("block_destabilizer", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> {
