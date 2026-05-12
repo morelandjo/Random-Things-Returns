@@ -128,6 +128,11 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(InventoryRerouterBlockEntity::new,
                 ModBlocks.INVENTORY_REROUTER.get()).build(null));
 
+    public static final Supplier<BlockEntityType<DyeingMachineBlockEntity>> DYEING_MACHINE =
+        BLOCK_ENTITY_TYPES.register("dyeing_machine",
+            () -> BlockEntityType.Builder.of(DyeingMachineBlockEntity::new,
+                ModBlocks.DYEING_MACHINE.get()).build(null));
+
     public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
         BLOCK_ENTITY_TYPES.register("diaphanous_block", 
             () -> BlockEntityType.Builder.of(DiaphanousBlockEntity::new, 

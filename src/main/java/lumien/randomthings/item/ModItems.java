@@ -126,6 +126,9 @@ public class ModItems {
     public static final Supplier<Item> INVENTORY_REROUTER = ITEMS.register("inventory_rerouter",
         () -> new BlockItem(ModBlocks.INVENTORY_REROUTER.get(), new Item.Properties()));
 
+    public static final Supplier<Item> DYEING_MACHINE = ITEMS.register("dyeing_machine",
+        () -> new BlockItem(ModBlocks.DYEING_MACHINE.get(), new Item.Properties()));
+
     public static final Supplier<Item> PEACE_CANDLE = ITEMS.register("peace_candle",
         () -> new BlockItem(ModBlocks.PEACE_CANDLE.get(), new Item.Properties()));
 
@@ -645,6 +648,7 @@ public class ModItems {
             output.accept(ITEM_COLLECTOR.get());
             output.accept(ADVANCED_ITEM_COLLECTOR.get());
             output.accept(INVENTORY_REROUTER.get());
+            output.accept(DYEING_MACHINE.get());
             output.accept(PEACE_CANDLE.get());
             output.accept(POTION_VAPORIZER.get());
             output.accept(CONTACT_BUTTON.get());

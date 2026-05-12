@@ -24,4 +24,7 @@ public class ModRecipeSerializers {
 
     public static final Supplier<RecipeSerializer<SpectreAnchorRecipe>> SPECTRE_ANCHOR =
         RECIPE_SERIALIZERS.register("spectre_anchor", SpectreAnchorRecipeSerializer::new);
+
+    public static final Supplier<RecipeSerializer<DyeingMachineRecipe>> DYEING_MACHINE =
+        RECIPE_SERIALIZERS.register("dyeing_machine", DyeingMachineRecipeSerializer::new);
 }

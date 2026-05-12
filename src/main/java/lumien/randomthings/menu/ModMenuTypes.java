@@ -49,6 +49,11 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) ->
                 new AdvancedItemCollectorMenu(windowId, inventory, data.readBlockPos())));
 
+    public static final Supplier<MenuType<DyeingMachineMenu>> DYEING_MACHINE =
+        MENU_TYPES.register("dyeing_machine",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) ->
+                new DyeingMachineMenu(windowId, inventory, data.readBlockPos())));
+
     public static final Supplier<MenuType<BlockDestabilizerMenu>> BLOCK_DESTABILIZER = 
         MENU_TYPES.register("block_destabilizer", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> {

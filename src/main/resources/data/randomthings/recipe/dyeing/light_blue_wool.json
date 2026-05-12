@@ -1,0 +1,6 @@
+{
+  "type": "randomthings:dyeing_machine",
+  "input": { "item": "minecraft:white_wool" },
+  "dye":   { "item": "minecraft:light_blue_dye" },
+  "result": { "id": "minecraft:light_blue_wool", "count": 1 }
+}

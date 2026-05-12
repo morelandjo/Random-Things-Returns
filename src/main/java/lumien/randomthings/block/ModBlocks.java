@@ -170,6 +170,9 @@ public class ModBlocks {
     public static final Supplier<Block> INVENTORY_REROUTER = BLOCKS.register("inventory_rerouter",
         () -> new InventoryRerouterBlock());
 
+    public static final Supplier<Block> DYEING_MACHINE = BLOCKS.register("dyeing_machine",
+        () -> new DyeingMachineBlock());
+
     public static final Supplier<Block> PEACE_CANDLE = BLOCKS.register("peace_candle", 
         () -> new PeaceCandleBlock());
 

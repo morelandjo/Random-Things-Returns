@@ -70,6 +70,7 @@ public class RandomThings {
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        lumien.randomthings.recipe.ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
         ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
 
         // Register lifecycle events
@@ -195,6 +196,12 @@ public class RandomThings {
             Capabilities.ItemHandler.BLOCK,
             ModBlockEntityTypes.INVENTORY_REROUTER.get(),
             (rerouter, side) -> rerouter.getMappedHandler(side)
+        );
+
+        event.registerBlockEntity(
+            Capabilities.ItemHandler.BLOCK,
+            ModBlockEntityTypes.DYEING_MACHINE.get(),
+            (machine, side) -> machine.getSidedHandler(side)
         );
 
         // Register fluid handler capabilities for ender buckets
