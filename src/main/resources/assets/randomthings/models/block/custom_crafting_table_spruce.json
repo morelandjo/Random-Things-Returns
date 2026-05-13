@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "randomthings:block/custom_crafting_table/spruce_bottom",
+    "up": "randomthings:block/custom_crafting_table/spruce_top",
+    "north": "randomthings:block/custom_crafting_table/spruce_front",
+    "south": "randomthings:block/custom_crafting_table/spruce_side",
+    "east": "randomthings:block/custom_crafting_table/spruce_side",
+    "west": "randomthings:block/custom_crafting_table/spruce_front",
+    "particle": "randomthings:block/custom_crafting_table/spruce_front"
+  }
+}

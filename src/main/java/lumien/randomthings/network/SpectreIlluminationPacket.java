@@ -1,6 +1,5 @@
 package lumien.randomthings.network;
 
-import lumien.randomthings.handler.spectreilluminator.SpectreIlluminationClientHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -23,14 +22,9 @@ public record SpectreIlluminationPacket(String dimension, long chunkLong, boolea
     }
 
     public static void handle(SpectreIlluminationPacket packet, IPayloadContext context) {
-        context.enqueueWork(() -> {
-            if (context.flow().isClientbound() && context.player().level() != null) {
-                // Check if we're in the correct dimension
-                String currentDimension = context.player().level().dimension().location().toString();
-                if (currentDimension.equals(packet.dimension)) {
-                    SpectreIlluminationClientHandler.setIlluminated(packet.chunkLong, packet.illuminated);
-                }
-            }
-        });
+        if (!context.flow().isClientbound()) return;
+        context.enqueueWork(() ->
+            lumien.randomthings.client.ClientPacketDispatch.handleSpectreIllumination(packet)
+        );
     }
 }

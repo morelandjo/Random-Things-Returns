@@ -133,6 +133,11 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(DyeingMachineBlockEntity::new,
                 ModBlocks.DYEING_MACHINE.get()).build(null));
 
+    public static final Supplier<BlockEntityType<ImbuingStationBlockEntity>> IMBUING_STATION =
+        BLOCK_ENTITY_TYPES.register("imbuing_station",
+            () -> BlockEntityType.Builder.of(ImbuingStationBlockEntity::new,
+                ModBlocks.IMBUING_STATION.get()).build(null));
+
     public static final Supplier<BlockEntityType<DiaphanousBlockEntity>> DIAPHANOUS_BLOCK = 
         BLOCK_ENTITY_TYPES.register("diaphanous_block", 
             () -> BlockEntityType.Builder.of(DiaphanousBlockEntity::new, 

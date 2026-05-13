@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "randomthings:block/custom_crafting_table/bamboo_bottom",
+    "up": "randomthings:block/custom_crafting_table/bamboo_top",
+    "north": "randomthings:block/custom_crafting_table/bamboo_front",
+    "south": "randomthings:block/custom_crafting_table/bamboo_side",
+    "east": "randomthings:block/custom_crafting_table/bamboo_side",
+    "west": "randomthings:block/custom_crafting_table/bamboo_front",
+    "particle": "randomthings:block/custom_crafting_table/bamboo_front"
+  }
+}

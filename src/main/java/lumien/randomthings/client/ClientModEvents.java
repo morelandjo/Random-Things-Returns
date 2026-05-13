@@ -39,8 +39,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import lumien.randomthings.client.LavaCharmOverlay;
+import lumien.randomthings.lib.ModConstants;
 
 public class ClientModEvents {
 
@@ -222,6 +226,14 @@ public class ClientModEvents {
         if (originalModel != null) {
             event.getModels().put(portkeyLocation, new PortkeyCamoModel(originalModel));
         }
+    }
+
+    public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
+        event.registerAbove(
+            VanillaGuiLayers.PLAYER_HEALTH,
+            ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "lava_charm_bar"),
+            new LavaCharmOverlay()
+        );
     }
 
     @SubscribeEvent

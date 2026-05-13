@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "randomthings:block/custom_crafting_table/cherry_bottom",
+    "up": "randomthings:block/custom_crafting_table/cherry_top",
+    "north": "randomthings:block/custom_crafting_table/cherry_front",
+    "south": "randomthings:block/custom_crafting_table/cherry_side",
+    "east": "randomthings:block/custom_crafting_table/cherry_side",
+    "west": "randomthings:block/custom_crafting_table/cherry_front",
+    "particle": "randomthings:block/custom_crafting_table/cherry_front"
+  }
+}

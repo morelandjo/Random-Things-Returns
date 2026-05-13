@@ -1,7 +1,5 @@
 package lumien.randomthings.network.messages;
 
-import lumien.randomthings.client.notifications.NotificationToast;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -25,10 +23,9 @@ public record MessageNotification(String title, String description, ItemStack ic
     }
 
     public static void handle(MessageNotification packet, IPayloadContext context) {
-        context.enqueueWork(() -> {
-            if (context.flow().isClientbound()) {
-                Minecraft.getInstance().getToasts().addToast(new NotificationToast(packet.title, packet.description, packet.icon));
-            }
-        });
+        if (!context.flow().isClientbound()) return;
+        context.enqueueWork(() ->
+            lumien.randomthings.client.notifications.ClientNotificationHandler.show(packet.title, packet.description, packet.icon)
+        );
     }
 }

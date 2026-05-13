@@ -19,4 +19,12 @@ public class ModRecipeTypes {
                 return ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "dyeing_machine").toString();
             }
         });
+
+    public static final Supplier<RecipeType<ImbuingRecipe>> IMBUING =
+        RECIPE_TYPES.register("imbuing", () -> new RecipeType<ImbuingRecipe>() {
+            @Override
+            public String toString() {
+                return ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "imbuing").toString();
+            }
+        });
 }

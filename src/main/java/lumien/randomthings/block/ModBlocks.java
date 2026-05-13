@@ -284,6 +284,44 @@ public class ModBlocks {
     public static final Supplier<Block> SPECTRE_ENERGY_INJECTOR = BLOCKS.register("spectre_energy_injector",
         () -> new SpectreEnergyInjectorBlock());
 
+    // Custom Crafting Tables (one per wood type; vanilla 3x3 recipe, aesthetic only)
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_OAK = BLOCKS.register("custom_crafting_table_oak",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_SPRUCE = BLOCKS.register("custom_crafting_table_spruce",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_BIRCH = BLOCKS.register("custom_crafting_table_birch",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_JUNGLE = BLOCKS.register("custom_crafting_table_jungle",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_ACACIA = BLOCKS.register("custom_crafting_table_acacia",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_DARK_OAK = BLOCKS.register("custom_crafting_table_dark_oak",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_MANGROVE = BLOCKS.register("custom_crafting_table_mangrove",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_CHERRY = BLOCKS.register("custom_crafting_table_cherry",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_BAMBOO = BLOCKS.register("custom_crafting_table_bamboo",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_CRIMSON = BLOCKS.register("custom_crafting_table_crimson",
+        () -> new CustomCraftingTableBlock());
+
+    public static final Supplier<Block> CUSTOM_CRAFTING_TABLE_WARPED = BLOCKS.register("custom_crafting_table_warped",
+        () -> new CustomCraftingTableBlock());
+
+    // Imbuing Station
+    public static final Supplier<Block> IMBUING_STATION = BLOCKS.register("imbuing_station",
+        () -> new ImbuingStationBlock());
+
     // Spectre Coils - 5 variants
     public static final Supplier<Block> SPECTRE_COIL_NORMAL = BLOCKS.register("spectre_coil_normal",
         () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.NORMAL));

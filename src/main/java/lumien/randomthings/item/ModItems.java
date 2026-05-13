@@ -129,6 +129,34 @@ public class ModItems {
     public static final Supplier<Item> DYEING_MACHINE = ITEMS.register("dyeing_machine",
         () -> new BlockItem(ModBlocks.DYEING_MACHINE.get(), new Item.Properties()));
 
+    // Custom Crafting Tables (one per wood type)
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_OAK = ITEMS.register("custom_crafting_table_oak",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_OAK.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_SPRUCE = ITEMS.register("custom_crafting_table_spruce",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_SPRUCE.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_BIRCH = ITEMS.register("custom_crafting_table_birch",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_BIRCH.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_JUNGLE = ITEMS.register("custom_crafting_table_jungle",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_JUNGLE.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_ACACIA = ITEMS.register("custom_crafting_table_acacia",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_ACACIA.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_DARK_OAK = ITEMS.register("custom_crafting_table_dark_oak",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_DARK_OAK.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_MANGROVE = ITEMS.register("custom_crafting_table_mangrove",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_MANGROVE.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_CHERRY = ITEMS.register("custom_crafting_table_cherry",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_CHERRY.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_BAMBOO = ITEMS.register("custom_crafting_table_bamboo",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_BAMBOO.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_CRIMSON = ITEMS.register("custom_crafting_table_crimson",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_CRIMSON.get(), new Item.Properties()));
+    public static final Supplier<Item> CUSTOM_CRAFTING_TABLE_WARPED = ITEMS.register("custom_crafting_table_warped",
+        () -> new BlockItem(ModBlocks.CUSTOM_CRAFTING_TABLE_WARPED.get(), new Item.Properties()));
+
+    // Imbuing Station
+    public static final Supplier<Item> IMBUING_STATION = ITEMS.register("imbuing_station",
+        () -> new BlockItem(ModBlocks.IMBUING_STATION.get(), new Item.Properties()));
+
     public static final Supplier<Item> PEACE_CANDLE = ITEMS.register("peace_candle",
         () -> new BlockItem(ModBlocks.PEACE_CANDLE.get(), new Item.Properties()));
 
@@ -649,6 +677,18 @@ public class ModItems {
             output.accept(ADVANCED_ITEM_COLLECTOR.get());
             output.accept(INVENTORY_REROUTER.get());
             output.accept(DYEING_MACHINE.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_OAK.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_SPRUCE.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_BIRCH.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_JUNGLE.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_ACACIA.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_DARK_OAK.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_MANGROVE.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_CHERRY.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_BAMBOO.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_CRIMSON.get());
+            output.accept(CUSTOM_CRAFTING_TABLE_WARPED.get());
+            output.accept(IMBUING_STATION.get());
             output.accept(PEACE_CANDLE.get());
             output.accept(POTION_VAPORIZER.get());
             output.accept(CONTACT_BUTTON.get());

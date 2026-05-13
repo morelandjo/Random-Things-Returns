@@ -85,7 +85,7 @@ public class RandomThings {
             modEventBus.addListener(this::registerScreens);
             modEventBus.addListener(this::registerRenderers);
             modEventBus.addListener(this::registerLayerDefinitions);
-            modEventBus.addListener(this::registerGuiOverlays);
+            modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerGuiOverlays);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerBlockColors);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::registerItemColors);
             modEventBus.addListener(lumien.randomthings.client.ClientModEvents::onClientSetup);
@@ -170,15 +170,6 @@ public class RandomThings {
         lumien.randomthings.client.ClientProxy.registerLayerDefinitions(event);
     }
 
-    private void registerGuiOverlays(final net.neoforged.neoforge.client.event.RegisterGuiLayersEvent event) {
-        // Register the lava charm bar overlay above player health
-        event.registerAbove(
-            net.neoforged.neoforge.client.gui.VanillaGuiLayers.PLAYER_HEALTH,
-            ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "lava_charm_bar"),
-            new lumien.randomthings.client.LavaCharmOverlay()
-        );
-    }
-
     private void registerCapabilities(final RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
             Capabilities.ItemHandler.BLOCK,
@@ -202,6 +193,12 @@ public class RandomThings {
             Capabilities.ItemHandler.BLOCK,
             ModBlockEntityTypes.DYEING_MACHINE.get(),
             (machine, side) -> machine.getSidedHandler(side)
+        );
+
+        event.registerBlockEntity(
+            Capabilities.ItemHandler.BLOCK,
+            ModBlockEntityTypes.IMBUING_STATION.get(),
+            (station, side) -> station.getItemHandler()
         );
 
         // Register fluid handler capabilities for ender buckets

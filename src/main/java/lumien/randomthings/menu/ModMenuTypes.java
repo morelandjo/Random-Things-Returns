@@ -54,6 +54,11 @@ public class ModMenuTypes {
             () -> IMenuTypeExtension.create((windowId, inventory, data) ->
                 new DyeingMachineMenu(windowId, inventory, data.readBlockPos())));
 
+    public static final Supplier<MenuType<ImbuingStationMenu>> IMBUING_STATION =
+        MENU_TYPES.register("imbuing_station",
+            () -> IMenuTypeExtension.create((windowId, inventory, data) ->
+                new ImbuingStationMenu(windowId, inventory, data.readBlockPos())));
+
     public static final Supplier<MenuType<BlockDestabilizerMenu>> BLOCK_DESTABILIZER = 
         MENU_TYPES.register("block_destabilizer", 
             () -> IMenuTypeExtension.create((windowId, inventory, data) -> {

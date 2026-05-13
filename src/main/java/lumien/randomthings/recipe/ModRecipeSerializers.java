@@ -27,4 +27,7 @@ public class ModRecipeSerializers {
 
     public static final Supplier<RecipeSerializer<DyeingMachineRecipe>> DYEING_MACHINE =
         RECIPE_SERIALIZERS.register("dyeing_machine", DyeingMachineRecipeSerializer::new);
+
+    public static final Supplier<RecipeSerializer<ImbuingRecipe>> IMBUING =
+        RECIPE_SERIALIZERS.register("imbuing", ImbuingRecipeSerializer::new);
 }
