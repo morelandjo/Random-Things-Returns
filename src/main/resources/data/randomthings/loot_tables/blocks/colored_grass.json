@@ -2,19 +2,31 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "rolls": 1.0,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "minecraft:dirt"
+          "type": "minecraft:alternatives",
+          "children": [
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_white",      "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "white" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_orange",     "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "orange" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_magenta",    "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "magenta" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_light_blue", "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "light_blue" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_yellow",     "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "yellow" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_lime",       "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "lime" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_pink",       "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "pink" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_gray",       "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "gray" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_light_gray", "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "light_gray" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_cyan",       "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "cyan" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_purple",     "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "purple" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_blue",       "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "blue" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_brown",      "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "brown" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_green",      "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "green" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_red",        "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "red" } } ] },
+            { "type": "minecraft:item", "name": "randomthings:colored_grass_black",      "conditions": [ { "condition": "minecraft:match_tool", "predicate": { "predicates": { "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ] } } }, { "condition": "minecraft:block_state_property", "block": "randomthings:colored_grass", "properties": { "color": "black" } } ] },
+            { "type": "minecraft:item", "name": "minecraft:dirt", "conditions": [ { "condition": "minecraft:survives_explosion" } ] }
+          ]
         }
-      ],
-      "rolls": 1.0
+      ]
     }
   ]
 }

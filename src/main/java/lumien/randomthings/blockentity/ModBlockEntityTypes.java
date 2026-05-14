@@ -58,6 +58,11 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(SoundDampenerBlockEntity::new,
                 ModBlocks.SOUND_DAMPENER.get()).build(null));
 
+    public static final Supplier<BlockEntityType<SoundBoxBlockEntity>> SOUND_BOX =
+        BLOCK_ENTITY_TYPES.register("sound_box",
+            () -> BlockEntityType.Builder.of(SoundBoxBlockEntity::new,
+                ModBlocks.SOUND_BOX.get()).build(null));
+
     public static final Supplier<BlockEntityType<BlockDestabilizerBlockEntity>> BLOCK_DESTABILIZER = 
         BLOCK_ENTITY_TYPES.register("block_destabilizer", 
             () -> BlockEntityType.Builder.of(BlockDestabilizerBlockEntity::new, 

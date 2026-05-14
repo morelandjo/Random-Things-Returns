@@ -113,6 +113,11 @@ public class ClientModEvents {
             ModBlocks.SPECTRE_COIL_GENESIS.get()
         );
 
+        // Colored Grass — tint by per-block COLOR state property.
+        BlockColor coloredGrassColor = (state, level, pos, tintIndex) ->
+            state.getValue(lumien.randomthings.block.ColoredGrassBlock.COLOR).getTextureDiffuseColor();
+        event.register(coloredGrassColor, ModBlocks.COLORED_GRASS.get());
+
         // Remove the destabilizer color handler for now - let's try without tinting
     }
     
@@ -168,6 +173,32 @@ public class ClientModEvents {
             ModItems.SPECTRE_COIL_ENDER.get(),
             ModItems.SPECTRE_COIL_NUMBER.get(),
             ModItems.SPECTRE_COIL_GENESIS.get()
+        );
+
+        // Colored Grass items — tint each item by its stored DyeColor.
+        ItemColor coloredGrassItemColor = (stack, tintIndex) -> {
+            if (stack.getItem() instanceof lumien.randomthings.item.ColoredGrassItem grassItem) {
+                return 0xFF000000 | grassItem.getColor().getTextureDiffuseColor();
+            }
+            return 0xFFFFFFFF;
+        };
+        event.register(coloredGrassItemColor,
+            ModItems.COLORED_GRASS_WHITE.get(),
+            ModItems.COLORED_GRASS_ORANGE.get(),
+            ModItems.COLORED_GRASS_MAGENTA.get(),
+            ModItems.COLORED_GRASS_LIGHT_BLUE.get(),
+            ModItems.COLORED_GRASS_YELLOW.get(),
+            ModItems.COLORED_GRASS_LIME.get(),
+            ModItems.COLORED_GRASS_PINK.get(),
+            ModItems.COLORED_GRASS_GRAY.get(),
+            ModItems.COLORED_GRASS_LIGHT_GRAY.get(),
+            ModItems.COLORED_GRASS_CYAN.get(),
+            ModItems.COLORED_GRASS_PURPLE.get(),
+            ModItems.COLORED_GRASS_BLUE.get(),
+            ModItems.COLORED_GRASS_BROWN.get(),
+            ModItems.COLORED_GRASS_GREEN.get(),
+            ModItems.COLORED_GRASS_RED.get(),
+            ModItems.COLORED_GRASS_BLACK.get()
         );
     }
     
@@ -245,6 +276,7 @@ public class ClientModEvents {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRIGGER_GLASS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLAZING_FIRE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.GLOWING_MUSHROOM.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.COLORED_GRASS.get(), RenderType.cutoutMipped());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SLIME_CUBE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSLUCENT_LUMINOUS_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUNE_BASE.get(), RenderType.cutout());

@@ -133,6 +133,19 @@ public class ModBlocks {
                 .strength(2.0f)
                 .sound(SoundType.STONE)));
 
+    public static final Supplier<Block> SOUND_BOX = BLOCKS.register("sound_box",
+        () -> new SoundBoxBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.WOOD)
+                .strength(0.8f)
+                .sound(SoundType.WOOD)));
+
+    public static final Supplier<Block> COLORED_GRASS = BLOCKS.register("colored_grass",
+        () -> new ColoredGrassBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.GRASS)
+                .strength(0.6f)
+                .sound(SoundType.GRASS)
+                .randomTicks()));
+
     public static final Supplier<Block> BLOCK_DESTABILIZER = BLOCKS.register("block_destabilizer",
         () -> new BlockDestabilizerBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.STONE)

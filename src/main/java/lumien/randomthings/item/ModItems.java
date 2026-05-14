@@ -87,6 +87,42 @@ public class ModItems {
     public static final Supplier<Item> SOUND_DAMPENER = ITEMS.register("sound_dampener",
         () -> new BlockItem(ModBlocks.SOUND_DAMPENER.get(), new Item.Properties()));
 
+    public static final Supplier<Item> SOUND_BOX = ITEMS.register("sound_box",
+        () -> new BlockItem(ModBlocks.SOUND_BOX.get(), new Item.Properties()));
+
+    public static final Supplier<Item> COLORED_GRASS_WHITE = ITEMS.register("colored_grass_white",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.WHITE, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_ORANGE = ITEMS.register("colored_grass_orange",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.ORANGE, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_MAGENTA = ITEMS.register("colored_grass_magenta",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.MAGENTA, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_LIGHT_BLUE = ITEMS.register("colored_grass_light_blue",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.LIGHT_BLUE, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_YELLOW = ITEMS.register("colored_grass_yellow",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.YELLOW, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_LIME = ITEMS.register("colored_grass_lime",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.LIME, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_PINK = ITEMS.register("colored_grass_pink",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.PINK, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_GRAY = ITEMS.register("colored_grass_gray",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.GRAY, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_LIGHT_GRAY = ITEMS.register("colored_grass_light_gray",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.LIGHT_GRAY, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_CYAN = ITEMS.register("colored_grass_cyan",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.CYAN, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_PURPLE = ITEMS.register("colored_grass_purple",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.PURPLE, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_BLUE = ITEMS.register("colored_grass_blue",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.BLUE, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_BROWN = ITEMS.register("colored_grass_brown",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.BROWN, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_GREEN = ITEMS.register("colored_grass_green",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.GREEN, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_RED = ITEMS.register("colored_grass_red",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.RED, new Item.Properties()));
+    public static final Supplier<Item> COLORED_GRASS_BLACK = ITEMS.register("colored_grass_black",
+        () -> new ColoredGrassItem(ModBlocks.COLORED_GRASS.get(), DyeColor.BLACK, new Item.Properties()));
+
     public static final Supplier<Item> BLOCK_DESTABILIZER = ITEMS.register("block_destabilizer",
         () -> new BlockItem(ModBlocks.BLOCK_DESTABILIZER.get(), new Item.Properties()));
 
@@ -663,6 +699,7 @@ public class ModItems {
             output.accept(SIDED_REDSTONE.get());
             output.accept(BLOCK_BREAKER.get());
             output.accept(SOUND_DAMPENER.get());
+            output.accept(SOUND_BOX.get());
             output.accept(BLOCK_DESTABILIZER.get());
             output.accept(IRON_DROPPER.get());
             output.accept(CHAT_DETECTOR.get());
@@ -704,6 +741,22 @@ public class ModItems {
             output.accept(BLOOD_ROSE.get());
             output.accept(BLOOD_ROSE_PETAL.get());
             output.accept(GLOWING_MUSHROOM.get());
+            output.accept(COLORED_GRASS_WHITE.get());
+            output.accept(COLORED_GRASS_ORANGE.get());
+            output.accept(COLORED_GRASS_MAGENTA.get());
+            output.accept(COLORED_GRASS_LIGHT_BLUE.get());
+            output.accept(COLORED_GRASS_YELLOW.get());
+            output.accept(COLORED_GRASS_LIME.get());
+            output.accept(COLORED_GRASS_PINK.get());
+            output.accept(COLORED_GRASS_GRAY.get());
+            output.accept(COLORED_GRASS_LIGHT_GRAY.get());
+            output.accept(COLORED_GRASS_CYAN.get());
+            output.accept(COLORED_GRASS_PURPLE.get());
+            output.accept(COLORED_GRASS_BLUE.get());
+            output.accept(COLORED_GRASS_BROWN.get());
+            output.accept(COLORED_GRASS_GREEN.get());
+            output.accept(COLORED_GRASS_RED.get());
+            output.accept(COLORED_GRASS_BLACK.get());
             output.accept(POSITION_FILTER.get());
             output.accept(ITEM_FILTER.get());
             output.accept(ENTITY_FILTER.get());

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:grass_block" },
+    { "item": "minecraft:magenta_dye" }
+  ],
+  "result": {
+    "count": 1,
+    "id": "randomthings:colored_grass_magenta"
+  }
+}
