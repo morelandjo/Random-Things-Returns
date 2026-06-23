@@ -357,6 +357,22 @@ public class ModItems {
     public static final Supplier<Item> SPECTRE_CHARGER_GENESIS = ITEMS.register("spectre_charger_genesis",
         () -> new SpectreChargerItem(SpectreChargerItem.Tier.GENESIS));
 
+    // Floo Teleportation
+    public static final Supplier<Item> FLOO_BRICK = ITEMS.register("floo_brick",
+        () -> new BlockItem(lumien.randomthings.block.ModBlocks.FLOO_BRICK.get(), new Item.Properties()));
+
+    public static final Supplier<Item> FLOO_POWDER = ITEMS.register("floo_powder",
+        () -> new FlooPowderItem(new Item.Properties()));
+
+    public static final Supplier<Item> FLOO_SIGN = ITEMS.register("floo_sign",
+        () -> new FlooSignItem(new Item.Properties().stacksTo(1)));
+
+    public static final Supplier<Item> FLOO_POUCH = ITEMS.register("floo_pouch",
+        () -> new FlooPouchItem());
+
+    public static final Supplier<Item> FLOO_TOKEN = ITEMS.register("floo_token",
+        () -> new FlooTokenItem(new Item.Properties()));
+
     // Bean Items
     public static final Supplier<Item> BEAN = ITEMS.register("bean",
         () -> new ItemBean());
@@ -871,6 +887,11 @@ public class ModItems {
             // Ender Bridge System
             output.accept(STABLE_ENDER_PEARL.get());
             output.accept(PORTKEY.get());
+            // Floo Teleportation (FLOO_BRICK is internal-only, produced by the sign)
+            output.accept(FLOO_POWDER.get());
+            output.accept(FLOO_SIGN.get());
+            output.accept(FLOO_POUCH.get());
+            output.accept(FLOO_TOKEN.get());
             output.accept(ENDER_BUCKET.get());
             output.accept(REINFORCED_ENDER_BUCKET.get());
             output.accept(ENDER_LETTER.get());

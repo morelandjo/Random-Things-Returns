@@ -721,4 +721,32 @@ public class RTEventHandler {
             }
         }
     }
+
+    /**
+     * Magnetic enchantment: when a player breaks a block with a tool that carries the
+     * randomthings:magnetic enchantment, redirect all dropped ItemEntities straight into the
+     * player's inventory (or drop at the player's feet if full). XP is not affected.
+     */
+    @SubscribeEvent
+    public static void onBlockDrops(net.neoforged.neoforge.event.level.BlockDropsEvent event) {
+        if (!(event.getBreaker() instanceof ServerPlayer player)) return;
+        if (player instanceof FakePlayer) return;
+
+        ItemStack tool = event.getTool();
+        if (tool.isEmpty()) return;
+
+        net.minecraft.core.Holder<net.minecraft.world.item.enchantment.Enchantment> magnetic =
+            event.getLevel().registryAccess()
+                .lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+                .getOrThrow(lumien.randomthings.enchantment.ModEnchantments.MAGNETIC);
+
+        if (net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(magnetic, tool) <= 0) return;
+
+        for (ItemEntity drop : event.getDrops()) {
+            ItemStack item = drop.getItem();
+            if (item.isEmpty()) continue;
+            net.neoforged.neoforge.items.ItemHandlerHelper.giveItemToPlayer(player, item);
+        }
+        event.getDrops().clear();
+    }
 }

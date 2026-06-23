@@ -279,4 +279,20 @@ public class ModDataComponents {
                 .persistent(net.minecraft.nbt.CompoundTag.CODEC.listOf())
                 .build());
 
+    // Floo Pouch - stores remaining Floo Powder charges (0-128)
+    public static final Supplier<DataComponentType<Integer>> FLOO_POUCH_CHARGE =
+        DATA_COMPONENTS.register("floo_pouch_charge",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
+    // Floo Token - tracks ticks-on-ground for the temporary fireplace spawn delay
+    public static final Supplier<DataComponentType<Integer>> FLOO_TOKEN_AGE =
+        DATA_COMPONENTS.register("floo_token_age",
+            () -> DataComponentType.<Integer>builder()
+                .persistent(Codec.INT)
+                .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                .build());
+
 }

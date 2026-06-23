@@ -548,5 +548,23 @@
   "item.randomthings.spectre_charger.disabled": "Disabled",
   "item.randomthings.spectre_charger.toggle": "Right-click to toggle",
   "item.randomthings.spectre_charger.enabled_message": "Spectre Charger Enabled",
-  "item.randomthings.spectre_charger.disabled_message": "Spectre Charger Disabled"
+  "item.randomthings.spectre_charger.disabled_message": "Spectre Charger Disabled",
+
+  "block.randomthings.floo_brick": "Floo Brick",
+  "item.randomthings.floo_brick": "Floo Brick",
+  "item.randomthings.floo_sign": "Floo Sign",
+  "item.randomthings.floo_token": "Floo Token",
+  "item.randomthings.floo_pouch": "Floo Pouch",
+  "item.randomthings.floo_powder": "Floo Powder",
+  "floo.info.teleport": "§7Teleporting to §a%s",
+  "floo.info.same": "§cYou are already at your destination",
+  "floo.info.duplicate": "§cAnother fireplace already has that name",
+  "tooltip.randomthings.floo_powder": "Magical powder. Hold it while standing on a Floo Brick and type a destination name in chat to teleport.",
+  "tooltip.randomthings.floo_sign": "Rename in an anvil first. Right-click on a connected line of bricks (max 20) to turn them into a Floo Fireplace with that name. Players arrive facing the opposite direction you were facing when creating it.",
+  "tooltip.randomthings.floo_token": "Throw on the ground. After a few seconds it becomes a temporary fireplace you can stand on to teleport.",
+  "tooltip.randomthings.floo_pouch": "Holds up to 128 Floo Powder. Sneak-right-click to fill from your inventory; carrying the pouch acts as having powder for teleportation.",
+  "tooltip.randomthings.floo_pouch.charge": "%s / %s charges",
+
+  "enchantment.randomthings.magnetic": "Magnetic",
+  "enchantment.randomthings.magnetic.desc": "The drops from blocks you mine with a tool that has the magnetic enchantment go directly into your inventory instead of dropping on the ground."
 }

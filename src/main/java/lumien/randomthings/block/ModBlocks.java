@@ -351,4 +351,8 @@ public class ModBlocks {
     public static final Supplier<Block> SPECTRE_COIL_GENESIS = BLOCKS.register("spectre_coil_genesis",
         () -> new SpectreCoilBlock(SpectreCoilBlock.CoilType.GENESIS));
 
+    // Floo Teleportation
+    public static final Supplier<Block> FLOO_BRICK = BLOCKS.register("floo_brick",
+        () -> new FlooBrickBlock());
+
 }

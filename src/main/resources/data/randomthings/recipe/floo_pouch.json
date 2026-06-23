@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LLL",
+    "LPL",
+    "LLL"
+  ],
+  "key": {
+    "L": { "item": "minecraft:leather" },
+    "P": { "item": "randomthings:floo_powder" }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:floo_pouch"
+  }
+}

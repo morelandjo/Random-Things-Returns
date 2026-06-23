@@ -117,6 +117,8 @@ public class RandomThings {
         // Spectre Anchor event handlers
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onLivingDrops);
         NeoForge.EVENT_BUS.addListener(RTEventHandler::onPlayerClone);
+        // Magnetic enchantment (DIGGER tools - drops go directly to inventory)
+        NeoForge.EVENT_BUS.addListener(RTEventHandler::onBlockDrops);
         // Super Lubricent Boots handler
         NeoForge.EVENT_BUS.addListener(lumien.randomthings.handler.SuperLubricentBootsHandler::onPlayerTickPost);
 

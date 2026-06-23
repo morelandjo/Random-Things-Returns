@@ -231,4 +231,10 @@ public class ModBlockEntityTypes {
                 ModBlocks.SPECTRE_COIL_NUMBER.get(),
                 ModBlocks.SPECTRE_COIL_GENESIS.get()).build(null));
 
+    // Floo Teleportation
+    public static final Supplier<BlockEntityType<FlooBrickBlockEntity>> FLOO_BRICK =
+        BLOCK_ENTITY_TYPES.register("floo_brick",
+            () -> BlockEntityType.Builder.of(FlooBrickBlockEntity::new,
+                ModBlocks.FLOO_BRICK.get()).build(null));
+
 }

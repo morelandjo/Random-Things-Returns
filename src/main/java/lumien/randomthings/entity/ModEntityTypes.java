@@ -90,4 +90,12 @@ public class ModEntityTypes {
             .updateInterval(1)
             .build("artificial_end_portal")
     );
+
+    public static final Supplier<EntityType<TemporaryFlooFireplaceEntity>> TEMPORARY_FLOO_FIREPLACE = ENTITY_TYPES.register("temporary_floo_fireplace",
+        () -> EntityType.Builder.<TemporaryFlooFireplaceEntity>of(TemporaryFlooFireplaceEntity::new, MobCategory.MISC)
+            .sized(2.0f, 1.0f)
+            .clientTrackingRange(32)
+            .updateInterval(1)
+            .build("temporary_floo_fireplace")
+    );
 }

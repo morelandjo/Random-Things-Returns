@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "key": {
+    "P": { "item": "randomthings:floo_powder" },
+    "S": { "item": "minecraft:oak_sign" }
+  },
+  "result": {
+    "count": 1,
+    "id": "randomthings:floo_sign"
+  }
+}
