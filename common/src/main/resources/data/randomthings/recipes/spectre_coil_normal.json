@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "OSO",
+    "OIG",
+    "OSO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "randomthings:spectre_ingot"
+    },
+    "S": {
+      "item": "randomthings:spectre_string"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:spectre_coil_normal"
+  }
+}

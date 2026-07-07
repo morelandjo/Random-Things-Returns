@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TSE",
+    "SCS",
+    "EST"
+  ],
+  "key": {
+    "T": {
+      "item": "randomthings:stable_ender_pearl"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "C": {
+      "item": "randomthings:spectre_charger_redstone"
+    },
+    "S": {
+      "item": "randomthings:spectre_string"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:spectre_charger_ender"
+  }
+}

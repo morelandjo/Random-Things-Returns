@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "DG",
+    " M"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "D": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "M": {
+      "item": "randomthings:glowing_mushroom"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "randomthings:luminous_powder"
+  }
+}

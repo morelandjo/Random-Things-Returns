@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "tools",
+    "pattern": [
+        "IB"
+    ],
+    "key": {
+        "B": {
+            "item": "minecraft:blaze_powder"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "count": 1,
+        "item": "randomthings:blaze_and_steel"
+    }
+}

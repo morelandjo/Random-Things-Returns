@@ -1,6 +1,11 @@
 # Random Things Returns
 
-NeoForge port of Lumien's **Random Things** mod, targeting Minecraft 1.21.1 on branch `1.21.1`.
+Port of Lumien's **Random Things** mod.
+
+- **Branch `1.21.1`** — NeoForge, Minecraft 1.21.1 (single loader).
+- **Branch `1.20.1`** — Architectury multiloader (**Fabric + Forge**), Minecraft 1.20.1. This is a
+  backport of the 1.21.1 code. See [`PORTING.md`](PORTING.md) for the build/run instructions
+  (note: **Gradle needs JDK 21**) and the full 1.21.1→1.20.1 API migration guide.
 
 - Mod ID: `randomthings`
 - Original mod (1.12.2 Forge): authored by Lumien, MIT licensed

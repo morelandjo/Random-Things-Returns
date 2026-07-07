@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "RCB",
+    " W "
+  ],
+  "key": {
+    "G": { "item": "minecraft:green_dye" },
+    "R": { "item": "minecraft:red_dye" },
+    "B": { "item": "minecraft:blue_dye" },
+    "C": { "item": "minecraft:crafting_table" },
+    "W": { "item": "minecraft:white_wool" }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:dyeing_machine"
+  }
+}

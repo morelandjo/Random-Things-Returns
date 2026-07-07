@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ER",
+    "GB"
+  ],
+  "key": {
+    "E": { "item": "minecraft:ender_pearl" },
+    "R": { "item": "minecraft:redstone" },
+    "G": { "item": "minecraft:gunpowder" },
+    "B": { "item": "minecraft:blaze_powder" }
+  },
+  "result": {
+    "count": 16,
+    "item": "randomthings:floo_powder"
+  }
+}

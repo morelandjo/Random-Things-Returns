@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " G ",
+    "RQB",
+    " Y "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:red_stained_glass"
+    },
+    "G": {
+      "item": "minecraft:green_stained_glass"
+    },
+    "B": {
+      "item": "minecraft:blue_stained_glass"
+    },
+    "Y": {
+      "item": "minecraft:yellow_stained_glass"
+    },
+    "Q": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "randomthings:diaphanous_block",
+    "components": {
+      "randomthings:diaphanous_inverted": false,
+      "randomthings:diaphanous_block_state": "minecraft:stone"
+    }
+  }
+}

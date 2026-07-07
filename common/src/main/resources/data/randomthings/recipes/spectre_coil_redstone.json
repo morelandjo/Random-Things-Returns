@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "RSR",
+    "SCS",
+    "RSR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "C": {
+      "item": "randomthings:spectre_coil_normal"
+    },
+    "S": {
+      "item": "randomthings:spectre_string"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:spectre_coil_redstone"
+  }
+}

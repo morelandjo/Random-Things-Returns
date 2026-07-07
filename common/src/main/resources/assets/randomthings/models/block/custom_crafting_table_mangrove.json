@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "randomthings:block/custom_crafting_table/mangrove_bottom",
+    "up": "randomthings:block/custom_crafting_table/mangrove_top",
+    "north": "randomthings:block/custom_crafting_table/mangrove_front",
+    "south": "randomthings:block/custom_crafting_table/mangrove_side",
+    "east": "randomthings:block/custom_crafting_table/mangrove_side",
+    "west": "randomthings:block/custom_crafting_table/mangrove_front",
+    "particle": "randomthings:block/custom_crafting_table/mangrove_front"
+  }
+}

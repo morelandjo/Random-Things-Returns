@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "randomthings:item/soundpattern_empty"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "randomthings:has_sound": 1.0
+      },
+      "model": "randomthings:item/soundpattern_full"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SSS",
+    "SBS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "B": {
+      "item": "randomthings:biome_crystal"
+    }
+  },
+  "result": {
+    "count": 16,
+    "item": "randomthings:biome_stone_smooth"
+  }
+}

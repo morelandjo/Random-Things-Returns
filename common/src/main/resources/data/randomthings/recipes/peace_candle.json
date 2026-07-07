@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "decorations",
+    "pattern": [
+        " S ",
+        " C ",
+        "BBB"
+    ],
+    "key": {
+        "S": {
+            "item": "minecraft:string"
+        },
+        "C": {
+            "item": "minecraft:candle"
+        },
+        "B": {
+            "item": "minecraft:stone_bricks"
+        }
+    },
+    "result": {
+        "count": 1,
+        "item": "randomthings:peace_candle"
+    }
+}

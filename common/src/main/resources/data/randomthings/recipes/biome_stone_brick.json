@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "RRR",
+    "RBR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:stone_bricks"
+    },
+    "B": {
+      "item": "randomthings:biome_crystal"
+    }
+  },
+  "result": {
+    "count": 16,
+    "item": "randomthings:biome_stone_brick"
+  }
+}

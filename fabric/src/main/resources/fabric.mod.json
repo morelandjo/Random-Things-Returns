@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_author}"
+  ],
+
+  "license": "${license}",
+  "icon": "assets/randomthings/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "lumien.randomthings.fabric.FabricRandomThings"
+    ],
+    "client": [
+      "lumien.randomthings.fabric.FabricRandomThingsClient"
+    ]
+  },
+  "mixins": [
+    "randomthings.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=${minecraft_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "architectury": "*"
+  },
+  "suggests": {
+    "jei": "*"
+  }
+}

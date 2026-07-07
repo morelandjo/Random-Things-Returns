@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "triggered=false": {
+            "model": "randomthings:block/trigger_glass"
+        },
+        "triggered=true": {
+            "model": "randomthings:block/trigger_glass_triggered"
+        }
+    }
+}

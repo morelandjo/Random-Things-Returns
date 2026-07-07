@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BSR",
+    "SCS",
+    "RSB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "randomthings:spectre_charger_normal"
+    },
+    "S": {
+      "item": "randomthings:spectre_string"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:spectre_charger_redstone"
+  }
+}

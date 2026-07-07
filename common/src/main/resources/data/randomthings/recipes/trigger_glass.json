@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " L ",
+    "QRQ",
+    " L "
+  ],
+  "key": {
+    "L": {
+      "item": "randomthings:lapis_glass"
+    },
+    "Q": {
+      "item": "randomthings:quartz_glass"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "randomthings:trigger_glass"
+  }
+}

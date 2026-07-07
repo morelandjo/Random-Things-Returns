@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/template_fire_side_alt",
+    "textures": {
+        "fire": "randomthings:block/blazing_fire/fire_layer_0"
+    }
+}

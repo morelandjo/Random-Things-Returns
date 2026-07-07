@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "randomthings:block/custom_crafting_table/acacia_bottom",
+    "up": "randomthings:block/custom_crafting_table/acacia_top",
+    "north": "randomthings:block/custom_crafting_table/acacia_front",
+    "south": "randomthings:block/custom_crafting_table/acacia_side",
+    "east": "randomthings:block/custom_crafting_table/acacia_side",
+    "west": "randomthings:block/custom_crafting_table/acacia_front",
+    "particle": "randomthings:block/custom_crafting_table/acacia_front"
+  }
+}

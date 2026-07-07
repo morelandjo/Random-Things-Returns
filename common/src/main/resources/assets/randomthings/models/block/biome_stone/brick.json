@@ -1,0 +1,6 @@
+{
+    "parent": "randomthings:block/biome_stone/parent",
+    "textures": {
+        "all": "minecraft:block/stone_bricks"
+    }
+}

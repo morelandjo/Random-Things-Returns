@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {"type": "minecraft:single", "resource": "randomthings:block/ancientbrick_o0"},
+    {"type": "minecraft:single", "resource": "randomthings:block/ancientbrick_o1"},
+    {"type": "minecraft:single", "resource": "randomthings:block/ancientbrick_o2"},
+    {"type": "minecraft:single", "resource": "randomthings:block/ancientbrick_o3"}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "down": "randomthings:block/sidedredstone/side",
+        "up": "randomthings:block/sidedredstone/front",
+        "north": "randomthings:block/sidedredstone/side",
+        "south": "randomthings:block/sidedredstone/side",
+        "west": "randomthings:block/sidedredstone/side",
+        "east": "randomthings:block/sidedredstone/side",
+        "particle": "randomthings:block/sidedredstone/front"
+    }
+}

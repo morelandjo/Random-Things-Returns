@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "RQR",
+    "QEQ",
+    "RQR"
+  ],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "Q": { "item": "minecraft:quartz" },
+    "E": { "item": "minecraft:ender_eye" }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:redstone_observer"
+  }
+}

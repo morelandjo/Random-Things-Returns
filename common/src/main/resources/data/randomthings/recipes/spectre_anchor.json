@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " I ",
+    "IEI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "E": {
+      "item": "randomthings:spectre_ingot"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "randomthings:spectre_anchor"
+  }
+}

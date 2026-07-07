@@ -1,0 +1,223 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_white",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_orange",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "orange"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_magenta",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "magenta"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_light_blue",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "light_blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_yellow",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "yellow"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_lime",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "lime"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_pink",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "pink"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_gray",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "gray"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_light_gray",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "light_gray"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_cyan",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "cyan"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_purple",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "purple"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_blue",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_brown",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "brown"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_green",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "green"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_red",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:translucent_luminous_block_black",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:translucent_luminous_block",
+              "properties": {
+                "color": "black"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

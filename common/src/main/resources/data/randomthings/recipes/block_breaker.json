@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "redstone",
+    "pattern": [
+        "CPC",
+        "CRC",
+        "CCC"
+    ],
+    "key": {
+        "C": {
+            "item": "minecraft:cobblestone"
+        },
+        "P": {
+            "item": "minecraft:iron_pickaxe"
+        },
+        "R": {
+            "item": "minecraft:redstone_torch"
+        }
+    },
+    "result": {
+        "count": 1,
+        "item": "randomthings:block_breaker"
+    }
+}

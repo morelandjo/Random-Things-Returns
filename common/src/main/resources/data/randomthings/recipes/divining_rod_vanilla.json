@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "randomthings:divining_rod_coal"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "D": {
+      "item": "randomthings:divining_rod_diamond"
+    },
+    "I": {
+      "item": "randomthings:divining_rod_iron"
+    },
+    "B": {
+      "item": "minecraft:slime_ball"
+    },
+    "E": {
+      "item": "randomthings:divining_rod_emerald"
+    },
+    "G": {
+      "item": "randomthings:divining_rod_gold"
+    },
+    "L": {
+      "item": "randomthings:divining_rod_lapis"
+    },
+    "R": {
+      "item": "randomthings:divining_rod_redstone"
+    }
+  },
+  "pattern": [
+    "CSD",
+    "IBE",
+    "GLR"
+  ],
+  "result": {
+    "count": 1,
+    "item": "randomthings:divining_rod_vanilla"
+  }
+}

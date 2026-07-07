@@ -1,0 +1,80 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:biome_stone_smooth",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:biome_stone",
+              "properties": {
+                "variant": "smooth"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:biome_stone_cobble",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:biome_stone",
+              "properties": {
+                "variant": "cobble"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:biome_stone_brick",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:biome_stone",
+              "properties": {
+                "variant": "brick"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:biome_stone_cracked",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:biome_stone",
+              "properties": {
+                "variant": "cracked"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomthings:biome_stone_chiseled",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomthings:biome_stone",
+              "properties": {
+                "variant": "chiseled"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

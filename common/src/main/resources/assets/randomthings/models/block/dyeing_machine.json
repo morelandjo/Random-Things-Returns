@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:block/dyeing_machine/side",
+        "down":  "randomthings:block/dyeing_machine/bottom",
+        "up":    "randomthings:block/dyeing_machine/top",
+        "north": "randomthings:block/dyeing_machine/front",
+        "east":  "randomthings:block/dyeing_machine/side",
+        "south": "randomthings:block/dyeing_machine/side",
+        "west":  "randomthings:block/dyeing_machine/side"
+    }
+}

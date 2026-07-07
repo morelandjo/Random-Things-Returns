@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "randomthings:block/contact_lever_front",
+    "side": "randomthings:block/contact_lever_side_active"
+  }
+}

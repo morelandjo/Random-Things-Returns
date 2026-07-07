@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "lumien.randomthings.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mappings": "official",
+  "client": [
+    "client.LevelRendererMixin",
+    "client.LivingEntityRendererMixin",
+    "client.ParticleEngineMixin",
+    "client.SoundEngineMixin"
+  ],
+  "mixins": [
+    "ItemEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

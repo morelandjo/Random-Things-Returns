@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:block/inventory_rerouter/side",
+        "down": "randomthings:block/inventory_rerouter/side",
+        "up": "randomthings:block/inventory_rerouter/side",
+        "north": "randomthings:block/inventory_rerouter/side_con",
+        "east": "randomthings:block/inventory_rerouter/side",
+        "south": "randomthings:block/inventory_rerouter/side",
+        "west": "randomthings:block/inventory_rerouter/side"
+    }
+}

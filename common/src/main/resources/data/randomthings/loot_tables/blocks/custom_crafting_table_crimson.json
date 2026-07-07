@@ -1,0 +1,4 @@
+{
+  "type": "minecraft:block",
+  "pools": [ { "rolls": 1, "entries": [ { "type": "minecraft:item", "name": "randomthings:custom_crafting_table_crimson" } ], "conditions": [ { "condition": "minecraft:survives_explosion" } ] } ]
+}
